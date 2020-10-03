@@ -1,0 +1,7 @@
+tStatus.txt=vars.status.txt
+nBedTemp.val=printer.bedTemp.val
+nSetBedTemp.val=printer.setBedTemp.val
+nT0Temp.val=printer.T0Temp.val
+nT0SetTemp.val=printer.T0SetTemp.val
+nT1Temp.val=printer.T1Temp.val
+nT1SetTemp.val=printer.T1SetTemp.val

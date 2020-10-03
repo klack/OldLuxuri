@@ -1,0 +1,10 @@
+tLine10.txt=tLine9.txt
+tLine9.txt=tLine8.txt
+tLine8.txt=tLine7.txt
+tLine7.txt=tLine6.txt
+tLine6.txt=tLine5.txt
+tLine5.txt=tLine4.txt
+tLine4.txt=tLine3.txt
+tLine3.txt=tLine2.txt
+tLine2.txt=tLine1.txt
+tLine1.txt=parse.buffer.txt

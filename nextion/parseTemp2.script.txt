@@ -1,0 +1,32 @@
+
+//Utilize mock data
+parse.buffer.txt=" T:22.15 /0.00 B:59.91 /60.00 T0:211.15 /215 T1:242 /245.00 @:0 B@:0 @0:0 @1:0"
+strlen parse.buffer.txt,BufferLen
+
+//Bed Temp
+spstr parse.buffer.txt,parse.match.txt,"B:",1 //Split by B:
+spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+covx vars.s.txt,printer.bedTemp.val,0,0 //Give bed temp at index 0
+
+//Bed SetTemp
+spstr parse.buffer.txt,parse.match.txt," /",2
+spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+covx vars.s.txt,printer.setBedTemp.val,0,0 //Give bedSetTemp at index 0
+
+//T0 Temp
+spstr parse.buffer.txt,parse.match.txt,"T0:",1
+spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+covx vars.s.txt,printer.T0Temp.val,0,0 
+//T0 SetTemp
+spstr parse.buffer.txt,parse.match.txt," /",3
+spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+covx vars.s.txt,printer.T0SetTemp.val,0,0 //Give bedSetTemp at index 0
+
+//T1 Temp
+spstr parse.buffer.txt,parse.match.txt,"T1:",1
+spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+covx vars.s.txt,printer.T1Temp.val,0,0 
+//T1 SetTemp
+spstr parse.buffer.txt,parse.match.txt," /",4
+spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+covx vars.s.txt,printer.T1SetTemp.val,0,0 //Give bedSetTemp at index 0

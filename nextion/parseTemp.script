@@ -1,0 +1,143 @@
+
+//  T:22.15 /0.00 B:21.91 /0.00 T0:122.15 /0.00 T1:43.38 /0.00 @:0 B@:0 @0:0 @1:0
+// \sT0:([0-9.]*)\s\/([0-9.]*)    ;T0Temp ;T0SetTemp
+// \sT1:([0-9.]*)\s\/([0-9.]*)    ;T1Temp ;T1SetTemp;
+// \sB:([0-9.]*)\s\/              ;bedTemp 
+// match variable holds the remaining text to be match against
+// match pattern
+// parse.g1Prefix.txt, parse.g1Suffix.txt, parse.g2Prefix.txt, parse.g2Suffix.txt
+// parse.g1Pos, parse.g1Len, parse.g2Pos, parse.g2Len
+// use sys1, sys2, sys3 variables for temp variables
+
+
+//Utilize mock data
+parse.buffer.txt=" T:22.15 /0.00 B:231.91 /0.00 T0:22.15 /0.00 T1:43.38 /0.00 @:0 B@:0 @0:0 @1:0"
+strlen parse.buffer.txt,BufferLen
+
+//Input Data
+parse.lineMatch.txt=" T:"
+
+parse.g1Prefix.txt="B:"
+parse.g1Suffix.txt=" /"
+parse.g2Prefix.txt=" /"
+parse.g2Suffix.txt=" T"
+
+//Qualify the line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,vars.s.txt,0,j
+if(vars.s.txt==parse.lineMatch.txt)
+{
+  vars.debug.txt="Line qualified"
+  strlen parse.g1Prefix.txt,g1PrefixLength //g1PrefixLength
+  for(SearchPos=0;SearchPos<BufferLen;SearchPos++)
+  {
+    vars.debug.txt="Searching POS:"
+    covx SearchPos,vars.s.txt,0,0
+    vars.debug.txt+=vars.s.txt
+
+    substr parse.buffer.txt,parse.eval.txt,SearchPos,g1PrefixLength
+    if(parse.eval.txt==parse.g1Prefix.txt)
+    {
+      // //g1Prefix matched
+      // vars.debug.txt="Match at POS:"
+      
+      vars.debug.txt="g1Len: "
+      covx l,vars.s.txt,0,0
+      vars.debug.txt+=vars.s.txt
+      
+      
+      parse.g1Pos.vag1PrefixLength=SearchPos+l //g1Pos
+      substr parse.buffer.txt,parse.g1.txt,parse.g1Pos.val,5 //g1
+            
+      vars.debug.txt+=" Value:"
+      vars.debug.txt+=parse.g1.txt
+
+      SearchPos=BufferLen //exit for
+    }
+  }
+}else
+{
+  vars.debug.txt="Line not found"
+}
+
+
+// //Determine if there is a match
+// substr parse.buffer.txt,vars.s.txt,0,3 //Get the first few characters
+// if(vars.s.txt==" T:") //This is a temperature line
+// {
+//   vars.debug.txt="Found temperature line"
+//   for(vars.searchPos.vag1PrefixLength=0;vars.searchPos.val<BufferLen;vars.searchPos.val++)
+//   {
+//     vars.search.txt="T0:"
+//     parse.valueLen.vag1PrefixLength=4 //This should be variable based on g1End
+//     strlen vars.search.txt,vars.searchLen.val
+//     substr parse.buffer.txt,parse.eval.txt,vars.searchPos.val,vars.searchLen.val
+//     if(vars.search.txt==parse.eval.txt)
+//     {
+//       vars.debug.txt="Found T0"
+//       substr parse.buffer.txt,parse.value.txt,vars.searchPos.val+vars.searchLen.val,parse.valueLen.val
+//       covx parse.value.txt, parse.i.val
+//       vars.debug.txt=parse.i.val
+//       //Need to look ahead to see where the slash is, this is for settemp
+//     }
+//   }
+// }else
+// {
+//   vars.debug.txt="Nothing found"
+// }
+
+
+
+  // for(vars.searchPos=0;vars.searchPos<BufferLen)
+  // {
+
+  // }
+// substr gcodeinput.t16.txt,tmppage.tmpX.txt,0,2
+//       if(tmppage.tmpX.txt==" T")
+//       {
+//         for(StartPos=0;StartPos<maxlen;StartPos++)
+//         {
+//           substr gcodeinput.t16.txt,tmppage.tmp.txt,StartPos,3
+//           for(resd=StartPos;resd<maxlen;resd++)
+//           {
+//             substr gcodeinput.t16.txt,tmppage.EndPos.txt,resd,2
+//             if(tmppage.EndPos.txt==" /")
+//             {
+//               if(tmppage.tmp.txt==" B:")
+//               {
+//                 substr gcodeinput.t16.txt,tmppage.vaBed.txt,StartPos+3,3
+//                 covx tmppage.vaBed.txt,Hotbed,0,0
+//                 covx Hotbed,tmppage.vaBed.txt,0,0
+//                 strlen tmppage.vaBed.txt,TempPos
+//                 substr gcodeinput.t16.txt,tmppage.vaBedT.txt,StartPos+TempPos+8,3
+//                 covx tmppage.vaBedT.txt,HotbedT,0,0
+//                 covx HotbedT,tmppage.vaBedT.txt,0,0
+//               }
+//               {
+//                 if(tmppage.tmp.txt=="T0:")
+//                 {
+//                   substr gcodeinput.t16.txt,tmppage.vaE0.txt,StartPos+3,3
+//                   covx tmppage.vaE0.txt,Temp0,0,0
+//                   covx Temp0,tmppage.vaE0.txt,0,0
+//                   strlen tmppage.vaE0.txt,TempPos
+//                   substr gcodeinput.t16.txt,tmppage.vaE0T.txt,StartPos+TempPos+8,3
+//                   covx tmppage.vaE0T.txt,Temp0T,0,0
+//                   covx Temp0T,tmppage.vaE0T.txt,0,0
+//                 }
+//                 if(tmppage.tmp.txt=="T1:")
+//                 {
+//                   substr gcodeinput.t16.txt,tmppage.vaE1.txt,StartPos+3,3
+//                   covx tmppage.vaE1.txt,Temp1,0,0
+//                   covx Temp1,tmppage.vaE1.txt,0,0
+//                   strlen tmppage.vaE1.txt,TempPos
+//                   substr gcodeinput.t16.txt,tmppage.vaE1T.txt,StartPos+TempPos+8,3
+//                   covx tmppage.vaE1T.txt,Temp1T,0,0
+//                   covx Temp1T,tmppage.vaE1T.txt,0,0
+//                 }
+//               }
+//               resd=maxlen
+//             }
+//           }
+//         }
+//       }
+//       //Temp//
