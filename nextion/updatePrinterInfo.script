@@ -1,0 +1,27 @@
+//Debug
+tDebug.txt=vars.debug.txt
+
+//Update T0
+covx printer.T0Temp.val,vars.s.txt,0,0
+tT0Temp.txt=vars.s.txt
+tT0Temp.txt+="/"
+covx printer.T0SetTemp.val,vars.s.txt,0,0
+tT0Temp.txt+=vars.s.txt
+
+//Update T1
+covx printer.T1Temp.val,vars.s.txt,0,0
+tT1Temp.txt=vars.s.txt
+tT1Temp.txt+="/"
+covx printer.T1SetTemp.val,vars.s.txt,0,0
+tT1Temp.txt+=vars.s.txt
+
+//Update Bed
+covx printer.bedTemp.val,vars.s.txt,0,0
+tBedTemp.txt=vars.s.txt
+tBedTemp.txt+="/"
+covx printer.setBedTemp.val,vars.s.txt,0,0
+tBedTemp.txt+=vars.s.txt
+
+//Fan Speed
+covx printer.fanSpeed.val,vars.s.txt,0,0
+tFanSpeed.txt=vars.s.txt

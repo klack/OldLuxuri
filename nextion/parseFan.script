@@ -1,0 +1,19 @@
+//Utilize mock data
+parse.buffer.txt="M106 P0 S255"
+vars.debug.txt="Parsing fan"
+
+//Qualify Line
+parse.lineMatch.txt="M106 P0 S"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  //Fan Speed
+  vars.debug.txt="Line qualified: "
+  spstr parse.buffer.txt,parse.match.txt,"M106 P0 S",1
+  vars.debug.txt+=parse.match.txt
+  covx parse.match.txt,printer.fanSpeed.val,0,0
+}else
+{
+  vars.debug.txt="Line not qualified"
+}
