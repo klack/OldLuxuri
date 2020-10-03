@@ -11,7 +11,7 @@
 
 
 //Utilize mock data
-parse.buffer.txt=" T:22.15 /0.00 B:231.91 /0.00 T0:22.15 /0.00 T1:43.38 /0.00 @:0 B@:0 @0:0 @1:0"
+parse.buffer.txt=" T:201.91 /200.00 B:60 /60.00 T0:201.91 /200.00 T1:230.38 /230.00 @:0 B@:0 @0:0 @1:0"
 strlen parse.buffer.txt,BufferLen
 
 //Input Data
