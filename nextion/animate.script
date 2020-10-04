@@ -1,0 +1,6 @@
+for(k=272;k>=0;k--)
+{
+  qBanner.y=k
+  delay=1
+}
+animate.en=0

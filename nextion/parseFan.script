@@ -1,3 +1,5 @@
+//TODO handle M107 Fan off
+
 //Utilize mock data
 parse.buffer.txt="M106 P0 S255"
 // vars.debug.txt="Parsing fan"

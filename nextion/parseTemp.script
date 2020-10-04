@@ -1,6 +1,6 @@
-//Utilize mock data
-parse.buffer.txt=" T:22.15 /0.00 B:59.91 /60.00 T0:211.15 /215 T1:242 /245.00 @:0 B@:0 @0:0 @1:0"
-strlen parse.buffer.txt,BufferLen
+// //Utilize mock data
+// parse.buffer.txt=" T:22.15 /0.00 B:59.91 /60.00 T0:211.15 /215 T1:242 /245.00 @:0 B@:0 @0:0 @1:0"
+// strlen parse.buffer.txt,BufferLen
 
 //Qualify Line
 parse.lineMatch.txt=" T:"
