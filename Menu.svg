@@ -397,8 +397,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="290.04906"
-     inkscape:cy="11.650228"
+     inkscape:cx="279.29906"
+     inkscape:cy="33.114192"
      inkscape:document-units="px"
      inkscape:current-layer="layer9"
      inkscape:document-rotation="0"
@@ -860,7 +860,7 @@
          rx="5.4488311"
          ry="5.2916665" />
       <rect
-         style="display:inline;font-variation-settings:normal;vector-effect:none;fill:#000000;fill-opacity:1;stroke:#4d4d4d;stroke-width:0.529166;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:13.6;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+         style="font-variation-settings:normal;display:inline;vector-effect:none;fill:#000000;fill-opacity:1;stroke:#4d4d4d;stroke-width:0.529166;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:13.6;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
          id="rect5811-6"
          width="21.046183"
          height="17.210981"
@@ -876,7 +876,7 @@
        style="display:inline">
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="12.005147"
          y="15.973789"
          id="text1378"><tspan
@@ -884,10 +884,10 @@
            id="tspan1376"
            x="12.005147"
            y="15.973789"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">1</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="32.378078"
          y="15.973789"
          id="text1382"><tspan
@@ -895,10 +895,10 @@
            id="tspan1380"
            x="32.378078"
            y="15.973789"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">2</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="52.850235"
          y="15.973789"
          id="text1386"><tspan
@@ -906,10 +906,10 @@
            id="tspan1384"
            x="52.850235"
            y="15.973789"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">3</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="12.005147"
          y="33.039383"
          id="text1390"><tspan
@@ -917,10 +917,10 @@
            id="tspan1388"
            x="12.005147"
            y="33.039383"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">4</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">4</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="32.378078"
          y="33.039383"
          id="text1394"><tspan
@@ -928,10 +928,10 @@
            id="tspan1392"
            x="32.378078"
            y="33.039383"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">5</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">5</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="52.850235"
          y="33.039383"
          id="text1398"><tspan
@@ -939,10 +939,10 @@
            id="tspan1396"
            x="52.850235"
            y="33.039383"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">6</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">6</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="12.005147"
          y="50.204201"
          id="text1402"><tspan
@@ -950,10 +950,10 @@
            id="tspan1400"
            x="12.005147"
            y="50.204201"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">7</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">7</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="32.378078"
          y="50.204201"
          id="text1406"><tspan
@@ -961,10 +961,10 @@
            id="tspan1404"
            x="32.378078"
            y="50.204201"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">8</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">8</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="52.850235"
          y="50.204201"
          id="text1410"><tspan
@@ -972,10 +972,10 @@
            id="tspan1408"
            x="52.850235"
            y="50.204201"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">9</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">9</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:15.875px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="32.378078"
          y="67.303055"
          id="text1418"><tspan
@@ -983,17 +983,17 @@
            id="tspan1416"
            x="32.378078"
            y="67.303055"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583">0</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.875px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;">0</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:9.84141px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
+         style="font-size:9.84141px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583;"
          x="52.619446"
          y="65.246162"
          id="text1423"><tspan
            sodipodi:role="line"
            x="52.619446"
            y="65.246162"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.84141px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.84141px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583;"
            id="tspan5815">⏎</tspan></text>
       <text
          xml:space="preserve"
@@ -1008,7 +1008,7 @@
            id="tspan1433" /></text>
       <text
          xml:space="preserve"
-         style="font-size:8.16042px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke:#000000;stroke-width:0.264583"
+         style="font-size:8.16042px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke:#000000;stroke-width:0.264583;"
          x="12.168079"
          y="64.587128"
          id="text5938"><tspan
@@ -1016,7 +1016,7 @@
            id="tspan5936"
            x="12.168079"
            y="64.587128"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.16042px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke:#000000;stroke-width:0.264583">del</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.16042px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke:#000000;stroke-width:0.264583;">del</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.684px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;display:inline;fill:#ffffff;stroke-width:0.264583"
@@ -1030,7 +1030,7 @@
            id="tspan5845">9999</tspan></text>
       <text
          xml:space="preserve"
-         style="display:inline;font-size:4.51205px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#4d4d4d;stroke-width:0.264583"
+         style="font-size:4.51205px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;fill:#4d4d4d;stroke-width:0.264583;"
          x="95.533035"
          y="55.521545"
          id="text5873"><tspan
@@ -1038,7 +1038,7 @@
            id="tspan5871"
            x="95.533035"
            y="55.521545"
-           style="fill:#4d4d4d;stroke-width:0.264583">Cancel</tspan></text>
+           style="fill:#4d4d4d;stroke-width:0.264583;">Cancel</tspan></text>
     </g>
     <text
        xml:space="preserve"
