@@ -3,6 +3,10 @@
 if(p[loadpageid.val].b[loadcmpid.val].type==54)
 {
   covx p[loadpageid.val].b[loadcmpid.val].val,input.txt,0,0
+  if(input.txt=="0")
+  {
+    input.txt=""
+  }
   inputlenth.val=input.txt_maxl
 }else if(p[loadpageid.val].b[loadcmpid.val].type==59)
 {
