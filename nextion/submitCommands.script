@@ -1,0 +1,9 @@
+if(setT0.val!=-1)
+{
+  prints "M109 T0 S",0
+  covx setT0.val,vars.s.txt,0,0
+  prints vars.s.txt,0
+  printh 0A
+  vars.debug.txt="T0 Temperature set"
+  setT0.val=-1
+}

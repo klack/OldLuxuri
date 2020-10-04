@@ -3,7 +3,7 @@
 if(p[loadpageid.val].b[loadcmpid.val].type==54)
 {
   covx p[loadpageid.val].b[loadcmpid.val].val,input.txt,0,0
-  if(input.txt=="0")
+  if(input.txt=="-1")
   {
     input.txt=""
   }
