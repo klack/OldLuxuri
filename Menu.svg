@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="Menu.svg"
-   inkscape:export-filename="D:\printing\universal-ui\nextion\img\main-s3.png"
+   inkscape:export-filename="D:\printing\universal-ui\nextion\img\main-s0.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -452,10 +452,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.4581943"
-     inkscape:cx="212.8507"
-     inkscape:cy="147.55361"
+     inkscape:cx="217.34827"
+     inkscape:cy="174.44402"
      inkscape:document-units="px"
-     inkscape:current-layer="layer13"
+     inkscape:current-layer="layer11"
      inkscape:document-rotation="0"
      showgrid="false"
      width="480mm"
@@ -536,7 +536,7 @@
      inkscape:label="Reference"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline;opacity:1;mix-blend-mode:normal"
+     style="display:none;opacity:1;mix-blend-mode:normal"
      sodipodi:insensitive="true">
     <image
        width="157.68288"
@@ -574,7 +574,7 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Main Menu"
-     style="display:inline">
+     style="display:inline;mix-blend-mode:normal">
     <g
        inkscape:groupmode="layer"
        id="layer21"
@@ -668,41 +668,41 @@
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.52071px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff;stroke-width:0.251478">Swap Tool</tspan></text>
         <text
            xml:space="preserve"
-           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.264583"
+           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:none;stroke-width:0.264583"
            x="7.7203603"
            y="7.3078589"
            id="text981"><tspan
              sodipodi:role="line"
-             x="7.7203603"
-             y="7.3078589"
+             x="0"
+             y="0"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.70417px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.264583"
              id="tspan8618">200/200</tspan></text>
         <text
            xml:space="preserve"
-           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.264583"
+           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:none;stroke-width:0.264583"
            x="36.419498"
            y="7.3624191"
            id="text999"><tspan
              sodipodi:role="line"
              id="tspan997"
-             x="36.419498"
-             y="7.3624191"
+             x="0"
+             y="0"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.70417px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.264583">200/200</tspan><tspan
              sodipodi:role="line"
-             x="36.419498"
-             y="12.035511"
+             x="0"
+             y="0"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.70417px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.264583"
              id="tspan8616" /></text>
         <text
            xml:space="preserve"
-           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.264583"
+           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:none;stroke-width:0.264583"
            x="67.475693"
            y="7.471539"
            id="text1003"><tspan
              sodipodi:role="line"
              id="tspan1001"
-             x="67.475693"
-             y="7.471539"
+             x="0"
+             y="0"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.70417px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.264583">60/60</tspan></text>
       </g>
       <g
@@ -838,8 +838,7 @@
         <g
            id="g8804"
            transform="translate(-1.1548759)"
-           style="display:inline"
-           sodipodi:insensitive="true">
+           style="display:none">
           <rect
              style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:0.302305;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
              id="rect6482"
@@ -861,18 +860,18 @@
          style="display:inline">
         <text
            xml:space="preserve"
-           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:inline;stroke-width:0.264583"
+           style="font-size:3.70417px;line-height:1.25;font-family:sans-serif;display:none;stroke-width:0.264583"
            x="117.45936"
            y="7.471539"
            id="text1183"><tspan
              sodipodi:role="line"
              id="tspan1181"
-             x="117.45936"
-             y="7.471539"
+             x="0"
+             y="0"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.70417px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.264583">100</tspan><tspan
              sodipodi:role="line"
-             x="117.45936"
-             y="12.14463"
+             x="0"
+             y="0"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.70417px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.264583"
              id="tspan1185" /></text>
         <g
