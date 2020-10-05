@@ -47,6 +47,7 @@ if(usize>0)
   {
     vars.status.txt="Clearning buffer"
     code_c //Clear buffer
+    BufferLen=0
   }
 }else
 {

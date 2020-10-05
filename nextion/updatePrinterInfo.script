@@ -1,5 +1,7 @@
 //Debug
 tDebug.txt=vars.debug.txt
+tStatus.txt=vars.status.txt
+nBufferSize.val=BufferLen
 
 //Update T0
 covx printer.T0Temp.val,vars.s.txt,0,0
