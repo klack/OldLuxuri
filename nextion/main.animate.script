@@ -1,0 +1,47 @@
+//T0 Temp
+if(printer.T0SetTemp.val!=0)
+{
+  if(bT0.picc==7) //Switch between frames
+  {
+    bT0.picc=9
+  }else
+  {
+    bT0.picc=7
+  }
+}
+
+//T1 Temp
+if(printer.T1SetTemp.val!=0)
+{
+  if(bT1.picc==7) //Switch between frames
+  {
+    bT1.picc=9
+  }else
+  {
+    bT1.picc=7
+  }
+}
+
+//Bed Temp
+if(printer.setBedTemp.val!=0)
+{
+  if(bBed.picc==7) //Switch between frames
+  {
+    bBed.picc=9
+  }else
+  {
+    bBed.picc=7
+  }
+}
+
+//Fan Speed
+if(printer.fanSpeed.val!=0)
+{
+  if(bFan.picc==7) //Switch between frames
+  {
+    bFan.picc=9
+  }else
+  {
+    bFan.picc=7
+  }
+}
