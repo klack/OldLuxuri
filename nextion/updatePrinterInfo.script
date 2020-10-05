@@ -27,3 +27,7 @@ tBedTemp.txt+=vars.s.txt
 //Fan Speed
 covx printer.fanSpeed.val,vars.s.txt,0,0
 tFanSpeed.txt=vars.s.txt
+
+//Current Tool
+
+//Idex Mode
