@@ -2,14 +2,16 @@
 diagConfirm.tPrompt.txt="Switch to extruder 2?"
 ReturnObj=20
 ReturnPage=dp
+ReturnVal=1
 page diagConfirm
 
-//Swap Tool Callback
-if(ReturnVal!=-1)
+//Do callback
+if(HandleCallback==1)
 {
-  prints "T",0
-  covx ReturnVal,vars.s.txt,0,0
-  prints vars.s.txt,0
-  printh 0A
+  vars.debug.txt="Doing Callback for "
+  covx ReturnObj,vars.s.txt,0,0
+  vars.debug.txt+=vars.s.txt
+  click ReturnObj,0 //Right click
 }
-ReturnVal=-1
+HandleCallback=0
+ReturnVal=0
