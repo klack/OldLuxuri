@@ -1,8 +1,15 @@
 //Click
-diagConfirm.tPrompt.txt="Switch to extruder 2?"
+if(Tool==0)
+{
+  diagConfirm.tPrompt.txt="Switch to Extruder 2?"
+  ReturnVal=1
+}else
+{
+  diagConfirm.tPrompt.txt="Switch to Extruder 1?"
+  ReturnVal=0
+}
 ReturnObj=20
 ReturnPage=dp
-ReturnVal=1
 page diagConfirm
 
 //Do callback
