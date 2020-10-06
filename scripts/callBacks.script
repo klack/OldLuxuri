@@ -1,4 +1,5 @@
 //Click
+DiagReturnPage=dp
 if(Tool==0)
 {
   diagConfirm.tPrompt.txt="Switch to Extruder 2?"
@@ -12,6 +13,17 @@ ReturnObj=20
 ReturnPage=dp
 page diagConfirm
 
+//Callback
+vars.debug.txt="Callback Running"
+if(ReturnVal!=-1)
+{
+  prints "T",0
+  covx ReturnVal,vars.s.txt,0,0
+  prints vars.s.txt,0
+  printh 0A
+}
+
+
 //Do callback
 if(HandleCallback==1)
 {
@@ -21,4 +33,4 @@ if(HandleCallback==1)
   click ReturnObj,0 //Right click
 }
 HandleCallback=0
-ReturnVal=0
+ReturnVal=-1

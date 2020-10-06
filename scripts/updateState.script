@@ -30,22 +30,31 @@ tFanSpeed.txt=vars.s.txt
 if(Tool==0)
 {
   bSwap.picc=7
+  bTool.picc=7
 }
 else
 {
   bSwap.picc=9
+  bTool.picc=9
 }
 
 //Idex Mode
 if(IdexMode==0)
 {
-  
+  bMode.picc=9 
 }
 if(IdexMode==1)
 {
+  bMode.picc=9 
+}
+if(IdexMode==2)
+{
+  bTool.picc=10
+  bMode.picc=10
 
 }
-if(IdexMode==0)
+if(IdexMode==3)
 {
-
+  bTool.picc=10
+  bMode.picc=11
 }
