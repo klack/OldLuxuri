@@ -1,0 +1,8 @@
+//Do callback
+if(ReturnVal!=-1)
+{
+  vars.debug.txt="Doing Callback for "
+  covx ReturnObj,vars.s.txt,0,0
+  vars.debug.txt+=vars.s.txt
+  click ReturnObj,0 //Mouse up
+}

@@ -33,21 +33,25 @@ if(usize<=0) //If the buffer is empty
   //Try and trigger a response
   prints "M155 S2",0
   printh 0A
-  delay=500
+  doevents
 }else
 {
   vars.s.txt="Connected at "
   covx Baud,vars.s.txt,0,0
   vars.s.txt+=vars.s.txt
-  //Start chatter
-  prints "M155 S2",0
+  //View and set settings
+  prints "M155 S2",0 //Temp auto report
   printh 0A
-  prints "M503",0
+  prints "M503",0 //Report settings
   printh 0A
-  prints "M115",0
+  prints "M115",0 //Firmware Info
   printh 0A
-  prints "M78",0
+  prints "M78",0 //Print job stats
   printh 0A
+  prints "M605 S0",0 //Dual Nozzle Mode Full Control
+  printh 0A
+  prints "T0",0 //Select T0
+
   startCon.en=0
   while(animate.en!=0)
   {
