@@ -1,4 +1,5 @@
 //Do callback
+ReturnPage=dp
 if(ReturnVal!=-1)
 {
   vars.debug.txt="Doing Callback for "

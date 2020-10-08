@@ -1,60 +1,44 @@
 //Debug
 tDebug.txt=vars.debug.txt
-
 //Update T0
 covx printer.T0Temp.val,vars.s.txt,0,0
 tT0Temp.txt=vars.s.txt
 tT0Temp.txt+="/"
 covx printer.T0SetTemp.val,vars.s.txt,0,0
 tT0Temp.txt+=vars.s.txt
-
 //Update T1
 covx printer.T1Temp.val,vars.s.txt,0,0
 tT1Temp.txt=vars.s.txt
 tT1Temp.txt+="/"
 covx printer.T1SetTemp.val,vars.s.txt,0,0
 tT1Temp.txt+=vars.s.txt
-
 //Update Bed
 covx printer.bedTemp.val,vars.s.txt,0,0
 tBedTemp.txt=vars.s.txt
 tBedTemp.txt+="/"
 covx printer.setBedTemp.val,vars.s.txt,0,0
 tBedTemp.txt+=vars.s.txt
-
 //Fan Speed
 covx printer.fanSpeed.val,vars.s.txt,0,0
 tFanSpeed.txt=vars.s.txt
-
 //Current Tool
 if(Tool==0)
 {
+  bSwap.picc=6
+}else
+{
   bSwap.picc=7
-  bTool.picc=7
 }
-else
-{
-  bSwap.picc=9
-  bTool.picc=9
-}
-
 //Idex Mode
-if(IdexMode==0)
-{
-  bMode.picc=9 
-}
 if(IdexMode==1)
 {
-  bMode.picc=9 
+  bMode.picc=6
 }
 if(IdexMode==2)
 {
-  bTool.picc=10
-  bMode.picc=10
-
+  bMode.picc=7
 }
 if(IdexMode==3)
 {
-  bTool.picc=10
-  bMode.picc=11
+  bMode.picc=8
 }

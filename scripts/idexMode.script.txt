@@ -6,50 +6,21 @@ if(HandleCallback==1)
   prints vars.s.txt,0
   printh 0A
   IdexMode=ReturnVal
+  HandleCallback=0
+  ReturnVal=-1
+  page ReturnPage
 }
-HandleCallback=0
-ReturnVal=-1
 
 //Set State
 if(IdexMode==1)
 {
-  bDual.picc=13
+  bDual.picc=12
 }
 if(IdexMode==2)
 {
-  bClone.picc=13
+  bClone.picc=12
 }
 if(IdexMode==3)
 {
-  bMirror.picc=13
+  bMirror.picc=12
 }
-
-//Click
-if(IdexMode!=1)
-{
-  diagConfirm.tPrompt.txt="Switch to Dual Material Mode?"
-  DiagReturnPage=dp
-  ReturnObj=2
-  ReturnVal=1
-  page diagConfirm
-}
-//Click
-if(IdexMode!=2)
-{
-  diagConfirm.tPrompt.txt="Switch to Clone Mode?"
-  DiagReturnPage=dp
-  ReturnObj=4
-  ReturnVal=2
-  page diagConfirm
-}
-//Click
-if(IdexMode!=3)
-{
-  diagConfirm.tPrompt.txt="Switch to Mirror Mode?"
-  DiagReturnPage=dp
-  ReturnObj=5
-  ReturnVal=3
-  page diagConfirm
-}
-
-//Callback
