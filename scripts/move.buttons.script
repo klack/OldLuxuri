@@ -13,3 +13,10 @@ command.txt+=distance.txt
 command.txt+=" F"
 command.txt+=speed.txt
 click sendCommand,1
+
+//Y down
+command.txt="G0 Y-"
+command.txt+=distance.txt
+command.txt+=" F"
+command.txt+=speed.txt
+click sendCommand,1

@@ -1,6 +1,6 @@
 if(setT0.val!=-1)
 {
-  prints "M109 T0 S",0
+  prints "M104 T0 S",0
   covx setT0.val,vars.s.txt,0,0
   prints vars.s.txt,0
   printh 0A
@@ -9,7 +9,7 @@ if(setT0.val!=-1)
 }
 if(setT1.val!=-1)
 {
-  prints "M109 T1 S",0
+  prints "M104 T1 S",0
   covx setT1.val,vars.s.txt,0,0
   prints vars.s.txt,0
   printh 0A

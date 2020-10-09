@@ -1,76 +1,75 @@
 //T0 Temp
-if(printer.T0SetTemp.val!=0)
+if(printer.T0SetTemp.val!=0) 
 {
-  if(printer.T0Temp.val<printer.T0SetTemp.val)
+  if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
   {
-    if(bT0.picc==6) //Switch between frames
-    {
-      bT0.picc=7
-    }else
+    if(bT0.picc==5) //Switch between frames
     {
       bT0.picc=6
+    }else
+    {
+      bT0.picc=5
     }
   }else
   {
-    if(printer.T0Temp.val>35)
-    {
-      bT0.picc=7
-    }else
-    {
-      bT0.picc=6
-    }
+    bT0.picc=6 //Temperature reached
   }
+}else //Cooling
+{
+  bT0.picc=5
 }
+
 //T1 Temp
-if(printer.T1SetTemp.val!=0)
+if(printer.T1SetTemp.val!=0) 
 {
-  if(printer.T1Temp.val<printer.T1SetTemp.val&&printer.T1Temp.val>35)
+  if(printer.T1Temp.val<printer.T1SetTemp.val) //Heating
   {
-    if(bT1.picc==6) //Switch between frames
-    {
-      bT1.picc=7
-    }else
+    if(bT1.picc==5) //Switch between frames
     {
       bT1.picc=6
+    }else
+    {
+      bT1.picc=5
     }
   }else
   {
-    if(printer.T1Temp.val>35)
-    {
-      bT1.picc=7
-    }else
-    {
-      bT1.picc=6
-    }
+    bT1.picc=6 //Temperature reached
   }
+}else //Cooling
+{
+  bT1.picc=5
 }
+
 //Bed Temp
-if(printer.setBedTemp.val!=0)
+if(printer.setBedTemp.val!=0) 
 {
-  if(printer.bedTemp.val<printer.setBedTemp.val&&printer.bedTemp.val>35)
+  if(printer.bedTemp.val<printer.setBedTemp.val) //Heating
   {
-    if(bBed.picc==6) //Switch between frames
-    {
-      bBed.picc=7
-    }else
+    if(bBed.picc==5) //Switch between frames
     {
       bBed.picc=6
+    }else
+    {
+      bBed.picc=5
     }
   }else
   {
-    if(printer.bedTemp.val>35)
-    {
-      bBed.picc=7
-    }else
-    {
-      bBed.picc=6
-    }
+    bBed.picc=6 //Temperature reached
   }
+}else //Cooling
+{
+  bBed.picc=5
 }
+
+
 //Fan
 if(printer.fanSpeed.val>0)
 {
     j=bFan.picc
+    if(bFan.picc==5)
+    {
+      j=6
+    }
     if(bFan.picc==6)
     {
       j=7
@@ -81,11 +80,7 @@ if(printer.fanSpeed.val>0)
     }
     if(bFan.picc==8)
     {
-      j=9
-    }
-    if(bFan.picc==9)
-    {
-      j=6
+      j=5
     }
     bFan.picc=j
 }
