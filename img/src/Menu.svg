@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="Menu.svg"
-   inkscape:export-filename="D:\printing\universal-ui\img\settings-s0.png"
+   inkscape:export-filename="D:\printing\universal-ui\img\background.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -992,7 +992,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.1905579"
-     inkscape:cx="152.10443"
+     inkscape:cx="261.66556"
      inkscape:cy="114.00945"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
@@ -1094,7 +1094,7 @@
      inkscape:groupmode="layer"
      id="layer69"
      inkscape:label="Background"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <rect
        style="display:inline;opacity:1;fill:#000000;stroke:none;stroke-width:1.42954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
@@ -4542,7 +4542,7 @@
      inkscape:groupmode="layer"
      id="layer57"
      inkscape:label="Settings"
-     style="display:inline">
+     style="display:none">
     <g
        inkscape:groupmode="layer"
        id="layer58"
@@ -5149,7 +5149,7 @@
      inkscape:groupmode="layer"
      id="layer17"
      inkscape:label="Common"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <g
        inkscape:groupmode="layer"
