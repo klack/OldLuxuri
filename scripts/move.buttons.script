@@ -1,0 +1,15 @@
+//Send Command
+prints "G91",0
+printh 0A
+prints command.txt,0
+printh 0A
+prints "G90",0
+printh 0A
+
+
+//Y Up
+command.txt="G0 Y"
+command.txt+=distance.txt
+command.txt+=" F"
+command.txt+=speed.txt
+click sendCommand,1

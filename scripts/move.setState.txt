@@ -1,0 +1,30 @@
+for(j=0;j<=32;j++)
+{
+  if(b[j].type==98) //If text box
+  {
+    if(b[j].txt_maxl==5) //Distance boxes are set with a maxl of 5
+    {
+      if(distance.txt==b[j].txt)
+      {
+        b[j].picc=19
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=20
+        b[j].pco=65535
+      }
+    }
+    if(b[j].txt_maxl==6) //Speed boxes are set with a maxl of 6
+    {
+      if(speed.txt==b[j].txt)
+      {
+        b[j].picc=19
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=20
+        b[j].pco=65535
+      }
+    }
+  }
+}
