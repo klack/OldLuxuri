@@ -1,30 +1,44 @@
-for(j=0;j<=32;j++)
+//Debug
+tDebug.txt=vars.debug.txt
+//Update T0
+covx printer.T0Temp.val,vars.s.txt,0,0
+tT0Temp.txt=vars.s.txt
+tT0Temp.txt+="/"
+covx printer.T0SetTemp.val,vars.s.txt,0,0
+tT0Temp.txt+=vars.s.txt
+//Update T1
+covx printer.T1Temp.val,vars.s.txt,0,0
+tT1Temp.txt=vars.s.txt
+tT1Temp.txt+="/"
+covx printer.T1SetTemp.val,vars.s.txt,0,0
+tT1Temp.txt+=vars.s.txt
+//Update Bed
+covx printer.bedTemp.val,vars.s.txt,0,0
+tBedTemp.txt=vars.s.txt
+tBedTemp.txt+="/"
+covx printer.setBedTemp.val,vars.s.txt,0,0
+tBedTemp.txt+=vars.s.txt
+//Fan Speed
+covx printer.fanSpeed.val,vars.s.txt,0,0
+tFanSpeed.txt=vars.s.txt
+//Current Tool
+if(Tool==0)
 {
-  if(b[j].type==98) //If text box
-  {
-    if(b[j].txt_maxl==5) //Distance boxes are set with a maxl of 5
-    {
-      if(distance.txt==b[j].txt)
-      {
-        b[j].picc=19
-        b[j].pco=0
-      }else
-      {
-        b[j].picc=20
-        b[j].pco=65535
-      }
-    }
-    if(b[j].txt_maxl==6) //Speed boxes are set with a maxl of 6
-    {
-      if(speed.txt==b[j].txt)
-      {
-        b[j].picc=19
-        b[j].pco=0
-      }else
-      {
-        b[j].picc=20
-        b[j].pco=65535
-      }
-    }
-  }
+  bSwap.picc=5
+}else
+{
+  bSwap.picc=6
+}
+//Idex Mode
+if(IdexMode==1)
+{
+  bMode.picc=6
+}
+if(IdexMode==2)
+{
+  bMode.picc=7
+}
+if(IdexMode==3)
+{
+  bMode.picc=8
 }
