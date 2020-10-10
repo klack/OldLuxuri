@@ -50,6 +50,64 @@ for(j=0;j<=32;j++) //Button Groups
 }
 
 
+j=1
+k=2
+l=3
+//Check T0Temp
+if(printer.T0Temp.val>=preheatT0Temp.val&&preheatT0Temp.val>0)
+{
+  j=1
+}
+
+//Check T1Temp
+if(printer.T1Temp.val>preheatT1Temp.val&&preheatT1Temp.val>0)
+{
+  k=1
+}
+
+//Check Bed Temp
+if(printer.bedTemp.val>preheatBedTemp.val&&preheatBedTemp.val>0)
+{
+  l=1
+}
+
+State=j+k+l
+//Set States
+if(State==3)
+{
+  //Temperature Reached
+  state.picc=24 //Change message to ready
+  tMessage.txt="Ready"
+  icon.picc=24
+  tMessage2.aph=0
+}else
+{
+  if(preheatT0Temp.val>0||preheatT1Temp.val>0)
+  {
+    //Heating
+    tMessage.txt="Heating"
+    tMessage2.txt="Please wait..."
+    icon.picc=23
+    if(tMessage2.aph==127)
+    {
+      tMessage2.aph=0
+    }else
+    {
+      tMessage2.aph=127
+    }    
+  }else
+  {
+    //Choose temp
+    tMessage.txt="Choose"
+    tMessage2.txt="Materials"
+    tMessage2.aph=127
+    icon.picc=2
+
+  }
+}
+
+
+---
 //Window State
 if(printer.T0Temp.val<preheatT0Temp.val||printer.T1Temp.val<preheatT1Temp.val)
   {
@@ -76,43 +134,6 @@ if(printer.T0Temp.val<=preheatT0Temp.val)
       icon.picc=24
       tMessage2.aph=0
     }
-  }
-}
-
-
-
---------
-//Window State
-if(printer.T0Temp.val<preheatT0Temp.val||printer.T1Temp.val<preheatT1Temp.val||printer.T1Temp.val<preheatT1Temp.val)
-{
-  tMessage.txt="Heating"
-  tMessage2.txt="Please wait..."
-  icon.picc=23
-  if(tMessage2.aph==127)
-  {
-    tMessage2.aph=0
-  }else
-  {
-    tMessage2.aph=127
-  }
-}else
-{ 
-  if(preheatT0Temp.val>0||preheatT1Temp.val>0)
-  {
-    if(printer.bedTemp.val>=preheatBedTemp.val)
-    {
-      //Temperature Reached
-      state.picc=24 //Change message to ready
-      tMessage.txt="Ready"
-      icon.picc=24
-      tMessage2.aph=0
-    }
-  }else
-  {
-    icon.picc=2
-    tMessage.txt="Choose"
-    tMessage2.txt="Materials"
-    tMessage2.aph=127
   }
 }
 
@@ -167,5 +188,38 @@ click sendCommand,1
 //bT0PVA
 preheatT0Temp.val=220
 T0Mat.txt="PVA"
+wantedBedTemp.val=60
+click sendCommand,1
+
+
+
+
+//bT1None
+preheatT1Temp.val=0
+T1Mat.txt="None"
+wantedBedTemp.val=0
+click sendCommand,1
+
+//bT1PLA
+preheatT1Temp.val=200
+T1Mat.txt="PLA"
+wantedBedTemp.val=60
+click sendCommand,1
+
+//bT1PETG
+preheatT1Temp.val=230
+T1Mat.txt="PETG"
+wantedBedTemp.val=70
+click sendCommand,1
+
+//bT1TPU
+preheatT1Temp.val=220
+T1Mat.txt="TPU"
+wantedBedTemp.val=40
+click sendCommand,1
+
+//bT1PVA
+preheatT1Temp.val=220
+T1Mat.txt="PVA"
 wantedBedTemp.val=60
 click sendCommand,1
