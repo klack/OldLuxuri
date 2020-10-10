@@ -49,8 +49,41 @@ for(j=0;j<=32;j++) //Button Groups
   }
 }
 
+
 //Window State
 if(printer.T0Temp.val<preheatT0Temp.val||printer.T1Temp.val<preheatT1Temp.val)
+  {
+  tMessage.txt="Heating"
+  tMessage2.txt="Please wait..."
+  icon.picc=23
+  if(tMessage2.aph==127)
+  {
+    tMessage2.aph=0
+  }else
+  {
+    tMessage2.aph=127
+  }
+}
+if(printer.T0Temp.val<=preheatT0Temp.val)
+{
+  if(printer.T1Temp.val<=preheatT0Temp.val)
+  {
+    if(printer.bedTemp.val>=preheatBedTemp.val)
+    {
+      //Temperature Reached
+      state.picc=24 //Change message to ready
+      tMessage.txt="Ready"
+      icon.picc=24
+      tMessage2.aph=0
+    }
+  }
+}
+
+
+
+--------
+//Window State
+if(printer.T0Temp.val<preheatT0Temp.val||printer.T1Temp.val<preheatT1Temp.val||printer.T1Temp.val<preheatT1Temp.val)
 {
   tMessage.txt="Heating"
   tMessage2.txt="Please wait..."
