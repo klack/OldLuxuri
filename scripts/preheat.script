@@ -1,0 +1,138 @@
+//State
+//Update T0
+covx printer.T0Temp.val,vars.s.txt,0,0
+tT0Temp.txt=vars.s.txt
+tT0Temp.txt+="/"
+covx printer.T0SetTemp.val,vars.s.txt,0,0
+tT0Temp.txt+=vars.s.txt
+//Update T1
+covx printer.T1Temp.val,vars.s.txt,0,0
+tT1Temp.txt=vars.s.txt
+tT1Temp.txt+="/"
+covx printer.T1SetTemp.val,vars.s.txt,0,0
+tT1Temp.txt+=vars.s.txt
+//Update Bed
+tBedTemp.txt="Bed:"
+covx printer.bedTemp.val,vars.s.txt,0,0
+tBedTemp.txt+=vars.s.txt
+tBedTemp.txt+="/"
+covx printer.setBedTemp.val,vars.s.txt,0,0
+tBedTemp.txt+=vars.s.txt
+for(j=0;j<=32;j++) //Button Groups
+{
+  if(b[j].type==98) //If text box
+  {
+    if(b[j].txt_maxl==4) //T0 boxes are set with a maxl of 5
+    {
+      if(T0Mat.txt==b[j].txt)
+      {
+        b[j].picc=22
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=3
+        b[j].pco=65535
+      }
+    }
+    if(b[j].txt_maxl==5) //T1 boxes are set with a maxl of 6
+    {
+      if(T1Mat.txt==b[j].txt)
+      {
+        b[j].picc=22
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=3
+        b[j].pco=65535
+      }
+    }
+  }
+}
+
+//Window State
+if(printer.T0Temp.val<preheatT0Temp.val||printer.T1Temp.val<preheatT1Temp.val)
+{
+  tMessage.txt="Heating"
+  tMessage2.txt="Please wait..."
+  icon.picc=23
+  if(tMessage2.aph==127)
+  {
+    tMessage2.aph=0
+  }else
+  {
+    tMessage2.aph=127
+  }
+}else
+{ 
+  if(preheatT0Temp.val>0||preheatT1Temp.val>0)
+  {
+    if(printer.bedTemp.val>=preheatBedTemp.val)
+    {
+      //Temperature Reached
+      state.picc=24 //Change message to ready
+      tMessage.txt="Ready"
+      icon.picc=24
+      tMessage2.aph=0
+    }
+  }else
+  {
+    icon.picc=2
+    tMessage.txt="Choose"
+    tMessage2.txt="Materials"
+    tMessage2.aph=127
+  }
+}
+
+//Send Command
+if(wantedBedTemp.val>preheatBedTemp.val) //Only set a new bed temp if higher
+{
+  preheatBedTemp.val=wantedBedTemp.val
+}
+if(preheatT0Temp.val==0&&preheatT1Temp.val==0) //Turn off if nothing selected
+{
+  preheatBedTemp.val=0
+}
+click updateState,1
+prints "M104 T0 S",0
+covx preheatT0Temp.val,vars.s.txt,0,0
+prints vars.s.txt,0
+printh 0A
+doevents
+prints "M104 T1 S",0
+covx preheatT0Temp.val,vars.s.txt,0,0
+prints vars.s.txt,0
+prints "M140 S",0
+doevents
+covx preheatBedTemp.val,vars.s.txt,0,0
+prints vars.s.txt,0
+printh 0A
+
+//bT0None
+preheatT0Temp.val=0
+T0Mat.txt="None"
+wantedBedTemp.val=0
+click sendCommand,1
+
+//bT0PLA
+preheatT0Temp.val=200
+T0Mat.txt="PLA"
+wantedBedTemp.val=60
+click sendCommand,1
+
+//bT0PETG
+preheatT0Temp.val=230
+T0Mat.txt="PETG"
+wantedBedTemp.val=70
+click sendCommand,1
+
+//bT0TPU
+preheatT0Temp.val=220
+T0Mat.txt="TPU"
+wantedBedTemp.val=40
+click sendCommand,1
+
+//bT0PVA
+preheatT0Temp.val=220
+T0Mat.txt="PVA"
+wantedBedTemp.val=60
+click sendCommand,1

@@ -16,7 +16,7 @@ tT1Temp.txt=vars.s.txt
 
 if(printer.T0Temp.val<loadTemp.val||printer.T1Temp.val<loadTemp.val)
 {
-  tMessage.txt="Loading"
+  tMessage.txt="Heating"
   if(tMessage2.aph==127)
   {
     tMessage2.aph=0
@@ -45,7 +45,7 @@ prints "T",0
 covx commandTool.val,vars.s.txt,0,0
 prints vars.s.txt,0
 printh 0A
-prints "G92 E0",0 //Set extruder to 0
+prints "G92 E0",0 //Set extruder pos to 0
 printh 0A
 vars.s.txt="G1 E"
 covx commandLength.val,vars.s2.txt,0,0
@@ -59,22 +59,25 @@ printh 0A
 //bT0Out
 commandTool.val=0
 commandLength.val=0-loadLength.val //Change to negative number
-click sendCommand,0
+click sendCommand,1
 
 //bT0In
-commandTool=0
-commandLength=""
-commandLength+=loadLength
-click sendCommand,0
+commandTool.val=0
+commandLength.val=loadLength.val //Change to negative number
+click sendCommand,1
 
 //bT1Out
-commandTool=1
-commandLength="-"
-commandLength+=loadLength
-click sendCommand,0
+commandTool.val=1
+commandLength.val=0-loadLength.val //Change to negative number
+click sendCommand,1
 
 //bT1In
-commandTool=1
-commandLength=""
-commandLength+=loadLength
-click sendCommand,0
+commandTool.val=1
+commandLength.val=loadLength.val //Change to negative number
+click sendCommand,1
+
+//Close button
+prints "M104 T0 S0",0 //Unset temperature
+printh 0A
+prints "M104 T1 S0",0
+printh 0A
