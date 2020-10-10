@@ -1,7 +1,10 @@
-//Send temperature
-prints "M104 T0 S220",0
+//Set temperature
+prints "M104 T0 S",0
+covx loadTemp.val,vars.s.txt,0,0
+prints vars.s.txt,0
 printh 0A
-prints "M104 T1 S220",0
+prints "M104 T1 S",0
+prints vars.s.txt,0
 printh 0A
 
 //State
@@ -37,45 +40,41 @@ if(printer.T0Temp.val<loadTemp.val||printer.T1Temp.val<loadTemp.val)
   setlayer bT1In,255
 }
 
+//Send Command
+prints "T",0
+covx commandTool.val,vars.s.txt,0,0
+prints vars.s.txt,0
+printh 0A
+prints "G92 E0",0 //Set extruder to 0
+printh 0A
+vars.s.txt="G1 E"
+covx commandLength.val,vars.s2.txt,0,0
+vars.s.txt+=vars.s2.txt
+vars.s.txt+=" F500"
+prints vars.s.txt,0
+printh 0A
+prints "G92 E0",0
+printh 0A
 
-//bT0OUt
-commandTool=0
-commandLength="-"
-commandLength=
-prints "T0",0
-printh 0A
-prints "G92 E0",0
-printh 0A
-prints "G1 E-10 F300",0
-printh 0A
-prints "G92 E0",0
-printh 0A
+//bT0Out
+commandTool.val=0
+commandLength.val=0-loadLength.val //Change to negative number
+click sendCommand,0
 
 //bT0In
-prints "T0",0
-printh 0A
-prints "G92 E0",0
-printh 0A
-prints "G1 E10 F300",0
-printh 0A
-prints "G92 E0",0
-printh 0A
+commandTool=0
+commandLength=""
+commandLength+=loadLength
+click sendCommand,0
 
 //bT1Out
-prints "T1",0
-printh 0A
-prints "G92 E0",0
-printh 0A
-prints "G1 E-10 F300",0
-printh 0A
-prints "G92 E0",0
-printh 0A
+commandTool=1
+commandLength="-"
+commandLength+=loadLength
+click sendCommand,0
 
 //bT1In
-prints "T1",0
-printh 0A
-prints "G92 E0",0
-printh 0A
-prints "G1 E10 F300",0
-printh 0A
-prints "G92 E0",0
+commandTool=1
+commandLength=""
+commandLength+=loadLength
+click sendCommand,0
