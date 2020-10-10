@@ -11,8 +11,9 @@ tT0Temp.txt=vars.s.txt
 covx printer.T1Temp.val,vars.s.txt,0,0
 tT1Temp.txt=vars.s.txt
 
-if(printer.T1Temp.val>printer.T1SetTemp.val&&printer.T1Temp.val>printer.T1SetTemp.val)
+if(printer.T0Temp.val<loadTemp.val||printer.T1Temp.val<loadTemp.val)
 {
+  tMessage.txt="Loading"
   if(tMessage2.aph==127)
   {
     tMessage2.aph=0
@@ -23,13 +24,13 @@ if(printer.T1Temp.val>printer.T1SetTemp.val&&printer.T1Temp.val>printer.T1SetTem
 }else
 { 
   //Temperature Reached
-  tT0Temp.y=222 //Move temps below box
-  tT1Temp.y=222
-
   state1.picc=18 //Change message to ready
   tMessage.txt="Ready"
   tMessage2.aph=0
 
+  tT0Temp.y=222 //Move temps below box
+  tT1Temp.y=222
+  
   setlayer bT0Out,255 //Unhide buttons
   setlayer bT0In,255
   setlayer bT1Out,255
@@ -38,6 +39,9 @@ if(printer.T1Temp.val>printer.T1SetTemp.val&&printer.T1Temp.val>printer.T1SetTem
 
 
 //bT0OUt
+commandTool=0
+commandLength="-"
+commandLength=
 prints "T0",0
 printh 0A
 prints "G92 E0",0
