@@ -8,7 +8,7 @@ prints "M104 T0 S0",0
 printh 0A
 prints "M104 T1 S0",0
 printh 0A
-prints "M140 S",0
+prints "M140 S0",0
 printh 0A
 vars.status.txt="Heaters Off"
 

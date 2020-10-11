@@ -19,6 +19,7 @@ tBedTemp.txt+="/"
 covx printer.setBedTemp.val,vars.s.txt,0,0
 tBedTemp.txt+=vars.s.txt
 
+//Swap States
 for(j=0;j<=32;j++) //Button Groups
 {
   if(b[j].type==98) //If text box
@@ -50,7 +51,6 @@ for(j=0;j<=32;j++) //Button Groups
   }
 }
 
-
 j=1
 k=2
 l=3
@@ -61,13 +61,13 @@ if(printer.T0Temp.val>=preheatT0Temp.val&&preheatT0Temp.val>0)
 }
 
 //Check T1Temp
-if(printer.T1Temp.val>preheatT1Temp.val&&preheatT1Temp.val>0)
+if(printer.T1Temp.val>=preheatT1Temp.val&&preheatT1Temp.val>0)
 {
   k=1
 }
 
 //Check Bed Temp
-if(printer.bedTemp.val>preheatBedTemp.val&&preheatBedTemp.val>0)
+if(printer.bedTemp.val>=preheatBedTemp.val&&preheatBedTemp.val>0)
 {
   l=1
 }
@@ -81,29 +81,32 @@ if(State==3)
   tMessage.txt="Ready"
   icon.picc=24
   tMessage2.aph=0
+  ready.val=1
 }else
 {
-  if(preheatT0Temp.val>0||preheatT1Temp.val>0)
+  if(ready.val==0)
   {
-    //Heating
-    tMessage.txt="Heating"
-    tMessage2.txt="Please wait..."
-    icon.picc=23
-    if(tMessage2.aph==127)
+    if(preheatT0Temp.val>0||preheatT1Temp.val>0)
     {
-      tMessage2.aph=0
+      //Heating
+      tMessage.txt="Heating"
+      tMessage2.txt="Please wait..."
+      icon.picc=23
+      if(tMessage2.aph==127)
+      {
+        tMessage2.aph=0
+      }else
+      {
+        tMessage2.aph=127
+      }    
     }else
     {
+      //Choose temp
+      tMessage.txt="Choose"
+      tMessage2.txt="Materials"
       tMessage2.aph=127
-    }    
-  }else
-  {
-    //Choose temp
-    tMessage.txt="Choose"
-    tMessage2.txt="Materials"
-    tMessage2.aph=127
-    icon.picc=2
-
+      icon.picc=2
+    }
   }
 }
 
@@ -112,6 +115,7 @@ if(State==3)
 
 
 //Send Command
+click updateState,1
 if(wantedBedTemp.val>preheatBedTemp.val) //Only set a new bed temp if higher
 {
   preheatBedTemp.val=wantedBedTemp.val
