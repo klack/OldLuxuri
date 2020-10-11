@@ -1,0 +1,22 @@
+//bSwap callback
+vars.status.txt="Swapping Tool"
+if(ReturnVal!=-1)
+{
+  prints "T",0
+  covx ReturnVal,vars.s.txt,0,0
+  prints vars.s.txt,0
+  printh 0A
+  ReturnVal=-1
+}
+
+
+
+//updateState
+if(Tool==0)
+{
+  bSwap.picc=14
+}else
+{
+  bSwap.picc=15
+}
+

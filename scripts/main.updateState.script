@@ -24,21 +24,28 @@ tFanSpeed.txt=vars.s.txt
 //Current Tool
 if(Tool==0)
 {
-  bSwap.picc=6
+  bSwap.picc=5
 }else
 {
-  bSwap.picc=7
+  bSwap.picc=6
 }
 //Idex Mode
-if(IdexMode==1)
+if(IdexMode==1||IdexMode==0)
 {
-  bMode.picc=6
+  bMode.picc=5
+  setlayer tSwap,255
+  setlayer bSwap,255
+
 }
 if(IdexMode==2)
 {
-  bMode.picc=7
+  bMode.picc=6
+  setlayer tSwap,0
+  setlayer bSwap,0
 }
 if(IdexMode==3)
 {
-  bMode.picc=8
+  bMode.picc=7
+  setlayer tSwap,0
+  setlayer bSwap,0
 }

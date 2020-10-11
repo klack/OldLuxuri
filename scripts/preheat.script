@@ -18,6 +18,7 @@ tBedTemp.txt+=vars.s.txt
 tBedTemp.txt+="/"
 covx printer.setBedTemp.val,vars.s.txt,0,0
 tBedTemp.txt+=vars.s.txt
+
 for(j=0;j<=32;j++) //Button Groups
 {
   if(b[j].type==98) //If text box
@@ -107,35 +108,8 @@ if(State==3)
 }
 
 
----
-//Window State
-if(printer.T0Temp.val<preheatT0Temp.val||printer.T1Temp.val<preheatT1Temp.val)
-  {
-  tMessage.txt="Heating"
-  tMessage2.txt="Please wait..."
-  icon.picc=23
-  if(tMessage2.aph==127)
-  {
-    tMessage2.aph=0
-  }else
-  {
-    tMessage2.aph=127
-  }
-}
-if(printer.T0Temp.val<=preheatT0Temp.val)
-{
-  if(printer.T1Temp.val<=preheatT0Temp.val)
-  {
-    if(printer.bedTemp.val>=preheatBedTemp.val)
-    {
-      //Temperature Reached
-      state.picc=24 //Change message to ready
-      tMessage.txt="Ready"
-      icon.picc=24
-      tMessage2.aph=0
-    }
-  }
-}
+
+
 
 //Send Command
 if(wantedBedTemp.val>preheatBedTemp.val) //Only set a new bed temp if higher
@@ -146,20 +120,22 @@ if(preheatT0Temp.val==0&&preheatT1Temp.val==0) //Turn off if nothing selected
 {
   preheatBedTemp.val=0
 }
-click updateState,1
 prints "M104 T0 S",0
 covx preheatT0Temp.val,vars.s.txt,0,0
 prints vars.s.txt,0
 printh 0A
-doevents
 prints "M104 T1 S",0
-covx preheatT0Temp.val,vars.s.txt,0,0
+covx preheatT1Temp.val,vars.s.txt,0,0
 prints vars.s.txt,0
+printh 0A
 prints "M140 S",0
-doevents
 covx preheatBedTemp.val,vars.s.txt,0,0
 prints vars.s.txt,0
 printh 0A
+
+
+
+
 
 //bT0None
 preheatT0Temp.val=0
