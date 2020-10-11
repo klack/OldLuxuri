@@ -1,16 +1,16 @@
 if(usize>0)
 {
-  vars.status.txt="Buffer Recieved"
+  //vars.status.txt="Buffer Recieved"
   SerialPos=0
   while(SerialPos<usize)
   {
-    vars.status.txt="Checking buffer"
+    //vars.status.txt="Checking buffer"
     // check next character
     ucopy parse.startChar.txt,SerialPos,1,0
     if(u[SerialPos]==10||u[SerialPos]==13) //if linefeed or carriage return
     {
       //EOL reached
-      vars.status.txt="EOL Reached"
+      //vars.status.txt="EOL Reached"
       strlen parse.buffer.txt,BufferLen //Record buffer length
       //Notify listeners
       click notifyEOL,1
@@ -45,11 +45,11 @@ if(usize>0)
   }
   if(SerialPos==usize) //End of buffer reached
   {
-    vars.status.txt="Clearning buffer"
+    //vars.status.txt="Clearning buffer"
     code_c //Clear buffer
     BufferLen=0
   }
 }else
 {
-  vars.status.txt="Waiting for data..."
+  //vars.status.txt="Waiting for data..."
 }

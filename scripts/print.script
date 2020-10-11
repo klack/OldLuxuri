@@ -1,0 +1,2 @@
+spstr tFiles.txt,vars.s.txt,">",5 //usage: spstr <src>,<dest>,<key>,<index>
+vars.status.txt=vars.s.txt
