@@ -1,5 +1,8 @@
-vars.status.txt="Starting print"
-prints "M23",0
+vars.status.txt="Starting print "
+vars.status.txt+=fileName.txt
 printh 0A
+prints "M23 ",0
 prints fileName.txt,0
+printh 0A
+prints "M24",0
 printh 0A

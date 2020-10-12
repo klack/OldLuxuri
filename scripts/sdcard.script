@@ -23,7 +23,7 @@ for(j=0;j<=18;j++)
   if(b[j].type==116&&b[j].txt_maxl==32)
   {
     //vars.status.txt="Checking object "
-    prints selected.txt,0
+    //prints selected.txt,0
     if(b[j].txt==selected.txt)
     {
       vars.status.txt="Found"
@@ -77,24 +77,26 @@ prints "M20",0
 printh 0A
 
 
-//File parser listener
+//File parser
 parse.lineMatch.txt="End file list"
 if(parse.buffer.txt==parse.lineMatch.txt)
 {
-  prints "End file list",0
+  //prints "End file list",0
   //Getting file state is off, do not listen for filenames
   gettingFiles.val=0
+  click showFiles,1
 }
 
 if(gettingFiles.val==1) //Get files
 {
-  spstr parse.buffer.txt,vars.s.txt,".gcode",0
+  spstr parse.buffer.txt,vars.s.txt,".GCO",0
   strlen vars.s.txt,j
   if(j>0)
   {
-    prints "Got a File",0
+    //prints "Got a File",0
     //Got a file
     tFiles.txt+=vars.s.txt
+    tFiles.txt+=".GCO"
     tFiles.txt+=">" //Delimeter to be used later
   }
 }
@@ -102,7 +104,7 @@ if(gettingFiles.val==1) //Get files
 parse.lineMatch.txt="Begin file list"
 if(parse.buffer.txt==parse.lineMatch.txt)
 {
-  prints "Begin file list",0
+  //prints "Begin file list",0
   //Getting file state is on, next iteration will process for file name
   tFiles.txt="" //Clear existing file list
   click showFiles,1 //Clear text boxes
