@@ -73,3 +73,54 @@ spstr tFiles.txt,f5.txt,">",j
 selection=f0.txt
 
 
+//Get files
+prints "M20",0
+printh 0A
+
+
+//File parser listener
+prints parse.buffer.txt,0
+prints "State:",0
+prints gettingFiles.val,0
+if(gettingFiles.val==1) //Get files
+{
+  spstr parse.buffer.txt,vars.s.txt,".gcode",0
+  strlen vars.s.txt,j
+  if(j>0)
+  {
+    prints "Got a File",0
+    //Got a file
+    tFiles.txt+=vars.s.txt
+    tFiles.txt+=">" //Delimeter to be used later
+  }
+}
+parse.lineMatch.txt="Begin file list"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  prints "Begin file list",0
+  //Getting file state is on, next iteration will process for file name
+  gettingFiles.val=1
+}
+parse.lineMatch.txt="End file list"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  prints "End file list",0
+  //Getting file state is off, do not listen for filenames
+  gettingFiles.val=0
+}
+
+
+
+//Tests
+parse.buffer.txt="Begin file list"
+click notifyEOL,1
+parse.buffer.txt="Richard.gcode"
+click notifyEOL,1
+parse.buffer.txt="Curtis.gcode"
+click notifyEOL,1
+parse.buffer.txt="Pierre.gcode"
+click notifyEOL,1
+parse.buffer.txt="End file list"
+click notifyEOL,1
+parse.buffer.txt="Danny.gcode"
+click notifyEOL,1
