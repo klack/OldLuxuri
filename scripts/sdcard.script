@@ -69,7 +69,9 @@ spstr tFiles.txt,f5.txt,">",j
 click setButtonState,1
 
 //fn click
-selection=f0.txt
+selected.txt=f0.txt
+click setButtonState,1
+
 
 
 //Get files
