@@ -59,17 +59,18 @@ valueLFile.txt=""
 gettingLongF.val=1
 j=page.val*5
 
-for(j=j;j<=5;j++)
+for(k=0;k<=5;k++)
 {
-  spstr tFiles.txt,vars.s.txt,">",j
-  keyLFile.txt+=vars.s.txt //Store key
-  keyLFile.txt+=">"
-  prints "M33 ",0  //Request long file name
-  prints vars.s.txt,0
-  printh 0A
-  doevents
+  spstr tFiles.txt,vars.s.txt,">",j+k
+  if(vars.s.txt!="")
+  {
+    keyLFile.txt+=vars.s.txt //Store key
+    keyLFile.txt+=">"
+    prints "M33 ",0  //Request long file name
+    prints vars.s.txt,0
+    printh 0A
+  }
 }
-
 click setButtonState,1
 
 
@@ -99,14 +100,13 @@ if(parse.buffer.txt==parse.lineMatch.txt)
 
 if(gettingFiles.val==1) //Get files
 {
-  spstr parse.buffer.txt,vars.s.txt,".GCO",0
+  spstr parse.buffer.txt,vars.s.txt," ",0
   strlen vars.s.txt,j
   if(j>0)
   {
     //prints "Got a File",0
     //Got a file
     tFiles.txt+=vars.s.txt
-    tFiles.txt+=".GCO"
     tFiles.txt+=">" //Delimeter to be used later
   }
 }
@@ -132,8 +132,7 @@ if(gettingLongF.val==1)
   substr parse.buffer.txt,parse.eval.txt,0,j
   if(parse.eval.txt==parse.lineMatch.txt)
   {
-    spstr parse.buffer.txt,vars.s.txt,"/",1
-    valueLFile.txt+=vars.s.txt
+    valueLFile.txt+=parse.buffer.txt
     valueLFile.txt+=">"
   }
 }
