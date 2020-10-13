@@ -48,7 +48,7 @@ if(f4.txt=="")
 
 //bUp
 selected.txt=""
-if(page.val>0)
+if(page.val>=0)
 {
   page.val-=1
 }
