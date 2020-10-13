@@ -54,19 +54,27 @@ click showFiles,1
 
 
 //showFiles
+keyLFile.txt=""
+valueLFile.txt=""
+gettingLongF.val=1
 j=page.val*5
-spstr tFiles.txt,f0.txt,">",j
-j+=1
-spstr tFiles.txt,f1.txt,">",j
-j+=1
-spstr tFiles.txt,f2.txt,">",j
-j+=1
-spstr tFiles.txt,f3.txt,">",j
-j+=1
-spstr tFiles.txt,f4.txt,">",j
-j+=1
-spstr tFiles.txt,f5.txt,">",j
+
+for(j=j;j<=5;j++)
+{
+  spstr tFiles.txt,vars.s.txt,">",j
+  keyLFile.txt+=vars.s.txt //Store key
+  keyLFile.txt+=">"
+  prints "M33 ",0  //Request long file name
+  prints vars.s.txt,0
+  printh 0A
+  doevents
+}
+
 click setButtonState,1
+
+
+
+
 
 //fn click
 selected.txt=f0.txt
@@ -109,11 +117,26 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   //prints "Begin file list",0
   //Getting file state is on, next iteration will process for file name
   tFiles.txt="" //Clear existing file list
-  click showFiles,1 //Clear text boxes
+  //click showFiles,1 //Clear text boxes
   page.val=0
   gettingFiles.val=1
 }
 
+
+
+//Long File Name Parser
+if(gettingLongF.val==1)
+{
+  parse.lineMatch.txt="/"
+  strlen parse.lineMatch.txt,j
+  substr parse.buffer.txt,parse.eval.txt,0,j
+  if(parse.eval.txt==parse.lineMatch.txt)
+  {
+    spstr parse.buffer.txt,vars.s.txt,"/",1
+    valueLFile.txt+=vars.s.txt
+    valueLFile.txt+=">"
+  }
+}
 
 
 
@@ -132,3 +155,12 @@ click notifyEOL,1
 parse.buffer.txt="End file list"
 click notifyEOL,1
 click showFiles,1
+
+
+
+
+
+
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
