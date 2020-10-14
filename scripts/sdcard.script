@@ -46,6 +46,8 @@ if(j>0)
 //---------------------------------------------
 keyLFile.txt=""
 valueLFile.txt=""
+lFilesReq.val=0
+lFilesRecieved.val=0
 gettingLongF.val=1
 j=page.val*5
 printh 0A
@@ -62,6 +64,7 @@ for(k=0;k<=4;k++)
     prints "M33 ",0  //Request long file name
     prints vars.s.txt,0
     printh 0A
+    lFilesReq.val+=1
     doevents
     delay=30
   }
@@ -154,10 +157,9 @@ if(gettingLongF.val==1)
     valueLFile.txt+=">"
     lFilesRecieved.val+=1
   }
-  if(lFilesRecieved.val>=5)
+  if(lFilesRecieved.val==lFilesReq.val)
   {
     gettingLongF.val=0
-    lFilesRecieved.val=0
     click updateState,1
   }
 }
