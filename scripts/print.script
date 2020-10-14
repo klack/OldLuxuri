@@ -1,8 +1,11 @@
 vars.status.txt="Starting print "
 vars.status.txt+=fileName.txt
 printh 0A
+prints "M27 S4",0
+printh 0A
 prints "M23 ",0
 prints fileName.txt,0
 printh 0A
 prints "M24",0
 printh 0A
+page console

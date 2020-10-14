@@ -50,7 +50,7 @@ lFilesReq.val=0
 lFilesRecieved.val=0
 gettingLongF.val=1
 j=page.val*5
-printh 0A
+printh 0A //Clear current buffer? TODO: FIX HACK
 for(k=0;k<=4;k++)
 {
   spstr tFiles.txt,vars.s.txt,">",j+k
@@ -153,7 +153,8 @@ if(gettingLongF.val==1)
   substr parse.buffer.txt,parse.eval.txt,0,j
   if(parse.eval.txt==parse.lineMatch.txt)
   {
-    valueLFile.txt+=parse.buffer.txt
+    spstr parse.buffer.txt,vars.s.txt,"/",1 //Grab after the slash
+    valueLFile.txt+=vars.s.txt
     valueLFile.txt+=">"
     lFilesRecieved.val+=1
   }
