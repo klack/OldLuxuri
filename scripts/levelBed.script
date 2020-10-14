@@ -1,4 +1,6 @@
 //Page load
+prints "G0 F5000",0
+printh 0A
 prints "M605 S0",0 //Set to manual idex mode
 printh 0A
 prints "G28",0 //Home
@@ -61,9 +63,13 @@ prints "M114",0 //Report position
 printh 0A
 
 //Close
-prints "M605 S1",0 //Set to auto idex mode
+prints "G0 F5000",0
 printh 0A
 prints "T0",0 //Set to T0
+printh 0A
+prints "G28",0 //Home
+printh 0A
+prints "M605 S1",0 //Set to auto idex mode
 printh 0A
 
 //Points
