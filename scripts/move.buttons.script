@@ -5,6 +5,8 @@ prints command.txt,0
 printh 0A
 prints "G90",0
 printh 0A
+prints "M114",0
+printh 0A
 
 
 //Y Up
@@ -20,3 +22,13 @@ command.txt+=distance.txt
 command.txt+=" F"
 command.txt+=speed.txt
 click sendCommand,1
+
+//Update status
+tPosition.txt="X:"
+tPosition.txt+=printer.x.txt
+tPosition.txt+=" "
+tPosition.txt+="Y:"
+tPosition.txt+=printer.y.txt
+tPosition.txt+=" "
+tPosition.txt+="Z:"
+tPosition.txt+=printer.z.txt

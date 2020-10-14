@@ -1,3 +1,19 @@
+//Page load
+prints "G28",0 //Home
+printh 0A
+prints "M114",0 //Report position
+printh 0A
+
+ReturnPage=dp
+//Do callback
+if(HandleCallback==1)
+{
+  click ReturnObj,0 //Mouse up
+  HandleCallback=0
+  ReturnVal=-1
+}
+
+
 //bSwap callback
 vars.status.txt="Swapping Tool"
 if(ReturnVal!=-1)
@@ -6,10 +22,7 @@ if(ReturnVal!=-1)
   covx ReturnVal,vars.s.txt,0,0
   prints vars.s.txt,0
   printh 0A
-  ReturnVal=-1
 }
-
-
 
 //updateState
 if(Tool==0)
@@ -19,4 +32,6 @@ if(Tool==0)
 {
   bSwap.picc=15
 }
+
+
 

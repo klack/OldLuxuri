@@ -6,7 +6,7 @@ if(usize>0)
     // check next character
     ucopy gcodeinput.startchar.txt,SerialPos,1,0
     strlen gcodeinput.b[SerialLines].txt,maxlen
-    if(u[SerialPos]==10||u[SerialPos]==13)
+    if(u[SerialPos]==10||u[SerialPos]==13)m
     {
       // scroll up serial
       for(Line=1;Line<SerialLines;Line++)
