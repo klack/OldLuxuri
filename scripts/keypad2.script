@@ -8,3 +8,8 @@ tValue+="1"
 vars.returnVal.txt=tValue.txt
 HandleCallback=1
 page DiagReturnPage
+
+//Close button
+vars.returnVal.txt="null"
+HandleCallback=0
+page DiagReturnPage

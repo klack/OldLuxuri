@@ -1,3 +1,7 @@
+//Close
+prints "G0 F5000",0 //Reset speed
+printh 0A
+
 //Send Command
 prints "G91",0
 printh 0A
@@ -7,6 +11,19 @@ prints "G90",0
 printh 0A
 prints "M114",0
 printh 0A
+
+//bZHome
+command.txt="G28 Z X"
+click sendCommand,1
+
+
+//Z
+command.txt="G0 Z"
+command.txt+=distance.txt
+command.txt+=" F500"
+click sendCommand,1
+
+
 
 
 //Y Up
