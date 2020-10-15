@@ -6,6 +6,8 @@ if(HandleCallback==1)
   HandleCallback=0
   vars.returnVal.txt=""
 }
+prints "M503",0
+printh 0A
 click updateState,1
 
 //Update State
