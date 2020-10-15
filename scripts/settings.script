@@ -1,12 +1,34 @@
 //Onload
 DiagReturnPage=dp
-//Handle Callback
 if(HandleCallback==1)
 {
   click b[ReturnObj],0 //Run right click code as callback
   HandleCallback=0
   vars.returnVal.txt=""
 }
+click updateState,1
+
+//Update State
+eStepsVal.txt=printer.T0Esteps.txt
+zOffsetVal.txt=printer.zOffset.txt
+x2Val.txt=printer.x2Offset.txt
+y2Val.txt=printer.y2Offset.txt
+z2Val.txt=printer.z2Offset.txt
+
+
+//bDefaults click
+prints "M502",0
+printh 0A
+prints "M500",0
+printh 0A
+prints "M503",0
+printh 0A
+
+//saveAndReload click
+prints "M500",0
+printh 0A
+prints "M503",0
+printh 0A
 
 //eStepsVal click
 ReturnObj=2
@@ -29,11 +51,7 @@ if(vars.returnVal.txt!=b[ReturnObj].txt)
   printh 0A
 }
 
-//saveAndReload click
-prints "M500",0
-printh 0A
-prints "M503",0
-printh 0A
+
 
 //zOffsetVal click
 ReturnObj=10
@@ -94,3 +112,19 @@ if(vars.returnVal.txt!=b[ReturnObj].txt)
   printh 0A
   click saveAndReload,1
 }
+
+// PID Autotune
+vars.status.txt="PID Auto-tuning"
+prints "M106 P0 255",0 //Turn on fan
+printh 0A
+prints "M106 P1 255",0 //Turn on fan
+printh 0A
+prints "M303 C15 E0 S220 U",0
+printh 0A
+prints "M303 C15 E1 S220 U",0
+printh 0A
+prints "M303 C5 E-1 S60 U",0
+printh 0A
+prints "M107",0 //Turn off fan
+printh 0A
+page console
