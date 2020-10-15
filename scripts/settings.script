@@ -1,10 +1,9 @@
 //Onload
 DiagReturnPage=dp
-
 //Handle Callback
 if(HandleCallback==1)
 {
-  click b[ReturnObj],0 //Righ click code as callback
+  click b[ReturnObj],0 //Run right click code as callback
   HandleCallback=0
   vars.returnVal.txt=""
 }
@@ -15,5 +14,83 @@ numpad.tCaption.txt="E-Steps"
 vars.returnVal.txt=b[ReturnObj].txt
 page numpad
 
-
 //eStepsVal callback
+if(vars.returnVal.txt!=b[ReturnObj].txt)
+{
+  prints "M92 T0 E",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  prints "M92 T1 E",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  prints "M500",0
+  printh 0A
+  prints "M503",0
+  printh 0A
+}
+
+//saveAndReload click
+prints "M500",0
+printh 0A
+prints "M503",0
+printh 0A
+
+//zOffsetVal click
+ReturnObj=10
+numpad.tCaption.txt="Z Offset"
+vars.returnVal.txt=b[ReturnObj].txt
+page numpad
+
+//zOffsetVal callback
+if(vars.returnVal.txt!=b[ReturnObj].txt)
+{
+  prints "M206 Z",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  click saveAndReload,1
+}
+
+//x2 click
+ReturnObj=11
+numpad.tCaption.txt="X2 Offset"
+vars.returnVal.txt=b[ReturnObj].txt
+page numpad
+
+//x2 callback
+if(vars.returnVal.txt!=b[ReturnObj].txt)
+{
+  prints "M218 T1 X",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  click saveAndReload,1
+}
+
+//y2 click
+ReturnObj=12
+numpad.tCaption.txt="Y2 Offset"
+vars.returnVal.txt=b[ReturnObj].txt
+page numpad
+
+//y2 callback
+if(vars.returnVal.txt!=b[ReturnObj].txt)
+{
+  prints "M218 T1 Y",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  click saveAndReload,1
+}
+
+//z2 click
+ReturnObj=13
+numpad.tCaption.txt="Z2 Offset"
+vars.returnVal.txt=b[ReturnObj].txt
+page numpad
+
+//z2 callback
+if(vars.returnVal.txt!=b[ReturnObj].txt)
+{
+  prints "M218 T1 Z",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  click saveAndReload,1
+}
