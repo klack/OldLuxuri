@@ -1,0 +1,19 @@
+//Onload
+DiagReturnPage=dp
+
+//Handle Callback
+if(HandleCallback==1)
+{
+  click b[ReturnObj],0 //Righ click code as callback
+  HandleCallback=0
+  vars.returnVal.txt=""
+}
+
+//eStepsVal click
+ReturnObj=2
+numpad.tCaption.txt="E-Steps"
+vars.returnVal.txt=b[ReturnObj].txt
+page numpad
+
+
+//eStepsVal callback
