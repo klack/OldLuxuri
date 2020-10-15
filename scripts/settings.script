@@ -5,10 +5,10 @@ if(HandleCallback==1)
   click b[ReturnObj],0 //Run right click code as callback
   HandleCallback=0
   vars.returnVal.txt=""
+  ReturnVal=-1
 }
 prints "M503",0
 printh 0A
-click updateState,1
 
 //Update State
 eStepsVal.txt=printer.T0Esteps.txt
@@ -16,15 +16,25 @@ zOffsetVal.txt=printer.zOffset.txt
 x2Val.txt=printer.x2Offset.txt
 y2Val.txt=printer.y2Offset.txt
 z2Val.txt=printer.z2Offset.txt
-
+doevents
 
 //bDefaults click
-prints "M502",0
-printh 0A
-prints "M500",0
-printh 0A
-prints "M503",0
-printh 0A
+//Click
+ReturnObj=3
+diagConfirm.tPrompt.txt="Load Firmware Defaults?"
+ReturnVal=1
+page diagConfirm
+
+//bDefaults callback
+if(ReturnVal!=-1)
+{
+  prints "M502",0
+  printh 0A
+  prints "M500",0
+  printh 0A
+  prints "M503",0
+  printh 0A
+}
 
 //saveAndReload click
 prints "M500",0
