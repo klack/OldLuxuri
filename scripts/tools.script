@@ -1,11 +1,19 @@
 // Motors Off
 prints "M108",0 //Break
 printh 0A
+prints "M108",0 //Break
+printh 0A
+prints "M108",0 //Break
+printh 0A
 prints "M84",0 //Disable steppers
 printh 0A
 vars.status.txt="Stepper Motors Disabled"
 
 // Heaters Off
+prints "M108",0 //Break
+printh 0A
+prints "M108",0 //Break
+printh 0A
 prints "M108",0 //Break
 printh 0A
 prints "M104 T0 S0",0
@@ -17,6 +25,10 @@ printh 0A
 vars.status.txt="Heaters Off"
 
 // Power Off
+prints "M108",0 //Break
+printh 0A
+prints "M108",0 //Break
+printh 0A
 prints "M108",0 //Break
 printh 0A
 prints "M84",0 //Disable steppers, heaters, fan, and powersupply

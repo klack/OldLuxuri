@@ -1,0 +1,112 @@
+//Page Load
+DiagReturnPage=dp
+if(HandleCallback==1)
+{
+  click b[ReturnObj],0 //Run right click code as callback
+  HandleCallback=0
+  vars.returnVal.txt="null"
+  ReturnVal=-1
+}
+
+prints "M114",0
+printh 0A
+click setState,1
+
+
+
+//Close
+prints "G0 F5000",0 //Reset speed
+printh 0A
+
+//Send Command
+prints "G91",0
+printh 0A
+prints command.txt,0
+printh 0A
+prints "G90",0
+printh 0A
+prints "M114",0
+printh 0A
+
+//bZHome
+command.txt="G28 Z X"
+click sendCommand,1
+
+
+//Z
+command.txt="G0 Z"
+command.txt+=distance.txt
+command.txt+=" F500"
+click sendCommand,1
+
+
+
+//Y Up
+command.txt="G0 Y"
+command.txt+=distance.txt
+command.txt+=" F"
+command.txt+=speed.txt
+click sendCommand,1
+
+//Y down
+command.txt="G0 Y-"
+command.txt+=distance.txt
+command.txt+=" F"
+command.txt+=speed.txt
+click sendCommand,1
+
+//Update status
+tPosition.txt="X:"
+tPosition.txt+=printer.x.txt
+tPosition.txt+=" "
+tPosition.txt+="Y:"
+tPosition.txt+=printer.y.txt
+tPosition.txt+=" "
+tPosition.txt+="Z:"
+tPosition.txt+=printer.z.txt
+
+
+
+
+
+
+//Button State
+//Toolhead
+if(Tool==0)
+{
+  bSwap.picc=20
+}else
+{
+  bSwap.picc=21
+}
+//Button Groups
+for(j=0;j<=32;j++)
+{
+  if(b[j].type==98) //If text box
+  {
+    if(b[j].txt_maxl==5) //Distance boxes are set with a maxl of 5
+    {
+      if(distance.txt==b[j].txt)
+      {
+        b[j].picc=19
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=20
+        b[j].pco=65535
+      }
+    }
+    if(b[j].txt_maxl==6) //Speed boxes are set with a maxl of 6
+    {
+      if(speed.txt==b[j].txt)
+      {
+        b[j].picc=19
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=20
+        b[j].pco=65535
+      }
+    }
+  }
+}
