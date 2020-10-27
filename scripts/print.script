@@ -29,6 +29,7 @@ tTime.txt=printTime.txt
 
 
 //On load
+ReturnPage=dp
 tFileName.txt=fileName.txt
 vars.status.txt="Starting print "
 vars.status.txt+=fileName.txt
