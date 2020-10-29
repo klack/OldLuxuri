@@ -21,21 +21,38 @@ tBedTemp.txt+=vars.s.txt
 covx printer.fanSpeed.val,vars.s.txt,0,0
 tFanSpeed.txt=vars.s.txt
 //Progress
-if(printer.totalBytes.val!=0)
+if(printer.printState.val==-1) //Uninitialized
 {
+  tTime.aph=0
+  oProgress.val=0
+  tProgress.txt=""
+  tFileName.txt=""
+}
+if(printer.printState.val==0) //Starting
+{
+  tProgress.txt="Starting Print..."
+}
+if(printer.printState.val==1) //Printing
+{
+  tTime.aph=127
   oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
 }
-
-
+if(printer.printState.val==2) //Finished
+{
+  tProgress.txt="Finished"
+}
+if(printer.printState.val==9) //Error
+{
+  tProgress.txt="Error opening file"
+}
 
 //On load
+//Todo get long file name
 ReturnPage=dp
 tFileName.txt=fileName.txt
-vars.status.txt="Starting print "
-vars.status.txt+=fileName.txt
 printh 0A
 prints "M27 S4",0
 printh 0A

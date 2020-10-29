@@ -16,24 +16,20 @@
 // 2020-10-16 02:48:22,571 - Changing monitoring state from "Finishing" to "Operational"
 // 2020-10-16 02:28:47,759 - Recv: Not SD printing
 
+// Starting
+// TODO Get long filename
+parse.lineMatch.txt="echo:Now fresh file: " //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  tProgress.txt="Starting Print..."
+  spstr parse.buffer.txt,fileName.txt,parse.lineMatch.txt,1
+  tFileName.txt=fileName.txt
+  printer.printState.val=0
+}
 
-//STATE STARTING PRINT
-//Todo get long file name
-//Select file with m23
-
-//RECV: open failed, File: D344UALCU~1.GCO.
-  //STATE ERROR
-
-//Check for "Now Fresh File", "File opened", "File selected"
-//Parse SD State
-
-//STATE PRINTING
-//Parse "Done printing file"
-//STATE FINISHED
-
-
-// Parse Progress
-// 2020-10-16 02:30:54,994 - Recv: SD printing byte 9558/45615
+// Progress
 parse.lineMatch.txt="SD printing byte " //Qualify Line
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
@@ -44,5 +40,27 @@ if(parse.eval.txt==parse.lineMatch.txt)
   covx vars.s2.txt,printer.currentByte.val,0,0
   spstr vars.s.txt,vars.s2.txt,"/",1 //Total Bytes
   covx vars.s2.txt,printer.totalBytes.val,0,0
+  printer.printState.val=1
+}
+
+// Finished
+parse.lineMatch.txt="Done printing file" //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  printer.printState.val=2
+  oProgress.val=100
+}
+
+// Error
+// RECV: open failed, File: D344UALCU~1.GCO.
+parse.lineMatch.txt="open failed, " //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  printer.printState.val=9
+  printer.lastError.txt=parse.buffer.txt
 }
 
