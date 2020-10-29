@@ -1,0 +1,23 @@
+// Feed Rate / Speed
+// FR:100%
+parse.lineMatch.txt="FR:" //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,vars.s.txt,":",1
+  spstr vars.s.txt,vars.s2.txt,"%",0
+  covx vars.s2.txt,printer.speed.val,0,0
+}
+
+// Flow
+// echo:E0 Flow: 100%
+parse.lineMatch.txt=" Flow: " //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,vars.s.txt," ",2
+  spstr vars.s.txt,vars.s2.txt,"%",0
+  covx vars.s2.txt,printer.flow.val,0,0
+}

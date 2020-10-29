@@ -63,4 +63,3 @@ if(parse.eval.txt==parse.lineMatch.txt)
   printer.printState.val=9
   printer.lastError.txt=parse.buffer.txt
 }
-

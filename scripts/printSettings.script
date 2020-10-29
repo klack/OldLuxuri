@@ -1,0 +1,52 @@
+//Update State
+if(printer.speed.val!=100&&printer.speed.val!=0)
+{
+  covx printer.speed.val,bSpeed.txt,0,0
+  bSpeed.picc=39
+}else
+{
+  bSpeed.txt=""
+  bSpeed.picc=38
+}
+
+//Onload
+DiagReturnPage=dp
+prints "M220",0
+printh 0A
+prints "M221",0
+printh 0A
+if(HandleCallback==1)
+{
+  click b[ReturnObj],0 //Run right click code as callback
+  HandleCallback=0
+  vars.returnVal.txt="null"
+  ReturnVal=-1
+}
+
+//bSpeed click
+ReturnObj=13
+numpad.tCaption.txt="Print Speed"
+if(printer.speed.val==0)
+{
+  vars.returnVal.txt=""
+}else
+{
+  covx printer.speed.val,vars.returnVal.txt,0,0
+}
+page numpad
+//bSpeed callback
+covx printer.speed.val,vars.s.txt,0,0
+if(vars.returnVal.txt!=vars.s.txt)
+{
+  prints "M220 S",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  prints "M220",0
+  printh 0A
+}
+
+//Mock Data
+parse.buffer.txt="echo:E1 Flow: 90%"
+click notifyEOL,1
+parse.buffer.txt="FR:90%"
+click notifyEOL,1
