@@ -21,11 +21,14 @@ tBedTemp.txt+=vars.s.txt
 covx printer.fanSpeed.val,vars.s.txt,0,0
 tFanSpeed.txt=vars.s.txt
 //Progress
-covx progress.val,vars.s.txt,0,0
-tProgress.txt=vars.s.txt
-tProgress.txt+="%"
-oProgress.val=progress.val
-tTime.txt=printTime.txt
+if(printer.totalBytes.val!=0)
+{
+  oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
+  covx oProgress.val,vars.s.txt,0,0
+  tProgress.txt=vars.s.txt
+  tProgress.txt+="%"
+}
+
 
 
 //On load
@@ -41,3 +44,7 @@ prints fileName.txt,0
 printh 0A
 prints "M24",0
 printh 0A
+
+//Mock Data
+parse.buffer.txt="SD printing byte 20/100"
+click notifyEOL,1

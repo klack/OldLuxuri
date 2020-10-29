@@ -7,10 +7,9 @@ if(HandleCallback==1)
   vars.returnVal.txt="null"
   ReturnVal=-1
 }
-
-prints "M114",0
+prints "M114",0 //Report position
 printh 0A
-click setState,1
+click updateState,1
 
 
 
@@ -55,7 +54,10 @@ command.txt+=" F"
 command.txt+=speed.txt
 click sendCommand,1
 
-//Update status
+
+//--------------------------
+//Update State
+//--------------------------
 tPosition.txt="X:"
 tPosition.txt+=printer.x.txt
 tPosition.txt+=" "
@@ -65,22 +67,15 @@ tPosition.txt+=" "
 tPosition.txt+="Z:"
 tPosition.txt+=printer.z.txt
 
-
-
-
-
-
-//Button State
-//Toolhead
-if(Tool==0)
+if(Tool==0) //Toolhead
 {
   bSwap.picc=20
 }else
 {
   bSwap.picc=21
 }
-//Button Groups
-for(j=0;j<=32;j++)
+
+for(j=0;j<=32;j++) //Button Groups
 {
   if(b[j].type==98) //If text box
   {
