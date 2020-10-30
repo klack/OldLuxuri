@@ -8,6 +8,15 @@ if(printer.speed.val!=100&&printer.speed.val!=0)
   bSpeed.txt=""
   bSpeed.picc=38
 }
+if(printer.flow.val!=100&&printer.flow.val!=0)
+{
+  covx printer.flow.val,bFlow.txt,0,0
+  bFlow.picc=39
+}else
+{
+  bFlow.txt=""
+  bFlow.picc=38
+}
 
 //Onload
 DiagReturnPage=dp
@@ -42,6 +51,28 @@ if(vars.returnVal.txt!=vars.s.txt)
   prints vars.returnVal.txt,0
   printh 0A
   prints "M220",0
+  printh 0A
+}
+
+//bFlow click
+ReturnObj=14
+numpad.tCaption.txt="Print Flow"
+if(printer.flow.val==0)
+{
+  vars.returnVal.txt=""
+}else
+{
+  covx printer.flow.val,vars.returnVal.txt,0,0
+}
+page numpad
+//bFlow callback
+covx printer.flow.val,vars.s.txt,0,0
+if(vars.returnVal.txt!=vars.s.txt)
+{
+  prints "M221 S",0
+  prints vars.returnVal.txt,0
+  printh 0A
+  prints "M221",0
   printh 0A
 }
 

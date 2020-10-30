@@ -14,7 +14,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 // echo:E0 Flow: 100%
 parse.lineMatch.txt=" Flow: " //Qualify Line
 strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
+substr parse.buffer.txt,parse.eval.txt,7,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,vars.s.txt," ",2
