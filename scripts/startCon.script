@@ -53,7 +53,6 @@ if(usize<=0) //If the buffer is empty
   prints "M605 S0",0 //Dual Nozzle Mode Full Control
   printh 0A
   prints "T0",0 //Select T0
-
   startCon.en=0
   while(animate.en!=0)
   {
