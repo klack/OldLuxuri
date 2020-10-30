@@ -40,7 +40,7 @@ if(usize<=0) //If the buffer is empty
   covx Baud,vars.s.txt,0,0
   vars.s.txt+=vars.s.txt
   //View and set settings
-  prints "M80",0 //Power on
+  prints "M80",0 //Power
   printh 0A
   prints "M155 S2",0 //Temp auto report
   printh 0A

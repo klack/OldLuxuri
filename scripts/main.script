@@ -1,4 +1,5 @@
 //Onload
+click updateState,1
 ReturnPage=dp
 DiagReturnPage=dp
 if(HandleCallback==1)

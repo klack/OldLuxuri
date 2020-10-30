@@ -138,14 +138,19 @@ if(vars.returnVal.txt!=b[ReturnObj].txt)
 vars.status.txt="PID Auto-tuning"
 prints "M106 S255",0 //Turn on fan
 printh 0A
-prints "M303 C15 E0 S220 U",0
+delay=1000
+// prints "M109 R40 T0",0 //Wait for temp to reach 40
+// printh 0A
+prints "M303 C3 E0 S220 U",0
 printh 0A
-prints "M303 C15 E1 S220 U",0
+// prints "M109 R40 T1",0 //Wait for temp to reach 40
+// printh 0A
+prints "M303 C3 E1 S220 U",0
 printh 0A
-prints "M303 C5 E-1 S60 U",0
+prints "M303 C3 E-1 S60 U",0
 printh 0A
 // prints "M107",0 //Turn off fan
 // printh 0A
-prints "M500",0
-printh 0A
+// prints "M500",0
+// printh 0A
 page console
