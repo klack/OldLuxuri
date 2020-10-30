@@ -31,7 +31,7 @@ if(usize<=0) //If the buffer is empty
   vars.status.txt="Trying baudrate "
   vars.status.txt+=vars.s.txt
   //Try and trigger a response
-  prints "M155 S2",0
+  prints "M155 S10",0
   printh 0A
   doevents
 }else
@@ -40,16 +40,18 @@ if(usize<=0) //If the buffer is empty
   covx Baud,vars.s.txt,0,0
   vars.s.txt+=vars.s.txt
   //View and set settings
+  printh 0A
+  printh 0A
   prints "M80",0 //Power
   printh 0A
-  prints "M155 S2",0 //Temp auto report
+  prints "M155 S10",0 //Temp auto report
   printh 0A
-  prints "M503",0 //Report settings
-  printh 0A
-  prints "M115",0 //Firmware Info
-  printh 0A
-  prints "M78",0 //Print job stats
-  printh 0A
+  // prints "M503",0 //Report settings
+  // printh 0A
+  // prints "M115",0 //Firmware Info
+  // printh 0A
+  // // prints "M78",0 //Print job stats
+  // printh 0A
   prints "M605 S0",0 //Dual Nozzle Mode Full Control
   printh 0A
   prints "T0",0 //Select T0
