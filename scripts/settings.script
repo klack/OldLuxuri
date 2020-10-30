@@ -151,6 +151,6 @@ prints "M303 C3 E-1 S60 U",0
 printh 0A
 // prints "M107",0 //Turn off fan
 // printh 0A
-// prints "M500",0
-// printh 0A
+prints "M500",0
+printh 0A
 page console
