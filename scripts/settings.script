@@ -16,7 +16,16 @@ zOffsetVal.txt=printer.zOffset.txt
 x2Val.txt=printer.x2Offset.txt
 y2Val.txt=printer.y2Offset.txt
 z2Val.txt=printer.z2Offset.txt
-doevents
+if(printer.printState.val==1)
+{
+  setlayer bDefaults,0
+  bDefaults.aph=0
+  setlayer tDefaults,0
+  tDefaults.aph=0
+  setlayer bPIDTune,0
+  bPIDTune.aph=0
+}
+
 
 //bDefaults click
 //Click

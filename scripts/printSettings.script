@@ -22,12 +22,17 @@ if(printer.printState.val==1) //Printing
   bPlayPause.picc=38
   bPlayPause.picc2=37
   tPlayPause.txt="Pause"
+  setlayer bClose,255
+  bClose.aph=127
+
 }
 if(printer.printState.val==2) //Paused
 {
   bPlayPause.picc=39
   bPlayPause.picc2=37
   tPlayPause.txt="Resume"
+  setlayer bClose,0
+  bClose.aph=0
 }
 
 //Onload
@@ -91,17 +96,27 @@ if(vars.returnVal.txt!=vars.s.txt)
 //bPlayPause click
 if(printer.printState.val==1)
 {
+  prints "M400",0 //Finish movements print
+  printh 0A
   prints "M25",0 //Pause print
   printh 0A
-  setlayer bClose,0
-  bClose.aph=0
+  prints "G91",0 //Move out the way
+  printh 0A
+  prints "G0 X-5 Y-5 Z10",0
+  printh 0A
+  prints "G90",0
+  printh 0A
 }
 if(printer.printState.val==2)
 {
+  prints "G91",0 //Move back
+  printh 0A
+  prints "G0 X5 Y5 Z-10",0 
+  printh 0A
+  prints "G90",0
+  printh 0A
   prints "M24",0 //Resume print
   printh 0A
-  setlayer bClose,255
-  bClose.aph=127
 }
 
 //Mock Data

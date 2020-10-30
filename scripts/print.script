@@ -55,6 +55,7 @@ if(printer.printState.val==9) //Error
 //On load
 //Todo get long file name
 ReturnPage=dp
+click updateState,1
 tFileName.txt=fileName.txt
 printh 0A
 prints "M27 S4",0
