@@ -31,9 +31,9 @@ if(usize<=0) //If the buffer is empty
   vars.status.txt="Trying baudrate "
   vars.status.txt+=vars.s.txt
   //Try and trigger a response
+  printh 0A
   prints "M155 S10",0
   printh 0A
-  doevents
 }else
 {
   vars.s.txt="Connected at "
@@ -41,9 +41,8 @@ if(usize<=0) //If the buffer is empty
   vars.s.txt+=vars.s.txt
   //View and set settings
   printh 0A
-  printh 0A
-  prints "M80",0 //Power
-  printh 0A
+  // prints "M80",0 //Power
+  // printh 0A
   prints "M155 S10",0 //Temp auto report
   printh 0A
   // prints "M503",0 //Report settings
@@ -55,6 +54,7 @@ if(usize<=0) //If the buffer is empty
   prints "M605 S0",0 //Dual Nozzle Mode Full Control
   printh 0A
   prints "T0",0 //Select T0
+  printh 0A
   startCon.en=0
   while(animate.en!=0)
   {
