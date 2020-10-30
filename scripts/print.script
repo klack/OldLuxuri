@@ -40,7 +40,10 @@ if(printer.printState.val==1) //Printing
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
 }
-if(printer.printState.val==2) //Finished
+
+//printer.printState.val==2 //Paused
+
+if(printer.printState.val==3) //Finished
 {
   tProgress.txt="Finished"
 }

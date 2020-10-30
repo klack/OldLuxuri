@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="Menu.svg"
-   inkscape:export-filename="C:\printing\universal-ui\img\print-settings-mockup.png"
+   inkscape:export-filename="D:\printing\universal-ui\img\print-settings-s2.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -1121,7 +1121,7 @@
      inkscape:cx="220.12058"
      inkscape:cy="116.10167"
      inkscape:document-units="px"
-     inkscape:current-layer="svg8"
+     inkscape:current-layer="layer3"
      inkscape:document-rotation="0"
      showgrid="false"
      width="480mm"
@@ -1129,10 +1129,10 @@
      inkscape:pagecheckerboard="true"
      showguides="false"
      inkscape:guide-bbox="true"
-     inkscape:window-width="2160"
-     inkscape:window-height="1145"
-     inkscape:window-x="-7"
-     inkscape:window-y="-7"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      guidetolerance="3.3"
      inkscape:lockguides="false"
@@ -1220,7 +1220,7 @@
      inkscape:groupmode="layer"
      id="layer69"
      inkscape:label="Background"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        style="display:inline;opacity:1;fill:#000000;stroke:none;stroke-width:1.42954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
@@ -4542,7 +4542,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Close Button"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <g
        inkscape:groupmode="layer"
@@ -4699,45 +4699,9 @@
        style="display:inline">
       <g
          inkscape:groupmode="layer"
-         id="layer11"
-         inkscape:label="State 0"
-         style="display:inline">
-        <circle
-           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="circle1061"
-           cx="50.60004"
-           cy="50.135937"
-           r="10.833477" />
-        <circle
-           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="circle1063"
-           cx="23.406511"
-           cy="50.135937"
-           r="10.833477" />
-        <circle
-           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:1.29923;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="circle1065"
-           cx="92.87072"
-           cy="35.239574"
-           r="15.96" />
-        <circle
-           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="circle1067"
-           cx="50.891079"
-           cy="19.813833"
-           r="10.833477" />
-        <circle
-           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="circle1069"
-           cx="23.406509"
-           cy="19.308826"
-           r="10.833477" />
-      </g>
-      <g
-         inkscape:groupmode="layer"
          id="layer83"
-         inkscape:label="State 1"
-         style="display:inline">
+         inkscape:label="State 0"
+         style="display:none">
         <circle
            style="display:inline;mix-blend-mode:normal;fill:#000000;stroke:url(#linearGradient3316);stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="circle968"
@@ -4796,11 +4760,47 @@
       </g>
       <g
          inkscape:groupmode="layer"
-         id="layer3"
-         inkscape:label="State 2"
+         id="layer11"
+         inkscape:label="State 1"
          style="display:none">
         <circle
-           style="display:inline;mix-blend-mode:normal;fill:#000000;stroke:url(#linearGradient3318);stroke-width:1.29923;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="circle1061"
+           cx="50.60004"
+           cy="50.135937"
+           r="10.833477" />
+        <circle
+           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="circle1063"
+           cx="23.406511"
+           cy="50.135937"
+           r="10.833477" />
+        <circle
+           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:1.29923;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="circle1065"
+           cx="92.87072"
+           cy="35.239574"
+           r="15.96" />
+        <circle
+           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="circle1067"
+           cx="50.891079"
+           cy="19.813833"
+           r="10.833477" />
+        <circle
+           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="circle1069"
+           cx="23.406509"
+           cy="19.308826"
+           r="10.833477" />
+      </g>
+      <g
+         inkscape:groupmode="layer"
+         id="layer3"
+         inkscape:label="State 2"
+         style="display:inline">
+        <circle
+           style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:url(#linearGradient3318);stroke-width:1.29923;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="circle1056"
            cx="92.87072"
            cy="35.239574"
@@ -4808,13 +4808,25 @@
         <path
            d="m 96.805934,34.427762 -6.91195,-4.086303 c -0.56159,-0.331853 -1.42166,-0.0098 -1.42166,0.810977 v 8.170642 c 0,0.73636 0.79919,1.180139 1.42166,0.810978 l 6.91195,-4.084339 c 0.6166,-0.363272 0.61855,-1.258684 0,-1.621955 z"
            id="path1022"
-           style="display:inline;fill:#ffffff;stroke-width:0.0196362" />
+           style="display:inline;fill:#000000;stroke-width:0.0196362" />
+        <circle
+           style="display:inline;mix-blend-mode:normal;fill:#000000;stroke:url(#linearGradient3314);stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="circle906"
+           cx="50.891079"
+           cy="19.813833"
+           r="10.833477" />
+        <circle
+           style="display:inline;mix-blend-mode:normal;fill:#000000;stroke:url(#linearGradient3390);stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="circle908"
+           cx="23.406509"
+           cy="19.308826"
+           r="10.833477" />
       </g>
       <g
          inkscape:groupmode="layer"
          id="layer20"
          inkscape:label="Text"
-         style="display:inline">
+         style="display:none">
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.36488px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;stroke-width:0.251478"

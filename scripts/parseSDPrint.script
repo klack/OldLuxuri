@@ -43,13 +43,15 @@ if(parse.eval.txt==parse.lineMatch.txt)
   printer.printState.val=1
 }
 
+// Paused
+
 // Finished
 parse.lineMatch.txt="Done printing file" //Qualify Line
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  printer.printState.val=2
+  printer.printState.val=3
   oProgress.val=100
 }
 

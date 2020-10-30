@@ -17,6 +17,18 @@ if(printer.flow.val!=100&&printer.flow.val!=0)
   bFlow.txt=""
   bFlow.picc=38
 }
+if(printer.printState.val==1) //Printing
+{
+  bPlayPause.picc=38
+  bPlayPause.picc2=37
+  tPlayPause.txt="Pause"
+}
+if(printer.printState.val==2) //Paused
+{
+  bPlayPause.picc=39
+  bPlayPause.picc2=37
+  tPlayPause.txt="Resume"
+}
 
 //Onload
 DiagReturnPage=dp
@@ -74,6 +86,22 @@ if(vars.returnVal.txt!=vars.s.txt)
   printh 0A
   prints "M221",0
   printh 0A
+}
+
+//bPlayPause click
+if(printer.printState.val==1)
+{
+  prints "M25",0 //Pause print
+  printh 0A
+  setlayer bClose,0
+  bClose.aph=0
+}
+if(printer.printState.val==2)
+{
+  prints "M24",0 //Resume print
+  printh 0A
+  setlayer bClose,255
+  bClose.aph=127
 }
 
 //Mock Data
