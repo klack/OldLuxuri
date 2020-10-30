@@ -106,8 +106,8 @@ if(printer.printState.val==1)
   printh 0A
   prints "G90",0
   printh 0A
-}
-if(printer.printState.val==2)
+  printer.printState.val=2
+}else
 {
   prints "G91",0 //Move back
   printh 0A
@@ -117,7 +117,33 @@ if(printer.printState.val==2)
   printh 0A
   prints "M24",0 //Resume print
   printh 0A
+  printer.printState.val=1
 }
+
+//Stop click
+diagConfirm.tPrompt.txt="Stop Print?"
+ReturnObj=17
+ReturnVal=1
+page diagConfirm
+//Stop callback
+if(ReturnVal!=-1)
+{
+  prints "M108",0
+  printh 0A
+  prints "M108",0
+  printh 0A
+  prints "M108",0
+  printh 0A
+  prints "M524",0
+  printh 0A
+  prints "M106 S0",0
+  printh 0A
+  page main
+}
+
+
+
+
 
 //Mock Data
 parse.buffer.txt="echo:E1 Flow: 90%"

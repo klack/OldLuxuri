@@ -1,4 +1,5 @@
 //Onload
+ReturnPage=dp
 DiagReturnPage=dp
 if(HandleCallback==1)
 {
@@ -7,6 +8,7 @@ if(HandleCallback==1)
   vars.returnVal.txt="null"
   ReturnVal=-1
 }
+
 
 
 //bT0 click
