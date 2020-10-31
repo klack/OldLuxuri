@@ -55,7 +55,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 // Print Time
-parse.lineMatch.txt="Print time: " //Qualify Line
+parse.lineMatch.txt="echo:Print time: " //Qualify Line
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
