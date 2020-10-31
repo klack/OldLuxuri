@@ -32,8 +32,6 @@ if(usize<=0) //If the buffer is empty
   vars.status.txt+=vars.s.txt
   //Try and trigger a response
   printh 0A
-  prints "M155 S10",0
-  printh 0A
 }else
 {
   vars.s.txt="Connected at "
@@ -43,7 +41,7 @@ if(usize<=0) //If the buffer is empty
   printh 0A
   // prints "M80",0 //Power
   // printh 0A
-  prints "M155 S10",0 //Temp auto report
+  prints "M155 S2",0 //Temp auto report
   printh 0A
   // prints "M503",0 //Report settings
   // printh 0A

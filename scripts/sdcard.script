@@ -50,7 +50,6 @@ lFilesReq.val=0
 lFilesRecieved.val=0
 gettingLongF.val=1
 j=page.val*5
-printh 0A //Clear current buffer? TODO: FIX HACK
 for(k=0;k<=4;k++)
 {
   spstr tFiles.txt,vars.s.txt,">",j+k
@@ -58,15 +57,10 @@ for(k=0;k<=4;k++)
   {
     keyLFile.txt+=vars.s.txt //Store key
     keyLFile.txt+=">"
-    prints "M118 Requesting:",0  //Request long file name
-    prints vars.s.txt,0
-    printh 0A
     prints "M33 ",0  //Request long file name
     prints vars.s.txt,0
     printh 0A
     lFilesReq.val+=1
-    doevents
-    delay=30
   }
 }
 
