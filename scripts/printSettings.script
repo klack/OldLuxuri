@@ -135,11 +135,13 @@ if(ReturnVal!=-1)
   printh 0A
   prints "M108",0
   printh 0A
+  prints "M108",0
+  printh 0A
   prints "M524",0
   printh 0A
   prints "M106 S0",0
   printh 0A
-  delay=3000
+  delay=5000
   page main
 }
 

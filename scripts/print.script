@@ -55,7 +55,7 @@ if(printer.printState.val==9) //Error
 //On load
 //Todo get long file name
 ReturnPage=dp
-click updateState,1
+prints "M31",0
 printh 0A
 prints "M27 S4",0
 printh 0A
@@ -63,6 +63,12 @@ prints "M23 ",0
 prints fileName.txt,0
 printh 0A
 prints "M24",0
+printh 0A
+click updateState,1
+
+
+//Get print time
+prints "M31",0
 printh 0A
 
 //Mock Data
