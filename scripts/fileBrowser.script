@@ -38,6 +38,15 @@ if(j>0)
     }
   }
 }
+if(selectedFile.txt=="")
+{
+  tsw bPrint,0
+  bPrint.aph=0
+}else
+{
+  tsw bPrint,1
+  bPrint.aph=127
+}
 
   
 //---------------------------------------------
@@ -76,6 +85,7 @@ spstr keyLFile.txt,vars.s.txt,">",selectedIndex.val
 selectedFile.txt=vars.s.txt
 spstr valueLFile.txt,vars.s.txt,">",selectedIndex.val
 selectedFLong.txt=vars.s.txt
+print.tFileName.txt=selectedFLong.txt
 click updateState,1
 
 

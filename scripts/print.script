@@ -26,7 +26,6 @@ if(printer.printState.val==-1) //Uninitialized
   tTime.aph=0
   oProgress.val=0
   tProgress.txt=""
-  tFileName.txt=""
 }
 if(printer.printState.val==0) //Starting
 {
@@ -39,6 +38,7 @@ if(printer.printState.val==1) //Printing
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
+  tTime.txt=printer.printTime.txt
 }
 
 //printer.printState.val==2 //Paused
@@ -56,7 +56,6 @@ if(printer.printState.val==9) //Error
 //Todo get long file name
 ReturnPage=dp
 click updateState,1
-tFileName.txt=fileName.txt
 printh 0A
 prints "M27 S4",0
 printh 0A

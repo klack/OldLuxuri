@@ -25,7 +25,6 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   tProgress.txt="Starting Print..."
   spstr parse.buffer.txt,fileName.txt,parse.lineMatch.txt,1
-  tFileName.txt=fileName.txt
   printer.printState.val=0
 }
 
@@ -53,6 +52,15 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   printer.printState.val=3
   oProgress.val=100
+}
+
+// Print Time
+parse.lineMatch.txt="Print time: " //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,printer.printTime.txt,": ",1
 }
 
 // Error
