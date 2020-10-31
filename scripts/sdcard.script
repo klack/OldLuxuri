@@ -1,7 +1,6 @@
 //---------------------------------------------
 //Update State
 //---------------------------------------------
-tStatus.txt=vars.status.txt
 if(page.val==0)
 {
   setlayer bUp,0
