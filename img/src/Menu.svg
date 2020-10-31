@@ -1141,10 +1141,10 @@
        y2="27.152496" />
     <mask
        maskUnits="userSpaceOnUse"
-       id="mask2341">
+       id="mask2363">
       <path
          style="font-variation-settings:normal;display:inline;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.08138;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
-         id="path2343"
+         id="path2365"
          width="88.606133"
          height="51.008877"
          x="7.1298985"
@@ -1162,9 +1162,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.457416"
-     inkscape:cx="219.5945"
-     inkscape:cy="135.89878"
+     inkscape:zoom="1.728708"
+     inkscape:cx="135.3752"
+     inkscape:cy="204.13967"
      inkscape:document-units="px"
      inkscape:current-layer="layer84"
      inkscape:document-rotation="0"
@@ -5080,15 +5080,17 @@
        inkscape:groupmode="layer"
        id="layer86"
        inkscape:label="scrollbox"
-       style="display:inline;opacity:1">
-      <rect
-         style="font-variation-settings:normal;display:inline;opacity:0.544304;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.08135;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000;stop-opacity:1"
+       style="display:inline;opacity:0.66426">
+      <path
+         style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.08135;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000;stop-opacity:1"
          id="rect1912"
          width="11.753769"
          height="50.975109"
          x="83.982262"
          y="14.718541"
-         mask="url(#mask2341)" />
+         mask="url(#mask2363)"
+         sodipodi:type="rect"
+         d="M 83.982262,14.718541 H 95.736031 V 65.69365 H 83.982262 Z" />
     </g>
     <g
        inkscape:groupmode="layer"
