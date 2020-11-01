@@ -1,4 +1,6 @@
+//--------------------
 //Update State
+//--------------------
 //Update T0
 covx printer.T0Temp.val,vars.s.txt,0,0
 tT0Temp.txt=vars.s.txt
@@ -33,14 +35,46 @@ if(printer.printState.val==0) //Starting
 }
 if(printer.printState.val==1) //Printing
 {
-  
-  oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
-  covx oProgress.val,vars.s.txt,0,0
-  tProgress.txt=vars.s.txt
-  tProgress.txt+="%"
+  if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0)
+  {  
+    j=0
+    k=0
+    l=0
+    //Check T0Temp
+    if(printer.T0Temp.val>=printer.T0SetTemp.val)
+    {
+      j=1
+    }
+    //Check T1Temp
+    if(printer.T1Temp.val>=printer.T1SetTemp.val)
+    {
+      k=1
+    }
+    //Check Bed Temp
+    if(printer.bedTemp.val>=printer.setBedTemp.val)
+    {
+      l=1
+    }
+    State=j+k+l
+    if(State==3)
+    {
+      heatersReady.val=1
+    }
+  }
 
+  if(heatersReady.val==1)
+  {
+    oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
+    covx oProgress.val,vars.s.txt,0,0
+    tProgress.txt=vars.s.txt
+    tProgress.txt+="%"
     tTime.aph=127
     tTime.txt=printer.printTime.txt
+  }else
+  {
+    tProgress.txt="Heating..."
+    tTime.aph=0
+  }
 }
 //printer.printState.val==2 //Paused
 if(printer.printState.val==3) //Finished
@@ -60,6 +94,9 @@ if(printer.printState.val==9) //Error
 {
   tProgress.txt="Error opening file"
 }
+//--------------------
+//End Update State
+//--------------------
 
 //On load
 //Todo get long file name
