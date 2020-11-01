@@ -47,6 +47,12 @@ if(printer.printState.val==1) //Printing
 if(printer.printState.val==3) //Finished
 {
   tProgress.txt="Finished"
+  //Clear printer related printer vars
+  printer.flow.val=-1
+  printer.speed.val=-1
+  printer.printState=-1
+  //Turn off report sdcard status
+  //Redirect to complete message
 }
 if(printer.printState.val==9) //Error
 {
@@ -56,17 +62,16 @@ if(printer.printState.val==9) //Error
 //On load
 //Todo get long file name
 ReturnPage=dp
-
 if(printer.printState.val==-1)
 {
-  prints "M31",0
-  printh 0A
-  prints "M27 S4",0
+  prints "M27 S4",0  //Report SD Status
   printh 0A
   prints "M23 ",0
   prints fileName.txt,0
   printh 0A
   prints "M24",0
+  printh 0A
+  prints "M31",0
   printh 0A
 }
 click updateState,1
@@ -75,9 +80,14 @@ click updateState,1
 //Get print time
 if(printer.currentByte.val>2500&&printer.printState.val==1)
 {
-  prints "M31",0
-  printh 0A
+  if(ok=1) //Only print if an ok was recieved
+  {
+    ok=0
+    prints "M31",0
+    printh 0A
+  }
 }
+
 
 //Mock Data
 parse.buffer.txt="SD printing byte 20/100"

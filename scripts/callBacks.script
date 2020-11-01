@@ -1,17 +1,17 @@
-//Click
+//Swap Extruder
 DiagReturnPage=dp
 if(Tool==0)
 {
-  diagConfirm.tPrompt.txt="Switch to Extruder 2?"
+  diagPrompt.tPrompt.txt="Switch to Extruder 2?"
   ReturnVal=1
 }else
 {
-  diagConfirm.tPrompt.txt="Switch to Extruder 1?"
+  diagPrompt.tPrompt.txt="Switch to Extruder 1?"
   ReturnVal=0
 }
-ReturnObj=20
+ReturnObj=!!
 ReturnPage=dp
-page diagConfirm
+page diagPrompt
 
 //Callback
 vars.debug.txt="Callback Running"

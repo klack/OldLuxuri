@@ -1,0 +1,59 @@
+//Handle Callback
+if(HandleCallback==1)
+{
+  prints "M605 S",0
+  covx ReturnVal,vars.s.txt,0,0
+  prints vars.s.txt,0
+  printh 0A
+  IdexMode=ReturnVal
+  HandleCallback=0
+  ReturnVal=-1
+  page ReturnPage
+}
+//Set State
+if(IdexMode==1)
+{
+  bDual.picc=11
+}
+if(IdexMode==2)
+{
+  bClone.picc=11
+}
+if(IdexMode==3)
+{
+  bMirror.picc=11
+}
+
+
+//Buttons
+//Dual
+if(IdexMode!=1)
+{
+  diagPrompt.tPrompt.txt="Switch to Dual Material Mode?"
+  DiagReturnPage=dp
+  ReturnObj=2
+  ReturnVal=1
+  page diagPrompt
+}
+
+//Clone
+if(IdexMode!=2)
+{
+  diagPrompt.tPrompt.txt="Switch to Clone Mode?"
+  DiagReturnPage=dp
+  ReturnObj=4
+  ReturnVal=2
+  page diagPrompt
+}
+
+//Mirror
+if(IdexMode!=3)
+{
+  diagPrompt.tPrompt.txt="Switch to Mirror Mode?"
+  DiagReturnPage=dp
+  ReturnObj=5
+  ReturnVal=3
+  page diagPrompt
+}
+
+
