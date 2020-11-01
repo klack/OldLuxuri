@@ -118,9 +118,9 @@ click updateState,1
 
 
 //Get print time
-if(printer.currentByte.val>2500&&printer.printState.val==1)
+if(printer.printState.val==1)
 {
-  if(ok=1) //Only print if an ok was recieved
+  if(ok==1) //Only print if an ok was recieved
   {
     ok=0
     prints "M31",0
