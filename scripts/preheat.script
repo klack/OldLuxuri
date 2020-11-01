@@ -1,4 +1,6 @@
-//State
+//--------------------
+//Update State
+//--------------------
 //Update T0
 covx printer.T0Temp.val,vars.s.txt,0,0
 tT0Temp.txt=vars.s.txt
@@ -12,7 +14,7 @@ tT1Temp.txt+="/"
 covx printer.T1SetTemp.val,vars.s.txt,0,0
 tT1Temp.txt+=vars.s.txt
 //Update Bed
-tBedTemp.txt="Bed:"
+tBedTemp.txt="Bed: "
 covx printer.bedTemp.val,vars.s.txt,0,0
 tBedTemp.txt+=vars.s.txt
 tBedTemp.txt+="/"
@@ -51,27 +53,24 @@ for(j=0;j<=32;j++) //Button Groups
   }
 }
 
-j=1
-k=2
-l=3
+j=0
+k=0
+l=0
 //Check T0Temp
-if(printer.T0Temp.val>=preheatT0Temp.val&&preheatT0Temp.val>0)
+if(printer.T0Temp.val>=preheatT0Temp.val)
 {
   j=1
 }
-
 //Check T1Temp
-if(printer.T1Temp.val>=preheatT1Temp.val&&preheatT1Temp.val>0)
+if(printer.T1Temp.val>=preheatT1Temp.val)
 {
   k=1
 }
-
 //Check Bed Temp
-if(printer.bedTemp.val>=preheatBedTemp.val&&preheatBedTemp.val>0)
+if(printer.bedTemp.val>=printer.setBedTemp.val)
 {
   l=1
 }
-
 State=j+k+l
 //Set States
 if(State==3)
@@ -109,34 +108,34 @@ if(State==3)
     }
   }
 }
-
-
+//--------------------
+//End UpdateState
+//--------------------
 
 
 
 //Send Command
-click updateState,1
-if(wantedBedTemp.val>preheatBedTemp.val) //Only set a new bed temp if higher
-{
-  preheatBedTemp.val=wantedBedTemp.val
-}
-if(preheatT0Temp.val==0&&preheatT1Temp.val==0) //Turn off if nothing selected
-{
-  preheatBedTemp.val=0
-}
-prints "M104 T0 S",0
+prints "M104 T0 S",0 //Set T0
 covx preheatT0Temp.val,vars.s.txt,0,0
 prints vars.s.txt,0
 printh 0A
-prints "M104 T1 S",0
+prints "M104 T1 S",0 //Set T1
 covx preheatT1Temp.val,vars.s.txt,0,0
 prints vars.s.txt,0
 printh 0A
+if(preheatT0Bed.val>preheatT1Bed.val) //Set the higher bed temp of the two
+{
+  j=preheatT0Bed.val
+}else
+{
+  j=preheatT1Bed.val
+}
 prints "M140 S",0
-covx preheatBedTemp.val,vars.s.txt,0,0
+covx j,vars.s.txt,0,0
 prints vars.s.txt,0
 printh 0A
-
+ready.val=0
+click updateState,1
 
 
 
@@ -144,31 +143,31 @@ printh 0A
 //bT0None
 preheatT0Temp.val=0
 T0Mat.txt="None"
-wantedBedTemp.val=0
+preheatT0Bed.val=0
 click sendCommand,1
 
 //bT0PLA
 preheatT0Temp.val=200
 T0Mat.txt="PLA"
-wantedBedTemp.val=60
+preheatT0Bed.val=60
 click sendCommand,1
 
 //bT0PETG
 preheatT0Temp.val=230
 T0Mat.txt="PETG"
-wantedBedTemp.val=70
+preheatT0Bed.val=70
 click sendCommand,1
 
 //bT0TPU
 preheatT0Temp.val=220
 T0Mat.txt="TPU"
-wantedBedTemp.val=40
+preheatT0Bed.val=40
 click sendCommand,1
 
 //bT0PVA
 preheatT0Temp.val=220
 T0Mat.txt="PVA"
-wantedBedTemp.val=60
+preheatT0Bed.val=60
 click sendCommand,1
 
 
@@ -177,29 +176,29 @@ click sendCommand,1
 //bT1None
 preheatT1Temp.val=0
 T1Mat.txt="None"
-wantedBedTemp.val=0
+preheatT1Bed.val=0
 click sendCommand,1
 
 //bT1PLA
 preheatT1Temp.val=200
 T1Mat.txt="PLA"
-wantedBedTemp.val=60
+preheatT1Bed.val=60
 click sendCommand,1
 
 //bT1PETG
 preheatT1Temp.val=230
 T1Mat.txt="PETG"
-wantedBedTemp.val=70
+preheatT1Bed.val=70
 click sendCommand,1
 
 //bT1TPU
 preheatT1Temp.val=220
 T1Mat.txt="TPU"
-wantedBedTemp.val=40
+preheatT1Bed.val=40
 click sendCommand,1
 
 //bT1PVA
 preheatT1Temp.val=220
 T1Mat.txt="PVA"
-wantedBedTemp.val=60
+preheatT1Bed.val=60
 click sendCommand,1
