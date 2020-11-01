@@ -1,4 +1,24 @@
-//Handle Callback
+//Set State
+if(IdexMode==0)
+{
+  bManual.picc=bManual.picc2
+}
+if(IdexMode==1)
+{
+  bAuto.picc=bAuto.picc2
+}
+if(IdexMode==2)
+{
+  bClone.picc=bClone.picc2
+}
+if(IdexMode==3)
+{
+  bMirror.picc=bMirror.picc2
+}
+
+
+//On Load
+click setState,1
 if(HandleCallback==1)
 {
   prints "M605 S",0
@@ -6,32 +26,34 @@ if(HandleCallback==1)
   prints vars.s.txt,0
   printh 0A
   IdexMode=ReturnVal
+  prints "G28 X",0
+  printh 0A
   HandleCallback=0
   ReturnVal=-1
   page ReturnPage
 }
-//Set State
-if(IdexMode==1)
-{
-  bDual.picc=11
-}
-if(IdexMode==2)
-{
-  bClone.picc=11
-}
-if(IdexMode==3)
-{
-  bMirror.picc=11
-}
+
+
+
 
 
 //Buttons
-//Dual
+//Manual
+if(IdexMode!=0)
+{
+  diagPrompt.tPrompt.txt="Switch to Manual Mode?"
+  DiagReturnPage=dp
+  ReturnObj=12
+  ReturnVal=0
+  page diagPrompt
+}
+
+//Auto
 if(IdexMode!=1)
 {
-  diagPrompt.tPrompt.txt="Switch to Dual Material Mode?"
+  diagPrompt.tPrompt.txt="Switch to Auto Mode?"
   DiagReturnPage=dp
-  ReturnObj=2
+  ReturnObj=9
   ReturnVal=1
   page diagPrompt
 }

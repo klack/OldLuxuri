@@ -7,15 +7,17 @@ if(HandleCallback==1)
   vars.returnVal.txt="null"
   ReturnVal=-1
 }
+prints "M605 S0",0 //Set manual mode
+printh 0A
+IdexMode=0
 prints "M114",0 //Report position
 printh 0A
 click updateState,1
 
-
-
 //Close
 prints "G0 F5000",0 //Reset speed
 printh 0A
+page ReturnPage
 
 //Send Command
 prints "G91",0

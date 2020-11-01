@@ -29,30 +29,40 @@ else
   tFanSpeed.txt=""
 }
 //Current Tool
+bSwap.picc=bSwap.picc2+1
 if(Tool==0)
 {
   bSwap.picc=5
+  bTool.picc=5
 }else
 {
   bSwap.picc=6
+  bTool.picc=6
 }
 //Idex Mode
-if(IdexMode==1||IdexMode==0)
+if(IdexMode==0)
 {
   bMode.picc=5
   setlayer tSwap,255
   setlayer bSwap,255
-
+}
+if(IdexMode==1)
+{
+  bMode.picc=6
+  setlayer tSwap,255
+  setlayer bSwap,255
 }
 if(IdexMode==2)
 {
-  bMode.picc=6
+  bMode.picc=7
+  bTool.picc=7
   setlayer tSwap,0
   setlayer bSwap,0
 }
 if(IdexMode==3)
 {
-  bMode.picc=7
+  bMode.picc=45
+  bTool.picc=7
   setlayer tSwap,0
   setlayer bSwap,0
 }
