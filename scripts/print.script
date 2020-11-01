@@ -112,13 +112,6 @@ if(printer.printState.val==-1)
   prints "M31",0
   printh 0A
 }
-if(HandleCallback==1)
-{
-  HandleCallback=0
-  click b[ReturnObj],0 //Run right click code as callback
-  vars.returnVal.txt="null"
-  ReturnVal=-1
-}
 click updateState,1
 
 
