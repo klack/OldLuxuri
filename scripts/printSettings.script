@@ -117,8 +117,6 @@ if(printer.printState.val==1)
   printh 0A
   prints "M24",0 //Resume print
   printh 0A
-  prints "M83",0 //TODO Decide if E Relative gcode should be mandated
-  printh 0A
   printer.printState.val=1
 }
 
@@ -147,6 +145,10 @@ if(ReturnVal!=-1)
   printh 0A
   delay=100
   prints "M106 S0",0
+  printh 0A
+  prints "M220 S100",0 //Reset Speed
+  printh 0A
+  prints "M221 S100",0 //Reset Flow
   printh 0A
   delay=5000
   printer.printState.val=-1

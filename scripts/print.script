@@ -35,34 +35,7 @@ if(printer.printState.val==0) //Starting
 }
 if(printer.printState.val==1) //Printing
 {
-  if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0)
-  {  
-    j=0
-    k=0
-    l=0
-    //Check T0Temp
-    if(printer.T0Temp.val>=printer.T0SetTemp.val)
-    {
-      j=1
-    }
-    //Check T1Temp
-    if(printer.T1Temp.val>=printer.T1SetTemp.val)
-    {
-      k=1
-    }
-    //Check Bed Temp
-    if(printer.bedTemp.val>=printer.setBedTemp.val)
-    {
-      l=1
-    }
-    State=j+k+l
-    if(State==3)
-    {
-      heatersReady.val=1
-    }
-  }
-
-  if(heatersReady.val==1)
+  if(heatersReady.val>=5) //Heaters have been ready for 10 seconds 
   {
     oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
     covx oProgress.val,vars.s.txt,0,0
@@ -74,6 +47,32 @@ if(printer.printState.val==1) //Printing
   {
     tProgress.txt="Heating..."
     tTime.aph=0
+    if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0) //Check if heaters are ready
+    {  
+      j=0
+      k=0
+      l=0
+      //Check T0Temp
+      if(printer.T0Temp.val>=printer.T0SetTemp.val)
+      {
+        j=1
+      }
+      //Check T1Temp
+      if(printer.T1Temp.val>=printer.T1SetTemp.val)
+      {
+        k=1
+      }
+      //Check Bed Temp
+      if(printer.bedTemp.val>=printer.setBedTemp.val)
+      {
+        l=1
+      }
+      State=j+k+l
+      if(State==3)
+      {
+        heatersReady.val+=1
+      }
+    }
   }
 }
 //printer.printState.val==2 //Paused
@@ -99,7 +98,6 @@ if(printer.printState.val==9) //Error
 //--------------------
 
 //On load
-//Todo get long file name
 ReturnPage=dp
 DiagReturnPage=dp
 if(printer.printState.val==-1)
@@ -113,6 +111,13 @@ if(printer.printState.val==-1)
   printh 0A
   prints "M31",0
   printh 0A
+}
+if(HandleCallback==1)
+{
+  HandleCallback=0
+  click b[ReturnObj],0 //Run right click code as callback
+  vars.returnVal.txt="null"
+  ReturnVal=-1
 }
 click updateState,1
 
