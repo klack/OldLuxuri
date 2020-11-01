@@ -75,12 +75,22 @@ State=j+k+l
 //Set States
 if(State==3)
 {
-  //Temperature Reached
-  state.picc=24 //Change message to ready
-  tMessage.txt="Ready"
-  icon.picc=24
-  tMessage2.aph=0
-  ready.val=1
+  if(preheatT0Temp.val>0||preheatT1Temp.val>0)
+  {
+    //Temperature Reached
+    state.picc=24 //Change message to ready
+    tMessage.txt="Ready"
+    icon.picc=24
+    tMessage2.aph=0
+    ready.val=1
+  }else
+  {
+    //Choose temp
+    tMessage.txt="Choose"
+    tMessage2.txt="Materials"
+    tMessage2.aph=127
+    icon.picc=2
+ }
 }else
 {
   if(ready.val==0)
@@ -98,13 +108,6 @@ if(State==3)
       {
         tMessage2.aph=127
       }    
-    }else
-    {
-      //Choose temp
-      tMessage.txt="Choose"
-      tMessage2.txt="Materials"
-      tMessage2.aph=127
-      icon.picc=2
     }
   }
 }

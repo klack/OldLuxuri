@@ -19,8 +19,15 @@ tBedTemp.txt+="/"
 covx printer.setBedTemp.val,vars.s.txt,0,0
 tBedTemp.txt+=vars.s.txt
 //Fan Speed
-covx printer.fanSpeed.val,vars.s.txt,0,0
-tFanSpeed.txt=vars.s.txt
+if(printer.fanSpeed.val>0)
+{
+  covx printer.fanSpeed.val,vars.s.txt,0,0
+  tFanSpeed.txt=vars.s.txt
+}
+else
+{
+  tFanSpeed.txt=""
+}
 //Current Tool
 if(Tool==0)
 {
