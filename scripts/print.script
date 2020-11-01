@@ -35,7 +35,7 @@ if(printer.printState.val==0) //Starting
 }
 if(printer.printState.val==1) //Printing
 {
-  if(heatersReady.val>=5) //Heaters have been ready for 10 seconds 
+  if(heatersReady.val>=4) //Heaters have been ready for 8 seconds 
   {
     oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
     covx oProgress.val,vars.s.txt,0,0
@@ -46,6 +46,7 @@ if(printer.printState.val==1) //Printing
   }else
   {
     tProgress.txt="Heating..."
+    oProgress.val=0
     tTime.aph=0
     if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0) //Check if heaters are ready
     {  

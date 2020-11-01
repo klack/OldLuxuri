@@ -90,7 +90,13 @@ click updateState,1
 
 
 
-//before render
+//On Load
+prints "M22",0
+printh 0A
+delay=250
+prints "M21",0
+printh 0A
+delay=250
 prints "M20",0
 printh 0A
 vars.status.txt="SD Files Requested"

@@ -10,6 +10,15 @@ if(HandleCallback==1)
   ReturnVal=-1
 }
 
+//Route
+// Direct to print page
+parse.lineMatch.txt="SD printing byte " //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  page print
+}
 
 
 //bT0 click

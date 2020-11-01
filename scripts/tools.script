@@ -5,6 +5,8 @@ prints "M108",0 //Break
 printh 0A
 prints "M108",0 //Break
 printh 0A
+prints "M524",0 //Stop SD print
+ printh 0A
 prints "M84",0 //Disable steppers
 printh 0A
 vars.status.txt="Stepper Motors Disabled"
