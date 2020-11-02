@@ -31,11 +31,13 @@ if(printer.printState.val==-1) //Uninitialized
 }
 if(printer.printState.val==0) //Starting
 {
+  tTime.aph=0
+  oProgress.val=0
   tProgress.txt="Starting Print..."
 }
 if(printer.printState.val==1) //Printing
 {
-  if(heatersReady.val>=4) //Heaters have been ready for 8 seconds 
+  if(heatersReady.val==1)
   {
     oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
     covx oProgress.val,vars.s.txt,0,0
@@ -50,28 +52,13 @@ if(printer.printState.val==1) //Printing
     tTime.aph=0
     if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0) //Check if heaters are ready
     {  
-      j=0
-      k=0
-      l=0
       //Check T0Temp
-      if(printer.T0Temp.val>=printer.T0SetTemp.val)
+      if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T1Temp.val>=printer.T1SetTemp.val)
       {
-        j=1
-      }
-      //Check T1Temp
-      if(printer.T1Temp.val>=printer.T1SetTemp.val)
-      {
-        k=1
-      }
-      //Check Bed Temp
-      if(printer.bedTemp.val>=printer.setBedTemp.val)
-      {
-        l=1
-      }
-      State=j+k+l
-      if(State==3)
-      {
-        heatersReady.val+=1
+        if(ok==1) //Make sure data is being received
+        {
+          heatersReady.val=1
+        }
       }
     }
   }
@@ -92,15 +79,26 @@ if(printer.printState.val==3) //Finished
 }
 if(printer.printState.val==9) //Error
 {
-  tProgress.txt="Error opening file"
+  DiagReturnPage=4 //main
+  diagConfirm.tMessage.txt="Error opening file"
+  page diagConfirm
 }
 //--------------------
 //End Update State
 //--------------------
 
 //On load
+ok=1
 ReturnPage=dp
 DiagReturnPage=dp
+if(HandleCallback==1)
+{
+  HandleCallback=0
+  click b[ReturnObj],0 //Run right click code as callback
+  vars.returnVal.txt="null"
+  ReturnVal=-1
+}
+click updateState,1
 if(printer.printState.val==-1)
 {
   prints "M27 S4",0  //Report SD Status
@@ -112,14 +110,13 @@ if(printer.printState.val==-1)
   printh 0A
   prints "M31",0
   printh 0A
+  ok=0
 }
-click updateState,1
-
 
 //Get print time
 if(printer.printState.val==1)
 {
-  if(ok==1) //Only print if an ok was recieved
+  if(ok==1) //Only get time if an ok was recieved
   {
     ok=0
     prints "M31",0

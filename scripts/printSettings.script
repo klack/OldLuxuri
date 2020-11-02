@@ -96,8 +96,6 @@ if(vars.returnVal.txt!=vars.s.txt)
 //bPlayPause click
 if(printer.printState.val==1)
 {
-  prints "M400",0 //Finish movements print
-  printh 0A
   prints "M25",0 //Pause print
   printh 0A
   prints "G91",0 //Move out the way

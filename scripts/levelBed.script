@@ -1,12 +1,13 @@
 //Page load
-prints "G0 F5000",0
+prints "G28",0 //Home
 printh 0A
 prints "M605 S0",0 //Set to manual idex mode
 printh 0A
-prints "G28",0 //Home
+prints "G0 F5000",0
 printh 0A
 prints "M114",0 //Report position
 printh 0A
+DiagReturnPage=dp
 //Do callback
 if(HandleCallback==1)
 {
@@ -63,14 +64,14 @@ prints "M114",0 //Report position
 printh 0A
 
 //Close
-prints "G0 F5000",0
+prints "G28",0 //Home
 printh 0A
 prints "T0",0 //Set to T0
 printh 0A
-prints "G28",0 //Home
+prints "G0 F5000",0
 printh 0A
-prints "M605 S1",0 //Set to auto idex mode
-printh 0A
+page ReturnPage
+
 
 //Points
 //1

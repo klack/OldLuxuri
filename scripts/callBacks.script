@@ -10,7 +10,6 @@ if(Tool==0)
   ReturnVal=0
 }
 ReturnObj=!!
-ReturnPage=dp
 page diagPrompt
 
 //Callback

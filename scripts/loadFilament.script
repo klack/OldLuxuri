@@ -16,13 +16,16 @@ tT1Temp.txt=vars.s.txt
 
 if(printer.T0Temp.val<loadTemp.val||printer.T1Temp.val<loadTemp.val)
 {
-  tMessage.txt="Heating"
-  if(tMessage2.aph==127)
-  {
-    tMessage2.aph=0
-  }else
-  {
-    tMessage2.aph=127
+  if(ready.val==0)
+    {
+    tMessage.txt="Heating"
+    if(tMessage2.aph==127)
+    {
+      tMessage2.aph=0
+    }else
+    {
+      tMessage2.aph=127
+    }
   }
 }else
 { 
@@ -38,6 +41,7 @@ if(printer.T0Temp.val<loadTemp.val||printer.T1Temp.val<loadTemp.val)
   setlayer bT0In,255
   setlayer bT1Out,255
   setlayer bT1In,255
+  ready.val=1
 }
 
 //Send Command
