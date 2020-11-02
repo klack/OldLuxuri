@@ -1,76 +1,84 @@
 //On Load
-diagReturnPage=dp
+DiagReturnPage=dp
 if(HandleCallback==1)
 {
-  if(ReturnValue==1)
+  if(ReturnVal==1)
   {
-    click pidTune,1
+    State=0
+    click tune,1
   }
 }else
 {
   diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
-  ReturnValue=1
-  page diagConfirm
+  page diagPrompt
 }
 
-
-
-
-// PID Autotune
+//tune
 tStatus.txt="Starting PID Autotune"
-if(printer.bedTemp.val>30)
-{
-  diagReturnPage=4
-  diagPrompt.tMessage.txt="Heaterbed is too hot.\rPlease cool first."
-  page diagConfirm
-}
 prints "M106 S255",0 //Turn on fan
 printh 0A
-delay=1000
-prints "M155 S1",0 //Temp auto report
-printh 0A
-tStatus.txt="Cooling hotends"
-prints "M109 R40 T0",0 //Wait for temp to reach 40
-printh 0A
-prints "M109 R40 T1",0 //Wait for temp to reach 40
-printh 0A
-prints "M303 C3 E0 S220 U",0 //T0 PID Tune
-printh 0A
-prints "M303 C3 E1 S220 U",0 //T1 PID Tune
-printh 0A
-prints "M303 C3 E-1 S60 U",0 //Bed PID Tune
-printh 0A
-prints "M500",0 //Save Results
-printh 0A
+
+if(printer.bedTemp.val>30)
+{
+  DiagReturnPage=4
+  diagPrompt.tMessage.txt="Hot bed is too hot.\rPlease cool first."
+  page diagConfirm
+}
+if(State=3)
+{
+
+}
+  delay=1000
+  prints "M155 S1",0 //Temp auto report
+  printh 0A
+  tStatus.txt="Cooling hotends"
+  prints "M109 R40 T0",0 //Wait for temp to reach 40
+  printh 0A
+  prints "M109 R40 T1",0 //Wait for temp to reach 40
+  printh 0A
+  prints "M303 C3 E0 S220 U",0 //T0 PID Tune
+  printh 0A
+  prints "M303 C3 E1 S220 U",0 //T1 PID Tune
+  printh 0A
+  prints "M303 C3 E-1 S60 U",0 //Bed PID Tune
+  printh 0A
+  prints "M500",0 //Save Results
+  printh 0A
+  State=
+
+
+
 
 
 //Update State
-
-//Cooling / Warming state
-//Start State
-tStatus.txt="Tuning"
-//Finished state
-tStatus.txt="Complete"
-// prints "M107",0 //Turn off fan
-// printh 0A
-
-//Show popup Screen
-
+//-1 Uninitialized, 0 Starting, 1 Tuning, 2 Finished
+if(State==1)
+{
+  tStatus.txt="Tuning"
+  oProgress.val=cycle.val*100/totalCycles.val
+  covx oProgress.val,tStatus.txt,0,0
+  tStatus.txt+="%"
+  if(oProgress.val==100)
+  {
+    State=2
+    tStatus.txt="Complete"
+    DiagReturnPage=4
+    diagPrompt.tMessage.txt="PID Tuning Complete"
+    page diagConfirm
+  }
+  add 1,0,printer.T0Temp.val
+  add 1,1,printer.T1Temp.val
+  add 1,2,printer.bedTemp.val
+}
+if(printer.T0Temp.val>40||printer.T1Temp.val>40)
+{
+  State=3 //Wait for hotends to cool down
+}
 
 //Close
 prints "M155 S2",0 //Temp auto report
 printh 0A
 page ReturnPage
-
-
-//plot
-add 1,0,printer.T0Temp.val
-add 1,1,printer.T1Temp.val
-add 1,2,printer.bedTemp.val
-
-
-//Warming Phase
-
 
 //parsePIDTune
 // bias: 109 d: 109 min: 215.00 max: 226.00
@@ -79,6 +87,7 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
+  State=1
   cycle.val+=1
 }
 
