@@ -2,11 +2,11 @@
 DiagReturnPage=dp
 if(Tool==0)
 {
-  diagPrompt.tPrompt.txt="Switch to Extruder 2?"
+  diagPrompt.tMessage.txt="Switch to Extruder 2?"
   ReturnVal=1
 }else
 {
-  diagPrompt.tPrompt.txt="Switch to Extruder 1?"
+  diagPrompt.tMessage.txt="Switch to Extruder 1?"
   ReturnVal=0
 }
 ReturnObj=!!

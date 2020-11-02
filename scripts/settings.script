@@ -29,7 +29,7 @@ if(printer.printState.val==1)
 
 //bDefaults click
 ReturnObj=3
-diagPrompt.tPrompt.txt="Load Firmware Defaults?"
+diagPrompt.tMessage.txt="Load Firmware Defaults?"
 ReturnVal=1
 page diagPrompt
 

@@ -119,7 +119,7 @@ if(printer.printState.val==1)
 }
 
 //Stop click
-diagPrompt.tPrompt.txt="Stop Print?"
+diagPrompt.tMessage.txt="Stop Print?"
 ReturnObj=16
 ReturnVal=1
 page diagPrompt

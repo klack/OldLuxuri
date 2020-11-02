@@ -1,25 +1,61 @@
 //On Load
+diagReturnPage=dp
+if(HandleCallback==1)
+{
+  if(ReturnValue==1)
+  {
+    click pidTune,1
+  }
+}else
+{
+  diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
+  ReturnValue=1
+  page diagConfirm
+}
+
+
+
+
 // PID Autotune
-vars.status.txt="PID Auto-tuning"
-prints "M155 S1",0 //Temp auto report
-printh 0A
+tStatus.txt="Starting PID Autotune"
+if(printer.bedTemp.val>30)
+{
+  diagReturnPage=4
+  diagPrompt.tMessage.txt="Heaterbed is too hot.\rPlease cool first."
+  page diagConfirm
+}
 prints "M106 S255",0 //Turn on fan
 printh 0A
 delay=1000
-// prints "M109 R40 T0",0 //Wait for temp to reach 40
-// printh 0A
-prints "M303 C3 E0 S220 U",0
+prints "M155 S1",0 //Temp auto report
 printh 0A
-// prints "M109 R40 T1",0 //Wait for temp to reach 40
-// printh 0A
-prints "M303 C3 E1 S220 U",0
+tStatus.txt="Cooling hotends"
+prints "M109 R40 T0",0 //Wait for temp to reach 40
 printh 0A
-prints "M303 C3 E-1 S60 U",0
+prints "M109 R40 T1",0 //Wait for temp to reach 40
 printh 0A
+prints "M303 C3 E0 S220 U",0 //T0 PID Tune
+printh 0A
+prints "M303 C3 E1 S220 U",0 //T1 PID Tune
+printh 0A
+prints "M303 C3 E-1 S60 U",0 //Bed PID Tune
+printh 0A
+prints "M500",0 //Save Results
+printh 0A
+
+
+//Update State
+
+//Cooling / Warming state
+//Start State
+tStatus.txt="Tuning"
+//Finished state
+tStatus.txt="Complete"
 // prints "M107",0 //Turn off fan
 // printh 0A
-prints "M500",0
-printh 0A
+
+//Show popup Screen
+
 
 //Close
 prints "M155 S2",0 //Temp auto report
@@ -32,6 +68,10 @@ add 1,0,printer.T0Temp.val
 add 1,1,printer.T1Temp.val
 add 1,2,printer.bedTemp.val
 
+
+//Warming Phase
+
+
 //parsePIDTune
 // bias: 109 d: 109 min: 215.00 max: 226.00
 parse.lineMatch.txt=" bias: "
@@ -41,3 +81,4 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   cycle.val+=1
 }
+

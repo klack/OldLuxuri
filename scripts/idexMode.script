@@ -41,7 +41,7 @@ if(HandleCallback==1)
 //Manual
 if(IdexMode!=0)
 {
-  diagPrompt.tPrompt.txt="Switch to Manual Mode?"
+  diagPrompt.tMessage.txt="Switch to Manual Mode?"
   DiagReturnPage=dp
   ReturnObj=12
   ReturnVal=0
@@ -51,7 +51,7 @@ if(IdexMode!=0)
 //Auto
 if(IdexMode!=1)
 {
-  diagPrompt.tPrompt.txt="Switch to Auto Mode?"
+  diagPrompt.tMessage.txt="Switch to Auto Mode?"
   DiagReturnPage=dp
   ReturnObj=9
   ReturnVal=1
@@ -61,7 +61,7 @@ if(IdexMode!=1)
 //Clone
 if(IdexMode!=2)
 {
-  diagPrompt.tPrompt.txt="Switch to Clone Mode?"
+  diagPrompt.tMessage.txt="Switch to Clone Mode?"
   DiagReturnPage=dp
   ReturnObj=4
   ReturnVal=2
@@ -71,7 +71,7 @@ if(IdexMode!=2)
 //Mirror
 if(IdexMode!=3)
 {
-  diagPrompt.tPrompt.txt="Switch to Mirror Mode?"
+  diagPrompt.tMessage.txt="Switch to Mirror Mode?"
   DiagReturnPage=dp
   ReturnObj=5
   ReturnVal=3
