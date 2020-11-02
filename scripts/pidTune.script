@@ -1,40 +1,51 @@
+//States, null, error, init, cooling, ready, tuning, complete
 //On Load
 DiagReturnPage=dp
 if(HandleCallback==1)
 {
   if(ReturnVal==1)
   {
-    State=0
-    click tune,1
+    vars.state.txt="init"
   }
-}else
+  else
+  {
+    page ReturnPage
+  }
+}
+click controller,1
+click updateState,1
+
+//Controller
+if(vars.state.txt=="null")
 {
   diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
   page diagPrompt
 }
-
-//tune
-tStatus.txt="Starting PID Autotune"
-prints "M106 S255",0 //Turn on fan
-printh 0A
-
-if(printer.bedTemp.val>30)
+if(vars.state.txt=="init")
 {
-  DiagReturnPage=4
-  diagPrompt.tMessage.txt="Hot bed is too hot.\rPlease cool first."
-  page diagConfirm
-}
-if(State=3)
-{
-
-}
+  if(printer.bedTemp.val>30) //Stop if heatbed is too hot
+  {
+    diagPrompt.tMessage.txt="Hot bed must be below 30C"
+    DiagReturnPage=4 //main
+    page diagConfirm
+  }
+  oProgress.val=0
+  tStatus.txt="Starting PID Autotune"
+  prints "M106 S255",0 //Turn on fan
+  printh 0A
   delay=1000
-  prints "M155 S1",0 //Temp auto report
-  printh 0A
+}
+if(printer.T0Temp.val<30&&printer.T1Temp.val<30)
+{
+  vars.state.txt="ready"
+}else
+{
+  vars.state.txt="cooling"
   tStatus.txt="Cooling hotends"
-  prints "M109 R40 T0",0 //Wait for temp to reach 40
-  printh 0A
-  prints "M109 R40 T1",0 //Wait for temp to reach 40
+}
+if(vars.state.txt=="ready")
+{
+  prints "M155 S1",0 //Temp auto report
   printh 0A
   prints "M303 C3 E0 S220 U",0 //T0 PID Tune
   printh 0A
@@ -44,15 +55,8 @@ if(State=3)
   printh 0A
   prints "M500",0 //Save Results
   printh 0A
-  State=
-
-
-
-
-
-//Update State
-//-1 Uninitialized, 0 Starting, 1 Tuning, 2 Finished
-if(State==1)
+}
+if(vars.state.txt=="tuning")
 {
   tStatus.txt="Tuning"
   oProgress.val=cycle.val*100/totalCycles.val
@@ -60,24 +64,23 @@ if(State==1)
   tStatus.txt+="%"
   if(oProgress.val==100)
   {
-    State=2
+    vars.state.txt="complete"
     tStatus.txt="Complete"
-    DiagReturnPage=4
     diagPrompt.tMessage.txt="PID Tuning Complete"
+    DiagReturnPage=4
     page diagConfirm
   }
-  add 1,0,printer.T0Temp.val
-  add 1,1,printer.T1Temp.val
-  add 1,2,printer.bedTemp.val
 }
-if(printer.T0Temp.val>40||printer.T1Temp.val>40)
-{
-  State=3 //Wait for hotends to cool down
-}
+
+//Update State
+add 1,0,printer.T0Temp.val
+add 1,1,printer.T1Temp.val
+add 1,2,printer.bedTemp.val
 
 //Close
 prints "M155 S2",0 //Temp auto report
 printh 0A
+vars.state.txt="null"
 page ReturnPage
 
 //parsePIDTune
@@ -87,7 +90,6 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  State=1
+  vars.state.txt="tuning"
   cycle.val+=1
 }
-
