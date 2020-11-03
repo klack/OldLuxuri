@@ -24,8 +24,20 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   ok=1
 }
 //M117
+parse.lineMatch.txt="echo:M117 "
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,printer.m117.txt,parse.lineMatch.txt,1
+}
 //Halt
 //Shutdown
 //Powerloss
 //TODO Idex Mode
 //TODO handle M107 Fan off
+
+
+//Mock data
+parse.buffer.txt="echo:M117 This is an M117 Message"
+click notifyEOL,1

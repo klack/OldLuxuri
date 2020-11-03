@@ -46,11 +46,11 @@ if(vars.state.txt=="ready")
 {
   vars.state.txt="tuning"
   vars.status.txt="Starting PID Autotune"
-  printer.command.txt="M303 C10 E0 S220 U" //T0 PID Tune
+  printer.command.txt="M303 C5 E0 S220 U" //T0 PID Tune
   click sendCommand,1
-  printer.command.txt="M303 C10 E1 S220 U" //T1 PID Tune
+  printer.command.txt="M303 C5 E1 S220 U" //T1 PID Tune
   click sendCommand,1
-  printer.command.txt="M303 C10 E-1 S60 U" //Bed PID Tune
+  printer.command.txt="M303 C5 E-1 S60 U" //Bed PID Tune
   click sendCommand,1
 }
 
@@ -103,6 +103,8 @@ if(parse.eval.txt==parse.lineMatch.txt)
 //destroy
 printer.command.txt="M155 S2" //Temp auto report
 click sendCommand,1
+printer.command.txt="M106 S0" //Turn off fan
+click sendCommand,1
 vars.state.txt="null"
 HandleCallback=-1
 ReturnVal=-1
@@ -111,9 +113,9 @@ ReturnObj=-1
 //close
 vars.status.txt="Cancelling"
 click updateView,1
+printer.command.txt="M108" 
 for(j=0;j<3;j++)
 {
-  printer.command.txt="M108" 
   click sendCommand,1
   delay=1000
 }
@@ -122,7 +124,7 @@ page ReturnPage
 
 //sendCommand
 prints printer.command.txt,0
-printh OA
+printh 0A
 
 //run
 click updateView,1

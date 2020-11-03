@@ -1,10 +1,11 @@
 // Serial Parser
 int Baud=0,SerialPos=0,BufferLen=0,SearchPos=0,ok=1
-int ReturnPage=4,DiagReturnPage,ReturnObj,ReturnVal=-1,HandleCallback=0,State=0
+int ReturnPage=4,DiagReturnPage,ReturnObj=-1,ReturnVal=-1,HandleCallback=0,State=0
 int Tool=0,IdexMode=1
 int j=0,k=0,l=0
 baud=0
 recmod=1
-thsp=15*60
+thsp=30*60
 thup=1 //Wake on Touch
+wup=255
 page connect

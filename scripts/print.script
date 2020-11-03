@@ -22,6 +22,8 @@ tBedTemp.txt+=vars.s.txt
 //Fan Speed
 covx printer.fanSpeed.val,vars.s.txt,0,0
 tFanSpeed.txt=vars.s.txt
+//M117
+tM117.txt=printer.m117.txt
 //Progress
 if(printer.printState.val==-1) //Uninitialized
 {
