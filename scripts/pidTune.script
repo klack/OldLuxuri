@@ -136,7 +136,7 @@ ReturnVal=-1
 ReturnObj=-1
 page ReturnPage
 
-//tmState
+//run
 click updateState,1
 click controller,1
 
