@@ -57,8 +57,16 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 //Shutdown
-//Powerloss
+parse.lineMatch.txt="echo:Power off button pressed"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
+  page shutdown
+}
 
+//TODO Powerloss
 //TODO Idex Mode
 //TODO handle M107 Fan off
 

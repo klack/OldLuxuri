@@ -1,3 +1,10 @@
+//On load
+dim=255
+wup=255
+vars.status.txt="Loading..."
+
+
+//startConnection
 if(usize<=0) //If the buffer is empty
 {
   //Check the value of i and set the baud rate appropriately
@@ -39,8 +46,8 @@ if(usize<=0) //If the buffer is empty
   vars.s.txt+=vars.s.txt
   //View and set settings
   printh 0A
-  // prints "M80",0 //Power
-  // printh 0A
+  prints "M80",0 //Power
+  printh 0A
   prints "M155 S2",0 //Temp auto report
   printh 0A
   // prints "M503",0 //Report settings

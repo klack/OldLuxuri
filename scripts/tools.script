@@ -27,22 +27,4 @@ printh 0A
 vars.status.txt="Heaters Off"
 
 // Power Off
-prints "M108",0 //Break
-printh 0A
-prints "M108",0 //Break
-printh 0A
-prints "M108",0 //Break
-printh 0A
-prints "M84",0 //Disable steppers, heaters, fan, and powersupply
-printh 0A
-prints "M104 T0 S0",0
-printh 0A
-prints "M104 T1 S0",0
-printh 0A
-prints "M140 S0",0
-printh 0A
-prints "M106 S0",0
-printh 0A
-prints "M81",0
-printh 0A
-sleep=1
+page shutdown
