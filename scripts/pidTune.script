@@ -1,52 +1,33 @@
-//On Load
-DiagReturnPage=dp
-if(HandleCallback==1)
-{
-  if(ReturnObj==0) //Direct to controller callback
-  {
-    click controller,0
-  }else
-  {
-    click b[ReturnObj],0
-  }
-  ReturnVal=-1
-  HandleCallback=0
-}
-click controller,1
-click updateView,1
-
 //---------------------------------------------------------
 //Controller
 //States: null, error, init, cooling, ready, tuning, complete
 //---------------------------------------------------------
 if(vars.state.txt=="null")
 {
+  vars.status.txt="Initializing"
   diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
   ReturnObj=0
   page diagPrompt
 }
+
 if(vars.state.txt=="init")
 {
   oProgress.val=0
+  vars.status.txt="Initializing"
   if(printer.bedTemp.val>40) //Stop if heatbed is too hot
   {
     diagConfirm.tMessage.txt="Hot bed must be below\r40C"
+    click destroy,1 //Cleanup
     DiagReturnPage=4 //main
     page diagConfirm
   }
-  prints "M106 S255",0 //Turn on fan
-  printh 0A
-  prints "M155 S1",0 //Temp auto report
-  printh 0A
+  printer.command.txt="M106 S255" //Turn on fan
+  click sendCommand,1
+  printer.command.txt="M155 S1" //Temp auto report
+  click sendCommand,1
+  click updateView,1
   delay=1000
-  if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
-  {
-    vars.state.txt="ready"
-  }else
-  {
-    vars.state.txt="cooling"
-    tStatus.txt="Cooling hotends"
-  }
+  vars.state.txt="cooling"
 }
 
 if(vars.state.txt=="cooling")
@@ -54,37 +35,40 @@ if(vars.state.txt=="cooling")
   if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
   {
     vars.state.txt="ready"
+    vars.status.txt="Ready"
+  }else
+  {
+    vars.status.txt="Cooling hotends"
   }  
 }
 
 if(vars.state.txt=="ready")
 {
   vars.state.txt="tuning"
-  tStatus.txt="Starting PID Autotune"
-  prints "M303 C3 E0 S220 U",0 //T0 PID Tune
-  printh 0A
-  prints "M303 C3 E1 S220 U",0 //T1 PID Tune
-  printh 0A
-  prints "M303 C3 E-1 S60 U",0 //Bed PID Tune
-  printh 0A
+  vars.status.txt="Starting PID Autotune"
+  printer.command.txt="M303 C10 E0 S220 U" //T0 PID Tune
+  click sendCommand,1
+  printer.command.txt="M303 C10 E1 S220 U" //T1 PID Tune
+  click sendCommand,1
+  printer.command.txt="M303 C10 E-1 S60 U" //Bed PID Tune
+  click sendCommand,1
 }
 
 if(vars.state.txt=="tuning")
 {
-  tStatus.txt="Tuning..."
+  vars.status.txt="Tuning..."
   oProgress.val=cycle.val*100/totalCycles.val
   covx oProgress.val,tProgress.txt,0,0
   tProgress.txt+="%"
   if(oProgress.val==100)
   {
     vars.state.txt="complete"
-    tStatus.txt="Complete"
-    prints "M500",0 //Save Results
-    printh 0A
-    prints "M155 S2",0 //Temp auto report
-    printh 0A
+    vars.status.txt="Complete"
+    printer.command.txt="M500" //Save Results
+    click sendCommand,1
+    click destroy,1
     diagConfirm.tMessage.txt="PID Tuning Complete"
-    DiagReturnPage=4
+    DiagReturnPage=ReturnPage
     page diagConfirm
   }
 }
@@ -93,10 +77,16 @@ if(vars.state.txt=="tuning")
 //---------------------------------------------------------
 
 //Controller Callback
-vars.state.txt="init"
+if(ReturnVal==1)
+{
+  vars.state.txt="init"
+}else
+{
+  page ReturnPage
+}
 
 //Update View
-add 1,0,printer.T0Temp.val
+add 1,printer.T0Temp.val
 add 1,1,printer.T1Temp.val
 add 1,2,printer.bedTemp.val
 
@@ -104,43 +94,53 @@ add 1,2,printer.bedTemp.val
 // bias: 109 d: 109 min: 215.00 max: 226.00
 parse.lineMatch.txt=" bias: "
 strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
+substr parse.buffer.txt,parse.eval.txt,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   cycle.val+=1
 }
 
 //destroy
-tStatus.txt="Cancelling"
-prints "M108",0 //Cancel
-printh 0A
-delay=1000
-prints "M108",0
-printh 0A
-delay=1000
-prints "M108",0
-printh 0A
-delay=1000
-prints "M108",0
-printh 0A
-delay=1000
-prints "M108",0
-printh 0A
-delay=1000
-prints "M108",0
-printh 0A
-delay=1000
-prints "M155 S2",0 //Temp auto report
-printh 0A
+printer.command.txt="M155 S2" //Temp auto report
+click sendCommand,1
 vars.state.txt="null"
 HandleCallback=-1
 ReturnVal=-1
 ReturnObj=-1
+
+//close
+vars.status.txt="Cancelling"
+click updateView,1
+for(j=0;j<3;j++)
+{
+  printer.command.txt="M108" 
+  click sendCommand,1
+  delay=1000
+}
+click destroy,1
 page ReturnPage
+
+//sendCommand
+prints printer.command.txt,0
+printh OA
 
 //run
 click updateView,1
 click controller,1
 
-//Close
-click destroy,1
+//On Load
+DiagReturnPage=dp
+if(HandleCallback==1)
+{
+  if(ReturnObj==0) //Direct to controller callback
+  {
+    click controller
+  }else
+  {
+    click b[ReturnObj]
+  }
+  ReturnVal=-1
+  HandleCallback=0
+}
+click controller,1
+click updateView,1
