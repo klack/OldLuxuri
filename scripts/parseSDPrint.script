@@ -71,5 +71,5 @@ substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   printer.printState.val=9
-  printer.lastError.txt=parse.buffer.txt
+  printer.error.txt+=parse.buffer.txt
 }

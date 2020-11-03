@@ -31,13 +31,42 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,printer.m117.txt,parse.lineMatch.txt,1
 }
+
+//Error
+parse.lineMatch.txt="Error:"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,vars.s.txt,parse.lineMatch.txt,1
+  vars.s.txt+="\r"
+  printer.error.txt+=vars.s.txt
+}
+
 //Halt
+parse.lineMatch.txt="Error:Printer halted. "
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,vars.s.txt,parse.lineMatch.txt,1
+  vars.s.txt+="\r"
+  printer.error.txt+=vars.s.txt
+  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
+  page error
+}
+
 //Shutdown
 //Powerloss
+
 //TODO Idex Mode
 //TODO handle M107 Fan off
 
-
 //Mock data
-parse.buffer.txt="echo:M117 This is an M117 Message"
-click notifyEOL,1
+// parse.buffer.txt="echo:M117 This is an M117 Message"
+// click notifyEOL,1
+
+// parse.buffer.txt="Error: Mock error test"
+// click notifyEOL,1
+// parse.buffer.txt="Error:Printer halted. "
+// click notifyEOL,1
