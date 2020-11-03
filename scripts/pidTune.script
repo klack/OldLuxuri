@@ -2,14 +2,15 @@
 DiagReturnPage=dp
 if(HandleCallback==1)
 {
-  if(ReturnVal==1)
+  if(ReturnObj==0) //Direct to controller callback
   {
-    vars.state.txt="init"
-  }
-  else
+    click controller,0
+  }else
   {
-    page ReturnPage
+    click b[ReturnObj],0
   }
+  ReturnVal=-1
+  HandleCallback=0
 }
 click controller,1
 click updateState,1
@@ -21,6 +22,7 @@ click updateState,1
 if(vars.state.txt=="null")
 {
   diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
+  ReturnObj=0
   page diagPrompt
 }
 if(vars.state.txt=="init")
@@ -65,13 +67,10 @@ if(vars.state.txt=="ready")
   printh 0A
   prints "M303 C3 E-1 S60 U",0 //Bed PID Tune
   printh 0A
-  prints "M500",0 //Save Results
-  printh 0A
 }
 
 if(vars.state.txt=="tuning")
 {
-  tStatus.txt="Tuning"
   oProgress.val=cycle.val*100/totalCycles.val
   covx oProgress.val,tStatus.txt,0,0
   tStatus.txt+="%"
@@ -79,7 +78,11 @@ if(vars.state.txt=="tuning")
   {
     vars.state.txt="complete"
     tStatus.txt="Complete"
-    diagPrompt.tMessage.txt="PID Tuning Complete"
+    prints "M500",0 //Save Results
+    printh 0A
+    prints "M155 S2",0 //Temp auto report
+    printh 0A
+    diagConfirm.tMessage.txt="PID Tuning Complete"
     DiagReturnPage=4
     page diagConfirm
   }
@@ -87,6 +90,12 @@ if(vars.state.txt=="tuning")
 //---------------------------------------------------------
 //End Controller
 //---------------------------------------------------------
+
+//Controller Callback
+vars.state.txt="init"
+
+
+
 
 //parsePIDTune
 // bias: 109 d: 109 min: 215.00 max: 226.00
@@ -103,4 +112,29 @@ add 1,0,printer.T0Temp.val
 add 1,1,printer.T1Temp.val
 add 1,2,printer.bedTemp.val
 
-//Before Close
+//Close
+prints "M108",0 //Cancel
+printh 0A
+delay=1000
+prints "M108",0
+printh 0A
+delay=1000
+prints "M108",0
+printh 0A
+delay=1000
+prints "M108",0
+printh 0A
+delay=1000
+prints "M108",0
+printh 0A
+delay=1000
+prints "M108",0
+printh 0A
+prints "M155 S2",0 //Temp auto report
+printh 0A
+vars.state.txt="null"
+page ReturnPage
+
+//tmState
+click updateState,1
+click controller,1
