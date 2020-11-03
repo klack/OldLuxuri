@@ -13,7 +13,7 @@ if(HandleCallback==1)
   HandleCallback=0
 }
 click controller,1
-click updateState,1
+click updateView,1
 
 //---------------------------------------------------------
 //Controller
@@ -71,9 +71,10 @@ if(vars.state.txt=="ready")
 
 if(vars.state.txt=="tuning")
 {
+  tStatus.txt="Tuning..."
   oProgress.val=cycle.val*100/totalCycles.val
-  covx oProgress.val,tStatus.txt,0,0
-  tStatus.txt+="%"
+  covx oProgress.val,tProgress.txt,0,0
+  tProgress.txt+="%"
   if(oProgress.val==100)
   {
     vars.state.txt="complete"
@@ -94,7 +95,7 @@ if(vars.state.txt=="tuning")
 //Controller Callback
 vars.state.txt="init"
 
-//Update State
+//Update View
 add 1,0,printer.T0Temp.val
 add 1,1,printer.T1Temp.val
 add 1,2,printer.bedTemp.val
@@ -110,6 +111,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 //destroy
+tStatus.txt="Cancelling"
 prints "M108",0 //Cancel
 printh 0A
 delay=1000
@@ -137,7 +139,7 @@ ReturnObj=-1
 page ReturnPage
 
 //run
-click updateState,1
+click updateView,1
 click controller,1
 
 //Close
