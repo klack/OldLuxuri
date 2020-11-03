@@ -17,7 +17,7 @@ click updateState,1
 
 //---------------------------------------------------------
 //Controller
-//States, null, error, init, cooling, ready, tuning, complete
+//States: null, error, init, cooling, ready, tuning, complete
 //---------------------------------------------------------
 if(vars.state.txt=="null")
 {
@@ -94,8 +94,10 @@ if(vars.state.txt=="tuning")
 //Controller Callback
 vars.state.txt="init"
 
-
-
+//Update State
+add 1,0,printer.T0Temp.val
+add 1,1,printer.T1Temp.val
+add 1,2,printer.bedTemp.val
 
 //parsePIDTune
 // bias: 109 d: 109 min: 215.00 max: 226.00
@@ -107,12 +109,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
   cycle.val+=1
 }
 
-//Update State
-add 1,0,printer.T0Temp.val
-add 1,1,printer.T1Temp.val
-add 1,2,printer.bedTemp.val
-
-//Close
+//destroy
 prints "M108",0 //Cancel
 printh 0A
 delay=1000
@@ -130,11 +127,18 @@ printh 0A
 delay=1000
 prints "M108",0
 printh 0A
+delay=1000
 prints "M155 S2",0 //Temp auto report
 printh 0A
 vars.state.txt="null"
+HandleCallback=-1
+ReturnVal=-1
+ReturnObj=-1
 page ReturnPage
 
 //tmState
 click updateState,1
 click controller,1
+
+//Close
+click destroy,1
