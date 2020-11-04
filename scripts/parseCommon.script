@@ -1,3 +1,23 @@
+//Shutdown
+parse.lineMatch.txt="//notice:power_pin"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+{
+  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
+  page shutdown
+}
+
+//Shutdown
+parse.lineMatch.txt="echo://notice:power_pin"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+{
+  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
+  page shutdown
+}
+
 //Active Extruder
 parse.lineMatch.txt="echo:Active Extruder: "
 strlen parse.lineMatch.txt,j
@@ -56,16 +76,6 @@ if(parse.eval.txt==parse.lineMatch.txt)
   page error
 }
 
-//Shutdown
-parse.lineMatch.txt="echo:Power off button pressed"
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt)
-{
-  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  page shutdown
-}
-
 //TODO Powerloss
 //TODO Idex Mode
 //TODO handle M107 Fan off
@@ -77,4 +87,6 @@ if(parse.eval.txt==parse.lineMatch.txt)
 // parse.buffer.txt="Error: Mock error test"
 // click notifyEOL,1
 // parse.buffer.txt="Error:Printer halted. "
+// click notifyEOL,1
+// parse.buffer.txt="echo:Power off button pressed"
 // click notifyEOL,1
