@@ -1,46 +1,59 @@
-if(usize<=0) //If the buffer is empty
+if(j<10)
 {
-  if(j==0)
+  if(usize<=0) //If the buffer is empty
   {
-    baud=115200
-    Baud=115200
-  }
-  if(j==1)
-  {
-    baud=9600
-    Baud=9600
-  }
-  if(j==2)
-  {
-    baud=2400
-    Baud=2400
-  }
-  if(j>2)
-  {
-    //Start over and try again
-    j=0
-    vars.s.txt="Retrying"
+    if(k==0)
+    {
+      baud=115200
+      Baud=115200
+    }
+    if(k==1)
+    {
+      baud=9600
+      Baud=9600
+    }
+    if(k>1)
+    {
+      //Start over and try again
+      k=0
+    }else
+    {
+      //Try the next baud value on the next timer event
+      k++
+    }
+    //Output status
+    covx Baud,vars.s.txt,0,0
+    vars.debug.txt="Trying baudrate "
+    vars.debug.txt+=vars.s.txt
+    //Try and trigger a response
+    printer.command.txt=""
+    click sendCommand,1
+    j++
   }else
   {
-    //Try the next baud value on the next timer event
-    j++
+    state1.aph=127
+    tStatus.txt="Connected at "
+    covx Baud,vars.s.txt,0,0
+    tStatus.txt+=vars.s.txt
+    printer.command.txt="" //Clear connection preamble sent by tft
+    click sendCommand,1
+    printer.command.txt="M503" //Get settings
+    click sendCommand,1
+    printer.command.txt="M155 S2" //Temp auto report
+    click sendCommand,1
+    printer.command.txt="M605 S0" //Dual Nozzle Mode Full Control
+    click sendCommand,1
+    printer.command.txt="T0" //Select T0
+    click sendCommand,1
+    for(k=272;k>=0;k--)
+    {
+      k=k-4
+      qBanner.y=k
+      doevents
+    }    
+    page main
   }
-  //Output status
-  covx Baud,vars.s.txt,0,0
-  vars.status.txt="Trying baudrate "
-  vars.status.txt+=vars.s.txt
-  //Try and trigger a response
-  printh 0A
 }else
 {
-  printh 0A
-  prints "M155 S2",0 //Temp auto report
-  printh 0A
-  for(k=272;k>=0;k--)
-  {
-    k=k-4
-    qBanner.y=k
-    doevents
-  }    
-  page main
+  tStatus.txt="Unplug USB to complete shutdown"
 }
