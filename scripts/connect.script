@@ -40,6 +40,7 @@ for(k=272;k>=0;k--)
   k=k-4
   qBanner.y=k
   doevents
+  click readBuffer,1
 }
 page main
 
