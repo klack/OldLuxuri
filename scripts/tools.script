@@ -27,6 +27,7 @@ printh 0A
 vars.status.txt="Heaters Off"
 
 // Power Off
-bPoweroff.picc=bPoweroff.picc2
-prints "M81",0
+bPowerOff.picc=bPowerOff.picc2
+prints "M112",0
 printh 0A
+page shutdown
