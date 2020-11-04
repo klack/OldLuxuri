@@ -4,22 +4,12 @@
 //Update T0
 covx printer.T0Temp.val,vars.s.txt,0,0
 tT0Temp.txt=vars.s.txt
-tT0Temp.txt+="/"
-covx printer.T0SetTemp.val,vars.s.txt,0,0
-tT0Temp.txt+=vars.s.txt
 //Update T1
 covx printer.T1Temp.val,vars.s.txt,0,0
 tT1Temp.txt=vars.s.txt
-tT1Temp.txt+="/"
-covx printer.T1SetTemp.val,vars.s.txt,0,0
-tT1Temp.txt+=vars.s.txt
 //Update Bed
-tBedTemp.txt="Bed: "
 covx printer.bedTemp.val,vars.s.txt,0,0
-tBedTemp.txt+=vars.s.txt
-tBedTemp.txt+="/"
-covx printer.setBedTemp.val,vars.s.txt,0,0
-tBedTemp.txt+=vars.s.txt
+tBedTemp.txt=vars.s.txt
 
 //Swap States
 for(j=0;j<=32;j++) //Button Groups
@@ -30,24 +20,24 @@ for(j=0;j<=32;j++) //Button Groups
     {
       if(T0Mat.txt==b[j].txt)
       {
-        b[j].picc=22
+        b[j].picc=b[j].picc2
         b[j].pco=0
       }else
       {
         b[j].picc=3
-        b[j].pco=65535
+        b[j].pco=WHITE
       }
     }
     if(b[j].txt_maxl==5) //T1 boxes are set with a maxl of 6
     {
       if(T1Mat.txt==b[j].txt)
       {
-        b[j].picc=22
+        b[j].picc=b[j].picc2
         b[j].pco=0
       }else
       {
         b[j].picc=3
-        b[j].pco=65535
+        b[j].pco=WHITE
       }
     }
   }
@@ -56,59 +46,63 @@ for(j=0;j<=32;j++) //Button Groups
 j=0
 k=0
 l=0
-//Check T0Temp
-if(printer.T0Temp.val>=preheatT0Temp.val)
+if(preheatT0Temp.val>0||preheatT1Temp.val>0)
 {
-  j=1
-}
-//Check T1Temp
-if(printer.T1Temp.val>=preheatT1Temp.val)
-{
-  k=1
-}
-//Check Bed Temp
-if(printer.bedTemp.val>=printer.setBedTemp.val)
-{
-  l=1
+  //Check T0Temp
+  if(printer.T0Temp.val>=preheatT0Temp.val)
+  {
+    j=1
+  }
+  //Check T1Temp
+  if(printer.T1Temp.val>=preheatT1Temp.val)
+  {
+    k=1
+  }
+  //Check Bed Temp
+  if(printer.bedTemp.val>=printer.setBedTemp.val)
+  {
+    l=1
+  }
 }
 State=j+k+l
 //Set States
 if(State==3)
 {
+  //Temperature Reached
+  icon.picc=24 //Change message to ready
+  tMessage.txt="Ready"
+  tMessage2.aph=0
+  ready.val=1
+}else
+{
   if(preheatT0Temp.val>0||preheatT1Temp.val>0)
   {
-    //Temperature Reached
-    state.picc=24 //Change message to ready
-    tMessage.txt="Ready"
-    icon.picc=24
-    tMessage2.aph=0
-    ready.val=1
+    //Heating
+    tMessage.txt="Heating"
+    tMessage2.txt="Please wait..."
+    icon.picc=46
+    tempIcons.aph=127
+    tT0Temp.aph=127
+    tT1Temp.aph=127
+    tBedTemp.aph=127
+    if(tMessage2.aph==127) //Blink message2
+    {
+      tMessage2.aph=0
+    }else
+    {
+      tMessage2.aph=127
+    }    
   }else
   {
     //Choose temp
     tMessage.txt="Choose"
     tMessage2.txt="Materials"
     tMessage2.aph=127
-    icon.picc=2
- }
-}else
-{
-  if(ready.val==0)
-  {
-    if(preheatT0Temp.val>0||preheatT1Temp.val>0)
-    {
-      //Heating
-      tMessage.txt="Heating"
-      tMessage2.txt="Please wait..."
-      icon.picc=23
-      if(tMessage2.aph==127)
-      {
-        tMessage2.aph=0
-      }else
-      {
-        tMessage2.aph=127
-      }    
-    }
+    icon.picc=23
+    tempIcons.aph=0
+    tT0Temp.aph=0
+    tT1Temp.aph=0
+    tBedTemp.aph=0
   }
 }
 //--------------------
@@ -140,6 +134,8 @@ printh 0A
 ready.val=0
 click updateState,1
 
+//Onload
+click updateState,1
 
 
 
