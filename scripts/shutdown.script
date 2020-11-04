@@ -26,7 +26,6 @@ if(dim>10)
 }else
 {
   animate.en=0
-  removeUSB.en=1
 }
 
 //removeUSB

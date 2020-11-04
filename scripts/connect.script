@@ -1,7 +1,45 @@
-//On load
-dim=255
-wup=255
-vars.status.txt="Loading..."
+//start
+j=0
+while(usize<=0&&j<20) //If the buffer is empty
+{
+  baud=115200
+  Baud=115200
+  covx j,vars.s.txt,0,0
+  vars.debug.txt="Connection attempt #"
+  vars.debug.txt+=vars.s.txt
+  printh 0A
+  doevents
+  delay=500
+  j+=1
+}
+dim=100
+if(j<20) //Connected
+{
+  click getSettings,1
+}else //Cannot connect
+{
+  vars.status.txt="Unplug USB to Complete Shutdown"
+  click updateView,1
+}
+
+//getSettings
+state1.aph=127
+printer.command.txt="M155 S2" //Temp auto report
+click sendCommand,1
+printer.command.txt="M605 S0" //Dual Nozzle Mode Full Control
+click sendCommand,1
+printer.command.txt="T0",0 //Select T0
+click sendCommand,1
+printer.command.txt="M503",0 //Select T0
+click sendCommand,1
+
+
+//updateView
+tStatus.txt=vars.status.txt
+
+
+
+
 
 
 //startConnection
@@ -46,19 +84,19 @@ if(usize<=0) //If the buffer is empty
   vars.s.txt+=vars.s.txt
   //View and set settings
   printh 0A
-  prints "M80",0 //Power
+  printer.command.txt="M80",0 //Power
   printh 0A
-  prints "M155 S2",0 //Temp auto report
+  printer.command.txt="M155 S2",0 //Temp auto report
   printh 0A
-  // prints "M503",0 //Report settings
+  // printer.command.txt="M503",0 //Report settings
   // printh 0A
-  // prints "M115",0 //Firmware Info
+  // printer.command.txt="M115",0 //Firmware Info
   // printh 0A
-  // // prints "M78",0 //Print job stats
+  // // printer.command.txt="M78",0 //Print job stats
   // printh 0A
-  prints "M605 S0",0 //Dual Nozzle Mode Full Control
+  printer.command.txt="M605 S0",0 //Dual Nozzle Mode Full Control
   printh 0A
-  prints "T0",0 //Select T0
+  printer.command.txt="T0",0 //Select T0
   printh 0A
   startCon.en=0
   while(animate.en!=0)
@@ -69,3 +107,15 @@ if(usize<=0) //If the buffer is empty
     page main
   }
 }
+
+
+
+
+
+for(k=272;k>=0;k--)
+{
+  k=k-4
+  qBanner.y=k
+  doevents
+}
+animate.en=0
