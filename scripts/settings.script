@@ -7,8 +7,12 @@ if(HandleCallback==1)
   vars.returnVal.txt=""
   ReturnVal=-1
 }
-prints "M503",0
-printh 0A
+if(printer.printState.val!=1)
+{
+  prints "M503",0
+  printh 0A
+}
+
 
 //Update State
 eStepsVal.txt=printer.T0Esteps.txt

@@ -44,7 +44,7 @@ if(j<10)
     click sendCommand,1
     printer.command.txt="M155 S2" //Temp auto report
     click sendCommand,1
-    printer.command.txt="M605 S0" //Dual Nozzle Mode Full Control
+    printer.command.txt="M605 S1" //Dual Nozzle Mode Auto
     click sendCommand,1
     printer.command.txt="T0" //Select T0
     click sendCommand,1
