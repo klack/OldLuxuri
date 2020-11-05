@@ -40,6 +40,8 @@ if(j<10)
     click sendCommand,1
     printer.command.txt="M503" //Get settings
     click sendCommand,1
+    printer.command.txt="M114" //Get position
+    click sendCommand,1
     printer.command.txt="M155 S2" //Temp auto report
     click sendCommand,1
     printer.command.txt="M605 S0" //Dual Nozzle Mode Full Control

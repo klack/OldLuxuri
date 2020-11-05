@@ -6,12 +6,14 @@ if(HandleCallback==1)
   HandleCallback=0
   vars.returnVal.txt="null"
   ReturnVal=-1
+}else
+{
+  prints "M605 S0",0 //Set manual mode
+  printh 0A
+  IdexMode=0
+  prints "M114",0 //Report position
+  printh 0A
 }
-prints "M605 S0",0 //Set manual mode
-printh 0A
-IdexMode=0
-prints "M114",0 //Report position
-printh 0A
 click updateState,1
 
 //Close
@@ -25,6 +27,11 @@ printh 0A
 prints command.txt,0
 printh 0A
 prints "G90",0
+printh 0A
+prints "M114",0
+printh 0A
+//Send Command right click
+prints command.txt,0
 printh 0A
 prints "M114",0
 printh 0A
@@ -60,14 +67,12 @@ click sendCommand,1
 //--------------------------
 //Update State
 //--------------------------
-tPosition.txt="X:"
-tPosition.txt+=printer.x.txt
-tPosition.txt+=" "
-tPosition.txt+="Y:"
-tPosition.txt+=printer.y.txt
-tPosition.txt+=" "
-tPosition.txt+="Z:"
-tPosition.txt+=printer.z.txt
+tX.txt="X:"
+tX.txt+=printer.x.txt
+tY.txt="Y:"
+tY.txt+=printer.y.txt
+tZ.txt="Z:"
+tZ.txt+=printer.z.txt
 
 if(Tool==0) //Toolhead
 {
@@ -77,7 +82,7 @@ if(Tool==0) //Toolhead
   bSwap.picc=21
 }
 
-for(j=0;j<=32;j++) //Button Groups
+for(j=0;j<=35;j++) //Button Groups
 {
   if(b[j].type==98) //If text box
   {
@@ -106,4 +111,51 @@ for(j=0;j<=32;j++) //Button Groups
       }
     }
   }
+}
+
+//tX
+ReturnObj=29
+numpad.tCaption.txt="X Location"
+vars.returnVal.txt=""
+page numpad
+
+//tX callback
+if(vars.returnVal.txt!="null")
+{
+  command.txt="G0 X"
+  command.txt+=vars.returnVal.txt
+  command.txt+=" F"
+  command.txt+=speed.txt
+  click sendCommand,0 //0 does not prepend G91
+}
+
+//tY
+ReturnObj=36
+numpad.tCaption.txt="Y Location"
+vars.returnVal.txt=""
+page numpad
+
+//tY callback
+if(vars.returnVal.txt!="null")
+{
+  command.txt="G0 Y"
+  command.txt+=vars.returnVal.txt
+  command.txt+=" F"
+  command.txt+=speed.txt
+  click sendCommand,0 //0 does not prepend G91
+}
+
+//tZ
+ReturnObj=37
+numpad.tCaption.txt="Z Location"
+vars.returnVal.txt=""
+page numpad
+
+//tZ callback
+if(vars.returnVal.txt!="null")
+{
+  command.txt="G0 Z"
+  command.txt+=vars.returnVal.txt
+  command.txt+=" F500"
+  click sendCommand,0 //0 does not prepend G91
 }
