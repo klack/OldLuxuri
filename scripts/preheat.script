@@ -73,25 +73,32 @@ if(State==3)
   tMessage.txt="Ready"
   tMessage2.aph=0
   ready.val=1
+  tempIcons.aph=127
+  tT0Temp.aph=127
+  tT1Temp.aph=127
+  tBedTemp.aph=127  
 }else
 {
   if(preheatT0Temp.val>0||preheatT1Temp.val>0)
   {
-    //Heating
-    tMessage.txt="Heating"
-    tMessage2.txt="Please wait..."
-    icon.picc=46
-    tempIcons.aph=127
-    tT0Temp.aph=127
-    tT1Temp.aph=127
-    tBedTemp.aph=127
-    if(tMessage2.aph==127) //Blink message2
+    if(ready.val==0)
     {
-      tMessage2.aph=0
-    }else
-    {
-      tMessage2.aph=127
-    }    
+      //Heating
+      tMessage.txt="Heating"
+      tMessage2.txt="Please wait..."
+      icon.picc=46
+      tempIcons.aph=127
+      tT0Temp.aph=127
+      tT1Temp.aph=127
+      tBedTemp.aph=127
+      if(tMessage2.aph==127) //Blink message2
+      {
+        tMessage2.aph=0
+      }else
+      {
+        tMessage2.aph=127
+      }    
+    }
   }else
   {
     //Choose temp
@@ -104,6 +111,7 @@ if(State==3)
     tT1Temp.aph=0
     tBedTemp.aph=0
   }
+
 }
 //--------------------
 //End UpdateState
