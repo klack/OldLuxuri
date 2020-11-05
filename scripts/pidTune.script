@@ -86,9 +86,10 @@ if(ReturnVal==1)
 }
 
 //Update View
-add 1,0,printer.T0Temp.val
-add 1,1,printer.T1Temp.val
-add 1,2,printer.bedTemp.val
+tStatus.txt=vars.status.txt
+add 2,0,printer.T0Temp.val
+add 2,1,printer.T1Temp.val
+add 2,2,printer.bedTemp.val
 covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
 tT0Temp.txt=vars.s.txt
 covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
