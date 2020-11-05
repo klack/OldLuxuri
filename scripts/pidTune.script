@@ -86,9 +86,15 @@ if(ReturnVal==1)
 }
 
 //Update View
-add 1,printer.T0Temp.val
+add 1,0,printer.T0Temp.val
 add 1,1,printer.T1Temp.val
 add 1,2,printer.bedTemp.val
+covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+tT0Temp.txt=vars.s.txt
+covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
+tT1Temp.txt=vars.s.txt
+covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+tBedTemp.txt=vars.s.txt
 
 //parsePIDTune
 // bias: 109 d: 109 min: 215.00 max: 226.00
