@@ -1,5 +1,6 @@
 //Page Load
 DiagReturnPage=dp
+click updateState,1
 if(HandleCallback==1)
 {
   click b[ReturnObj],0 //Run right click code as callback
@@ -14,7 +15,7 @@ if(HandleCallback==1)
   prints "M114",0 //Report position
   printh 0A
 }
-click updateState,1
+
 
 //Close
 prints "G0 F5000",0 //Reset speed
@@ -74,6 +75,19 @@ tY.txt+=printer.y.txt
 tZ.txt="Z:"
 tZ.txt+=printer.z.txt
 
+if(busy==1) //Busy
+{
+  if(tBusy.aph==127) //Flash
+  {
+    tBusy.aph=0
+  }else
+  {
+    tBusy.aph=127
+  }
+}else
+{
+  tBusy.aph=0
+}
 if(Tool==0) //Toolhead
 {
   bSwap.picc=20

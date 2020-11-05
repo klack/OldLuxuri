@@ -42,6 +42,7 @@ parse.lineMatch.txt="ok"
 if(parse.buffer.txt==parse.lineMatch.txt)
 {
   ok=1
+  busy=0
 }
 //M117
 parse.lineMatch.txt="echo:M117 "
@@ -74,6 +75,16 @@ if(parse.eval.txt==parse.lineMatch.txt)
   printer.error.txt+=vars.s.txt
   parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
   page error
+}
+
+//Busy
+parse.lineMatch.txt="echo:busy: processing"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  busy=1
+  ok=0
 }
 
 //TODO Powerloss

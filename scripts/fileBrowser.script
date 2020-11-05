@@ -91,6 +91,9 @@ click updateState,1
 
 
 //On Load
+click updateState,1
+printer.command.txt="M155 S0" //Temp auto report off
+printh 0A
 prints "M22",0
 printh 0A
 delay=250
@@ -100,8 +103,11 @@ delay=250
 prints "M20",0
 printh 0A
 vars.status.txt="SD Files Requested"
-click updateState,1
 
+
+//On Exit
+printer.command.txt="M155 S2" //Temp auto report on
+printh 0A
 
 //bUp
 if(page.val>0)
