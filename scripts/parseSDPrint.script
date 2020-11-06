@@ -1,21 +1,3 @@
-// 2020-10-16 02:30:54,488 - Send: M23 /dualcu~1.gco
-// 2020-10-16 02:30:54,499 - Recv: echo:Now fresh file: /dualcu~1.gco
-// 2020-10-16 02:30:54,523 - Recv: File opened: dualcu~1.gco Size: 45615
-// 2020-10-16 02:30:54,527 - Recv: File selected
-// 2020-10-16 02:30:54,552 - Recv: ok
-// 2020-10-16 02:30:54,557 - Send: M24
-// 2020-10-16 02:30:54,564 - Recv: ok
-// 2020-10-16 02:30:54,568 - Changing monitoring state from "Starting print from SD" to "Printing from SD"
-// 2020-10-16 02:30:54,994 - Recv: SD printing byte 9558/45615
-// 2020-10-16 02:48:21,651 - Recv: SD printing byte 45615/45615
-// 2020-10-16 02:48:22,216 - Recv: Done printing file
-// 2020-10-16 02:48:22,217 - Changing monitoring state from "Printing from SD" to "Finishing"
-// 2020-10-16 02:48:22,256 - Send: M400
-// 2020-10-16 02:48:22,565 - Recv: ok
-// 2020-10-16 02:48:22,567 - Recv: ok
-// 2020-10-16 02:48:22,571 - Changing monitoring state from "Finishing" to "Operational"
-// 2020-10-16 02:28:47,759 - Recv: Not SD printing
-
 // Starting
 // TODO Get long filename
 parse.lineMatch.txt="echo:Now fresh file: " //Qualify Line
@@ -23,9 +5,7 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  tProgress.txt="Starting Print..."
   spstr parse.buffer.txt,fileName.txt,parse.lineMatch.txt,1
-  printer.printState.val=0
 }
 
 // Progress
@@ -39,10 +19,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
   covx vars.s2.txt,printer.currentByte.val,0,0
   spstr vars.s.txt,vars.s2.txt,"/",1 //Total Bytes
   covx vars.s2.txt,printer.totalBytes.val,0,0
-  printer.printState.val=1
 }
-
-// Paused
 
 // Finished
 parse.lineMatch.txt="Done printing file" //Qualify Line
@@ -50,8 +27,7 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  printer.printState.val=3
- 
+  printer.printState.txt="finished"
 }
 
 // Print Time
@@ -64,12 +40,11 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 // Error
-// RECV: open failed, File: D344UALCU~1.GCO.
 parse.lineMatch.txt="open failed, " //Qualify Line
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  printer.printState.val=9
+  printer.printState.txt="error"
   printer.error.txt+=parse.buffer.txt
 }

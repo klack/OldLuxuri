@@ -4,7 +4,6 @@
 //---------------------------------------------------------
 if(vars.state.txt=="null")
 {
-  vars.status.txt="Initializing"
   diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
   ReturnVal=1
   ReturnObj=0

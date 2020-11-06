@@ -1,136 +1,143 @@
-//--------------------
-//Update State
-//--------------------
-//Update T0
-covx printer.T0Temp.val,vars.s.txt,0,0
-tT0Temp.txt=vars.s.txt
-tT0Temp.txt+="/"
-covx printer.T0SetTemp.val,vars.s.txt,0,0
-tT0Temp.txt+=vars.s.txt
-//Update T1
-covx printer.T1Temp.val,vars.s.txt,0,0
-tT1Temp.txt=vars.s.txt
-tT1Temp.txt+="/"
-covx printer.T1SetTemp.val,vars.s.txt,0,0
-tT1Temp.txt+=vars.s.txt
-//Update Bed
-covx printer.bedTemp.val,vars.s.txt,0,0
-tBedTemp.txt=vars.s.txt
-tBedTemp.txt+="/"
-covx printer.setBedTemp.val,vars.s.txt,0,0
-tBedTemp.txt+=vars.s.txt
-//Fan Speed
-covx printer.fanSpeed.val,vars.s.txt,0,0
-tFanSpeed.txt=vars.s.txt
-//M117
-tM117.txt=printer.m117.txt
-//Progress
-if(printer.printState.val==-1) //Uninitialized
+//---------------------------------------------------------
+//Controller
+//States: null, error, init, heating, printing, paused, complete
+//---------------------------------------------------------
+if(printer.printState.txt=="null")
 {
-  tTime.aph=0
-  oProgress.val=0
   tProgress.txt=""
-}
-if(printer.printState.val==0) //Starting
-{
-  tTime.aph=0
   oProgress.val=0
-  tProgress.txt="Starting Print..."
+  tTime.aph=0
+  printer.printState.txt="init"
 }
-if(printer.printState.val==1) //Printing
+if(printer.printState.txt=="init")
+  tProgress.txt="Starting Print..."
+  printer.command.txt="M27 S4"  //Report SD Status
+  click sendCommand,1
+  printer.command.txt="M23 "
+  prints fileName.txt,0
+  click sendCommand,1
+  printer.command.txt="M24"
+  click sendCommand,1
+  printer.command.txt="M31"
+  click sendCommand,1
+  printer.printState.txt=="heating"
+}
+if(printer.printState.txt=="heating")
 {
-  if(heatersReady.val==1)
-  {
-    oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
-    covx oProgress.val,vars.s.txt,0,0
-    tProgress.txt=vars.s.txt
-    tProgress.txt+="%"
-    tTime.aph=127
-    tTime.txt=printer.printTime.txt
-  }else
-  {
-    tProgress.txt="Heating..."
-    oProgress.val=0
-    tTime.aph=0
-    if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0) //Check if heaters are ready
-    {  
-      //Check T0Temp
-      if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T1Temp.val>=printer.T1SetTemp.val)
+  if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0) //Check if heaters are set
+  {  
+    if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T1Temp.val>=printer.T1SetTemp.val) //Check if heaters are ready
+    {
+      if(ok==1) //Make sure data is being received
       {
-        if(ok==1) //Make sure data is being received
-        {
-          heatersReady.val=1
-        }
+        printer.printState.txt=="printing"
+        click updateView,1
       }
     }
   }
 }
-//printer.printState.val==2 //Paused
-if(printer.printState.val==3) //Finished
+if(printer.printState.txt=="printing") //Printing
 {
+  if(ok==1) //Only get time if an ok was recieved
+  {
+    printer.command.txt="M31"
+    click sendCommand,1
+  }  
+}
+if(printer.printState.txt=="finished") //Finished
+{
+  printer.command.txt="M27 S0" //Turn off report sdcard status
+  click sendCommand,1
   printer.flow.val=-1   //Clear printer related printer vars
   printer.speed.val=-1
-  printer.printState.val=-1
-  prints "M27 S0",0  //Turn off report sdcard status
-  printh 0A
+  printer.printState.txt="null"
   diagConfirm.tMessage.txt="Print Complete"
   diagConfirm.tMessage.txt+="\r"
   diagConfirm.tMessage.txt+=printer.printTime.txt
   DiagReturnPage=4 //main
   page diagConfirm
 }
-if(printer.printState.val==9) //Error
+if(printer.printState.txt=="error") //Error
 {
   DiagReturnPage=4 //main
   diagConfirm.tMessage.txt="Error opening file"
   page diagConfirm
 }
-//--------------------
-//End Update State
-//--------------------
+//---------------------------------------------------------
+//End Controller
+//---------------------------------------------------------
 
-//On load
-ok=1
+//---------------------------------------------------------
+//updateView
+//---------------------------------------------------------
+covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+tT0Temp.txt=vars.s.txt
+tT0Temp.txt+="/"
+covx printer.T0SetTemp.val,vars.s.txt,0,0
+tT0Temp.txt+=vars.s.txt
+covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
+tT1Temp.txt=vars.s.txt
+tT1Temp.txt+="/"
+covx printer.T1SetTemp.val,vars.s.txt,0,0 
+tT1Temp.txt+=vars.s.txt
+covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+tBedTemp.txt=vars.s.txt
+tBedTemp.txt+="/"
+covx printer.setBedTemp.val,vars.s.txt,0,0 
+tBedTemp.txt+=vars.s.txt
+covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
+tFanSpeed.txt=vars.s.txt
+tM117.txt=printer.m117.txt //M117
+if(printer.printState.txt=="printing") 
+{
+  oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
+  covx oProgress.val,vars.s.txt,0,0
+  tProgress.txt=vars.s.txt
+  tProgress.txt+="%"
+  tTime.aph=127
+  tTime.txt=printer.printTime.txt
+}
+if(printer.printState.txt=="printing")
+{
+  tProgress.txt="Heating..."
+  oProgress.val=0
+  tTime.aph=0
+}
+//---------------------------------------------------------
+//End updateView
+//---------------------------------------------------------
+
+//---------------------------------------------------------
+//Pre-initialize
+//---------------------------------------------------------
 ReturnPage=dp
 DiagReturnPage=dp
 if(HandleCallback==1)
 {
-  HandleCallback=0
-  click b[ReturnObj],0 //Run right click code as callback
-  vars.returnVal.txt="null"
-  ReturnVal=-1
-}
-click updateState,1
-if(printer.printState.val==-1)
-{
-  prints "M27 S4",0  //Report SD Status
-  printh 0A
-  prints "M23 ",0
-  prints fileName.txt,0
-  printh 0A
-  prints "M24",0
-  printh 0A
-  prints "M31",0
-  printh 0A
-  ok=0
-}
-
-//Get print time
-if(printer.printState.val==1)
-{
-  if(ok==1) //Only get time if an ok was recieved
+  if(ReturnObj==0) //Direct to custom controller callback
   {
-    ok=0
-    prints "M31",0
-    printh 0A
+    click controller,0
+  }else
+  {
+    click b[ReturnObj],0
   }
+  ReturnVal=-1
+  HandleCallback=0
 }
+click controller,1
+click updateView,1
 
+//---------------------------------------------------------
+//sendCommand
+//---------------------------------------------------------
+prints printer.command.txt,0
+printh 0A
+ok=0
 
-//Mock Data
-parse.buffer.txt="echo:Print time: 7d 7m 7s"
-click notifyEOL,1
-parse.buffer.txt="SD printing byte 20/100"
-click notifyEOL,1
-parse.buffer.txt="Done printing file"
-click notifyEOL,1
+// //Mock Data
+// parse.buffer.txt="echo:Print time: 7d 7m 7s"
+// click notifyEOL,1
+// parse.buffer.txt="SD printing byte 20/100"
+// click notifyEOL,1
+// parse.buffer.txt="Done printing file"
+// click notifyEOL,1

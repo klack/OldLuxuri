@@ -17,16 +17,15 @@ if(printer.flow.val!=100&&printer.flow.val!=0)
   bFlow.txt=""
   bFlow.picc=38
 }
-if(printer.printState.val==1) //Printing
+if(printer.printState.txt=="printing") //Printing
 {
   bPlayPause.picc=38
   bPlayPause.picc2=37
   tPlayPause.txt="Pause"
   setlayer bClose,255
   bClose.aph=127
-
 }
-if(printer.printState.val==2) //Paused
+if(printer.printState.txt=="paused") //Paused
 {
   bPlayPause.picc=39
   bPlayPause.picc2=37
@@ -95,7 +94,7 @@ if(vars.returnVal.txt!=vars.s.txt)
 }
 
 //bPlayPause click
-if(printer.printState.val==1)
+if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
 {
   prints "M25",0 //Pause print
   printh 0A
@@ -105,7 +104,7 @@ if(printer.printState.val==1)
   printh 0A
   prints "G90",0
   printh 0A
-  printer.printState.val=2
+  printer.printState.txt="paused"
 }else
 {
   prints "G91",0 //Move back
@@ -116,7 +115,7 @@ if(printer.printState.val==1)
   printh 0A
   prints "M24",0 //Resume print
   printh 0A
-  printer.printState.val=1
+  printer.printState.txt="printing"
 }
 
 //Stop click
@@ -161,14 +160,20 @@ if(ReturnVal!=-1)
   prints "G0 X Y",0 //Home X Y
   printh 0A  
   delay=10000
-  printer.printState.val=-1
+  printer.printState.txt="null"
+  printer.flow.val=-1   //Clear printer related printer vars
+  printer.speed.val=-1
   page main
 }
 
+//Close
+if(printer.printState.txt!="null")
+{
+  page printSettings
+}
 
-
-//Mock Data
-parse.buffer.txt="echo:E1 Flow: 90%"
-click notifyEOL,1
-parse.buffer.txt="FR:90%"
-click notifyEOL,1
+// //Mock Data
+// parse.buffer.txt="echo:E1 Flow: 90%"
+// click notifyEOL,1
+// parse.buffer.txt="FR:90%"
+// click notifyEOL,1
