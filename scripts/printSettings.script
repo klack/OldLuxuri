@@ -161,8 +161,8 @@ if(ReturnVal!=-1)
   printh 0A  
   delay=10000
   printer.printState.txt="null"
-  printer.flow.val=-1   //Clear printer related printer vars
-  printer.speed.val=-1
+  printer.flow.val=100   //Clear printer related printer vars
+  printer.speed.val=100
   page main
 }
 

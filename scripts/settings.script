@@ -15,7 +15,7 @@ if(printer.printState.txt!="printing")
 }
 
 //Close
-if(printer.printState<=0)
+if(printer.printState.txt!="null")
 {
   page printSettings
 }else

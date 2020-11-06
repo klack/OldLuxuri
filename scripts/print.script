@@ -4,23 +4,21 @@
 //---------------------------------------------------------
 if(printer.printState.txt=="null")
 {
-  tProgress.txt=""
-  oProgress.val=0
-  tTime.aph=0
   printer.printState.txt="init"
 }
 if(printer.printState.txt=="init")
-  tProgress.txt="Starting Print..."
+{
+  tProgress.txt="Starting Print"
   printer.command.txt="M27 S4"  //Report SD Status
   click sendCommand,1
   printer.command.txt="M23 "
-  prints fileName.txt,0
+  printer.command.txt+=fileName.txt
   click sendCommand,1
   printer.command.txt="M24"
   click sendCommand,1
   printer.command.txt="M31"
   click sendCommand,1
-  printer.printState.txt=="heating"
+  printer.printState.txt="heating"
 }
 if(printer.printState.txt=="heating")
 {
@@ -30,8 +28,7 @@ if(printer.printState.txt=="heating")
     {
       if(ok==1) //Make sure data is being received
       {
-        printer.printState.txt=="printing"
-        click updateView,1
+        printer.printState.txt="printing"
       }
     }
   }
@@ -88,6 +85,12 @@ tBedTemp.txt+=vars.s.txt
 covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
 tFanSpeed.txt=vars.s.txt
 tM117.txt=printer.m117.txt //M117
+if(printer.printState.txt=="null")
+{
+  tProgress.txt=""
+  oProgress.val=0
+  tTime.aph=0
+}
 if(printer.printState.txt=="printing") 
 {
   oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
@@ -97,7 +100,7 @@ if(printer.printState.txt=="printing")
   tTime.aph=127
   tTime.txt=printer.printTime.txt
 }
-if(printer.printState.txt=="printing")
+if(printer.printState.txt=="heating")
 {
   tProgress.txt="Heating..."
   oProgress.val=0
@@ -110,6 +113,7 @@ if(printer.printState.txt=="printing")
 //---------------------------------------------------------
 //Pre-initialize
 //---------------------------------------------------------
+click updateView,1
 ReturnPage=dp
 DiagReturnPage=dp
 if(HandleCallback==1)
@@ -125,7 +129,7 @@ if(HandleCallback==1)
   HandleCallback=0
 }
 click controller,1
-click updateView,1
+
 
 //---------------------------------------------------------
 //sendCommand
