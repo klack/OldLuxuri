@@ -78,7 +78,7 @@ if(vars.state.txt=="tuning")
 //---------------------------------------------------------
 
 //Controller Callback
-if(ReturnVal==1)
+if(ReturnVal==1) //Handle start confirmation diag
 {
   vars.state.txt="init"
 }else

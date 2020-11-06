@@ -904,7 +904,7 @@
        xlink:href="#linearGradient2817"
        id="linearGradient918"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.14159581,0,0,0.36481885,17.622143,-38.699841)"
+       gradientTransform="matrix(0.14159581,0,0,0.36481885,16.906267,-38.699841)"
        x1="12.941481"
        y1="27.152496"
        x2="29.199364"
@@ -1352,11 +1352,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.5177142"
-     inkscape:cx="117.95003"
-     inkscape:cy="45.416298"
+     inkscape:zoom="7.8032263"
+     inkscape:cx="111.7689"
+     inkscape:cy="45.301497"
      inkscape:document-units="px"
-     inkscape:current-layer="layer21"
+     inkscape:current-layer="layer85"
      inkscape:document-rotation="0"
      showgrid="false"
      width="480mm"
@@ -1393,11 +1393,7 @@
        inkscape:locked="false"
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="193.63677,59.992992"
-       orientation="0,-1"
-       id="guide158460" />
-    <sodipodi:guide
-       position="142.78161,59.992992"
+       position="45.985603,60.410326"
        orientation="0,-1"
        id="guide3669" />
     <sodipodi:guide
@@ -4436,17 +4432,17 @@
       <text
          xml:space="preserve"
          style="font-size:8.46667px;line-height:1;font-family:sans-serif;text-align:start;text-anchor:start;display:inline;fill:#ffffff;stroke-width:0.386763"
-         x="5.676856"
-         y="11.545632"
+         x="4.9609795"
+         y="11.497681"
          id="text5883"><tspan
            sodipodi:role="line"
-           x="5.676856"
-           y="11.545632"
+           x="4.9609795"
+           y="11.497681"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.386763"
            id="tspan5881">Settings</tspan><tspan
            sodipodi:role="line"
-           x="5.676856"
-           y="20.110312"
+           x="4.9609795"
+           y="20.062359"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.386763"
            id="tspan5887" /></text>
       <text
@@ -5552,7 +5548,7 @@
            id="rect905"
            width="88.606133"
            height="51.008877"
-           x="6.5978842"
+           x="5.8820081"
            y="15.26019"
            ry="2.6458333"
            rx="2.6458333" />
@@ -5619,12 +5615,12 @@
       <text
          xml:space="preserve"
          style="font-size:8.46667px;line-height:1;font-family:sans-serif;text-align:start;text-anchor:start;display:inline;fill:#ffffff;stroke-width:0.386763"
-         x="5.6355147"
-         y="11.545632"
+         x="4.9196382"
+         y="11.497681"
          id="text911"><tspan
            sodipodi:role="line"
-           x="5.6355147"
-           y="11.545632"
+           x="4.9196382"
+           y="11.497681"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.386763"
            id="tspan920">Choose File</tspan></text>
       <text

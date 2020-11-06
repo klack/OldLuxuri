@@ -1,5 +1,6 @@
 //Onload
 DiagReturnPage=dp
+click updateState,1
 if(HandleCallback==1)
 {
   click b[ReturnObj],0 //Run right click code as callback
@@ -13,6 +14,14 @@ if(printer.printState.val!=1)
   printh 0A
 }
 
+//Close
+if(printer.printState<=0)
+{
+  page printSettings
+}else
+{
+  page ReturnPage
+}
 
 //Update State
 eStepsVal.txt=printer.T0Esteps.txt
@@ -20,7 +29,7 @@ zOffsetVal.txt=printer.zOffset.txt
 x2Val.txt=printer.x2Offset.txt
 y2Val.txt=printer.y2Offset.txt
 z2Val.txt=printer.z2Offset.txt
-if(printer.printState.val==1)
+if(printer.printState.val>=1)
 {
   setlayer bDefaults,0
   bDefaults.aph=0

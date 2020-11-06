@@ -37,6 +37,7 @@ if(printer.printState.val==2) //Paused
 
 //Onload
 DiagReturnPage=dp
+click updateState,1
 prints "M220",0
 printh 0A
 prints "M221",0
@@ -157,6 +158,8 @@ if(ReturnVal!=-1)
   printh 0A
   prints "M221 S100",0 //Reset Flow
   printh 0A
+  prints "G0 X Y",0 //Home X Y
+  printh 0A  
   delay=10000
   printer.printState.val=-1
   page main
