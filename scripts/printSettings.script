@@ -166,11 +166,7 @@ if(ReturnVal!=-1)
   page main
 }
 
-//Close
-if(printer.printState.txt!="null")
-{
-  page printSettings
-}
+
 
 // //Mock Data
 // parse.buffer.txt="echo:E1 Flow: 90%"

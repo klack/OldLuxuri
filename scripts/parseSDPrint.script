@@ -19,6 +19,17 @@ if(parse.eval.txt==parse.lineMatch.txt)
   covx vars.s2.txt,printer.currentByte.val,0,0
   spstr vars.s.txt,vars.s2.txt,"/",1 //Total Bytes
   covx vars.s2.txt,printer.totalBytes.val,0,0
+  printer.sdPrinting.val=1
+}
+
+
+// Paused or Finished
+parse.lineMatch.txt="Not SD printing" //Qualify Line
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+ printer.sdPrinting.val=0 
 }
 
 // Finished

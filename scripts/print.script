@@ -29,7 +29,7 @@ if(printer.printState.txt=="heating")
     if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T1Temp.val>=printer.T1SetTemp.val) //Check if heaters are ready
     {
       vars.debug.txt="here3"
-      if(ok==1&&heatCount.val>3) //Make sure data is being received
+      if(ok==1&&heatCount.val>1) //Make sure data is being received
       {
         vars.debug.txt="here4"
         printer.printState.txt="printing"
@@ -44,14 +44,18 @@ if(printer.printState.txt=="printing") //Printing
   {
     printer.command.txt="M31"
     click sendCommand,1
-  }  
+  }    
+  if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
+  {
+    printer.printState.txt="finished"
+  }
 }
 if(printer.printState.txt=="finished") //Finished
 {
   printer.command.txt="M27 S0" //Turn off report sdcard status
   click sendCommand,1
-  printer.flow.val=-1   //Clear printer related printer vars
-  printer.speed.val=-1
+  printer.flow.val=100   //Clear printer related printer vars
+  printer.speed.val=100
   printer.printState.txt="null"
   diagConfirm.tMessage.txt="Print Complete"
   diagConfirm.tMessage.txt+="\r"
@@ -103,7 +107,10 @@ if(printer.printState.txt=="printing")
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
   tTime.aph=127
-  tTime.txt=printer.printTime.txt
+  if(printer.printTime.txt!="0s")
+  {
+    tTime.txt=printer.printTime.txt
+  }
 }
 if(printer.printState.txt=="heating")
 {
