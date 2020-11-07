@@ -126,40 +126,8 @@ page diagPrompt
 //Stop callback
 if(ReturnVal!=-1)
 {
-  bStop.picc=37
-  prints "M108",0
-  printh 0A
-  delay=1000
-  prints "M108",0
-  printh 0A
-  delay=1000
-  prints "M108",0
-  printh 0A
-  delay=1000
-  prints "M108",0
-  printh 0A
-  delay=1000
-  prints "M524",0
-  printh 0A
-  delay=1000
-  prints "M27 S0",0 //Turn off SD status
-  delay=1000
-  printh 0A
-  prints "M104 T0 S0",0 //Heaters
-  printh 0A
-  prints "M104 T1 S0",0 
-  printh 0A  
-  prints "M140 S0",0
-  printh 0A    
-  prints "M106 S0",0 //Turn off fan
-  printh 0A
-  prints "M220 S100",0 //Reset Speed
-  printh 0A
-  prints "M221 S100",0 //Reset Flow
-  printh 0A
-  prints "G0 X Y",0 //Home X Y
-  printh 0A  
-  delay=10000
+  commands.queue.txt=commands.stopPrint.txt
+  click sendCommand,0
   printer.printState.txt="null"
   printer.flow.val=100   //Clear printer related printer vars
   printer.speed.val=100
