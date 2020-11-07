@@ -26,7 +26,7 @@ if(j<10)
     vars.debug.txt="Trying baudrate "
     vars.debug.txt+=vars.s.txt
     //Try and trigger a response
-    printer.command.txt=""
+    commands.command.txt=""
     click sendCommand,1
     j++
   }else
@@ -36,28 +36,37 @@ if(j<10)
     tStatus.txt="Connected at "
     covx Baud,vars.s.txt,0,0
     tStatus.txt+=vars.s.txt
-    printer.command.txt="" //Clear connection preamble sent by tft
-    click sendCommand,1
-    printer.command.txt="M503" //Get settings
-    click sendCommand,1
-    printer.command.txt="M114" //Get position
-    click sendCommand,1
-    printer.command.txt="M155 S2" //Temp auto report
-    click sendCommand,1
-    printer.command.txt="M605 S1" //Dual Nozzle Mode Auto
-    click sendCommand,1
-    printer.command.txt="T0" //Select T0
-    click sendCommand,1
-    for(k=272;k>=0;k--)
-    {
-      k=k-4
-      qBanner.y=k
-      doevents
-    }    
-    page main
+    animate.en=1
+    click makeReady,1
   }
 }else
 {
   dim=100
+  state1.aph=0
+  qBanner.aph=0
   tStatus.txt="Unplug USB to complete shutdown"
+}
+
+
+
+//makeReady
+commands.command.txt="" //Clear connection preamble sent by tft
+click sendCommand,1
+commands.queue.txt="M503" //Get settings
+commands.queue.txt+="M114" //Get position
+commands.queue.txt+="M155 S2" //Temp auto report
+commands.queue.txt+="M605 S1" //Dual Nozzle Mode Auto
+commands.queue.txt+="T0" //Select T0
+click sendCommand,0
+
+//animate
+if(qBanner.y>0)
+{
+  qBanner.y-=4
+}else
+{
+  if(ok==1)
+  {
+    page main
+  }
 }
