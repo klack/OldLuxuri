@@ -1,0 +1,29 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @brief Parse marlin version number
+///////////////////////////////////////////////////////////////////////////////
+parse.search.txt="Marlin "
+parse.startPos.val=0
+click parse,0
+if(parse.matched.val==1)
+{
+  spstr parse.buffer.txt,connect.version.txt,parse.lineMatch.txt,1
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @brief Parse version date and author
+///////////////////////////////////////////////////////////////////////////////
+parse.search.txt="echo: Last Updated: " 
+click parse,1
+if(parse.matched.val==1)
+{
+  spstr parse.buffer.txt,vars.s.txt,parse.lineMatch.txt,1
+  connect.version.txt+="\r"
+  connect.version.txt+=vars.s.txt
+}
+
+// Marlin bugfix-2.0.x
+// echo: Last Updated: 2020-09-25 | Author: klack
+// echo:Compiled: Nov  5 2020
+// echo: Free Memory: 2515  PlannerBufferBytes: 1392
+// echo:V81 stored settings retrieved (757 bytes; crc 55558)
+// echo:SD card ok

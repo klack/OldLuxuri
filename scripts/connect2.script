@@ -1,0 +1,137 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @fn controller,1
+///
+/// @brief Program loop
+/// @brief state.vals: null, connecting, reporting, connected, timeout
+///////////////////////////////////////////////////////////////////////////////
+if(state.val=="null")
+{
+  state.val="connecting"   
+}
+if(state.val=="connecting")
+{
+  click connect,1
+}
+if(state.val=="reporting")
+{
+  click reportSettings,1
+}
+if(state.val=="connected")
+{
+  vars.status.txt==connect.version.txt
+  delay=1000
+  page main
+}
+if(state.val=="timeout")
+{
+  dim=50
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn connect,1
+///
+/// @brief Connect trying different baud rates automatically
+///////////////////////////////////////////////////////////////////////////////
+if(j<10) //Try connecting 10 times
+{
+  if(usize<=0) //If the buffer is empty
+  {
+    if(k==0)
+    {
+      baud=115200
+      Baud=115200
+    }
+    if(k==1)
+    {
+      baud=9600
+      Baud=9600
+    }
+    if(k==2)
+    {
+      baud=9600
+      Baud=9600
+    }      
+    if(k==3)
+      baud=250000
+      Baud=250000
+    if(k>1)
+    {
+      k=0 //Start over and try again
+    }else
+    {
+      k++ //Try the next baud value on the next run
+    }
+    covx Baud,vars.s.txt,0,0  //Output status
+    vars.status.txt="Trying baudrate "
+    vars.status.txt+=vars.s.txt
+    commands.command.txt=""  //Try and trigger a response
+    click sendCommand,1
+    j++
+  }else
+  { 
+    tStatus.txt="Connected at "
+    covx Baud,vars.s.txt,0,0
+    vars.status.txt+=vars.s.txt
+    state.val="reporting"
+  }
+}else
+{
+  state.val='timeout'
+  click updateView,1
+  vars.status.txt="Unplug USB to complete shutdown"
+}    
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn setDefaults,1
+///
+/// @brief Report printer settings and set printer defaults
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="" //Clear connection preamble sent by tft
+click sendCommand,1
+commands.queue.txt="M503" //Get settings
+commands.queue.txt+="M114" //Get position
+commands.queue.txt+="M155 S2" //Temp auto report
+commands.queue.txt+="M605 S1" //Dual Nozzle Mode Auto
+commands.queue.txt+="T0" //Select T0
+click sendCommand,0
+state.val="complete"
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn buffer
+/// @brief Read and parse buffer on 50ms timer
+///////////////////////////////////////////////////////////////////////////////
+click parseBuffer,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn animate
+/// @brief Animate banners on 50ms timer
+///////////////////////////////////////////////////////////////////////////////
+if(qBanner.y>0)
+{
+  qBanner.y-=4
+}
+else
+{
+  animate.en=0
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn run
+/// @brief Program Loop on 1000ms timer
+///////////////////////////////////////////////////////////////////////////////
+click updateView,1
+click controller,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn updateView,1
+/// @breif Handle display state
+///////////////////////////////////////////////////////////////////////////////
+tStatus.txt=vars.status.txt
+if(state.val=='timeout')
+{
+  dim=100
+  state.val1.aph=0
+  qBanner.aph=0
+}
