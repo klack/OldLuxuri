@@ -129,21 +129,21 @@ if(ReturnVal!=-1)
   bStop.picc=37
   prints "M108",0
   printh 0A
-  delay=100
+  delay=1000
   prints "M108",0
   printh 0A
-  delay=100
+  delay=1000
   prints "M108",0
   printh 0A
-  delay=100
+  delay=1000
   prints "M108",0
   printh 0A
-  delay=100
+  delay=1000
   prints "M524",0
   printh 0A
-  delay=100
+  delay=1000
   prints "M27 S0",0 //Turn off SD status
-  delay=100
+  delay=1000
   printh 0A
   prints "M104 T0 S0",0 //Heaters
   printh 0A
