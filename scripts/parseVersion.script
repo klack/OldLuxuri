@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 parse.search.txt="Marlin "
 parse.startPos.val=0
-click parse,0
+click parser,0
 if(parse.matched.val==1)
 {
   spstr parse.buffer.txt,connect.version.txt,parse.lineMatch.txt,1
@@ -13,7 +13,7 @@ if(parse.matched.val==1)
 /// @brief Parse version date and author
 ///////////////////////////////////////////////////////////////////////////////
 parse.search.txt="echo: Last Updated: " 
-click parse,1
+click parser,1
 if(parse.matched.val==1)
 {
   spstr parse.buffer.txt,vars.s.txt,parse.lineMatch.txt,1

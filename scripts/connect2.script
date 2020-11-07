@@ -2,34 +2,34 @@
 /// @fn controller,1
 ///
 /// @brief Program loop
-/// @brief state.vals: null, connecting, reporting, connected, timeout
+/// @brief state.txts: null, connecting, reporting, connected, timeout
 ///////////////////////////////////////////////////////////////////////////////
-if(state.val=="null")
+if(state.txt=="null")
 {
-  state.val="connecting"   
+  state.txt="connecting"   
 }
-if(state.val=="connecting")
+if(state.txt=="connecting")
 {
   click connect,1
 }
-if(state.val=="reporting")
+if(state.txt=="reporting")
 {
-  click reportSettings,1
+  click setDefaults,1
 }
-if(state.val=="connected")
+if(state.txt=="connected")
 {
-  vars.status.txt==connect.version.txt
+  vars.status.txt=version.txt
   delay=1000
   page main
 }
-if(state.val=="timeout")
+if(state.txt=="timeout")
 {
   dim=50
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn connect,1
+/// @fn startConnect,1
 ///
 /// @brief Connect trying different baud rates automatically
 ///////////////////////////////////////////////////////////////////////////////
@@ -53,8 +53,10 @@ if(j<10) //Try connecting 10 times
       Baud=9600
     }      
     if(k==3)
+    {
       baud=250000
       Baud=250000
+    }
     if(k>1)
     {
       k=0 //Start over and try again
@@ -73,14 +75,14 @@ if(j<10) //Try connecting 10 times
     tStatus.txt="Connected at "
     covx Baud,vars.s.txt,0,0
     vars.status.txt+=vars.s.txt
-    state.val="reporting"
+    state.txt="reporting"
   }
 }else
 {
-  state.val='timeout'
+  state.txt="timeout"
   click updateView,1
   vars.status.txt="Unplug USB to complete shutdown"
-}    
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn setDefaults,1
@@ -95,14 +97,13 @@ commands.queue.txt+="M155 S2" //Temp auto report
 commands.queue.txt+="M605 S1" //Dual Nozzle Mode Auto
 commands.queue.txt+="T0" //Select T0
 click sendCommand,0
-state.val="complete"
-
+state.txt="complete"
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn buffer
 /// @brief Read and parse buffer on 50ms timer
 ///////////////////////////////////////////////////////////////////////////////
-click parseBuffer,1
+click readBuffer,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn animate
@@ -129,9 +130,9 @@ click controller,1
 /// @breif Handle display state
 ///////////////////////////////////////////////////////////////////////////////
 tStatus.txt=vars.status.txt
-if(state.val=='timeout')
+if(state.txt=="timeout")
 {
   dim=100
-  state.val1.aph=0
+  state1.aph=0
   qBanner.aph=0
 }
