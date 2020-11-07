@@ -22,14 +22,19 @@ if(printer.printState.txt=="init")
 }
 if(printer.printState.txt=="heating")
 {
+  vars.debug.txt="here1"
   if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0) //Check if heaters are set
   {  
+    vars.debug.txt="here2"
     if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T1Temp.val>=printer.T1SetTemp.val) //Check if heaters are ready
     {
-      if(ok==1) //Make sure data is being received
+      vars.debug.txt="here3"
+      if(ok==1&&heatCount.val>3) //Make sure data is being received
       {
+        vars.debug.txt="here4"
         printer.printState.txt="printing"
       }
+      heatCount.val+=1 //To handle multiple heaters ready
     }
   }
 }
