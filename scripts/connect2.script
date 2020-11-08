@@ -18,9 +18,10 @@ if(state.txt=="setting-defaults")
 }
 if(state.txt=="connected")
 {
-  if(ok==1)
+  if(ok==1&&animate.en==0)
   {
-    click updateView,1
+    delay=3000
+    page main
   }
 }
 if(state.txt=="timeout")
@@ -110,16 +111,16 @@ click readBuffer,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn animate
-/// @brief Animate banners on 50ms timer
+/// @brief Animate banners
 ///////////////////////////////////////////////////////////////////////////////
-if(qBanner.y>0)
+if(pBanner.y>0)
 {
-  qBanner.y-=4
-}
-else
+  pBanner.y-=4
+}else
 {
   animate.en=0
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn run
@@ -132,9 +133,28 @@ click controller,1
 /// @fn updateView,1
 /// @breif Handle display state
 ///////////////////////////////////////////////////////////////////////////////
+tStatus.txt=vars.status.txt
+if(state.txt=="null")
+{
+  tVersion.aph=0
+  tMachine.aph=0
+}
 if(state.txt=="timeout")
 {
   dim=100
-  state1.aph=0
-  qBanner.aph=0
+  pState.aph=0
+  pBanner.aph=0
 }
+if(state.txt=="connected")
+{
+  tVersion.aph=127
+  tMachine.aph=127
+  tStatus.aph=0
+  tVersion.txt=version.txt
+  tMachine.txt=machine.txt
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn Pre-initialize
+///////////////////////////////////////////////////////////////////////////////
+click updateView,1

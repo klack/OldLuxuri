@@ -6,7 +6,6 @@ parse.startPos.val=0
 click parser,0
 if(parse.matched.val==1)
 {
-  debug.txt+="Matched Firmware Line"
   parse.search.txt="FIRMWARE_NAME:"
   spstr parse.buffer.txt,vars.s.txt,parse.search.txt,1
   spstr vars.s.txt,connect.version.txt," SOURCE_CODE_URL:",0
@@ -14,9 +13,4 @@ if(parse.matched.val==1)
   parse.search.txt=" MACHINE_TYPE:"
   spstr parse.buffer.txt,vars.s.txt,parse.search.txt,1
   spstr vars.s.txt,connect.machine.txt," EXTRUDER_COUNT:",0
-
-  debug.txt+=connect.version.txt
-  debug.txt+="\r"
-  debug.txt+=connect.machine.txt
-  debug.txt+="\r"  
 }
