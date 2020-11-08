@@ -3,7 +3,6 @@ prints commands.command.txt,0
 printh 0A
 ok=0
 
-
 //Send Queue
 BlockCount=0
 strlen commands.queue.txt,k //get the length of the command queue

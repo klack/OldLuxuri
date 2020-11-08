@@ -2,7 +2,7 @@
 /// @fn controller,1
 ///
 /// @brief Program loop
-/// @brief state.txts: null, connecting, reporting, connected, timeout
+/// @brief state.txts: null, connecting, setting-defaults, connected, timeout
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="null")
 {
@@ -10,17 +10,20 @@ if(state.txt=="null")
 }
 if(state.txt=="connecting")
 {
-  click connect,1
+  click startConnect,1
 }
-if(state.txt=="reporting")
+if(state.txt=="setting-defaults")
 {
   click setDefaults,1
 }
 if(state.txt=="connected")
 {
-  vars.status.txt=version.txt
-  delay=1000
-  page main
+  if(ok==1)
+  {
+    vars.status.txt=version.txt
+    click updateView,1
+    covx printer.T0Temp.val,vars.s.txt,0,0
+  }
 }
 if(state.txt=="timeout")
 {
@@ -33,7 +36,7 @@ if(state.txt=="timeout")
 ///
 /// @brief Connect trying different baud rates automatically
 ///////////////////////////////////////////////////////////////////////////////
-if(j<10) //Try connecting 10 times
+if(j<200) //Try connecting 10 times
 {
   if(usize<=0) //If the buffer is empty
   {
@@ -62,20 +65,21 @@ if(j<10) //Try connecting 10 times
       k=0 //Start over and try again
     }else
     {
-      k++ //Try the next baud value on the next run
+      k++ //Try the next baud value on the next iteration
     }
     covx Baud,vars.s.txt,0,0  //Output status
     vars.status.txt="Trying baudrate "
     vars.status.txt+=vars.s.txt
-    commands.command.txt=""  //Try and trigger a response
+    commands.command.txt="M155 S2"  //Try and trigger a response
     click sendCommand,1
     j++
   }else
   { 
-    tStatus.txt="Connected at "
+    buffer.en=1
+    vars.status.txt="Connected at "
     covx Baud,vars.s.txt,0,0
     vars.status.txt+=vars.s.txt
-    state.txt="reporting"
+    state.txt="setting-defaults"
   }
 }else
 {
@@ -91,13 +95,14 @@ if(j<10) //Try connecting 10 times
 ///////////////////////////////////////////////////////////////////////////////
 commands.command.txt="" //Clear connection preamble sent by tft
 click sendCommand,1
-commands.queue.txt="M503" //Get settings
+commands.queue.txt="M115" //Get Marlin version
+commands.queue.txt+="M503" //Get settings
 commands.queue.txt+="M114" //Get position
 commands.queue.txt+="M155 S2" //Temp auto report
 commands.queue.txt+="M605 S1" //Dual Nozzle Mode Auto
 commands.queue.txt+="T0" //Select T0
 click sendCommand,0
-state.txt="complete"
+state.txt="connected"
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn buffer
@@ -129,7 +134,6 @@ click controller,1
 /// @fn updateView,1
 /// @breif Handle display state
 ///////////////////////////////////////////////////////////////////////////////
-tStatus.txt=vars.status.txt
 if(state.txt=="timeout")
 {
   dim=100
