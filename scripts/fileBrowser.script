@@ -1,6 +1,51 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @fn controller,1
+///
+/// @brief Program loop
+/// @brief state.txts: null, getting-files, ready, no-sd
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="null")
+{
+  state.txt="getting-files"   
+}
+if(state.txt=="getting-files")
+{
+  //On Load
+  commands.queue.txt+="M155 S0" //Select T0
+  commands.queue.txt+="M22"
+  commands.queue.txt+="M21"
+  commands.queue.txt+="M20"
+  vars.status.txt="Getting Files"
+  click sendCommand,0
+}
+if(state.txt=="ready")
+{
+
+}
+if(state.txt=="no-sd")
+{
+
+}
+
 //---------------------------------------------
 //Update State
 //---------------------------------------------
+if(state.txt=="null")
+{
+
+}
+if(state.txt=="getting-files")
+{
+ 
+}
+if(state.txt=="ready")
+{
+  
+}
+if(state.txt=="no-sd")
+{
+  
+}
 if(page.val==0)
 {
   setlayer bUp,0
@@ -65,12 +110,13 @@ for(k=0;k<=4;k++)
   {
     keyLFile.txt+=vars.s.txt //Store key
     keyLFile.txt+=">"
-    prints "M33 ",0  //Request long file name
-    prints vars.s.txt,0
-    printh 0A
+    commands.queue.txt+="M33 "
+    commands.queue.txt+=vars.s.txt
+    commands.queue.txt+="\r"
     lFilesReq.val+=1
   }
 }
+click sendCommand,0
 
 //bPrint
 print.fileName.txt=selectedFile.txt
@@ -90,19 +136,6 @@ click updateState,1
 
 
 
-//On Load
-click updateState,1
-printer.command.txt="M155 S0" //Temp auto report off
-printh 0A
-prints "M22",0
-printh 0A
-delay=250
-prints "M21",0
-printh 0A
-delay=250
-prints "M20",0
-printh 0A
-vars.status.txt="SD Files Requested"
 
 
 //On Exit
