@@ -23,7 +23,7 @@ if(printer.printState.txt=="init")
   tProgress.txt="Starting Print"
   commands.queue.txt="M27 S4\r"  //Report SD Status
   commands.queue.txt+="M23 "
-  commands.queue.txt+="fileName.txt"
+  commands.queue.txt+=fileName.txt
   commands.queue.txt+="\rM24"
   commands.queue.txt+="M31\r"
   click sendCommand,0
