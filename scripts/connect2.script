@@ -20,9 +20,7 @@ if(state.txt=="connected")
 {
   if(ok==1)
   {
-    vars.status.txt=version.txt
     click updateView,1
-    covx printer.T0Temp.val,vars.s.txt,0,0
   }
 }
 if(state.txt=="timeout")

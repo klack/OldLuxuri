@@ -1,26 +1,22 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// @brief Parse marlin version number
 ///////////////////////////////////////////////////////////////////////////////
-parse.search.txt="FIRMWARE_NAME:"
+parse.search.txt="FIRMWARE_NAME:"  //Qualify Line
+parse.startPos.val=0
 click parser,0
 if(parse.matched.val==1)
 {
+  debug.txt+="Matched Firmware Line"
+  parse.search.txt="FIRMWARE_NAME:"
   spstr parse.buffer.txt,vars.s.txt,parse.search.txt,1
   spstr vars.s.txt,connect.version.txt," SOURCE_CODE_URL:",0
+
+  parse.search.txt=" MACHINE_TYPE:"
+  spstr parse.buffer.txt,vars.s.txt,parse.search.txt,1
+  spstr vars.s.txt,connect.machine.txt," EXTRUDER_COUNT:",0
+
   debug.txt+=connect.version.txt
+  debug.txt+="\r"
+  debug.txt+=connect.machine.txt
+  debug.txt+="\r"  
 }
-
-///////////////////////////////////////////////////////////////////////////////
-/// @brief Parse version date and author
-///////////////////////////////////////////////////////////////////////////////
-parse.search.txt="echo: Last Updated: " 
-click parser,1
-if(parse.matched.val==1)
-{
-  debug.txt+="Matched ver"
-  spstr parse.buffer.txt,vars.s.txt,parse.lineMatch.txt,1
-  connect.version.txt+="\r"
-  connect.version.txt+=vars.s.txt
-}
-
-//FIRMWARE_NAME:Marlin bugfix-2.0.x (Nov  5 2020 19:32:06) SOURCE_CODE_URL:https://github.com/MarlinFirmware/Marlin PROTOCOL_VERSION:1.0 MACHINE_TYPE:Tenlog D3 Pro w/ Powerloss Resume EXTRUDER_COUNT:2 UUID:cede2a2f-41a2-4748-9b12-c55c62f367ff
