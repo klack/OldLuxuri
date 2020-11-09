@@ -15,11 +15,10 @@ if(state.txt=="null")
 }
 if(state.txt=="getting-files")
 {
-  click readBuffer,1
   if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
   {
-    tDebug.txt+="here7"
     state.txt="ready"
+    click updateView,1
   }
 }
 if(state.txt=="ready")
@@ -136,13 +135,13 @@ for(k=0;k<=4;k++)
   {
     keyLFile.txt+=vars.s.txt //Store key
     keyLFile.txt+="\r"
-    commands.queue.txt+="M33 "
-    commands.queue.txt+=vars.s.txt
-    commands.queue.txt+="\r"
+    commands.command.txt+="M33 "
+    commands.command.txt+=vars.s.txt
+    commands.command.txt+="\r"
     lFilesReq.val+=1
   }
 }
-click sendCommand,0
+click sendCommand,1
 
 
 ///////////////////////////////////////////////////////////////////////////////

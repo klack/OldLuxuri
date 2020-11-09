@@ -1,7 +1,9 @@
 //Send Command
 prints commands.command.txt,0
 printh 0A
+commands.command.txt=""
 ok=0
+
 
 //Send Queue
 BlockCount=0
