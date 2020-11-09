@@ -87,13 +87,13 @@ if(j<20) //Try connecting 10 times
 ///////////////////////////////////////////////////////////////////////////////
 commands.command.txt="" //Clear connection preamble sent by tft
 click sendCommand,1
-commands.queue.txt="M115" //Get Marlin version
-commands.queue.txt+="M503" //Get settings
-commands.queue.txt+="M114" //Get position
-commands.queue.txt+="M155 S2" //Temp auto report
-commands.queue.txt+="M605 S1" //Dual Nozzle Mode Auto
-commands.queue.txt+="T0" //Select T0
-click sendCommand,0
+commands.command.txt="M115\r" //Get Marlin version
+commands.command.txt+="M503\r" //Get settings
+commands.command.txt+="M114\r" //Get position
+commands.command.txt+="M155 S2\r" //Temp auto report
+commands.command.txt+="M605 S1\r" //Dual Nozzle Mode Auto
+commands.command.txt+="T0\r" //Select T0
+click sendCommand,1
 state.txt="connected"
 
 ///////////////////////////////////////////////////////////////////////////////

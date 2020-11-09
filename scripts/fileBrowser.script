@@ -15,6 +15,7 @@ if(state.txt=="init")
   vars.status.txt="Getting Files"
   click listFiles,1
   state.txt="getting-files"
+  click updateView,1
 }
 if(state.txt=="getting-files")
 {
@@ -258,3 +259,22 @@ selectedIndex.val=-1
 page.val+=1
 click getLongFiles,1
 click selectFile,1
+
+//---------------------------------------------------------
+//Pre-initialize
+//---------------------------------------------------------
+click updateView,1
+DiagReturnPage=dp
+if(HandleCallback==1)
+{
+  if(ReturnObj==0) //Direct to custom controller callback
+  {
+    click controller,0
+  }else
+  {
+    click b[ReturnObj],0
+  }
+  ReturnVal=-1
+  HandleCallback=0
+}
+click controller,1

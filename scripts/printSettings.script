@@ -1,56 +1,96 @@
-//Update State
-if(printer.speed.val!=100&&printer.speed.val!=0)
+///////////////////////////////////////////////////////////////////////////////
+/// @fn controller,1
+///
+/// @brief Program loop
+/// @brief state.txts: null, ready
+///////////////////////////////////////////////////////////////////////////////
+if(printer.printState.txt=="null")
 {
-  covx printer.speed.val,bSpeed.txt,0,0
-  bSpeed.picc=39
-}else
-{
-  bSpeed.txt=""
-  bSpeed.picc=38
+  commands.command.txt="M220\r" 
+  commands.command.txt="M221\r"
+  click sendCommand,1
+  printer.printState.txt="ready"
 }
-if(printer.flow.val!=100&&printer.flow.val!=0)
+if(printer.printState.txt=="stopping")
 {
-  covx printer.flow.val,bFlow.txt,0,0
-  bFlow.picc=39
-}else
-{
-  bFlow.txt=""
-  bFlow.picc=38
+  tsw 255,0
+  if(ok==1)
+  {
+    printer.printState.txt="null"
+    page main
+  }
 }
-if(printer.printState.txt=="printing") //Printing
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn updateView,1
+///
+/// @brief Updates states for controls
+///////////////////////////////////////////////////////////////////////////////
+if(printer.printState.txt=="stopping") //Paused
 {
-  bPlayPause.picc=38
-  bPlayPause.picc2=37
-  tPlayPause.txt="Pause"
-  setlayer bClose,255
-  bClose.aph=127
+  bStop.picc=bStop.picc2
+
 }
 if(printer.printState.txt=="paused") //Paused
 {
-  bPlayPause.picc=39
-  bPlayPause.picc2=37
+  bPlayPause.picc=bPlayPause.picc2+2
   tPlayPause.txt="Resume"
   setlayer bClose,0
   bClose.aph=0
 }
-
-//Onload
-DiagReturnPage=dp
-click updateState,1
-prints "M220",0
-printh 0A
-prints "M221",0
-printh 0A
-if(HandleCallback==1)
+if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
 {
-  HandleCallback=0
-  click b[ReturnObj],0 //Run right click code as callback
-  vars.returnVal.txt="null"
-  ReturnVal=-1
+  covx printer.speed.val,bSpeed.txt,0,0
+  bSpeed.picc=bSpeed.picc2+2
+}else
+{
+  bSpeed.txt=""
+  bSpeed.picc=bSpeed.picc2+1
+}
+if(printer.flow.val!=100&&printer.flow.val!=0) //Flow
+{
+  covx printer.flow.val,bFlow.txt,0,0
+  bFlow.picc=bFlow.picc2+2
+}else
+{
+  bFlow.txt=""
+  bFlow.picc=bFlow.picc2+1
+}
+if(printer.printState.txt=="printing") //Printing
+{
+  bPlayPause.picc=bPlayPause.picc2+1
+  tPlayPause.txt="Pause"
+  setlayer bClose,255
+  bClose.aph=127
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn Pre-initialize
+/// @brief Page Initialization
+///////////////////////////////////////////////////////////////////////////////
+click updateView,1
+ReturnPage=dp
+DiagReturnPage=dp
+if(HandleCallback==1)
+{
+  if(ReturnObj==0) //Direct to custom controller callback
+  {
+    click controller,0
+  }else
+  {
+    click b[ReturnObj],0
+  }
+  ReturnVal=-1
+  HandleCallback=0
+}
+click controller,1
+
+
+///////////////////////////////////////////////////////////////////////////////
 //bSpeed click
-ReturnObj=13
+ReturnObj=2
 numpad.tCaption.txt="Print Speed"
 if(printer.speed.val==0)
 {
@@ -64,15 +104,15 @@ page numpad
 covx printer.speed.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  prints "M220 S",0
-  prints vars.returnVal.txt,0
-  printh 0A
-  prints "M220",0
-  printh 0A
+  commands.queue.txt+="M220 S"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+  commands.queue.txt+="M220\r"
+  click sendCommand,0
 }
 
 //bFlow click
-ReturnObj=14
+ReturnObj=3
 numpad.tCaption.txt="Print Flow"
 if(printer.flow.val==0)
 {
@@ -86,54 +126,64 @@ page numpad
 covx printer.flow.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  prints "M221 S",0
-  prints vars.returnVal.txt,0
-  printh 0A
-  prints "M221",0
-  printh 0A
+  commands.queue.txt+="M221 S"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+  commands.queue.txt+="M221\r"
+  click sendCommand,0
 }
 
 //bPlayPause click
 if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
 {
-  prints "M25",0 //Pause print
-  printh 0A
-  prints "G91",0 //Move out the way
-  printh 0A
-  prints "G0 X-5 Y-5 Z10",0
-  printh 0A
-  prints "G90",0
-  printh 0A
+  commands.queue.txt+="M25" //Pause print
+  commands.queue.txt+="G91" //Move out the way
+  commands.queue.txt+="G0 X-5 Y-5 Z10"
+  commands.queue.txt+="G90"
   printer.printState.txt="paused"
 }else
 {
-  prints "G91",0 //Move back
-  printh 0A
-  prints "G0 X5 Y5 Z-10",0 
-  printh 0A
-  prints "G90",0
-  printh 0A
-  prints "M24",0 //Resume print
-  printh 0A
+  commands.queue.txt+="G91" //Move back
+  commands.queue.txt+="G0 X5 Y5 Z-10"
+  commands.queue.txt+="G90"
+  commands.queue.txt+="M24" //Resume print
   printer.printState.txt="printing"
 }
+click updateView,1
 
 //Stop click
 diagPrompt.tMessage.txt="Stop Print?"
-ReturnObj=16
-ReturnVal=1
+ReturnObj=4
 page diagPrompt
 //Stop callback
 if(ReturnVal!=-1)
 {
-  commands.queue.txt=commands.stopPrint.txt
-  click sendCommand,0
-  printer.printState.txt="null"
+  commands.command.txt="M108\r"
+  click sendCommand,1
+  commands.command.txt="M108\r"
+  click sendCommand,1
+  commands.command.txt="M108\r"
+  click sendCommand,1
+  commands.command.txt="M108\r"
+  click sendCommand,1  
+  commands.command.txt="M524\r"
+  click sendCommand,1
+  delay=1000
+  commands.command.txt=commands.stopPrint.txt
+  click sendCommand,1
   printer.flow.val=100   //Clear printer related printer vars
   printer.speed.val=100
-  page main
+  printer.printState.txt="stopping"
+  click updateView,1
 }
 
+///////////////////////////////////////////////////////////////////////////////
+/// @fn run
+/// @brief Program Loop on 1000ms timer
+///////////////////////////////////////////////////////////////////////////////
+click updateView,1
+click controller,1
+click sendCommand,0
 
 
 // //Mock Data
