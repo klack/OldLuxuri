@@ -26,13 +26,13 @@ if(state.txt=="getting-files")
 }
 if(state.txt=="ready")
 {
-  tDebug.txt+="Ready"
+  //Do nothing
 }
 if(state.txt=="no-sd")
 {
   DiagReturnPage=5
-  diagPrompt.tMessage.txt="Please insert SD Card"
-  page diagPrompt
+  diagConfirm.tMessage.txt="Please insert SD Card"
+  page diagConfirm
 }
 
 
@@ -63,26 +63,29 @@ if(state.txt=="ready")
 {
   tMessage.aph=0
   
-  if(page.val==0) //Button visibility
-  {
-    setlayer bUp,0
-  }else
-  {
-    setlayer bUp,254
-  }
-  
-  spstr tFiles.txt,vars.s.txt,"\r",page.val+1*5 //Check for last page
-  if(vars.s.txt=="")
-  {
-    setlayer bDown,0
-  }else
-  {
-    setlayer bDown,254
-  }
-  
   strlen valueLFile.txt,j //Load file controls
   if(j>0)
   {
+    if(page.val==0) //Button visibility
+    {
+      setlayer bUp,0
+    }else
+    {
+      setlayer bUp,254
+    }
+    
+    spstr tFiles.txt,vars.s.txt,"\r",page.val+1*5 //Check for last page
+    if(vars.s.txt=="")
+    {
+      setlayer bDown,0
+    }else
+    {
+      setlayer bDown,254
+    }
+
+    bUp.picc=bUp.picc2+2
+    bDown.picc=bDown.picc2+2
+
     spstr valueLFile.txt,f0.txt,"\r",0
     spstr valueLFile.txt,f1.txt,"\r",1
     spstr valueLFile.txt,f2.txt,"\r",2
@@ -153,6 +156,12 @@ click sendCommand,1
 ///
 /// @brief Parse filenames and long file names
 ///////////////////////////////////////////////////////////////////////////////
+parse.lineMatch.txt="echo:No media"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  state.txt="no-sd"
+}
+
 parse.lineMatch.txt="End file list"
 if(parse.buffer.txt==parse.lineMatch.txt)
 {
@@ -180,8 +189,8 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   page.val=0
 }
 
-// if(gettingLFiles.val==1)  //Parse long filenames 
-// {
+if(gettingLFiles.val==1)  //Parse long filenames 
+{
   parse.lineMatch.txt="/"
   strlen parse.lineMatch.txt,j
   substr parse.buffer.txt,parse.eval.txt,0,j
@@ -192,12 +201,16 @@ if(parse.buffer.txt==parse.lineMatch.txt)
     valueLFile.txt+="\r"
     lFilesRecieved.val+=1
   }
-// }
-
-if(lFilesRecieved.val==lFilesReq.val)
-{
-  gettingLFiles.val=0
 }
+
+if(lFilesRecieved.val>0)
+{
+  if(lFilesRecieved.val==lFilesReq.val)
+  {
+    gettingLFiles.val=0
+  }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //bPrint
@@ -221,6 +234,7 @@ click sendCommand,0
 
 
 //bUp
+bUp.picc=bUp.picc2
 if(page.val>0)
 {
   selectedFile.txt=""
@@ -231,6 +245,7 @@ if(page.val>0)
 click selectFile,1
 
 //bDown
+bDown.picc=bDown.picc2
 selectedFile.txt=""
 selectedIndex.val=-1
 page.val+=1
