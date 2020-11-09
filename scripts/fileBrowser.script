@@ -7,11 +7,14 @@
 if(state.txt=="null")
 {
   vars.status.txt="Initializing"
+  state.txt="init"
+  click updateView,1
+}
+if(state.txt=="init")
+{
+  vars.status.txt="Getting Files"
   click listFiles,1
-  click readBuffer,1
-  click getLongFiles,1
-  click readBuffer,1
-  state.txt="getting-files"   
+  state.txt="getting-files"
 }
 if(state.txt=="getting-files")
 {
@@ -23,7 +26,7 @@ if(state.txt=="getting-files")
 }
 if(state.txt=="ready")
 {
-  tDebug.txt+="here8"
+  tDebug.txt+="Ready"
 }
 if(state.txt=="no-sd")
 {
@@ -39,7 +42,14 @@ if(state.txt=="no-sd")
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
 tMessage.txt=vars.status.txt
-
+if(state.txt=="null")
+{
+  tMessage.aph=0
+}
+if(state.txt=="init")
+{
+  tMessage.aph=127
+}
 if(selectedFile.txt=="") //Hide or Show Print button
 {
   tsw bPrint,0
@@ -48,15 +58,6 @@ if(selectedFile.txt=="") //Hide or Show Print button
 {
   tsw bPrint,1
   bPrint.aph=127
-}
-
-if(state.txt=="null")
-{
-  tMessage.aph=0
-}
-if(state.txt=="getting-files")
-{
-  tMessage.aph=127
 }
 if(state.txt=="ready")
 {
@@ -109,13 +110,16 @@ if(state.txt=="ready")
 ///
 /// @brief Re-initialize SDCard and list files
 ///////////////////////////////////////////////////////////////////////////////
-tDebug.txt+="here5"
-commands.queue.txt="M155 S0\r" //Temp auto report off
-commands.queue.txt+="M22\r" //Unmount
-commands.queue.txt+="M21\r" //Mount
-commands.queue.txt+="M20\r" //List files
-click sendCommand,0
-tDebug.txt+="here10"
+commands.command.txt="M155 S0\r" //Temp auto report off
+commands.command.txt+="M22\r" //Unmount
+commands.command.txt+="M21\r" //Mount
+commands.command.txt+="M20\r" //List files
+click sendCommand,1
+delay=1000
+click readBuffer,1
+click getLongFiles,1
+click readBuffer,1
+
   
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn getLongFiles,1
@@ -204,9 +208,9 @@ selectedIndex.val=0
 click selectFile,1
 
 //selectFile
-spstr keyLFile.txt,vars.s.txt,">",selectedIndex.val
+spstr keyLFile.txt,vars.s.txt,"\r",selectedIndex.val
 selectedFile.txt=vars.s.txt
-spstr valueLFile.txt,vars.s.txt,">",selectedIndex.val
+spstr valueLFile.txt,vars.s.txt,"\r",selectedIndex.val
 selectedFLong.txt=vars.s.txt
 print.tFileName.txt=selectedFLong.txt
 click updateView,1
