@@ -28,6 +28,7 @@ while(k>0&&BlockCount<20) //Only try sending commands for 5 seconds
     }
   }else
   {
+    click readBuffer,1
     BlockCount+=1
     delay=250
   }

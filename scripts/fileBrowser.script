@@ -7,32 +7,24 @@
 if(state.txt=="null")
 {
   vars.status.txt="Initializing"
+  click listFiles,1
+  click readBuffer,1
+  click getLongFiles,1
+  click readBuffer,1
   state.txt="getting-files"   
 }
 if(state.txt=="getting-files")
 {
-  tDebug.txt+="here1"
-  strlen tFiles.txt,j
-  if(j<=0) //Only run if files are being recieved
+  click readBuffer,1
+  if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
   {
-    tDebug.txt+="here2"
-    vars.status.txt="Getting Files"
-    click listFiles,1
-    click getLongFiles,1
-  }else
-  {
-    click readBuffer,1
-    tDebug.txt+="here6"
-    if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
-    {
-      state.txt="ready"
-      tDebug.txt+="here7"
-    }
+    tDebug.txt+="here7"
+    state.txt="ready"
   }
 }
 if(state.txt=="ready")
 {
-
+  tDebug.txt+="here8"
 }
 if(state.txt=="no-sd")
 {
@@ -79,7 +71,7 @@ if(state.txt=="ready")
     setlayer bUp,254
   }
   
-  spstr tFiles.txt,vars.s.txt,">",page.val+1*5 //Check for last page
+  spstr tFiles.txt,vars.s.txt,"\r",page.val+1*5 //Check for last page
   if(vars.s.txt=="")
   {
     setlayer bDown,0
@@ -124,6 +116,7 @@ commands.queue.txt+="M22\r" //Unmount
 commands.queue.txt+="M21\r" //Mount
 commands.queue.txt+="M20\r" //List files
 click sendCommand,0
+tDebug.txt+="here10"
   
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn getLongFiles,1
