@@ -11,14 +11,17 @@ if(state.txt=="null")
 }
 if(state.txt=="getting-files")
 {
+  tDebug.txt+="here1"
   strlen tFiles.txt,j
-  if(j==0) //Don't run again if files are being recieved
+  if(j<=0) //Only run if files are being recieved
   {
+    tDebug.txt+="here2"
     vars.status.txt="Getting Files"
     click listFiles,1
     click getLongFiles,1
   }else
   {
+    tDebug.txt+="here3"
     if(ok==1)
     {
       if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
@@ -57,6 +60,14 @@ if(selectedFile.txt=="") //Hide or Show Print button
   bPrint.aph=127
 }
 
+if(state.txt=="null")
+{
+  tMessage.aph=0
+}
+if(state.txt=="getting-files")
+{
+  tMessage.aph=127
+}
 if(state.txt=="ready")
 {
   tMessage.aph=0
@@ -108,11 +119,11 @@ if(state.txt=="ready")
 ///
 /// @brief Re-initialize SDCard and list files
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="M155 S0" //Temp auto report off
-commands.queue.txt+="M22" //Unmount
-commands.queue.txt+="M21" //Mount
-commands.queue.txt+="M20" //List files
-vars.status.txt="Getting Files"
+tDebug.txt+="here5"
+commands.queue.txt="M155 S0\r" //Temp auto report off
+commands.queue.txt+="M22\r" //Unmount
+commands.queue.txt+="M21\r" //Mount
+commands.queue.txt+="M20\r" //List files
 click sendCommand,0
   
 ///////////////////////////////////////////////////////////////////////////////
