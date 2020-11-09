@@ -38,6 +38,19 @@ if(printer.printState.txt=="paused") //Paused
   setlayer bClose,0
   bClose.aph=0
 }
+if(busy==1) //Busy
+{
+  if(tBusy.aph==127) //Flash
+  {
+    tBusy.aph=0
+  }else
+  {
+    tBusy.aph=127
+  }
+}else
+{
+  tBusy.aph=0
+}
 if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
 {
   covx printer.speed.val,bSpeed.txt,0,0
@@ -157,24 +170,23 @@ ReturnObj=4
 page diagPrompt
 //Stop callback
 if(ReturnVal!=-1)
-{
-  commands.command.txt="M108\r"
-  click sendCommand,1
-  commands.command.txt="M108\r"
-  click sendCommand,1
-  commands.command.txt="M108\r"
-  click sendCommand,1
-  commands.command.txt="M108\r"
-  click sendCommand,1  
-  commands.command.txt="M524\r"
-  click sendCommand,1
-  delay=1000
+{ 
+  printer.printState.txt="stopping"
+  click updateView,1
+  ok=0
+  while(ok==0)
+  {
+    commands.command.txt="M108"
+    click sendCommand,1
+    commands.command.txt="M524"
+    click sendCommand,1
+    delay=250
+    click readBuffer,1
+  }
   commands.command.txt=commands.stopPrint.txt
   click sendCommand,1
   printer.flow.val=100   //Clear printer related printer vars
   printer.speed.val=100
-  printer.printState.txt="stopping"
-  click updateView,1
 }
 
 ///////////////////////////////////////////////////////////////////////////////
