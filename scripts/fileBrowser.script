@@ -45,6 +45,8 @@ tMessage.txt=vars.status.txt
 if(state.txt=="null")
 {
   tMessage.aph=0
+  setlayer bUp,0
+  setlayer bDown,0
 }
 if(state.txt=="init")
 {
@@ -85,7 +87,8 @@ if(state.txt=="ready")
 
     bUp.picc=bUp.picc2+2
     bDown.picc=bDown.picc2+2
-
+    tsw bUp,1
+    tsw bDown,1
     spstr valueLFile.txt,f0.txt,"\r",0
     spstr valueLFile.txt,f1.txt,"\r",1
     spstr valueLFile.txt,f2.txt,"\r",2
@@ -235,6 +238,8 @@ click sendCommand,0
 
 //bUp
 bUp.picc=bUp.picc2
+tsw bUp,0
+tsw bDown,0
 if(page.val>0)
 {
   selectedFile.txt=""
@@ -245,6 +250,8 @@ if(page.val>0)
 click selectFile,1
 
 //bDown
+tsw bUp,0
+tsw bDown,0
 bDown.picc=bDown.picc2
 selectedFile.txt=""
 selectedIndex.val=-1
