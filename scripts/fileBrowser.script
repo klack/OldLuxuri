@@ -21,13 +21,12 @@ if(state.txt=="getting-files")
     click getLongFiles,1
   }else
   {
-    tDebug.txt+="here3"
-    if(ok==1)
+    click readBuffer,1
+    tDebug.txt+="here6"
+    if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
     {
-      if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
-      {
-        state.txt="ready"
-      }
+      state.txt="ready"
+      tDebug.txt+="here7"
     }
   }
 }
@@ -185,8 +184,8 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   page.val=0
 }
 
-if(gettingLFiles.val==1)  //Parse long filenames 
-{
+// if(gettingLFiles.val==1)  //Parse long filenames 
+// {
   parse.lineMatch.txt="/"
   strlen parse.lineMatch.txt,j
   substr parse.buffer.txt,parse.eval.txt,0,j
@@ -197,10 +196,11 @@ if(gettingLFiles.val==1)  //Parse long filenames
     valueLFile.txt+="\r"
     lFilesRecieved.val+=1
   }
-  if(lFilesRecieved.val==lFilesReq.val)
-  {
-    gettingLFiles.val=0
-  }
+// }
+
+if(lFilesRecieved.val==lFilesReq.val)
+{
+  gettingLFiles.val=0
 }
 
 ///////////////////////////////////////////////////////////////////////////////
