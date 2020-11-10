@@ -6,8 +6,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt=="null")
 {
-  commands.command.txt="M220\r" 
-  commands.command.txt="M221\r"
+  commands.command.txt="M220\rM221\r" 
   click sendCommand,1
   printer.printState.txt="ready"
 }
@@ -81,7 +80,7 @@ if(printer.printState.txt=="printing") //Printing
 }
 if(state.txt=="pausing")
 {
-  tPlayPause.txt="Pausing..."
+  tPlayPause.txt="Finishing Moves..."
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -116,10 +115,10 @@ page numpad
 covx printer.speed.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  commands.command.txt="M220 S"
-  commands.command.txt+=vars.returnVal.txt
-  commands.command.txt+="\rM220\r"
-  click sendCommand,1
+  commands.queue.txt="M220 S"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\rM220\r"
+  click sendCommand,0
 }
 
 //bFlow click
@@ -131,10 +130,10 @@ page numpad
 covx printer.flow.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  commands.command.txt="M221 S"
-  commands.command.txt+=vars.returnVal.txt
-  commands.command.txt+="\rM221\r"
-  click sendCommand,1
+  commands.queue.txt="M221 S"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\rM221\r"
+  click sendCommand,0
 }
 
 //bPlayPause click
@@ -143,23 +142,19 @@ if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
   state.txt="pausing"
   click updateView,1
   commands.queue.txt+="M25\r" //Pause print
-  commands.queue.txt+="M400"
-  commands.queue.txt+="G91\r" //Move out the way
-  commands.queue.txt+="G0 X-5 Y-5 Z10\r"
-  commands.queue.txt+="G90\r"
+  commands.queue.txt+="M400\r"
+  // commands.queue.txt+="G91\r" //Move out the way
+  // commands.queue.txt+="G0 X-5 Y-5 Z10\r"
+  // commands.queue.txt+="G90\r"
   commands.queue.txt+="M114\r"
   click sendCommand,0
-  while(ok==0)
-  {
-    click readBuffer,1
-  }
-  state.txt="null"
+  state.txt="null" // Page state
   printer.printState.txt="paused"
 }else
 {
-  commands.queue.txt+="G91\r" //Move back
-  commands.queue.txt+="G0 X5 Y5 Z-10\r"
-  commands.queue.txt+="G90\r"
+  // commands.queue.txt+="G91\r" //Move back
+  // commands.queue.txt+="G0 X5 Y5 Z-10\r"
+  // commands.queue.txt+="G90\r"
   commands.queue.txt+="M24\r" //Resume print
   printer.printState.txt="printing"
 }
@@ -202,6 +197,19 @@ if(tBusy.aph==127) //Flash
 {
   tBusy.aph=127
 }
+if(state.txt=="pausing")
+{
+  if(tPlayPause.aph==127) //Flash
+  {
+    tPlayPause.aph=0
+  }else
+  {
+    tPlayPause.aph=127
+  }  
+}else
+{
+  tPlayPause.aph=127
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -218,3 +226,11 @@ click sendCommand,0
 // click notifyEOL,1
 // parse.buffer.txt="FR:90%"
 // click notifyEOL,1
+
+
+parse.buffer.txt="ok"
+click notifyEOL,1
+
+busy=1
+
+ok=0
