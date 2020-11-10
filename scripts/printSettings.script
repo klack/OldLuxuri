@@ -38,7 +38,7 @@ if(printer.printState.txt=="paused") //Paused
   setlayer bClose,0
   bClose.aph=0
 }
-if(busy==1) //Busy
+if(busy==1||ok==0) //Busy
 {
   if(tBusy.aph==127) //Flash
   {
@@ -46,6 +46,14 @@ if(busy==1) //Busy
   }else
   {
     tBusy.aph=127
+  }
+  strlen commands.queue.txt,j
+  if(j>0)
+  {
+    tBusy.txt="Commands Queued"
+  }else
+  {
+    tBusy.txt="Busy"
   }
 }else
 {
@@ -55,10 +63,12 @@ if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
 {
   covx printer.speed.val,bSpeed.txt,0,0
   bSpeed.picc=bSpeed.picc2+2
+  bSpeed.pco2=BLACK
 }else
 {
   bSpeed.txt=""
   bSpeed.picc=bSpeed.picc2+1
+  bSpeed.pco2=WHITE
 }
 if(printer.flow.val!=100&&printer.flow.val!=0) //Flow
 {
@@ -149,23 +159,25 @@ if(vars.returnVal.txt!=vars.s.txt)
 //bPlayPause click
 if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
 {
-  commands.queue.txt+="M25" //Pause print
-  commands.queue.txt+="G91" //Move out the way
-  commands.queue.txt+="G0 X-5 Y-5 Z10"
-  commands.queue.txt+="G90"
+  commands.queue.txt+="M25\r" //Pause print
+  commands.queue.txt+="G91\r" //Move out the way
+  commands.queue.txt+="G0 X-5 Y-5 Z10\r"
+  commands.queue.txt+="G90\r"
   printer.printState.txt="paused"
 }else
 {
-  commands.queue.txt+="G91" //Move back
-  commands.queue.txt+="G0 X5 Y5 Z-10"
-  commands.queue.txt+="G90"
-  commands.queue.txt+="M24" //Resume print
+  commands.queue.txt+="G91\r" //Move back
+  commands.queue.txt+="G0 X5 Y5 Z-10\r"
+  commands.queue.txt+="G90\r"
+  commands.queue.txt+="M24\r" //Resume print
   printer.printState.txt="printing"
 }
+click sendCommand,0
 click updateView,1
 
 //Stop click
 diagPrompt.tMessage.txt="Stop Print?"
+ReturnVal=1
 ReturnObj=4
 page diagPrompt
 //Stop callback
@@ -180,13 +192,14 @@ if(ReturnVal!=-1)
     click sendCommand,1
     commands.command.txt="M524"
     click sendCommand,1
-    delay=250
+    delay=500
     click readBuffer,1
   }
   commands.command.txt=commands.stopPrint.txt
   click sendCommand,1
   printer.flow.val=100   //Clear printer related printer vars
   printer.speed.val=100
+  page main
 }
 
 ///////////////////////////////////////////////////////////////////////////////

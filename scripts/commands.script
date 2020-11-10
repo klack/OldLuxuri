@@ -1,4 +1,3 @@
-M524 //Stop print
 M27 S0 //Turn off SD status
 M104 T0 S0 //Heaters
 M104 T1 S0 
@@ -7,3 +6,5 @@ M106 S0 //Turn off fan
 M220 S100 //Reset Speed
 M221 S100 //Reset Flow
 G0 X Y //Home X Y0
+M605 S1 //Auto Park Mode
+T0 
