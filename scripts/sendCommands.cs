@@ -52,7 +52,8 @@ if(OkBlocks>=50)
 }
 if(QueueBlocks>500)
 {
-  commands.command.txt="M27" //Maybe an ok was missed, try and trigger one
+  commands.command.txt="M114" //Maybe an ok was missed, try and trigger one
   click sendCommand,1
   QueueBlocks=0
 }
+click debug,1

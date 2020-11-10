@@ -93,6 +93,7 @@ commands.command.txt+="M114\r" //Get position
 commands.command.txt+="M155 S2\r" //Temp auto report
 commands.command.txt+="M605 S1\r" //Dual Nozzle Mode Auto
 commands.command.txt+="T0\r" //Select T0
+commands.command.txt+="M220\rM221\r" //Get flow and speed
 click sendCommand,1
 state.txt="connected"
 

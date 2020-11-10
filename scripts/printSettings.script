@@ -30,7 +30,11 @@ if(printer.printState.txt=="stopping")
 if(printer.printState.txt=="stopping") //Stopping
 {
   bStop.picc=bStop.picc2
-
+}
+if(printer.printState.txt=="pausing")
+{
+  setlayer bClose,0
+  bClose.aph=0
 }
 if(printer.printState.txt=="paused") //Paused
 {
@@ -39,7 +43,6 @@ if(printer.printState.txt=="paused") //Paused
   setlayer bClose,0
   bClose.aph=0
 }
-
 tBusy.txt=""
 if(busy==1) //Busy Text
 {
@@ -49,7 +52,6 @@ if(QueueBlocks>0)
 {
   tBusy.txt="Commands Queued"
 }
-
 if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
 {
   covx printer.speed.val,bSpeed.txt,0,0
@@ -77,8 +79,10 @@ if(printer.printState.txt=="printing") //Printing
   setlayer bClose,255
   bClose.aph=127
 }
-
-
+if(state.txt=="pausing")
+{
+  tPlayPause.txt="Pausing..."
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn Pre-initialize
@@ -106,54 +110,50 @@ click controller,1
 //bSpeed click
 ReturnObj=2
 numpad.tCaption.txt="Print Speed"
-if(printer.speed.val==0)
-{
-  vars.returnVal.txt=""
-}else
-{
-  covx printer.speed.val,vars.returnVal.txt,0,0
-}
+covx printer.speed.val,vars.returnVal.txt,0,0
 page numpad
 //bSpeed callback
 covx printer.speed.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  commands.queue.txt+="M220 S"
-  commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\r"
-  commands.queue.txt+="M220\r"
-  click sendCommand,0
+  commands.command.txt="M220 S"
+  commands.command.txt+=vars.returnVal.txt
+  commands.command.txt+="\rM220\r"
+  click sendCommand,1
 }
 
 //bFlow click
 ReturnObj=3
 numpad.tCaption.txt="Print Flow"
-if(printer.flow.val==0)
-{
-  vars.returnVal.txt=""
-}else
-{
-  covx printer.flow.val,vars.returnVal.txt,0,0
-}
+covx printer.flow.val,vars.returnVal.txt,0,0
 page numpad
 //bFlow callback
 covx printer.flow.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  commands.queue.txt+="M221 S"
-  commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\r"
-  commands.queue.txt+="M221\r"
-  click sendCommand,0
+  commands.command.txt="M221 S"
+  commands.command.txt+=vars.returnVal.txt
+  commands.command.txt+="\rM221\r"
+  click sendCommand,1
 }
 
 //bPlayPause click
 if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
 {
+  state.txt="pausing"
+  click updateView,1
   commands.queue.txt+="M25\r" //Pause print
+  commands.queue.txt+="M400"
   commands.queue.txt+="G91\r" //Move out the way
   commands.queue.txt+="G0 X-5 Y-5 Z10\r"
   commands.queue.txt+="G90\r"
+  commands.queue.txt+="M114\r"
+  click sendCommand,0
+  while(ok==0)
+  {
+    click readBuffer,1
+  }
+  state.txt="null"
   printer.printState.txt="paused"
 }else
 {
@@ -163,7 +163,6 @@ if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
   commands.queue.txt+="M24\r" //Resume print
   printer.printState.txt="printing"
 }
-click sendCommand,0
 click updateView,1
 
 //Stop click
