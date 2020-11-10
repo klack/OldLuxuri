@@ -2,6 +2,22 @@
 //Controller
 //States: null, error, init, heating, printing, paused, complete
 //---------------------------------------------------------
+if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
+{ 
+  if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
+  {
+    if(ok==1)
+    {
+      commands.command.txt="M31"
+      click sendCommand,1
+      while(ok==0)
+      {
+        doevents
+      }
+      printer.printState.txt="finished"
+    }
+  }
+}
 if(printer.printState.txt=="null")
 {
   printer.printState.txt="init"
@@ -15,26 +31,8 @@ if(printer.printState.txt=="init")
   commands.queue.txt+="\rM24\r"
   commands.queue.txt+="M31\r"
   click sendCommand,0
-  click readBuffer,1
-  printer.printState.txt="heating"
-}
-if(printer.printState.txt=="heating")
-{
-  vars.debug.txt="here1"
-  if(printer.T0SetTemp.val>0||printer.T1SetTemp.val>0) //Check if heaters are set
-  {  
-    vars.debug.txt="here2"
-    if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T1Temp.val>=printer.T1SetTemp.val) //Check if heaters are ready
-    {
-      vars.debug.txt="here3"
-      if(ok==1&&heatCount.val>1) //Make sure data is being received
-      {
-        vars.debug.txt="here4"
-        printer.printState.txt="printing"
-      }
-      heatCount.val+=1 //To handle multiple heaters ready
-    }
-  }
+  delay=2000
+  printer.printState.txt="printing"
 }
 if(printer.printState.txt=="printing") //Printing
 {
@@ -62,18 +60,6 @@ if(printer.printState.txt=="error") //Error
   DiagReturnPage=5 //main
   diagConfirm.tMessage.txt="Error opening file"
   page diagConfirm
-}
-if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
-{ 
-  if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
-  {
-    if(ok==1)
-    {
-      printer.printState.txt="finished"
-    }
-  }
-  commands.command.txt="M31"
-  click sendCommand,1  
 }
 //---------------------------------------------------------
 //End Controller
@@ -117,12 +103,6 @@ if(printer.printState.txt=="printing")
   {
     tTime.txt=printer.printTime.txt
   }
-}
-if(printer.printState.txt=="heating")
-{
-  tProgress.txt="Heating..."
-  oProgress.val=0
-  tTime.aph=0
 }
 //---------------------------------------------------------
 //End updateView

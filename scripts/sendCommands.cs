@@ -1,14 +1,19 @@
 //Send Command
-prints commands.command.txt,0
-printh 0A
+if(busy==0)
+{
+  prints commands.command.txt,0
+  printh 0A
+  ok=0
+}else
+{
+  commands.queue.txt+=commands.command.txt
+}
 commands.command.txt=""
-ok=0
-
 
 //Send Queue
 OkBlocks=0
 strlen commands.queue.txt,k //get the length of the command queue
-while(k>0&&OkBlocks<20)
+while(k>0&&OkBlocks<500)
 {
   doevents
   click readBuffer,1
@@ -31,7 +36,6 @@ while(k>0&&OkBlocks<20)
     }
   }else
   {
-    busy=1
     click readBuffer,1
     OkBlocks+=1
     click debug,1
@@ -39,17 +43,16 @@ while(k>0&&OkBlocks<20)
   }
   strlen commands.queue.txt,k //get the length of the command queue
 }
-if(OkBlocks>=20)
+if(OkBlocks>=50)
 {
   QueueBlocks+=1
 }else
 {
   QueueBlocks=0
 }
-if(QueueBlocks>100)
+if(QueueBlocks>500)
 {
   commands.command.txt="M27" //Maybe an ok was missed, try and trigger one
   click sendCommand,1
   QueueBlocks=0
 }
-click debug,1

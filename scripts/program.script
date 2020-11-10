@@ -10,4 +10,3 @@ thsp=15*60 //Sleep time
 thup=1 //Wake on Touch
 wup=255
 page connect
-
