@@ -8,7 +8,7 @@ ok=0
 //Send Queue
 OkBlocks=0
 strlen commands.queue.txt,k //get the length of the command queue
-while(k>0&&OkBlocks<200) //Only try sending commands for 5 seconds
+while(k>0&&OkBlocks<20)
 {
   doevents
   click readBuffer,1
@@ -31,13 +31,25 @@ while(k>0&&OkBlocks<200) //Only try sending commands for 5 seconds
     }
   }else
   {
+    busy=1
     click readBuffer,1
     OkBlocks+=1
+    click debug,1
     doevents
   }
   strlen commands.queue.txt,k //get the length of the command queue
 }
-if(OkBlocks>200)
+if(OkBlocks>=20)
 {
   QueueBlocks+=1
+}else
+{
+  QueueBlocks=0
 }
+if(QueueBlocks>100)
+{
+  commands.command.txt="M27" //Maybe an ok was missed, try and trigger one
+  click sendCommand,1
+  QueueBlocks=0
+}
+click debug,1

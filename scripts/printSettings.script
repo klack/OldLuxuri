@@ -21,12 +21,13 @@ if(printer.printState.txt=="stopping")
   }
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn updateView,1
 ///
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
-if(printer.printState.txt=="stopping") //Paused
+if(printer.printState.txt=="stopping") //Stopping
 {
   bStop.picc=bStop.picc2
 
@@ -38,27 +39,17 @@ if(printer.printState.txt=="paused") //Paused
   setlayer bClose,0
   bClose.aph=0
 }
-if(busy==1||ok==0) //Busy
+
+tBusy.txt=""
+if(busy==1) //Busy Text
 {
-  if(tBusy.aph==127) //Flash
-  {
-    tBusy.aph=0
-  }else
-  {
-    tBusy.aph=127
-  }
-  strlen commands.queue.txt,j
-  if(j>0)
-  {
-    tBusy.txt="Commands Queued"
-  }else
-  {
-    tBusy.txt="Busy"
-  }
-}else
-{
-  tBusy.aph=0
+  tBusy.txt="Busy"
 }
+if(QueueBlocks>0)
+{
+  tBusy.txt="Commands Queued"
+}
+
 if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
 {
   covx printer.speed.val,bSpeed.txt,0,0
@@ -201,6 +192,18 @@ if(ReturnVal!=-1)
   printer.speed.val=100
   page main
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn animate
+///////////////////////////////////////////////////////////////////////////////
+if(tBusy.aph==127) //Flash
+{
+  tBusy.aph=0
+}else
+{
+  tBusy.aph=127
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn run
