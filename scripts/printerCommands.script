@@ -1,24 +1,34 @@
-
 /// @fn luxPauseResume_1
 /// @brief Pause the print
+printer.x.txt="?" //Clear out Coords
+printer.y.txt="?"
+printer.z.txt="?"
 commands.queue.txt+="M25\r" //Pause print
 commands.queue.txt+="M400\r"
-commands.queue.txt+="G91\r" //Move out the way
-commands.queue.txt+="G0 X-5 Y-5 Z10\r"
-commands.queue.txt+="G90\r"
-commands.queue.txt+="M114\r"
-
+commands.queue.txt+="G0 X"
+commands.queue.txt+=printer.goX.txt
+commands.queue.txt+=" Y"
+commands.queue.txt+=printer.goY.txt
+commands.queue.txt+=" Z"
+commands.queue.txt+=printer.goZ.txt
+commands.queue.txt+="\rM114\r" //Get new position that will be caught later
+click sendCommand,0
 
 /// @fn luxPauseResume_0
 /// @brief Resume the print
-commands.queue.txt+="G91\r" //Move back
-commands.queue.txt+="G0 X5 Y5 Z-10\r"
-commands.queue.txt+="G90\r"
-commands.queue.txt+="M24\r" //Resume print
+commands.queue.txt+="G0 X"
+commands.queue.txt+=printer.goX.txt
+commands.queue.txt+=" Y"
+commands.queue.txt+=printer.goY.txt
+commands.queue.txt+=" Z"
+commands.queue.txt+=printer.goZ.txt
+commands.queue.txt+="\rM24\r" //Resume print
+click sendCommand,0
 
-
-
-
+/// @fn luxFlowSpeed_0
+/// @brief Get Flow and Speed
+commands.queue.txt+="M220\rM221\r" //Get flow and speed
+click sendCommand,0
 
 M27 S0 //Turn off SD status
 M104 T0 S0 //Heaters
