@@ -6,40 +6,50 @@
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt=="null")
 {
-  commands.command.txt="M220\rM221\r" 
+  commands.command.txt="M220\rM221\r" //Get flow and speed
   click sendCommand,0
   printer.printState.txt="ready"
+  click updateView,1
 }
+
 if(printer.state.txt="pausing")
 {
-  //See if new coordinates were recieved
-  //Calculate new coords to goto
-  //Goto them
-  commands.queue.txt+="M25\r" //Pause print
-  commands.queue.txt+="M400\r"
-  commands.queue.txt+="G91\r" //Move out the way
-  commands.queue.txt+="G0 X-5 Y-5 Z10\r"
-  commands.queue.txt+="G90\r"
-  commands.queue.txt+="M114\r"
-  click sendCommand,0
-  //Make sure all commands were sent
-  printer.printState.txt="paused"
+  if(x!="?")  //See if new coordinates were recieved
+  {
+    //Calculate new coords to goto
+    //Goto them and pause print
+    click luxPauseResume,1
+  }
+  strlen commands.queue.txt,k //Make sure all commands were sent
+  if(k==0)
+  {
+    printer.printState.txt="paused"
+    click updateView,1
+  }
 }
 if(printer.printState.txt="resuming")
 {
   //Go back to old coordinates
+  click luxPauseResume,0
 }
+
 if(printer.printState.txt=="stopping")
 {
   strlen commands.queue.txt,k //get the length of the command queue
   if(k==0)
   {
-    click sendCommand,0
     printer.printState.txt="null"
     page main
   }
 }
+if(printer.printState.txt="printing")
+{
 
+}
+if(printer.state.txt="paused")
+{
+
+}
 
 /// @fn stopPrint,1
 
@@ -53,8 +63,9 @@ if(printer.printState.txt=="stopping") //Stopping
 {
   bStop.picc=bStop.picc2
 }
-if(printer.printState.txt=="pausing")
+if(printer.printState.txt=="pausing") //Pausing
 {
+  tPlayPause.txt="Finishing Moves..."
   setlayer bClose,0
   bClose.aph=0
 }
@@ -64,16 +75,6 @@ if(printer.printState.txt=="paused") //Paused
   tPlayPause.txt="Resume"
   setlayer bClose,0
   bClose.aph=0
-}
-
-tBusy.txt=""
-if(busy==1) //Busy Text
-{
-  tBusy.txt="Busy"
-}
-if(QueueBlocks>0)
-{
-  tBusy.txt="Commands Queued"
 }
 if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
 {
@@ -102,10 +103,16 @@ if(printer.printState.txt=="printing") //Printing
   setlayer bClose,255
   bClose.aph=127
 }
-if(state.txt=="pausing")
+tBusy.txt="" //Busy Text
+if(busy==1) 
 {
-  tPlayPause.txt="Finishing Moves..."
+  tBusy.txt="Busy"
 }
+if(QueueBlocks>0)
+{
+  tBusy.txt="Commands Queued"
+}
+doevents
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn Pre-initialize
@@ -163,19 +170,17 @@ if(vars.returnVal.txt!=vars.s.txt)
 //bPlayPause click
 if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
 {
-  state.txt="pausing"
+  printer.printState.txt="pausing"
   click updateView,1
-  //Clear out old coordinates
-  //Request new coordinates
+  printer.x.txt="?" //Clear out Coords
+  printer.y.txt="?"
+  printer.z.txt="?"
+  commands.queue.txt+="M114\r" //Request new coords
+  
 }else
 {
-  state.txt="resuming"
-  click updateView,1
-  commands.queue.txt+="G91\r" //Move back
-  commands.queue.txt+="G0 X5 Y5 Z-10\r"
-  commands.queue.txt+="G90\r"
-  commands.queue.txt+="M24\r" //Resume print
-  printer.printState.txt="printing"
+  printer.printState.txt="resuming"
+  click updateView,1  
 }
 click updateView,1
 
@@ -205,7 +210,7 @@ if(tBusy.aph==127) //Flash
 {
   tBusy.aph=127
 }
-if(state.txt=="pausing")
+if(printer.printState.txt=="pausing")
 {
   if(tPlayPause.aph==127) //Flash
   {

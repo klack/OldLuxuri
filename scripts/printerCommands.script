@@ -1,0 +1,32 @@
+
+/// @fn luxPauseResume_1
+/// @brief Pause the print
+commands.queue.txt+="M25\r" //Pause print
+commands.queue.txt+="M400\r"
+commands.queue.txt+="G91\r" //Move out the way
+commands.queue.txt+="G0 X-5 Y-5 Z10\r"
+commands.queue.txt+="G90\r"
+commands.queue.txt+="M114\r"
+
+
+/// @fn luxPauseResume_0
+/// @brief Resume the print
+commands.queue.txt+="G91\r" //Move back
+commands.queue.txt+="G0 X5 Y5 Z-10\r"
+commands.queue.txt+="G90\r"
+commands.queue.txt+="M24\r" //Resume print
+
+
+
+
+
+M27 S0 //Turn off SD status
+M104 T0 S0 //Heaters
+M104 T1 S0 
+M140 S0
+M106 S0 //Turn off fan
+M220 S100 //Reset Speed
+M221 S100 //Reset Flow
+G0 X Y //Home X Y0
+M605 S1 //Auto Park Mode
+T0 
