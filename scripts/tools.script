@@ -1,29 +1,13 @@
 // Motors Off
-prints "M108",0 //Break
-printh 0A
-prints "M108",0 //Break
-printh 0A
-prints "M108",0 //Break
-printh 0A
-prints "M524",0 //Stop SD print
- printh 0A
-prints "M84",0 //Disable steppers
-printh 0A
+click stopPrint,1
+commands.command.txt="M84" //Disable steppers
+click sendCommand,1
 vars.status.txt="Stepper Motors Disabled"
 
 // Heaters Off
-prints "M108",0 //Break
-printh 0A
-prints "M108",0 //Break
-printh 0A
-prints "M108",0 //Break
-printh 0A
-prints "M104 T0 S0",0
-printh 0A
-prints "M104 T1 S0",0
-printh 0A
-prints "M140 S0",0
-printh 0A
+click stopPrint,1
+commands.command.txt+="M104 T0 S0\rM104 T1 S0\rM140 S0\r"
+click sendCommand,1
 vars.status.txt="Heaters Off"
 
 // Power Off

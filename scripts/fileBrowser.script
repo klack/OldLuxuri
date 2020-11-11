@@ -219,6 +219,9 @@ if(lFilesRecieved.val>0)
 ///////////////////////////////////////////////////////////////////////////////
 //bPrint
 print.fileName.txt=selectedFile.txt
+printer.sdPrinting.val==0
+printer.printState.txt="null"
+page print
 
 //fn click
 selectedIndex.val=0

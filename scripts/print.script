@@ -2,46 +2,47 @@
 //Controller
 //States: null, error, init, heating, printing, paused, complete
 //---------------------------------------------------------
-ok=1
-if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
-{ 
-  if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
-  { 
-    if(ok==1)
-    {
-      commands.command.txt="M31"
-      click sendCommand,1
-      while(ok==0)
-      {
-        doevents
-      }
-      printer.printState.txt="finished"
-    }
-  }
-}
+// if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
+// { 
+//   if(printer.printState.txt=="printing")
+//   { 
+//     if(ok==1)
+//     {
+//       //commands.command.txt="M31"
+//       //click sendCommand,1
+//       while(ok==0)
+//       {
+//         doevents
+//       }
+//       printer.printState.txt="finished"
+//     }
+//   }
+// }
 if(printer.printState.txt=="null")
 {
+  ok=1 //Hack
+  commands.queue.txt+="M27 S4\r"  //Report SD Status
+  commands.queue.txt+="M23 "
+  commands.queue.txt+=fileName.txt
+  commands.queue.txt+="\rM24\r"
+  click sendCommand,0
   printer.printState.txt="init"
 }
 if(printer.printState.txt=="init")
 {
   tProgress.txt="Starting Print"
-  commands.queue.txt+="M27 S4\r"  //Report SD Status
-  commands.queue.txt+="M23 "
-  commands.queue.txt+=fileName.txt
-  commands.queue.txt+="\rM24\r"
-  commands.queue.txt+="M31\r"
-  click sendCommand,0
-  delay=2000
-  printer.printState.txt="printing"
+  if(printer.currentByte.val>1)
+  {
+    printer.printState.txt="printing"
+  }
 }
 if(printer.printState.txt=="printing") //Printing
 {
-  if(ok==1) //Only get time if an ok was recieved
-  {
-    commands.command.txt="M31"
-    click sendCommand,1
-  }    
+  // if(ok==1) //Only get time if an ok was recieved
+  // {
+  //   commands.command.txt="M31\r"
+  //   click sendCommand,1
+  // }    
 }
 if(printer.printState.txt=="finished") //Finished
 {
@@ -92,9 +93,13 @@ if(printer.printState.txt=="null")
   tProgress.txt=""
   oProgress.val=0
   tTime.aph=0
+  bSettings.aph=0
+  tsw hSettings,0
 }
 if(printer.printState.txt=="printing") 
 {
+  tsw hSettings,1
+  bSettings.aph=127
   oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt

@@ -1,5 +1,6 @@
 //Send Command
-if(busy==0)
+click debug,1
+if(ok==1&&busy==0)
 {
   prints commands.command.txt,0
   printh 0A
@@ -11,7 +12,7 @@ if(busy==0)
 commands.command.txt=""
 
 //Send Queue
-if(ok==1)
+if(ok==1&&busy==0)
 {
   OkBlocks=0
   strlen commands.queue.txt,k //get the length of the command queue
@@ -19,7 +20,7 @@ if(ok==1)
   {
     doevents
     click readBuffer,1
-    if(ok==1)
+    if(ok==1&&busy==0)
     {
       OkBlocks=0
       spstr commands.queue.txt,vars.s.txt,"\r",0
@@ -54,12 +55,16 @@ if(ok==1)
   }
 }else
 {
-  QueueBlocks+=1
+  strlen commands.queue.txt,j
+  if(j>0)
+  {
+    QueueBlocks+=1
+  }
 }
 if(QueueBlocks>10)
 {
-  commands.command.txt="M114" //Maybe an ok was missed, try and trigger one
-  click sendCommand,1
+  prints "M114",0 //Maybe an ok was missed, try and trigger one
+  printh 0A
   QueueBlocks=0
 }
 click debug,1

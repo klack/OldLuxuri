@@ -1,0 +1,9 @@
+while(printer.sdPrinting.val==1)
+{
+  prints "M108",0 
+  printh 0A
+  prints "M524",0 //Stop print
+  printh 0A
+  delay=500
+  click readBuffer,1
+}

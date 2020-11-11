@@ -5,7 +5,7 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  spstr parse.buffer.txt,fileName.txt,parse.lineMatch.txt,1
+  spstr parse.buffer.txt,printer.fileName.txt,parse.lineMatch.txt,1
 }
 
 // Progress
