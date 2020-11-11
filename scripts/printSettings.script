@@ -10,6 +10,25 @@ if(printer.printState.txt=="null")
   click sendCommand,0
   printer.printState.txt="ready"
 }
+if(printer.state.txt="pausing")
+{
+  //See if new coordinates were recieved
+  //Calculate new coords to goto
+  //Goto them
+  commands.queue.txt+="M25\r" //Pause print
+  commands.queue.txt+="M400\r"
+  commands.queue.txt+="G91\r" //Move out the way
+  commands.queue.txt+="G0 X-5 Y-5 Z10\r"
+  commands.queue.txt+="G90\r"
+  commands.queue.txt+="M114\r"
+  click sendCommand,0
+  //Make sure all commands were sent
+  printer.printState.txt="paused"
+}
+if(printer.printState.txt="resuming")
+{
+  //Go back to old coordinates
+}
 if(printer.printState.txt=="stopping")
 {
   strlen commands.queue.txt,k //get the length of the command queue
@@ -46,6 +65,7 @@ if(printer.printState.txt=="paused") //Paused
   setlayer bClose,0
   bClose.aph=0
 }
+
 tBusy.txt=""
 if(busy==1) //Busy Text
 {
@@ -145,17 +165,12 @@ if(printer.printState.txt=="printing"||printer.printState.txt=="heating")
 {
   state.txt="pausing"
   click updateView,1
-  commands.queue.txt+="M25\r" //Pause print
-  commands.queue.txt+="M400\r"
-  commands.queue.txt+="G91\r" //Move out the way
-  commands.queue.txt+="G0 X-5 Y-5 Z10\r"
-  commands.queue.txt+="G90\r"
-  commands.queue.txt+="M114\r"
-  click sendCommand,0
-  state.txt="null" // Page state
-  printer.printState.txt="paused"
+  //Clear out old coordinates
+  //Request new coordinates
 }else
 {
+  state.txt="resuming"
+  click updateView,1
   commands.queue.txt+="G91\r" //Move back
   commands.queue.txt+="G0 X5 Y5 Z-10\r"
   commands.queue.txt+="G90\r"
