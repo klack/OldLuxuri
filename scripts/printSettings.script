@@ -7,7 +7,7 @@
 if(printer.printState.txt=="null")
 {
   commands.command.txt="M220\rM221\r" 
-  click sendCommand,1
+  click sendCommand,0
   printer.printState.txt="ready"
 }
 if(printer.printState.txt=="stopping")
@@ -115,7 +115,7 @@ page numpad
 covx printer.speed.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  commands.queue.txt="M220 S"
+  commands.queue.txt+="M220 S"
   commands.queue.txt+=vars.returnVal.txt
   commands.queue.txt+="\rM220\r"
   click sendCommand,0
@@ -130,7 +130,7 @@ page numpad
 covx printer.flow.val,vars.s.txt,0,0
 if(vars.returnVal.txt!=vars.s.txt)
 {
-  commands.queue.txt="M221 S"
+  commands.queue.txt+="M221 S"
   commands.queue.txt+=vars.returnVal.txt
   commands.queue.txt+="\rM221\r"
   click sendCommand,0
@@ -173,15 +173,21 @@ if(ReturnVal!=-1)
   ok=0
   while(ok==0)
   {
-    commands.command.txt="M108"
+    commands.command.txt="M108\r"
     click sendCommand,1
-    commands.command.txt="M524"
+    commands.command.txt="M524\r"
     click sendCommand,1
     delay=500
     click readBuffer,1
   }
-  commands.command.txt=commands.stopPrint.txt
-  click sendCommand,1
+  commands.queue.txt=commands.stopPrint.txt
+  click sendCommand,0
+  while(ok==0)
+  {
+    doevents
+    click readBuffer,1
+    delay=100
+  }
   printer.flow.val=100   //Clear printer related printer vars
   printer.speed.val=100
   page main
