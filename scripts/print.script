@@ -21,6 +21,7 @@
 if(printer.printState.txt=="null")
 {
   ok=1 //Hack
+  commands.queue.txt+="M114\r" //Get location
   commands.queue.txt+="M27 S4\r"  //Report SD Status
   commands.queue.txt+="M23 "
   commands.queue.txt+=fileName.txt

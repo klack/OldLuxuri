@@ -63,7 +63,7 @@ if(ok==1&&busy==0)
 }
 if(QueueBlocks>10)
 {
-  prints "M114",0 //Maybe an ok was missed, try and trigger one
+  prints "G4 P1",0 //Maybe an ok was missed, try and trigger one
   printh 0A
   QueueBlocks=0
 }
