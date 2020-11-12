@@ -1,28 +1,27 @@
-///@fn luxPause_1
+/// @fn luxPause_1
 /// @brief Pause the print
-commands.queue.txt+="M25\r" //Pause print
-commands.queue.txt+="M400\r"
-printer.x.txt="?"
+printer.x.txt="?" //Clear out so it can be caught later
 printer.y.txt="?"
 printer.z.txt="?"
+commands.queue.txt+="M25\r" //Pause print
+commands.queue.txt+="M400\r"
+commands.queue.txt+="M114\r"
 click sendCommand,0
 
-///@fn luxPause_0
-commands.queue.txt+="G0 X"
+/// @fn luxPause_0
+printer.storedX.txt=printer.x.txt  //Store current coords
+printer.storedY.txt=printer.y.txt
+printer.storedZ.txt=printer.z.txt
+commands.queue.txt+="G0 X" //Goto paused location
 commands.queue.txt+=printer.pausedX.txt
 commands.queue.txt+=" Y"
 commands.queue.txt+=printer.pausedY.txt
 commands.queue.txt+="\r"
-commands.queue.txt+=printer.pausedZ.txt
 click sendCommand,0
 
-/// @fn luxPauseResume_0
+/// @fn luxResume_1
 /// @brief Resume the print
-//Go back to old coordinates
-printer.goX.txt=printer.storedX.txt
-printer.goY.txt=printer.storedY.txt
-printer.goZ.txt=printer.storedZ.txt    
-commands.queue.txt+="G0 X"
+commands.queue.txt+="G0 X" //Go back to old coordinates
 commands.queue.txt+=printer.storedX.txt
 commands.queue.txt+=" Y"
 commands.queue.txt+=printer.storedY.txt
@@ -58,7 +57,7 @@ click sendCommand,0
 
 /// @fn luxStopPrint_1
 /// @brief Print and return print to default settings
-commands.queue.txt+="M27 S0 //Turn off SD status\rM104 T0 S0 //Heaters\rM104 T1 S0\rM140 S0\rM106 S0 //Turn off fan\rM220 S100 //Reset Speed\rM221 S100 //Reset Flow\rG0 X Y //Home X Y0\rM605 S1 //Auto Park Mode\rT0\r"
+commands.queue.txt="M27 S0 //Turn off SD status\rM104 T0 S0 //Heaters\rM104 T1 S0\rM140 S0\rM106 S0 //Turn off fan\rM220 S100 //Reset Speed\rM221 S100 //Reset Flow\rM220\rM221\rG0 X Y //Home X Y0\rM605 S1 //Auto Park Mode\rT0\r"
 click sendCommand,0
 
 /// @fn luxStopPrint_0
