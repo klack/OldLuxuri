@@ -113,11 +113,6 @@ if(HandleCallback==1)
   }
   ReturnVal=-1
   HandleCallback=0
-}else
-{
-  click luxFlow,1
-  click luxSpeed,1
-  click luxGetPos,1    
 }
 click updateView,1
 click controller,1

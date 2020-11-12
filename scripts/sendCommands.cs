@@ -16,7 +16,7 @@ if(ok==1&&busy==0)
 {
   OkBlocks=0
   strlen commands.queue.txt,k //get the length of the command queue
-  while(k>0&&OkBlocks<50)
+  while(k>0&&OkBlocks<10)
   {
     doevents
     click readBuffer,1
@@ -46,7 +46,7 @@ if(ok==1&&busy==0)
     }
     strlen commands.queue.txt,k //get the length of the command queue
   }
-  if(OkBlocks>=50)
+  if(OkBlocks>=10)
   {
     QueueBlocks+=1
   }else

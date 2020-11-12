@@ -57,7 +57,7 @@ click sendCommand,0
 
 /// @fn luxStopPrint_1
 /// @brief Print and return print to default settings
-commands.queue.txt="M27 S0 //Turn off SD status\rM104 T0 S0 //Heaters\rM104 T1 S0\rM140 S0\rM106 S0 //Turn off fan\rM220 S100 //Reset Speed\rM221 S100 //Reset Flow\rM220\rM221\rG0 X Y //Home X Y0\rM605 S1 //Auto Park Mode\rT0\r"
+commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\rG0 X Y\rM605 S1\rT0\rM220 S100\rM221 S100\rM220\rM221\r"
 click sendCommand,0
 
 /// @fn luxStopPrint_0
@@ -69,6 +69,7 @@ for(j=0;j<10;j++)
   prints "M524",0 //Stop print
   printh 0A
   delay=250
+  click readBuffer,1
 }
 
 // printer.storedX.txt=printer.x.txt  //Store current coords
