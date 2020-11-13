@@ -1,8 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn controller,1
-///
 /// @brief Program loop
-/// @brief state.txts: null, ready
 ///////////////////////////////////////////////////////////////////////////////
 strlen commands.queue.txt,c //See if there are commands in the queue
 if(c==0)
@@ -36,10 +34,8 @@ if(c==0)
   }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn updateView,1...
-///
+/// @fn updateView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt=="stopping") //Stopping
@@ -49,21 +45,21 @@ if(printer.printState.txt=="stopping") //Stopping
 if(printer.printState.txt=="pausing") //Pausing
 {
   tPlayPause.txt="Finishing Moves..."
-  setlayer bClose,0
+  tsw bClose,0
   bClose.aph=0
 }
 if(printer.printState.txt=="paused") //Paused
 {
   bPauseResume.picc=bPauseResume.picc2+2
   tPlayPause.txt="Resume"
-  setlayer bClose,0
+  tsw bClose,0
   bClose.aph=0
 }
 if(printer.printState.txt=="printing") //Printing
 {
   bPauseResume.picc=bPauseResume.picc2+1
   tPlayPause.txt="Pause"
-  setlayer bClose,255
+  tsw bClose,1
   bClose.aph=127
 }
 if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
@@ -98,27 +94,9 @@ if(QueueBlocks>0)
 doevents
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn Pre-initialize
-/// @brief Page Initialization
+/// @brief Buttons
 ///////////////////////////////////////////////////////////////////////////////
-ReturnPage=dp
-DiagReturnPage=dp
-if(HandleCallback==1)
-{
-  if(ReturnObj==0) //Direct to custom controller callback
-  {
-    click controller,0
-  }else
-  {
-    click b[ReturnObj],0
-  }
-  ReturnVal=-1
-  HandleCallback=0
-}
-click updateView,1
-click controller,1
 
-///////////////////////////////////////////////////////////////////////////////
 //bSpeed click
 bSpeed.txt=""
 ReturnObj=2
@@ -176,10 +154,6 @@ if(ReturnVal!=-1)
   click luxStopPrint,1
 }
 
-/// @fn luxGetPos_1
-commands.queue.txt+="M114"
-click sendCommand,0
-
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn animate
 ///////////////////////////////////////////////////////////////////////////////
@@ -196,18 +170,3 @@ if(printer.printState.txt=="pausing")
 click updateView,1
 click controller,1
 click sendCommand,0
-
-
-// //Mock Data
-// parse.buffer.txt="echo:E1 Flow: 90%"
-// click notifyEOL,1
-// parse.buffer.txt="FR:90%"
-// click notifyEOL,1
-
-
-// parse.buffer.txt="ok"
-// click notifyEOL,1
-
-// busy=1
-
-// ok=0

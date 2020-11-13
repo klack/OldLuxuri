@@ -1,0 +1,20 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @fn Pre-initialize
+/// @brief Page Initialization
+///////////////////////////////////////////////////////////////////////////////
+click updateView,1
+ReturnPage=dp
+DiagReturnPage=dp
+if(HandleCallback==1)
+{
+  if(ReturnObj==0) //Direct to custom controller callback
+  {
+    click controller,0
+  }else
+  {
+    click b[ReturnObj],0
+  }
+  ReturnVal=-1
+  HandleCallback=0
+}
+click controller,1

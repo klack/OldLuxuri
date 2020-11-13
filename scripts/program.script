@@ -2,11 +2,12 @@
 int BlockCount=0,State=0 //depreciated
 int Baud=0,SerialPos=0,BufferLen=0,SearchPos=0,ok=1,busy=0,QueueBlocks=0,OkBlocks=0
 int ReturnPage=4,DiagReturnPage,ReturnObj=-1,ReturnVal=-1,HandleCallback=0
+int TimeCount=0,Frame=0
 int Tool=0,IdexMode=1
 int j=0,k=0,l=0,c=0
 baud=0
 recmod=1
-thsp=15*60 //Sleep time
+thsp=1*60 //Sleep time
 thup=1 //Wake on Touch
 wup=255
 page connect

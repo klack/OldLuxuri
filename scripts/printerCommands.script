@@ -1,69 +1,87 @@
-/// @fn luxPause_1
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPause 1
 /// @brief Pause the print
+///////////////////////////////////////////////////////////////////////////////
 printer.x.txt="?" //Clear out so it can be caught later
 printer.y.txt="?"
 printer.z.txt="?"
-commands.queue.txt+="M25\r" //Pause print
-commands.queue.txt+="M400\r"
+commands.queue.txt+="M25\r" 
+commands.queue.txt+="M400\r" //Trigger busy until planner is finished
 commands.queue.txt+="M114\r"
 click sendCommand,0
 
-/// @fn luxPause_0
-printer.storedX.txt=printer.x.txt  //Store current coords
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPause 0
+/// @fn Goes to paused locaiton
+///////////////////////////////////////////////////////////////////////////////
+printer.storedX.txt=printer.x.txt
 printer.storedY.txt=printer.y.txt
 printer.storedZ.txt=printer.z.txt
-commands.queue.txt+="G0 X" //Goto paused location
+commands.queue.txt+="G0 X"
 commands.queue.txt+=printer.pausedX.txt
 commands.queue.txt+=" Y"
 commands.queue.txt+=printer.pausedY.txt
 commands.queue.txt+="\r"
 click sendCommand,0
 
-/// @fn luxResume.click
-/// @brief Resume the print
-commands.queue.txt+="G0 X" //Go back to old coordinates
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxResume 1
+/// @brief Go back to old coordinates and resume the print
+///////////////////////////////////////////////////////////////////////////////
+commands.queue.txt+="G0 X"
 commands.queue.txt+=printer.storedX.txt
 commands.queue.txt+=" Y"
 commands.queue.txt+=printer.storedY.txt
 commands.queue.txt+=" Z"
 commands.queue.txt+=printer.storedZ.txt
 commands.queue.txt+="\r"
-commands.queue.txt+="M24\r" //Resume print
+commands.queue.txt+="M24\r"
 click sendCommand,0
 
-/// @fn luxFlow_1
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxFlow 1
 /// @brief Get Flow
+///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="M221\r"
 click sendCommand,0
 
-/// @fn luxFlow_0
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxFlow 0
 /// @brief Set Flow
+///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="M221 S"
 commands.queue.txt+=vars.returnVal.txt
 commands.queue.txt+="\rM221\r"
 click sendCommand,0
 
-/// @fn luxSpeed_1
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxSpeed 1
 /// @brief Get Speed
+///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="M220\r"
 click sendCommand,0
 
-/// @fn luxSpeed_0
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxSpeed 0
 /// @brief Set Speed
+///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="M220 S"
 commands.queue.txt+=vars.returnVal.txt
 commands.queue.txt+="\rM220\r"
 click sendCommand,0
 
-/// @fn luxStopPrint_1
-/// @brief Print and return print to default settings
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxStopPrint 1
+/// @brief Return printer to default settings
+///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\rG0 X Y\rM605 S1\rT0\rM220 S100\rM221 S100\rM220\rM221\r"
 printer.printState.txt="null"
 click sendCommand,0
 
-
-/// @fn luxStopPrint.rightClick
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxStopPrint 0
 /// @brief Break through a busy or waiting for response status
+///////////////////////////////////////////////////////////////////////////////
 ok=0
 commands.queue.txt=""
 while(ok==0)
@@ -80,25 +98,12 @@ while(ok==0)
   click readBuffer,1
 }
 
-/// @fn luxPrintTime
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPrintTime 1
+///////////////////////////////////////////////////////////////////////////////
 strlen commands.queue.txt,j
 if(ok==1&&j==0) //Only get time if an ok was recieved
 {
   commands.queue.txt+="M31\r"
-}    
-
-// printer.storedX.txt=printer.x.txt  //Store current coords
-// printer.storedY.txt=printer.y.txt
-// printer.storedZ.txt=printer.z.txt
-// vars.debug.txt+="X:"
-// vars.debug.txt+=printer.x.txt
-// vars.debug.txt+=" Y:"
-// vars.debug.txt+=printer.y.txt
-// vars.debug.txt+=" Z:"
-// vars.debug.txt+=printer.z.txt
-// vars.debug.txt+="\r"
-// printer.x.txt="?"
-// printer.y.txt="?"
-// printer.z.txt="?"
-// commands.queue.txt+=" Z"
-// commands.queue.txt+=printer.goZ.txt
+  TimeCount+=1
+}

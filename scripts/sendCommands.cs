@@ -1,4 +1,8 @@
-//Send Command
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxSendCommand
+/// @brief Send a single command
+/// @param[in] command.command.txt
+///////////////////////////////////////////////////////////////////////////////
 click debug,1
 if(ok==1&&busy==0)
 {
@@ -11,7 +15,11 @@ if(ok==1&&busy==0)
 }
 commands.command.txt=""
 
-//Send Queue
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxSendQueue
+/// @brief Send command queue, waiting for ok between each command
+/// @brief Waits a max of 10 times for each ok
+///////////////////////////////////////////////////////////////////////////////
 if(ok==1&&busy==0)
 {
   OkBlocks=0
@@ -44,11 +52,11 @@ if(ok==1&&busy==0)
       click debug,1
       doevents
     }
-    strlen commands.queue.txt,k //get the length of the command queue
+    strlen commands.queue.txt,k
   }
   if(OkBlocks>=10)
   {
-    QueueBlocks+=1
+    QueueBlocks+=1 //Track how many times the queue was blocked
   }else
   {
     QueueBlocks=0
