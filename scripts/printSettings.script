@@ -21,16 +21,12 @@ if(c==0)
   {
     printer.printState.txt="printing"
     click luxView,1 
-    page main
   }
   if(printer.printState.txt=="stopping")
   {
-    if(ok==1&&busy==0)
-    {
-      printer.printState.txt="null"
-      printer.sdPrinting.val=0
-      page main
-    }
+    printer.printState.txt="null"
+    printer.sdPrinting.val=0
+    page main
   }
 }
 

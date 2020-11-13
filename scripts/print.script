@@ -16,16 +16,8 @@ if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
 if(printer.printState.txt=="null")
 {
   ok=1 //Hack
-  commands.queue.txt+="M114\r" //Get location
-  commands.queue.txt+="M220\rM221\r" //Get flow / speed
-  commands.queue.txt+="M27 S5\r"  //Report SD Status
-  commands.queue.txt+="M23 "
-  commands.queue.txt+=fileName.txt
-  commands.queue.txt+="\rM24\r"
-  printer.printTime.txt=""
-  printer.currentByte.val=0
-  printer.totalBytes.val=0
-  click luxSend,0
+  TimeCount=0
+  click luxStartPrint,1
   printer.printState.txt="init"
 }
 if(printer.printState.txt=="init")
@@ -40,7 +32,7 @@ if(printer.printState.txt=="printing") //Printing
 {
   click luxCheckSleep,1
 }
-if(printer.printState.txt=="finishing") //Use to wait for updated print time
+if(printer.printState.txt=="finishing") //Used to wait for updated print time
 {
   strlen commands.queue.txt,c //See if there are commands in the queue
   if(ok==1&&c==0)
@@ -50,7 +42,8 @@ if(printer.printState.txt=="finishing") //Use to wait for updated print time
 }
 if(printer.printState.txt=="finished") //Finished is set by parsing
 {
-  click luxStopPrint,1
+  click luxStopPrint,1 //Run second half of stopping script
+  printer.printState.txt="null"
   diagConfirm.tMessage.txt="Print Complete"
   diagConfirm.tMessage.txt+="\r"
   diagConfirm.tMessage.txt+=printer.printTime.txt
@@ -87,7 +80,7 @@ if(printer.printState.txt=="printing")
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
-  if(timeCount.val>3) //Only show after time was gotten the 3rd time (heaters will no longer be blocking)
+  if(TimeCount>2) //Only show after time was gotten the 3rd time (heaters will no longer be blocking)
   {
     tTime.aph=127
     tTime.txt=printer.printTime.txt
@@ -100,31 +93,28 @@ if(printer.printState.txt=="finishing")
   tTime.txt=""
   tsw 255,0
 }
-covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
-tT0Temp.txt=vars.s.txt
-tT0Temp.txt+="/"
-covx printer.T0SetTemp.val,vars.s.txt,0,0
-tT0Temp.txt+=vars.s.txt
-covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
-tT1Temp.txt=vars.s.txt
-tT1Temp.txt+="/"
-covx printer.T1SetTemp.val,vars.s.txt,0,0 
-tT1Temp.txt+=vars.s.txt
-covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
-tBedTemp.txt=vars.s.txt
-tBedTemp.txt+="/"
-covx printer.setBedTemp.val,vars.s.txt,0,0 
-tBedTemp.txt+=vars.s.txt
-covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
-tFanSpeed.txt=vars.s.txt
 tM117.txt=printer.m117.txt
 doevents
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxAnimate
-/// @brief Animates temp, flow, and speed indicators
+/// @brief Animation Loop
 ///////////////////////////////////////////////////////////////////////////////
 Frame=Frame^1 //Toggle Frame between 0 and 1
+if(FrameB<=4)
+{
+  FrameB+=1
+}else
+{
+  FrameB=0
+}
+click luxPageAnimate,1
+click luxCBAnimate,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPageAnimate
+/// @brief Flow, and speed indicators
+///////////////////////////////////////////////////////////////////////////////
 if(printer.flow.val!=100)
 {
   if(Frame==0)
@@ -137,65 +127,4 @@ if(printer.flow.val!=100)
 }else
 {
     pFlow.aph=0
-}
-if(printer.speed.val!=100)
-{
-  if(Frame==0)
-  {
-    pSpeed.aph=127
-  }else
-  {
-    pSpeed.aph=0
-  }
-}else
-{
-  pSpeed.aph=0
-}
-if(printer.T0SetTemp.val!=0) //T0 Temp
-{
-  if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
-  {
-    bT0.picc=bT0.picc2-Frame
-  }else
-  {
-    bT0.picc=bT0.picc2 //Temperature reached
-  }
-}else //Cooling
-{
-  bT0.picc=5
-}
-if(printer.T1SetTemp.val!=0) //T1 Temp
-{
-  if(printer.T1Temp.val<printer.T1SetTemp.val) //Heating
-  {
-    bT1.picc=bT1.picc2-Frame
-  }else
-  {
-    bT1.picc=bT1.picc2 //Temperature reached
-  }
-}else //Cooling
-{
-  bT1.picc=5
-}
-if(printer.setBedTemp.val!=0) //Bed Temp
-{
-  if(printer.bedTemp.val<printer.setBedTemp.val) //Heating
-  {
-    bBed.picc=bBed.picc2-Frame
-  }else
-  {
-    bBed.picc=bBed.picc2 //Temperature reached
-  }
-}
-if(printer.fanSpeed.val>0) //Fan
-{
-  j=bFan.picc //Animate using pics 5-8
-  if(bFan.picc>8)
-  {
-    j+=1
-  }else
-  {
-    j=5
-  }
-  bFan.picc=j
 }

@@ -1,0 +1,74 @@
+///////////////////////////////////////////////////////////////////////////////
+// @fn luxCBAnimate
+// @brief Animate and update control bar
+///////////////////////////////////////////////////////////////////////////////
+if(printer.speed.val!=100)
+{
+  if(Frame==0)
+  {
+    pSpeed.aph=127
+  }else
+  {
+    pSpeed.aph=0
+  }
+}else
+{
+  pSpeed.aph=0
+}
+if(printer.T0SetTemp.val!=0) //T0 Temp
+{
+  if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
+  {
+    bT0.picc=bT0.picc2-Frame
+  }else
+  {
+    bT0.picc=bT0.picc2 //Temperature reached
+  }
+}else //Cooling
+{
+  bT0.picc=5
+}
+if(printer.T1SetTemp.val!=0) //T1 Temp
+{
+  if(printer.T1Temp.val<printer.T1SetTemp.val) //Heating
+  {
+    bT1.picc=bT1.picc2-Frame
+  }else
+  {
+    bT1.picc=bT1.picc2 //Temperature reached
+  }
+}else //Cooling
+{
+  bT1.picc=5
+}
+if(printer.setBedTemp.val!=0) //Bed Temp
+{
+  if(printer.bedTemp.val<printer.setBedTemp.val) //Heating
+  {
+    bBed.picc=bBed.picc2-Frame
+  }else
+  {
+    bBed.picc=bBed.picc2 //Temperature reached
+  }
+}
+if(printer.fanSpeed.val>0) //Fan
+{
+  bFan.picc=bFan.picc2+FrameB //picc2 use to signify starting frame
+}
+covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+tT0Temp.txt=vars.s.txt
+tT0Temp.txt+="/"
+covx printer.T0SetTemp.val,vars.s.txt,0,0
+tT0Temp.txt+=vars.s.txt
+covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
+tT1Temp.txt=vars.s.txt
+tT1Temp.txt+="/"
+covx printer.T1SetTemp.val,vars.s.txt,0,0 
+tT1Temp.txt+=vars.s.txt
+covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+tBedTemp.txt=vars.s.txt
+tBedTemp.txt+="/"
+covx printer.setBedTemp.val,vars.s.txt,0,0 
+tBedTemp.txt+=vars.s.txt
+covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
+tFanSpeed.txt=vars.s.txt

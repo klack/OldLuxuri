@@ -75,7 +75,6 @@ click luxSend,0
 /// @brief Return printer to default settings
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\rG0 X Y\rM605 S1\rT0\rM220 S100\rM221 S100\rM220\rM221\r"
-printer.printState.txt="null"
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
