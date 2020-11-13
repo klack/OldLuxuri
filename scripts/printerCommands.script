@@ -82,21 +82,21 @@ click luxSend,0
 /// @fn luxStopPrint 0
 /// @brief Break through a busy or waiting for response status
 ///////////////////////////////////////////////////////////////////////////////
-ok=0
 commands.queue.txt=""
-while(ok==0)
+for(l=0;l<5;l++)
 {
-  prints "M108",0
-  printh 0A
-  prints "M108",0
-  printh 0A
-  prints "M108",0
-  printh 0A
-  prints "M524",0 //Stop print
-  printh 0A 
-  delay=2500
-  click luxRead,1
+  ok=0
+  while(ok==0)
+  {
+    prints "M108",0
+    printh 0A
+    prints "M524",0 //Stop print
+    printh 0A 
+    delay=500
+    click luxRead,1
+  }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPrintTime 1
