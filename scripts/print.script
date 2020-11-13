@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn controller,1
+/// @fn luxController,1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
@@ -25,7 +25,7 @@ if(printer.printState.txt=="null")
   printer.printTime.txt=""
   printer.currentByte.val=0
   printer.totalBytes.val=0
-  click sendCommand,0
+  click luxSend,0
   printer.printState.txt="init"
 }
 if(printer.printState.txt=="init")
@@ -40,14 +40,14 @@ if(printer.printState.txt=="printing") //Printing
 {
   if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
   {
+    printer.printState.txt="finishing"
     commands.queue.txt+="" //Clear invalid commands
-    click sendCommand,0
+    click luxView,1
+    click luxSend,0
     strlen commands.queue.txt,c //See if there are commands in the queue
     if(ok==1&&c==0)
     {
       commands.queue.txt+="M31\r" //Get print time
-      printer.printState.txt="finishing"
-      click updateView,1
     }
   }
 }
@@ -76,7 +76,7 @@ if(printer.printState.txt=="error") //Error
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn updateView,1
+/// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt=="null")
@@ -129,9 +129,10 @@ tBedTemp.txt+=vars.s.txt
 covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
 tFanSpeed.txt=vars.s.txt
 tM117.txt=printer.m117.txt
+doevents
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn animate
+/// @fn luxAnimate
 /// @brief Animates temp, flow, and speed indicators
 ///////////////////////////////////////////////////////////////////////////////
 Frame=Frame^1 //Toggle Frame between 0 and 1

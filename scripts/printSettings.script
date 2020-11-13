@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn controller,1
+/// @fn luxController,1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
 strlen commands.queue.txt,c //See if there are commands in the queue
@@ -13,14 +13,14 @@ if(c==0)
       {
         click luxPause,0 
         printer.printState.txt="paused"
-        click updateView,1         
+        click luxView,1         
       }
     }
   }
   if(printer.printState.txt=="resuming")
   {
     printer.printState.txt="printing"
-    click updateView,1 
+    click luxView,1 
     page main
   }
   if(printer.printState.txt=="stopping")
@@ -35,7 +35,7 @@ if(c==0)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn updateView,1
+/// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt=="stopping") //Stopping
@@ -128,16 +128,16 @@ if(vars.returnVal.txt!=vars.s.txt)
 if(printer.printState.txt=="printing")
 {
   printer.printState.txt="pausing"
-  click updateView,1  
+  click luxView,1  
   click luxPause,1
 }
 if(printer.printState.txt=="paused")
 {
   printer.printState.txt="resuming"
-  click updateView,1  
+  click luxView,1  
   click luxResume,1
 }
-click updateView,1
+click luxView,1
 
 //Stop click
 diagPrompt.tMessage.txt="Stop Print?"
@@ -149,13 +149,13 @@ if(ReturnVal!=-1)
 {
   tsw 255,0
   printer.printState.txt="stopping"
-  click updateView,1
+  click luxView,1
   click luxStopPrint,0
   click luxStopPrint,1
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn animate
+/// @fn luxAnimate
 ///////////////////////////////////////////////////////////////////////////////
 Frame=Frame^1
 if(printer.printState.txt=="pausing")
@@ -164,9 +164,9 @@ if(printer.printState.txt=="pausing")
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn run
+/// @fn luxRun
 /// @brief Program Loop on 1000ms timer
 ///////////////////////////////////////////////////////////////////////////////
-click updateView,1
-click controller,1
-click sendCommand,0
+click luxView,1
+click luxController,1
+click luxSendCommand,0

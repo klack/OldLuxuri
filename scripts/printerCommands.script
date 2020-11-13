@@ -8,7 +8,7 @@ printer.z.txt="?"
 commands.queue.txt+="M25\r" 
 commands.queue.txt+="M400\r" //Trigger busy until planner is finished
 commands.queue.txt+="M114\r"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPause 0
@@ -22,7 +22,7 @@ commands.queue.txt+=printer.pausedX.txt
 commands.queue.txt+=" Y"
 commands.queue.txt+=printer.pausedY.txt
 commands.queue.txt+="\r"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxResume 1
@@ -36,14 +36,14 @@ commands.queue.txt+=" Z"
 commands.queue.txt+=printer.storedZ.txt
 commands.queue.txt+="\r"
 commands.queue.txt+="M24\r"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxFlow 1
 /// @brief Get Flow
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="M221\r"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxFlow 0
@@ -52,14 +52,14 @@ click sendCommand,0
 commands.queue.txt+="M221 S"
 commands.queue.txt+=vars.returnVal.txt
 commands.queue.txt+="\rM221\r"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxSpeed 1
 /// @brief Get Speed
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="M220\r"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxSpeed 0
@@ -68,7 +68,7 @@ click sendCommand,0
 commands.queue.txt+="M220 S"
 commands.queue.txt+=vars.returnVal.txt
 commands.queue.txt+="\rM220\r"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxStopPrint 1
@@ -76,7 +76,7 @@ click sendCommand,0
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\rG0 X Y\rM605 S1\rT0\rM220 S100\rM221 S100\rM220\rM221\r"
 printer.printState.txt="null"
-click sendCommand,0
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxStopPrint 0
@@ -95,7 +95,7 @@ while(ok==0)
   prints "M524",0 //Stop print
   printh 0A 
   delay=2500
-  click readBuffer,1
+  click luxRead,1
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxSendCommand
+/// @fn luxSend 1
 /// @brief Send a single command
 /// @param[in] command.command.txt
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ if(ok==1&&busy==0)
 commands.command.txt=""
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxSendQueue
+/// @fn luxSend 0
 /// @brief Send command queue, waiting for ok between each command
 /// @brief Waits a max of 10 times for each ok
 ///////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ if(ok==1&&busy==0)
   while(k>0&&OkBlocks<10)
   {
     doevents
-    click readBuffer,1
+    click luxRead,1
     if(ok==1&&busy==0)
     {
       OkBlocks=0
@@ -39,7 +39,7 @@ if(ok==1&&busy==0)
         //remove the command from the queue by getting a substring of the commandqueue
         substr commands.queue.txt,commands.queue.txt,j+2,l //+2 to count \r
         commands.command.txt=vars.s.txt
-        click sendCommand,1
+        click luxSend,1
       }else
       {
         commands.queue.txt=""
@@ -47,7 +47,7 @@ if(ok==1&&busy==0)
       }
     }else
     {
-      click readBuffer,1
+      click luxRead,1
       OkBlocks+=1
       click debug,1
       doevents
