@@ -38,18 +38,7 @@ if(printer.printState.txt=="init")
 }
 if(printer.printState.txt=="printing") //Printing
 {
-  if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
-  {
-    printer.printState.txt="finishing"
-    commands.queue.txt+="" //Clear invalid commands
-    click luxView,1
-    click luxSend,0
-    strlen commands.queue.txt,c //See if there are commands in the queue
-    if(ok==1&&c==0)
-    {
-      commands.queue.txt+="M31\r" //Get print time
-    }
-  }
+  click luxCheckSleep,1
 }
 if(printer.printState.txt=="finishing") //Use to wait for updated print time
 {

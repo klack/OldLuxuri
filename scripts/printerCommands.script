@@ -107,3 +107,33 @@ if(ok==1&&j==0) //Only get time if an ok was recieved
   commands.queue.txt+="M31\r"
   TimeCount+=1
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxCheckSleep
+///////////////////////////////////////////////////////////////////////////////
+if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
+{
+  printer.printState.txt="finishing"
+  commands.queue.txt+="" //Clear invalid commands
+  click luxView,1
+  click luxSend,0
+  strlen commands.queue.txt,c //See if there are commands in the queue
+  if(ok==1&&c==0)
+  {
+    commands.queue.txt+="M31\r" //Get print time
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxStartPrint
+///////////////////////////////////////////////////////////////////////////////
+commands.queue.txt+="M114\r" //Get location
+commands.queue.txt+="M220\rM221\r" //Get flow / speed
+commands.queue.txt+="M27 S5\r"  //Report SD Status
+commands.queue.txt+="M23 "
+commands.queue.txt+=fileName.txt
+commands.queue.txt+="\rM24\r"
+printer.printTime.txt=""
+printer.currentByte.val=0
+printer.totalBytes.val=0
+click luxSend,0
