@@ -23,6 +23,7 @@ if(c==0)
   {
     printer.printState.txt="printing"
     click updateView,1 
+    page main
   }
   if(printer.printState.txt=="stopping")
   {
@@ -119,9 +120,10 @@ click controller,1
 
 ///////////////////////////////////////////////////////////////////////////////
 //bSpeed click
+bSpeed.txt=""
 ReturnObj=2
 numpad.tCaption.txt="Print Speed"
-covx printer.speed.val,vars.returnVal.txt,0,0
+vars.returnVal.txt=""
 page numpad
 //bSpeed callback
 covx printer.speed.val,vars.s.txt,0,0
@@ -132,9 +134,10 @@ if(vars.returnVal.txt!=vars.s.txt)
 }
 
 //bFlow click
+bFlow.txt=""
 ReturnObj=3
 numpad.tCaption.txt="Print Flow"
-covx printer.flow.val,vars.returnVal.txt,0,0
+vars.returnVal.txt=""
 page numpad
 //bFlow callback
 covx printer.flow.val,vars.s.txt,0,0
@@ -149,7 +152,8 @@ if(printer.printState.txt=="printing")
   printer.printState.txt="pausing"
   click updateView,1  
   click luxPause,1
-}else
+}
+if(printer.printState.txt=="paused")
 {
   printer.printState.txt="resuming"
   click updateView,1  
@@ -172,28 +176,18 @@ if(ReturnVal!=-1)
   click luxStopPrint,1
 }
 
-
 /// @fn luxGetPos_1
 commands.queue.txt+="M114"
 click sendCommand,0
 
-
-
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn animate
 ///////////////////////////////////////////////////////////////////////////////
-if(tBusy.txt!="")
+Frame=Frame^1
+if(printer.printState.txt=="pausing")
 {
-  if(tBusy.aph==127) //Flash
-  {
-    tBusy.aph=0
-  }else
-  {
-    tBusy.aph=127
-  }
+  bPauseResume.picc=bPauseResume.picc2-Frame
 }
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn run

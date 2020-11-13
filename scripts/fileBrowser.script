@@ -117,7 +117,6 @@ if(state.txt=="ready")
 ///
 /// @brief Re-initialize SDCard and list files
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="M155 S0\r" //Temp auto report off
 commands.command.txt+="M22\r" //Unmount
 commands.command.txt+="M21\r" //Mount
 commands.command.txt+="M20\r" //List files
@@ -236,7 +235,7 @@ print.tFileName.txt=selectedFLong.txt
 click updateView,1
 
 //On Exit
-commands.queue.txt+="M155 S2" //Temp auto report on
+commands.queue.txt+="M155 S5" //Temp auto report on
 click sendCommand,0
 
 

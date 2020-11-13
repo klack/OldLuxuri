@@ -16,9 +16,11 @@
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="Menu.svg"
-   inkscape:export-filename="D:\printing\universal-ui\img\move-s1.png"
+   inkscape:export-filename="D:\printing\universal-ui\img\print-s3.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
+  <style
+     id="style1161"></style>
   <defs
      id="defs2">
     <rect
@@ -1352,11 +1354,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.8032263"
-     inkscape:cx="111.7689"
-     inkscape:cy="45.301497"
+     inkscape:zoom="1.9610957"
+     inkscape:cx="177.96492"
+     inkscape:cy="181.60777"
      inkscape:document-units="px"
-     inkscape:current-layer="layer85"
+     inkscape:current-layer="layer17"
      inkscape:document-rotation="0"
      showgrid="false"
      width="480mm"
@@ -1493,7 +1495,7 @@
      inkscape:groupmode="layer"
      id="layer69"
      inkscape:label="Background"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        style="display:inline;opacity:1;fill:#000000;stroke:none;stroke-width:1.42954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
@@ -4397,7 +4399,7 @@
      inkscape:groupmode="layer"
      id="layer57"
      inkscape:label="Settings"
-     style="display:inline">
+     style="display:none">
     <g
        inkscape:groupmode="layer"
        id="layer58"
@@ -4442,7 +4444,7 @@
            id="tspan5881">Settings</tspan><tspan
            sodipodi:role="line"
            x="4.9609795"
-           y="20.062359"
+           y="20.062361"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.386763"
            id="tspan5887" /></text>
       <text
@@ -4955,7 +4957,7 @@
      inkscape:groupmode="layer"
      id="layer77"
      inkscape:label="Printing"
-     style="display:none">
+     style="display:inline">
     <g
        inkscape:groupmode="layer"
        id="layer81"
@@ -4965,7 +4967,7 @@
          inkscape:groupmode="layer"
          id="layer79"
          inkscape:label="Bar"
-         style="display:inline">
+         style="display:none">
         <rect
            style="font-variation-settings:normal;display:inline;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3018);stroke-width:0.705644;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
            id="rect2088"
@@ -4987,12 +4989,24 @@
            inkscape:export-filename="C:\printing\universal-ui\img\progress-bar.png"
            inkscape:export-xdpi="96"
            inkscape:export-ydpi="96" />
+        <rect
+           style="font-variation-settings:normal;display:inline;vector-effect:none;fill:#008000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.736904;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
+           id="rect2054"
+           width="87.265747"
+           height="14.225067"
+           x="19.867126"
+           y="32.860222"
+           ry="2.6458333"
+           rx="2.6458333"
+           inkscape:export-filename="C:\printing\universal-ui\img\progress.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
       </g>
       <g
          inkscape:groupmode="layer"
          id="layer78"
          inkscape:label="Text"
-         style="display:inline">
+         style="display:none">
         <text
            xml:space="preserve"
            style="font-size:5.64444px;line-height:1;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;display:inline;stroke-width:0.264583"
@@ -5031,19 +5045,38 @@
          inkscape:groupmode="layer"
          id="layer80"
          inkscape:label="Buttons"
-         style="display:inline">
+         style="display:none" />
+      <g
+         inkscape:groupmode="layer"
+         id="layer27"
+         inkscape:label="State 2"
+         style="display:none">
         <path
-           d="m 122.98578,66.867377 -0.45449,-0.262449 c 0.0459,-0.247513 0.0459,-0.501428 0,-0.748941 l 0.45449,-0.26245 c 0.0522,-0.02987 0.0758,-0.09175 0.0587,-0.149362 -0.11842,-0.379804 -0.32005,-0.723337 -0.58358,-1.009257 -0.0405,-0.04373 -0.10666,-0.05441 -0.1579,-0.02453 l -0.45449,0.26245 c -0.19097,-0.164299 -0.41073,-0.291254 -0.64866,-0.374471 v -0.523832 c 0,-0.05974 -0.0417,-0.112021 -0.10033,-0.124824 -0.39153,-0.08748 -0.79268,-0.08321 -1.16503,0 -0.0587,0.0128 -0.10022,0.06508 -0.10022,0.124824 v 0.524899 c -0.23684,0.08428 -0.45662,0.21124 -0.64866,0.37447 l -0.45342,-0.262449 c -0.0522,-0.02987 -0.11736,-0.02027 -0.1579,0.02453 -0.26351,0.284853 -0.46516,0.628384 -0.58358,1.009257 -0.0181,0.05761 0.007,0.119488 0.0587,0.149361 l 0.45448,0.26245 c -0.0459,0.247513 -0.0459,0.501426 0,0.748941 l -0.45448,0.262448 c -0.0522,0.02987 -0.0758,0.09176 -0.0587,0.149363 0.11842,0.379805 0.32007,0.723336 0.58358,1.009257 0.0404,0.04373 0.10667,0.05441 0.1579,0.02453 l 0.45449,-0.26245 c 0.19097,0.164298 0.41075,0.291255 0.64866,0.37447 v 0.5249 c 0,0.05974 0.0417,0.11202 0.10033,0.124823 0.39154,0.08748 0.79269,0.08321 1.16503,0 0.0587,-0.0128 0.10033,-0.06508 0.10033,-0.124823 v -0.5249 c 0.23685,-0.08428 0.45661,-0.211239 0.64866,-0.37447 l 0.45448,0.26245 c 0.0522,0.02987 0.11735,0.02027 0.1579,-0.02453 0.26351,-0.284855 0.46514,-0.628386 0.58358,-1.009257 0.0159,-0.05868 -0.008,-0.120557 -0.0598,-0.150428 z m -2.46874,0.216574 c -0.4705,0 -0.8535,-0.383006 -0.8535,-0.853494 0,-0.470489 0.383,-0.853494 0.8535,-0.853494 0.47048,0 0.8535,0.383005 0.8535,0.853494 0,0.470488 -0.38302,0.853494 -0.8535,0.853494 z"
+           d="m 123.51493,66.867377 -0.45449,-0.262449 c 0.0459,-0.247513 0.0459,-0.501428 0,-0.748941 l 0.45449,-0.26245 c 0.0522,-0.02987 0.0758,-0.09175 0.0587,-0.149362 -0.11842,-0.379804 -0.32005,-0.723337 -0.58358,-1.009257 -0.0405,-0.04373 -0.10666,-0.05441 -0.1579,-0.02453 l -0.45449,0.26245 c -0.19097,-0.164299 -0.41073,-0.291254 -0.64866,-0.374471 v -0.523832 c 0,-0.05974 -0.0417,-0.112021 -0.10033,-0.124824 -0.39153,-0.08748 -0.79268,-0.08321 -1.16503,0 -0.0587,0.0128 -0.10022,0.06508 -0.10022,0.124824 v 0.524899 c -0.23684,0.08428 -0.45662,0.21124 -0.64866,0.37447 l -0.45342,-0.262449 c -0.0522,-0.02987 -0.11736,-0.02027 -0.1579,0.02453 -0.26351,0.284853 -0.46516,0.628384 -0.58358,1.009257 -0.0181,0.05761 0.007,0.119488 0.0587,0.149361 l 0.45448,0.26245 c -0.0459,0.247513 -0.0459,0.501426 0,0.748941 l -0.45448,0.262448 c -0.0522,0.02987 -0.0758,0.09176 -0.0587,0.149363 0.11842,0.379805 0.32007,0.723336 0.58358,1.009257 0.0404,0.04373 0.10667,0.05441 0.1579,0.02453 l 0.45449,-0.26245 c 0.19097,0.164298 0.41075,0.291255 0.64866,0.37447 v 0.5249 c 0,0.05974 0.0417,0.11202 0.10033,0.124823 0.39154,0.08748 0.79269,0.08321 1.16503,0 0.0587,-0.0128 0.10033,-0.06508 0.10033,-0.124823 v -0.5249 c 0.23685,-0.08428 0.45661,-0.211239 0.64866,-0.37447 l 0.45448,0.26245 c 0.0522,0.02987 0.11735,0.02027 0.1579,-0.02453 0.26351,-0.284855 0.46514,-0.628386 0.58358,-1.009257 0.0159,-0.05868 -0.008,-0.120557 -0.0598,-0.150428 z m -2.46874,0.216574 c -0.4705,0 -0.8535,-0.383006 -0.8535,-0.853494 0,-0.470489 0.383,-0.853494 0.8535,-0.853494 0.47048,0 0.8535,0.383005 0.8535,0.853494 0,0.470488 -0.38302,0.853494 -0.8535,0.853494 z"
            id="path3236"
            style="display:inline;fill:#ffffff;stroke-width:0.0106686"
            inkscape:export-filename="C:\printing\universal-ui\img\cog.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
+        <path
+           d="m 112.6194,63.585692 c -1.75002,0 -3.16864,1.418631 -3.16864,3.168652 0,0.580921 0.15678,1.125092 0.42975,1.593129 0.0617,0.105842 0.17933,0.167234 0.30189,0.167234 h 4.87401 c 0.12256,0 0.24018,-0.06139 0.3019,-0.167234 0.27297,-0.468037 0.42975,-1.012208 0.42975,-1.593129 0,-1.750021 -1.41863,-3.168652 -3.16866,-3.168652 z m 0,0.704144 c 0.16185,0 0.29245,0.111453 0.3336,0.260204 -0.0122,0.02486 -0.029,0.04654 -0.038,0.07339 l -0.10145,0.304434 c -0.0564,0.0384 -0.12069,0.06612 -0.19407,0.06612 -0.19441,0 -0.35208,-0.157662 -0.35208,-0.352072 0,-0.194411 0.15755,-0.352072 0.35196,-0.352072 z m -2.11243,3.168654 c -0.19441,0 -0.35207,-0.157662 -0.35207,-0.352074 0,-0.19441 0.15766,-0.352072 0.35207,-0.352072 0.19441,0 0.35207,0.157662 0.35207,0.352072 0,0.194412 -0.15766,0.352074 -0.35207,0.352074 z m 0.52811,-1.760364 c -0.19441,0 -0.35208,-0.157663 -0.35208,-0.352072 0,-0.19441 0.15767,-0.352073 0.35208,-0.352073 0.19441,0 0.35207,0.157663 0.35207,0.352073 0,0.194409 -0.15766,0.352072 -0.35207,0.352072 z m 2.71503,-0.796673 -0.67477,2.024417 c 0.15062,0.129167 0.24821,0.318514 0.24821,0.53262 0,0.128946 -0.0372,0.248099 -0.0977,0.352071 h -1.21289 c -0.0605,-0.103972 -0.0977,-0.223125 -0.0977,-0.352071 0,-0.373416 0.29155,-0.67587 0.65903,-0.699635 l 0.67488,-2.024527 c 0.0459,-0.138188 0.19507,-0.213994 0.33403,-0.166904 0.1383,0.0461 0.21289,0.19573 0.1669,0.334029 z m 0.16129,0.629329 0.17075,-0.512157 c 0.0382,-0.0142 0.0785,-0.02453 0.12158,-0.02453 0.19441,0 0.35208,0.157663 0.35208,0.352073 0,0.19441 -0.15767,0.352072 -0.35208,0.352072 -0.12521,-1.06e-4 -0.22984,-0.0691 -0.29233,-0.167453 z m 0.82044,1.927708 c -0.19441,0 -0.35207,-0.157662 -0.35207,-0.352074 0,-0.19441 0.15766,-0.352072 0.35207,-0.352072 0.19441,0 0.35207,0.157662 0.35207,0.352072 0,0.194412 -0.15766,0.352074 -0.35207,0.352074 z"
+           id="path1011-8"
+           style="display:inline;fill:#ffffff;stroke-width:0.0110023"
+           inkscape:export-filename="D:\printing\universal-ui\img\flow-feed.png"
+           inkscape:export-xdpi="96"
+           inkscape:export-ydpi="96" />
+        <path
+           d="m 104.64885,66.076853 h -0.50096 c -0.20383,-0.174381 -0.46008,-0.299328 -0.74462,-0.363293 v -0.617082 l -0.4152,-0.04385 -0.41519,0.04385 v 0.617082 c -0.28454,0.06488 -0.54078,0.189431 -0.74462,0.363293 h -1.53896 a 0.20759676,0.20759676 0 0 0 -0.20759,0.207598 v 1.24558 a 0.20759676,0.20759676 0 0 0 0.20759,0.207597 h 1.20395 c 0.26715,0.489539 0.83311,0.830387 1.49482,0.830387 0.66172,0 1.22768,-0.340848 1.49483,-0.830387 h 0.16595 a 0.41519353,0.41519353 0 0 1 0.41519,0.415194 0.41519353,0.41519353 0 0 0 0.4152,0.415193 h 0.83039 a 0.41519353,0.41519353 0 0 0 0.41518,-0.415193 2.0759676,2.0759676 0 0 0 -2.07596,-2.075969 z m -3.50851,-1.246748 1.84773,-0.194622 1.84775,0.194622 c 0.12222,0.01297 0.22822,-0.08836 0.22822,-0.217977 V 64.22003 c 0,-0.129748 -0.106,-0.230951 -0.22822,-0.218106 l -1.43255,0.151286 v -0.359921 a 0.20759676,0.20759676 0 0 0 -0.2076,-0.207597 h -0.41519 a 0.20759676,0.20759676 0 0 0 -0.2076,0.207597 v 0.359921 l -1.43254,-0.151286 c -0.12223,-0.01285 -0.22823,0.08849 -0.22823,0.218106 v 0.392098 c 0,0.129618 0.106,0.230952 0.22823,0.217977 z"
+           id="path1044-5"
+           style="display:inline;fill:#ffffff;stroke-width:0.0129748"
+           inkscape:export-filename="D:\printing\universal-ui\img\flow-feed.png"
            inkscape:export-xdpi="96"
            inkscape:export-ydpi="96" />
       </g>
       <g
          inkscape:groupmode="layer"
          id="layer17"
-         inkscape:label="Highlight"
+         inkscape:label="State 3"
          style="display:inline">
         <path
            style="display:inline;fill:#ffffff;stroke-width:0.0106686"
@@ -5054,18 +5087,6 @@
            d="m 122.98578,66.867377 -0.45449,-0.262449 c 0.0459,-0.247513 0.0459,-0.501428 0,-0.748941 l 0.45449,-0.26245 c 0.0522,-0.02987 0.0758,-0.09175 0.0587,-0.149362 -0.11842,-0.379804 -0.32005,-0.723337 -0.58358,-1.009257 -0.0405,-0.04373 -0.10666,-0.05441 -0.1579,-0.02453 l -0.45449,0.26245 c -0.19097,-0.164299 -0.41073,-0.291254 -0.64866,-0.374471 v -0.523832 c 0,-0.05974 -0.0417,-0.112021 -0.10033,-0.124824 -0.39153,-0.08748 -0.79268,-0.08321 -1.16503,0 -0.0587,0.0128 -0.10022,0.06508 -0.10022,0.124824 v 0.524899 c -0.23684,0.08428 -0.45662,0.21124 -0.64866,0.37447 l -0.45342,-0.262449 c -0.0522,-0.02987 -0.11736,-0.02027 -0.1579,0.02453 -0.26351,0.284853 -0.46516,0.628384 -0.58358,1.009257 -0.0181,0.05761 0.007,0.119488 0.0587,0.149361 l 0.45448,0.26245 c -0.0459,0.247513 -0.0459,0.501426 0,0.748941 l -0.45448,0.262448 c -0.0522,0.02987 -0.0758,0.09176 -0.0587,0.149363 0.11842,0.379805 0.32007,0.723336 0.58358,1.009257 0.0404,0.04373 0.10667,0.05441 0.1579,0.02453 l 0.45449,-0.26245 c 0.19097,0.164298 0.41075,0.291255 0.64866,0.37447 v 0.5249 c 0,0.05974 0.0417,0.11202 0.10033,0.124823 0.39154,0.08748 0.79269,0.08321 1.16503,0 0.0587,-0.0128 0.10033,-0.06508 0.10033,-0.124823 v -0.5249 c 0.23685,-0.08428 0.45661,-0.211239 0.64866,-0.37447 l 0.45448,0.26245 c 0.0522,0.02987 0.11735,0.02027 0.1579,-0.02453 0.26351,-0.284855 0.46514,-0.628386 0.58358,-1.009257 0.0159,-0.05868 -0.008,-0.120557 -0.0598,-0.150428 z"
            id="path1077"
            inkscape:export-filename="C:\printing\universal-ui\img\cog-pressed.png"
-           inkscape:export-xdpi="96"
-           inkscape:export-ydpi="96" />
-        <rect
-           style="font-variation-settings:normal;display:inline;vector-effect:none;fill:#008000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.736904;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
-           id="rect2054"
-           width="87.265747"
-           height="14.225067"
-           x="19.867126"
-           y="32.860222"
-           ry="2.6458333"
-           rx="2.6458333"
-           inkscape:export-filename="C:\printing\universal-ui\img\progress.png"
            inkscape:export-xdpi="96"
            inkscape:export-ydpi="96" />
       </g>
@@ -5079,7 +5100,7 @@
          inkscape:groupmode="layer"
          id="layer11"
          inkscape:label="State 0"
-         style="display:none">
+         style="display:inline">
         <circle
            style="display:inline;mix-blend-mode:normal;fill:#ffffff;stroke:none;stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="circle1061"
@@ -5141,7 +5162,7 @@
          inkscape:groupmode="layer"
          id="layer83"
          inkscape:label="State 1"
-         style="display:none">
+         style="display:inline">
         <circle
            style="display:inline;mix-blend-mode:normal;fill:#000000;stroke:url(#linearGradient3316);stroke-width:0.881902;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="circle968"
@@ -5532,7 +5553,7 @@
      inkscape:groupmode="layer"
      id="layer21"
      inkscape:label="File Browser"
-     style="display:inline">
+     style="display:none">
     <g
        inkscape:groupmode="layer"
        id="layer84"

@@ -108,7 +108,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 //destroy
-printer.command.txt="M155 S2" //Temp auto report
+printer.command.txt="M155 S5" //Temp auto report
 click sendCommand,1
 printer.command.txt="M106 S0" //Turn off fan
 click sendCommand,1

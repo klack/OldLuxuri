@@ -21,13 +21,15 @@
 if(printer.printState.txt=="null")
 {
   ok=1 //Hack
-
   commands.queue.txt+="M114\r" //Get location
   commands.queue.txt+="M220\rM221\r" //Get flow / speed
   commands.queue.txt+="M27 S5\r"  //Report SD Status
   commands.queue.txt+="M23 "
   commands.queue.txt+=fileName.txt
   commands.queue.txt+="\rM24\r"
+  printer.printTime.txt=""
+  printer.currentByte.val=0
+  printer.totalBytes.val=0
   click sendCommand,0
   printer.printState.txt="init"
 }
@@ -41,19 +43,11 @@ if(printer.printState.txt=="init")
 }
 if(printer.printState.txt=="printing") //Printing
 {
-  // if(ok==1) //Only get time if an ok was recieved
-  // {
-  //   commands.command.txt="M31\r"
-  //   click sendCommand,1
-  // }    
+
 }
 if(printer.printState.txt=="finished") //Finished
 {
-  commands.command.txt="M27 S0" //Turn off report sdcard status
-  click sendCommand,1
-  printer.flow.val=100   //Clear printer related printer vars
-  printer.speed.val=100
-  printer.printState.txt="null"
+  click luxStopPrint,1
   diagConfirm.tMessage.txt="Print Complete"
   diagConfirm.tMessage.txt+="\r"
   diagConfirm.tMessage.txt+=printer.printTime.txt
@@ -73,6 +67,32 @@ if(printer.printState.txt=="error") //Error
 //---------------------------------------------------------
 //updateView
 //---------------------------------------------------------
+if(printer.printState.txt=="null")
+{
+  tProgress.txt=""
+  oProgress.val=0
+  tTime.aph=0
+  pFlow.aph=0
+  pSpeed.aph=0
+  bSettings.aph=0
+  tsw hSettings,0
+  doevents
+
+}
+if(printer.printState.txt=="printing") 
+{
+  tsw hSettings,1
+  bSettings.aph=127
+  oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
+  covx oProgress.val,vars.s.txt,0,0
+  tProgress.txt=vars.s.txt
+  tProgress.txt+="%"
+  tTime.aph=127
+  if(printer.printTime.txt!="0s")
+  {
+    tTime.txt=printer.printTime.txt
+  }
+}
 covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
 tT0Temp.txt=vars.s.txt
 tT0Temp.txt+="/"
@@ -91,28 +111,6 @@ tBedTemp.txt+=vars.s.txt
 covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
 tFanSpeed.txt=vars.s.txt
 tM117.txt=printer.m117.txt //M117
-if(printer.printState.txt=="null")
-{
-  tProgress.txt=""
-  oProgress.val=0
-  tTime.aph=0
-  bSettings.aph=0
-  tsw hSettings,0
-}
-if(printer.printState.txt=="printing") 
-{
-  tsw hSettings,1
-  bSettings.aph=127
-  oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
-  covx oProgress.val,vars.s.txt,0,0
-  tProgress.txt=vars.s.txt
-  tProgress.txt+="%"
-  tTime.aph=127
-  if(printer.printTime.txt!="0s")
-  {
-    tTime.txt=printer.printTime.txt
-  }
-}
 //---------------------------------------------------------
 //End updateView
 //---------------------------------------------------------
@@ -136,6 +134,87 @@ if(HandleCallback==1)
   HandleCallback=0
 }
 click controller,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn animate
+/// @brief Animates temp, flow, and speed indicators
+///////////////////////////////////////////////////////////////////////////////
+Frame=Frame^1 //Toggle Frame between 0 and 1
+if(printer.flow.val!=100)
+{
+  if(Frame==0)
+  {
+    pFlow.aph=127
+  }else
+  {
+    pFlow.aph=0
+  }
+}else
+{
+    pFlow.aph=0
+}
+if(printer.speed.val!=100)
+{
+  if(Frame==0)
+  {
+    pSpeed.aph=127
+  }else
+  {
+    pSpeed.aph=0
+  }
+}else
+{
+  pSpeed.aph=0
+}
+if(printer.T0SetTemp.val!=0) //T0 Temp
+{
+  if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
+  {
+    bT0.picc=bT0.picc2-Frame
+  }else
+  {
+    bT0.picc=bT0.picc2 //Temperature reached
+  }
+}else //Cooling
+{
+  bT0.picc=5
+}
+if(printer.T1SetTemp.val!=0) //T1 Temp
+{
+  if(printer.T1Temp.val<printer.T1SetTemp.val) //Heating
+  {
+    bT1.picc=bT1.picc2-Frame
+  }else
+  {
+    bT1.picc=bT1.picc2 //Temperature reached
+  }
+}else //Cooling
+{
+  bT1.picc=5
+}
+if(printer.setBedTemp.val!=0) //Bed Temp
+{
+  if(printer.bedTemp.val<printer.setBedTemp.val) //Heating
+  {
+    bBed.picc=bBed.picc2-Frame
+  }else
+  {
+    bBed.picc=bBed.picc2 //Temperature reached
+  }
+}
+if(printer.fanSpeed.val>0) //Fan
+{
+  j=bFan.picc //Animate using pics 5-8
+  if(bFan.picc>8)
+  {
+    j+=1
+  }else
+  {
+    j=5
+  }
+  bFan.picc=j
+}
+
 
 // //Mock Data
 // parse.buffer.txt="echo:Print time: 7d 7m 7s"

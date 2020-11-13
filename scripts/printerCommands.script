@@ -19,7 +19,7 @@ commands.queue.txt+=printer.pausedY.txt
 commands.queue.txt+="\r"
 click sendCommand,0
 
-/// @fn luxResume_1
+/// @fn luxResume.click
 /// @brief Resume the print
 commands.queue.txt+="G0 X" //Go back to old coordinates
 commands.queue.txt+=printer.storedX.txt
@@ -58,19 +58,34 @@ click sendCommand,0
 /// @fn luxStopPrint_1
 /// @brief Print and return print to default settings
 commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\rG0 X Y\rM605 S1\rT0\rM220 S100\rM221 S100\rM220\rM221\r"
+printer.printState.txt="null"
 click sendCommand,0
 
-/// @fn luxStopPrint_0
+
+/// @fn luxStopPrint.rightClick
 /// @brief Break through a busy or waiting for response status
-for(j=0;j<10;j++)
+ok=0
+commands.queue.txt=""
+while(ok==0)
 {
   prints "M108",0
   printh 0A
-  prints "M524",0 //Stop print
+  prints "M108",0
   printh 0A
-  delay=250
+  prints "M108",0
+  printh 0A
+  prints "M524",0 //Stop print
+  printh 0A 
+  delay=2500
   click readBuffer,1
 }
+
+/// @fn luxPrintTime
+strlen commands.queue.txt,j
+if(ok==1&&j==0) //Only get time if an ok was recieved
+{
+  commands.queue.txt+="M31\r"
+}    
 
 // printer.storedX.txt=printer.x.txt  //Store current coords
 // printer.storedY.txt=printer.y.txt
