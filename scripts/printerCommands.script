@@ -36,6 +36,7 @@ commands.queue.txt+=" Z"
 commands.queue.txt+=printer.storedZ.txt
 commands.queue.txt+="\r"
 commands.queue.txt+="M24\r"
+printer.sdPrinting.val=1
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -42,22 +42,22 @@ if(printer.printState.txt=="stopping") //Stopping
 if(printer.printState.txt=="pausing") //Pausing
 {
   tPlayPause.txt="Finishing Moves..."
-  // tsw bClose,0
-  // bClose.aph=0
+  tsw bClose,0
+  bClose.aph=0
 }
 if(printer.printState.txt=="paused") //Paused
 {
   bPauseResume.picc=bPauseResume.picc2+2
   tPlayPause.txt="Resume"
-  // tsw bClose,0
-  // bClose.aph=0
+  tsw bClose,0
+  bClose.aph=0
 }
 if(printer.printState.txt=="printing") //Printing
 {
   bPauseResume.picc=bPauseResume.picc2+1
   tPlayPause.txt="Pause"
-  // tsw bClose,1
-  // bClose.aph=127
+  tsw bClose,1
+  bClose.aph=127
 }
 if(printer.speed.val!=100&&printer.speed.val!=0) //Speed
 {
@@ -143,7 +143,7 @@ page diagPrompt
 //Stop callback
 if(ReturnVal!=-1)
 {
-  // tsw 255,0
+  tsw 255,0
   printer.printState.txt="stopping"
   click luxView,1
   click luxStopPrint,0
