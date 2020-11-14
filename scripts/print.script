@@ -61,6 +61,7 @@ if(printer.printState.txt=="error") //Error
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
+click luxControlBar,1
 if(printer.printState.txt=="null")
 {
   tProgress.txt=""
@@ -70,21 +71,24 @@ if(printer.printState.txt=="null")
   pSpeed.aph=0
   bSettings.aph=0
   tsw hSettings,0
-  doevents
 }
 if(printer.printState.txt=="printing") 
 {
-  tsw hSettings,1
   bSettings.aph=127
   oProgress.val=printer.currentByte.val*100/printer.totalBytes.val
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
-  if(TimeCount>2) //Only show after time was gotten the 3rd time (heaters will no longer be blocking)
+  if(TimeCount>4) //Only show after time was gotten the 3rd time (heaters will no longer be blocking)
   {
     tTime.aph=127
     tTime.txt=printer.printTime.txt
+  }else
+  {
+    tTime.aph=0
+    tTime.txt=""
   }
+  tsw hSettings,1
 }
 if(printer.printState.txt=="finishing")
 {
@@ -94,14 +98,14 @@ if(printer.printState.txt=="finishing")
   tsw 255,0
 }
 tM117.txt=printer.m117.txt
-doevents
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxAnimate
 /// @brief Animation Loop
 ///////////////////////////////////////////////////////////////////////////////
 Frame=Frame^1 //Toggle Frame between 0 and 1
-if(FrameB<=4)
+if(FrameB<3)
 {
   FrameB+=1
 }else
@@ -109,7 +113,7 @@ if(FrameB<=4)
   FrameB=0
 }
 click luxPageAnimate,1
-click luxCBAnimate,1
+click luxControlBar,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPageAnimate

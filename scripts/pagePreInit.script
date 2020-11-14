@@ -3,6 +3,7 @@
 /// @brief Page Initialization
 ///////////////////////////////////////////////////////////////////////////////
 click luxView,1
+click luxAnimate,1
 ReturnPage=dp
 DiagReturnPage=dp
 if(HandleCallback==1)
