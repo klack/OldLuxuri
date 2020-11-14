@@ -79,3 +79,63 @@ tBedTemp.txt+=vars.s.txt
 covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
 tFanSpeed.txt=vars.s.txt
 bTool.picc=bTool.picc2+Tool
+
+///////////////////////////////////////////////////////////////////////////////
+/// @brief Buttons
+///////////////////////////////////////////////////////////////////////////////
+
+//bT0 click
+ReturnObj=!!
+numpad.tCaption.txt="T0 Temperature"
+vars.returnVal.txt=""
+page numpad
+
+//bT0 callback
+if(vars.returnVal.txt!="null")
+{
+  commands.queue.txt+="M104 T0 S"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+}
+
+//bT1 click
+ReturnObj=!!
+numpad.tCaption.txt="T1 Temperature"
+vars.returnVal.txt=""
+page numpad
+
+//bT1 callback
+if(vars.returnVal.txt!="null")
+{
+  commands.queue.txt+="M104 T1 S"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+}
+
+//bBed click
+ReturnObj=!!
+numpad.tCaption.txt="Bed Temperature"
+vars.returnVal.txt=""
+page numpad
+
+//bBed callback
+if(vars.returnVal.txt!="null")
+{
+  commands.queue.txt+="M140 S"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+}
+
+//bFan click
+ReturnObj=!!
+numpad.tCaption.txt="Fan Speed"
+vars.returnVal.txt=""
+page numpad
+
+//bFan callback
+if(vars.returnVal.txt!="null")
+{
+  prints "M106 S",0
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+}
