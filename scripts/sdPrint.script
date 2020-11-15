@@ -1,28 +1,45 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn controller,1
+/// @fn luxController,1
 ///
 /// @brief Program loop
 /// @brief state.txts: null, getting-files, ready, no-sd
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="null")
 {
-  vars.status.txt="Initializing"
   state.txt="init"
-  click updateView,1
+  vars.status.txt="Initializing"
+  commands.queue.txt+="M155 S0\r" //Temp auto report on
+  click luxSend,0
+  click luxView,1
 }
 if(state.txt=="init")
 {
-  vars.status.txt="Getting Files"
-  click listFiles,1
   state.txt="getting-files"
-  click updateView,1
+  vars.status.txt="Getting Files"
+  click luxListFiles,1
+  click luxView,1
 }
 if(state.txt=="getting-files")
+{
+  if(parse.callback.txt!="luxController:init")
+  {
+    parse.callback.txt="luxController:init"
+    click setCallback,1
+  }
+  tDebug.txt+=parse.callbackReturn.txt
+  if(parse.callbackReturn.txt==parse.callback.txt)
+  {
+    state.txt="getting-long"
+    click luxGetLong,1
+    click luxView,1
+  }
+}
+if(state.txt=="getting-long")
 {
   if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
   {
     state.txt="ready"
-    click updateView,1
+    click luxView,1
   }
 }
 if(state.txt=="ready")
@@ -31,14 +48,14 @@ if(state.txt=="ready")
 }
 if(state.txt=="no-sd")
 {
-  DiagReturnPage=5
+  DiagReturnPage=MAIN
   diagConfirm.tMessage.txt="Please insert SD Card"
   page diagConfirm
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn updateView,1
+/// @fn luxView,1
 ///
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
@@ -113,46 +130,38 @@ if(state.txt=="ready")
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn listFiles,1
+/// @fn luxListFiles,1
 ///
 /// @brief Re-initialize SDCard and list files
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt+="M22\r" //Unmount
-commands.command.txt+="M21\r" //Mount
-commands.command.txt+="M20\r" //List files
-click sendCommand,1
-delay=1000
-click readBuffer,1
-click getLongFiles,1
-click readBuffer,1
+commands.queue.txt+="M22\r" //Unmount
+commands.queue.txt+="M21\r" //Mount
+commands.queue.txt+="M20\r" //List files
+gettingFiles.val=1
+click luxSend,0
 
   
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn getLongFiles,1
+/// @fn luxGetLong,1
 ///
 /// @Get Long File names from file list
 ///////////////////////////////////////////////////////////////////////////////
+state.txt="getting-long"
 keyLFile.txt=""
 valueLFile.txt=""
 lFilesReq.val=0
 lFilesRecieved.val=0
-gettingLFiles.val=1
 j=page.val*5
 for(k=0;k<=4;k++)
 {
-  spstr tFiles.txt,vars.s.txt,"\r",j+k
-  if(vars.s.txt!="")
-  {
-    keyLFile.txt+=vars.s.txt //Store key
-    keyLFile.txt+="\r"
-    commands.command.txt+="M33 "
-    commands.command.txt+=vars.s.txt
-    commands.command.txt+="\r"
-    lFilesReq.val+=1
-  }
+  keyLFile.txt+=vars.s.txt //Store key
+  keyLFile.txt+="\r"
+  commands.command.txt+="M33 "
+  commands.command.txt+=vars.s.txt
+  commands.command.txt+="\r"
+  lFilesReq.val+=1
 }
-click sendCommand,1
-
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn parseFiles,1
@@ -218,11 +227,12 @@ if(lFilesRecieved.val>0)
 ///////////////////////////////////////////////////////////////////////////////
 //bPrint
 print.fileName.txt=selectedFile.txt
-printer.sdPrinting.val==0
+printer.sdPrinting.val=0
 printer.printState.txt="null"
 page print
 
-//fn click
+/// @fn click
+/// @brief Executed when clicking on a file name
 selectedIndex.val=0
 click selectFile,1
 
@@ -232,11 +242,11 @@ selectedFile.txt=vars.s.txt
 spstr valueLFile.txt,vars.s.txt,"\r",selectedIndex.val
 selectedFLong.txt=vars.s.txt
 print.tFileName.txt=selectedFLong.txt
-click updateView,1
+click luxView,1
 
 //On Exit
 commands.queue.txt+="M155 S5" //Temp auto report on
-click sendCommand,0
+click luxSend,0
 
 
 //bUp
@@ -248,7 +258,7 @@ if(page.val>0)
   selectedFile.txt=""
   selectedIndex.val=-1
   page.val-=1
-  click getLongFiles,1
+  click luxGetLong,1
 }
 click selectFile,1
 
@@ -259,24 +269,5 @@ bDown.picc=bDown.picc2
 selectedFile.txt=""
 selectedIndex.val=-1
 page.val+=1
-click getLongFiles,1
+click luxGetLong,1
 click selectFile,1
-
-//---------------------------------------------------------
-//Pre-initialize
-//---------------------------------------------------------
-click updateView,1
-DiagReturnPage=dp
-if(HandleCallback==1)
-{
-  if(ReturnObj==0) //Direct to custom controller callback
-  {
-    click controller,0
-  }else
-  {
-    click b[ReturnObj],0
-  }
-  ReturnVal=-1
-  HandleCallback=0
-}
-click controller,1

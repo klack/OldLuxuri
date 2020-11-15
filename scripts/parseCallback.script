@@ -1,0 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @fn parseCallback
+/// @brief Catch a callback from serial
+///////////////////////////////////////////////////////////////////////////////
+parse.lineMatch.txt="// lux:callback "
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,parse.callbackReturn.txt,parse.lineMatch.txt,1
+}

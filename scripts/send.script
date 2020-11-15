@@ -23,7 +23,7 @@ if(ok==1&&busy==0)
 {
   OkBlocks=0
   strlen commands.queue.txt,k //get the length of the command queue
-  while(k>0&&OkBlocks<10)
+  while(k>0&&OkBlocks<50)
   {
     doevents
     click luxRead,1
@@ -48,11 +48,12 @@ if(ok==1&&busy==0)
     {
       click luxRead,1
       OkBlocks+=1
-      doevents
+      bClose.aph=0
+      delay=25
     }
     strlen commands.queue.txt,k
   }
-  if(OkBlocks>=10)
+  if(OkBlocks>=50)
   {
     QueueBlocks+=1 //Track how many times the queue was blocked
   }else
