@@ -32,7 +32,6 @@ if(printer.printState.txt=="finishing") //Used to wait for updated print time
 if(printer.printState.txt=="finished") //Finished is set by parsing
 {
   click luxStopPrint,1 //Run second half of stopping script
-  =MaxQueueBlocks
   MaxQueueBlocks=-1
   strlen commands.queue.txt,c //See if there are commands in the queue
   while(ok==0||c>0)
