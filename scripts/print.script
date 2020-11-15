@@ -2,17 +2,6 @@
 /// @fn luxController,1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
-if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
-{ 
-  if(printer.printState.txt=="printing")
-  { 
-    strlen commands.queue.txt,c //See if there are commands in the queue
-    if(ok==1&&c==0)
-    {
-      printer.printState.txt="finished"
-    }
-  }
-}
 if(printer.printState.txt=="null")
 {
   ok=1 //Hack
@@ -43,18 +32,26 @@ if(printer.printState.txt=="finishing") //Used to wait for updated print time
 if(printer.printState.txt=="finished") //Finished is set by parsing
 {
   click luxStopPrint,1 //Run second half of stopping script
-  printer.printState.txt="null"
+  =MaxQueueBlocks
+  MaxQueueBlocks=-1
+  strlen commands.queue.txt,c //See if there are commands in the queue
+  while(ok==0||c>0)
+  {
+    click luxSend,0
+    click luxRead,1
+    strlen commands.queue.txt,c //See if there are commands in the queue
+  }
+  MaxQueueBlocks=10
   diagConfirm.tMessage.txt="Print Complete"
   diagConfirm.tMessage.txt+="\r"
   diagConfirm.tMessage.txt+=printer.printTime.txt
-  DiagReturnPage=5 //main
+  DiagReturnPage=MAIN
   page diagConfirm
 }
 if(printer.printState.txt=="error") //Error
 {
-  DiagReturnPage=5 //main
   diagConfirm.tMessage.txt="Error opening file"
-  page diagConfirm
+  page MAIN
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,6 +127,19 @@ if(printer.flow.val!=100)
 }else
 {
     pFlow.aph=0
+}
+if(printer.speed.val!=100)
+{
+  if(Frame==0)
+  {
+    pSpeed.aph=127
+  }else
+  {
+    pSpeed.aph=0
+  }
+}else
+{
+  pSpeed.aph=0
 }
 
 ///////////////////////////////////////////////////////////////////////////////

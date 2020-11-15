@@ -17,11 +17,13 @@ click luxSend,0
 printer.storedX.txt=printer.x.txt
 printer.storedY.txt=printer.y.txt
 printer.storedZ.txt=printer.z.txt
-commands.queue.txt+="G0 X"
-commands.queue.txt+=printer.pausedX.txt
-commands.queue.txt+=" Y"
-commands.queue.txt+=printer.pausedY.txt
-commands.queue.txt+="\r"
+commands.queue.txt+="G28 X\r"
+commands.queue.txt+="G0 Y300\r"
+// commands.queue.txt+="G0 X"
+// commands.queue.txt+=printer.pausedX.txt
+// commands.queue.txt+=" Y"
+// commands.queue.txt+=printer.pausedY.txt
+// commands.queue.txt+="\r"
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -36,8 +38,8 @@ commands.queue.txt+=" Z"
 commands.queue.txt+=printer.storedZ.txt
 commands.queue.txt+="\r"
 commands.queue.txt+="M24\r"
-printer.sdPrinting.val=1
 click luxSend,0
+printer.sdPrinting.val=1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxFlow 1
@@ -83,7 +85,7 @@ click luxSend,0
 /// @brief Break through a busy or waiting for response status
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt=""
-for(l=0;l<5;l++)
+for(l=0;l<4;l++)
 {
   ok=0
   while(ok==0)
@@ -92,7 +94,7 @@ for(l=0;l<5;l++)
     printh 0A
     prints "M524",0 //Stop print
     printh 0A 
-    delay=500
+    delay=1000
     click luxRead,1
   }
 }
@@ -101,12 +103,16 @@ for(l=0;l<5;l++)
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPrintTime 1
 ///////////////////////////////////////////////////////////////////////////////
-strlen commands.queue.txt,j
-if(ok==1&&j==0) //Only get time if an ok was recieved
+if(printer.printState.txt=="printing")
 {
-  commands.queue.txt+="M31\r"
-  TimeCount+=1
+  strlen commands.queue.txt,j
+  if(ok==1&&j==0) //Only get time if an ok was recieved
+  {
+    commands.queue.txt+="M31\r"
+    TimeCount+=1
+  }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxCheckSleep
@@ -117,11 +123,7 @@ if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
   commands.queue.txt+="" //Clear invalid commands
   click luxView,1
   click luxSend,0
-  strlen commands.queue.txt,c //See if there are commands in the queue
-  if(ok==1&&c==0)
-  {
-    commands.queue.txt+="M31\r" //Get print time
-  }
+  commands.queue.txt+="M31\r" //Get print time
 }
 
 ///////////////////////////////////////////////////////////////////////////////

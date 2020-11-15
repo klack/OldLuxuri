@@ -68,7 +68,7 @@ if(ok==1&&busy==0)
     QueueBlocks+=1
   }
 }
-if(QueueBlocks>10)
+if(MaxQueueBlocks>0&&QueueBlocks>MaxQueueBlocks)
 {
   prints "M118 marco",0 //Maybe an ok was missed, try and trigger one
   printh 0A

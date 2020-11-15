@@ -43,3 +43,4 @@ if(usize>0)
     BufferLen=0
   }
 }
+doevents

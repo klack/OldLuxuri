@@ -2,60 +2,50 @@
 // @fn luxControlBar 0
 // @brief Animate control bar
 ///////////////////////////////////////////////////////////////////////////////
-if(printer.speed.val!=100)
-{
-  if(Frame==0)
-  {
-    pSpeed.aph=127
-  }else
-  {
-    pSpeed.aph=0
-  }
-}else
-{
-  pSpeed.aph=0
-}
 if(printer.T0SetTemp.val!=0) //T0 Temp
 {
   if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
   {
-    bT0.picc=bT0.picc2-Frame
+    bT0.picc=bT0.picc2+Frame
   }else
   {
     bT0.picc=bT0.picc2 //Temperature reached
   }
 }else //Cooling
 {
-  bT0.picc=5
+  bT0.picc=bT0.picc2+1
 }
 if(printer.T1SetTemp.val!=0) //T1 Temp
 {
   if(printer.T1Temp.val<printer.T1SetTemp.val) //Heating
   {
-    bT1.picc=bT1.picc2-Frame
+    bT1.picc=bT1.picc2+Frame
   }else
   {
     bT1.picc=bT1.picc2 //Temperature reached
   }
 }else //Cooling
 {
-  bT1.picc=5
+  bT1.picc=bT1.picc2+1
 }
 if(printer.setBedTemp.val!=0) //Bed Temp
 {
   if(printer.bedTemp.val<printer.setBedTemp.val) //Heating
   {
-    bBed.picc=bBed.picc2-Frame
+    bBed.picc=bBed.picc2+Frame
   }else
   {
     bBed.picc=bBed.picc2 //Temperature reached
   }
+}else //Cooling
+{
+  bBed.picc=bBed.picc2+1
 }
 if(printer.fanSpeed.val>0) //Fan
 {
   bFan.picc=bFan.picc2+FrameB //picc2 use to signify starting frame
 }
-bTool.picc=bTool.picc2+Tool
+//bTool.picc=bTool.picc2+Tool
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxControlBar 1
@@ -135,7 +125,7 @@ page numpad
 //bFan callback
 if(vars.returnVal.txt!="null")
 {
-  prints "M106 S",0
+  commands.queue.txt+="M106 S"
   commands.queue.txt+=vars.returnVal.txt
   commands.queue.txt+="\r"
 }

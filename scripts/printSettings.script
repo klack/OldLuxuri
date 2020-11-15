@@ -35,6 +35,7 @@ if(c==0)
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
+click luxControlBar,1
 if(printer.printState.txt=="stopping") //Stopping
 {
   bStop.picc=bStop.picc2
@@ -88,7 +89,6 @@ if(QueueBlocks>0)
 {
   tBusy.txt="Commands Queued"
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @brief Buttons
@@ -153,13 +153,18 @@ if(ReturnVal!=-1)
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxAnimate
-/// @breif Animation Loop
+/// @brief Animation Loop
 ///////////////////////////////////////////////////////////////////////////////
-Frame=Frame^1
-if(printer.printState.txt=="pausing")
+Frame=Frame^1 //Toggle Frame between 0 and 1
+if(FrameB<3)
 {
-  bPauseResume.picc=bPauseResume.picc2-Frame
+  FrameB+=1
+}else
+{
+  FrameB=0
 }
+click luxPageAnimate,1
+click luxControlBar,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRun
@@ -169,3 +174,15 @@ click luxRead,1
 click luxView,1
 click luxController,1
 click luxSend,0
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPageAnimate
+///////////////////////////////////////////////////////////////////////////////
+if(printer.printState.txt=="pausing")
+{
+  bPauseResume.picc=bPauseResume.picc2-Frame
+}
+if(printer.printState.txt=="stopping")
+{
+  bStop.picc=bStop.picc2-Frame
+}
