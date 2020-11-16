@@ -3,6 +3,7 @@
 /// @brief Page Initialization
 ///////////////////////////////////////////////////////////////////////////////
 parse.callback.txt="null"
+parse.callbackReturn.txt="null"
 click luxView,1
 click luxAnimate,1
 ReturnPage=dp
