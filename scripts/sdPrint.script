@@ -24,9 +24,8 @@ if(state.txt=="getting-files")
   if(parse.callback.txt!="luxController:init")
   {
     parse.callback.txt="luxController:init"
-    click setCallback,1
+    click luxSetCallback,1
   }
-  tDebug.txt+=parse.callbackReturn.txt
   if(parse.callbackReturn.txt==parse.callback.txt)
   {
     state.txt="getting-long"
@@ -36,11 +35,8 @@ if(state.txt=="getting-files")
 }
 if(state.txt=="getting-long")
 {
-  if(gettingFiles.val==0&&gettingLFiles.val==0) //All files should be recieved
-  {
-    state.txt="ready"
-    click luxView,1
-  }
+  // state.txt="ready"
+  // click luxView,1
 }
 if(state.txt=="ready")
 {
@@ -154,12 +150,17 @@ lFilesRecieved.val=0
 j=page.val*5
 for(k=0;k<=4;k++)
 {
-  keyLFile.txt+=vars.s.txt //Store key
-  keyLFile.txt+="\r"
-  commands.command.txt+="M33 "
-  commands.command.txt+=vars.s.txt
-  commands.command.txt+="\r"
-  lFilesReq.val+=1
+  spstr tFiles.txt,vars.s.txt,"\r",j+k
+  gettingLFiles.val=1
+  if(vars.s.txt!="")
+  {
+    keyLFile.txt+=vars.s.txt //Store key
+    keyLFile.txt+="\r"
+    commands.queue.txt+="M33 "
+    commands.queue.txt+=vars.s.txt
+    commands.queue.txt+="\r"
+    lFilesReq.val+=1
+  }
 }
 click luxSend,0
 
