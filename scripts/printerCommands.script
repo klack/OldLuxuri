@@ -97,6 +97,7 @@ for(j=0;j<4;j++)
     delay=250*k
     click luxRead,1
   }
+  delay=250
 }
 parse.callback.txt="luxStopPrint0:finished"      
 click luxSetCallback,1

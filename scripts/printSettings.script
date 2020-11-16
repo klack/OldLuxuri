@@ -2,6 +2,10 @@
 /// @fn luxController,1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
+if(printer.printState.txt=="finished")
+{
+  page print
+}
 if(printer.printState.txt=="paused"||printer.printState.txt=="printing")
 {
   //Do nothing
