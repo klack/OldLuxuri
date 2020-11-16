@@ -48,7 +48,6 @@ if(ok==1&&busy==0)
     {
       click luxRead,1
       OkBlocks+=1
-      bClose.aph=0
       delay=25
     }
     strlen commands.queue.txt,k

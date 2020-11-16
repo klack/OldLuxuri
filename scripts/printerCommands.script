@@ -156,3 +156,25 @@ commands.queue.txt+="M118 A1 lux:callback "
 commands.queue.txt+=parse.callback.txt
 commands.queue.txt+="\r"
 click luxSend,0
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn Pre-initialize
+/// @brief Page Initialization
+///////////////////////////////////////////////////////////////////////////////
+parse.callback.txt="null"
+click luxView,1
+DiagReturnPage=dp
+if(HandleCallback==1)
+{
+  if(ReturnObj==0) //Direct to custom controller callback
+  {
+    click luxController,0
+  }else
+  {
+    click b[ReturnObj],0
+  }
+  ReturnVal=-1
+  HandleCallback=0
+}
+click luxController,1

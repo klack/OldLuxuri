@@ -17,16 +17,13 @@ if(state.txt=="init")
   state.txt="getting-files"
   vars.status.txt="Getting Files"
   click luxListFiles,1
+  parse.callback.txt="luxController:init"
+  click luxSetCallback,1
   click luxView,1
 }
 if(state.txt=="getting-files")
 {
-  if(parse.callback.txt!="luxController:init")
-  {
-    parse.callback.txt="luxController:init"
-    click luxSetCallback,1
-  }
-  if(parse.callbackReturn.txt==parse.callback.txt)
+  if(parse.callbackReturn.txt=="luxController:init")
   {
     state.txt="getting-long"
     click luxGetLong,1
@@ -35,8 +32,11 @@ if(state.txt=="getting-files")
 }
 if(state.txt=="getting-long")
 {
-  // state.txt="ready"
-  // click luxView,1
+  if(lFilesReq.val==lFilesRecieved.val)
+  {
+    state.txt="ready"
+    click luxView,1
+  }  
 }
 if(state.txt=="ready")
 {
@@ -133,7 +133,6 @@ if(state.txt=="ready")
 commands.queue.txt+="M22\r" //Unmount
 commands.queue.txt+="M21\r" //Mount
 commands.queue.txt+="M20\r" //List files
-gettingFiles.val=1
 click luxSend,0
 
   
@@ -156,13 +155,13 @@ for(k=0;k<=4;k++)
   {
     keyLFile.txt+=vars.s.txt //Store key
     keyLFile.txt+="\r"
-    commands.queue.txt+="M33 "
-    commands.queue.txt+=vars.s.txt
-    commands.queue.txt+="\r"
+    commands.command.txt+="M33 "
+    commands.command.txt+=vars.s.txt
+    commands.command.txt+="\r"
     lFilesReq.val+=1
   }
 }
-click luxSend,0
+click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn parseFiles,1
@@ -272,3 +271,7 @@ selectedIndex.val=-1
 page.val+=1
 click luxGetLong,1
 click selectFile,1
+
+
+
+luxController:init
