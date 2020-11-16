@@ -2,31 +2,35 @@
 /// @fn luxController,1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
-strlen commands.queue.txt,c //See if there are commands in the queue
-if(c==0)
+if(printer.printState.txt=="paused"||printer.printState.txt=="printing")
 {
-  if(printer.printState.txt=="pausing")
+  //Do nothing
+}
+if(printer.printState.txt=="pausing")
+{
+  if(parse.callbackReturn.txt=="luxPause_1:finished")
   {
-    if(ok==1&&busy==0)
-    {
-      if(printer.x.txt!="?")
-      {
-        click luxPause,0 
-        printer.printState.txt="paused"
-        click luxView,1         
-      }
-    }
+    click luxPause,0 //Park
+    commands.queue.txt+="G0 Y300\r" //Present
+    click luxSend,0
+    printer.printState.txt="paused"
+    click luxView,1         
   }
-  if(printer.printState.txt=="resuming")
+}
+if(printer.printState.txt=="resuming")
+{
+  if(parse.callbackReturn.txt=="luxResume_1:finished")
   {
     printer.printState.txt="printing"
     click luxView,1 
-  }
-  if(printer.printState.txt=="stopping")
+  } 
+}
+if(printer.printState.txt=="stopping")
+{
+  if(parse.callbackReturn.txt=="luxStopPrint_1:finished")
   {
-    vars.debug.txt+="here2"
-    printer.printState.txt="nulluby"
     printer.sdPrinting.val=0
+    printer.printState.txt="null"
     page main
   }
 }
@@ -148,7 +152,6 @@ if(ReturnVal!=-1)
   click luxView,1
   click luxStopPrint,0
   click luxStopPrint,1
-  vars.debug.txt+="here1"
 }
 
 ///////////////////////////////////////////////////////////////////////////////

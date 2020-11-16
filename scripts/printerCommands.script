@@ -2,28 +2,21 @@
 /// @fn luxPause 1
 /// @brief Pause the print
 ///////////////////////////////////////////////////////////////////////////////
-printer.x.txt="?" //Clear out so it can be caught later
-printer.y.txt="?"
-printer.z.txt="?"
 commands.queue.txt+="M25\r" 
 commands.queue.txt+="M400\r" //Trigger busy until planner is finished
 commands.queue.txt+="M114\r"
 click luxSend,0
+parse.callback.txt="luxPause_1:finished"
+click luxSetCallback,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPause 0
-/// @fn Goes to paused locaiton
+/// @fn Store current position and park
 ///////////////////////////////////////////////////////////////////////////////
 printer.storedX.txt=printer.x.txt
 printer.storedY.txt=printer.y.txt
 printer.storedZ.txt=printer.z.txt
 commands.queue.txt+="G28 X\r"
-commands.queue.txt+="G0 Y300\r"
-// commands.queue.txt+="G0 X"
-// commands.queue.txt+=printer.pausedX.txt
-// commands.queue.txt+=" Y"
-// commands.queue.txt+=printer.pausedY.txt
-// commands.queue.txt+="\r"
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -39,6 +32,8 @@ commands.queue.txt+=printer.storedZ.txt
 commands.queue.txt+="\r"
 commands.queue.txt+="M24\r"
 click luxSend,0
+parse.callback.txt="luxResume_1:finished"
+click luxSetCallback,1
 printer.sdPrinting.val=1
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -79,9 +74,9 @@ click luxSend,0
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\rG0 X Y\rM605 S1\rT0\rM220 S100\rM221 S100\rM220\rM221\r"
 click luxSend,0
-parse.callback.txt="luxStopPrint1:finished"
+parse.callback.txt="luxStopPrint_1:finished"
 click luxSetCallback,1
-printer.printState.txt="null"
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxStopPrint 0

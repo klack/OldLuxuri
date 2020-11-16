@@ -36,7 +36,7 @@ if(printer.printState.txt=="finished") //Finished state is also set by parsing
 }
 if(printer.printState.txt=="cleaning-up")
 {
-  if(parse.callbackReturn.txt=="luxStopPrint1:finished")
+  if(parse.callbackReturn.txt=="luxStopPrint_1:finished")
   {
     printer.printState.txt="null"
     diagConfirm.tMessage.txt="Print Complete"

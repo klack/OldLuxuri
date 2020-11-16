@@ -128,8 +128,8 @@ if(state.txt=="ready")
 ///
 /// @brief Re-initialize SDCard and list files
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="M22\r" //Unmount
-commands.queue.txt+="M21\r" //Mount
+// commands.queue.txt+="M22\r" //Unmount
+// commands.queue.txt+="M21\r" //Mount
 commands.queue.txt+="M20\r" //List files
 click luxSend,0
 
