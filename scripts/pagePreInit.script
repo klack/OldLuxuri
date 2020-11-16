@@ -2,6 +2,7 @@
 /// @fn Pre-initialize
 /// @brief Page Initialization
 ///////////////////////////////////////////////////////////////////////////////
+parse.callback.txt="null"
 click luxView,1
 click luxAnimate,1
 ReturnPage=dp

@@ -7,27 +7,27 @@
 if(state.txt=="null")
 {
   state.txt="init"
+  click luxView,1
   vars.status.txt="Initializing"
   commands.queue.txt+="M155 S0\r" //Temp auto report on
   click luxSend,0
-  click luxView,1
 }
 if(state.txt=="init")
 {
   state.txt="getting-files"
+  click luxView,1
   vars.status.txt="Getting Files"
   click luxListFiles,1
   parse.callback.txt="luxController:init"
   click luxSetCallback,1
-  click luxView,1
 }
 if(state.txt=="getting-files")
 {
   if(parse.callbackReturn.txt=="luxController:init")
   {
     state.txt="getting-long"
-    click luxGetLong,1
     click luxView,1
+    click luxGetLong,1
   }
 }
 if(state.txt=="getting-long")
@@ -48,7 +48,6 @@ if(state.txt=="no-sd")
   diagConfirm.tMessage.txt="Please insert SD Card"
   page diagConfirm
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1
@@ -124,7 +123,6 @@ if(state.txt=="ready")
   }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxListFiles,1
 ///
@@ -135,7 +133,6 @@ commands.queue.txt+="M21\r" //Mount
 commands.queue.txt+="M20\r" //List files
 click luxSend,0
 
-  
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxGetLong,1
 ///
@@ -193,6 +190,7 @@ if(gettingFiles.val==1) //Get files
     }
   }
 }
+
 parse.lineMatch.txt="Begin file list"
 if(parse.buffer.txt==parse.lineMatch.txt)
 {
@@ -223,7 +221,6 @@ if(lFilesRecieved.val>0)
   }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 //bPrint
 print.fileName.txt=selectedFile.txt
@@ -248,7 +245,6 @@ click luxView,1
 commands.queue.txt+="M155 S5" //Temp auto report on
 click luxSend,0
 
-
 //bUp
 bUp.picc=bUp.picc2
 tsw bUp,0
@@ -271,7 +267,3 @@ selectedIndex.val=-1
 page.val+=1
 click luxGetLong,1
 click selectFile,1
-
-
-
-luxController:init

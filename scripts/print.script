@@ -21,10 +21,9 @@ if(printer.printState.txt=="printing") //Printing
 {
   click luxCheckSleep,1
 }
-if(printer.printState.txt=="finishing") //Used to wait for updated print time
+if(printer.printState.txt=="waking") //Used to wait for updated print time
 {
-  strlen commands.queue.txt,c //See if there are commands in the queue
-  if(ok==1&&c==0)
+  if(parse.callbackReturn.txt=="luxCheckSleep:finished")
   {
     printer.printState.txt="finished"
   }

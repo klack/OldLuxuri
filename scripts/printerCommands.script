@@ -79,22 +79,26 @@ click luxSend,0
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\rG0 X Y\rM605 S1\rT0\rM220 S100\rM221 S100\rM220\rM221\r"
 click luxSend,0
+parse.callback.txt="luxStopPrint:finished"
+click luxSetCallback,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxStopPrint 0
 /// @brief Break through a busy or waiting for response status
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt=""
-for(l=0;l<4;l++)
+for(j=0;j<4;j++)
 {
   ok=0
-  while(ok==0)
+  k=0
+  while(ok==0&&k<10)
   {
+    k=k+1
     prints "M108",0
     printh 0A
     prints "M524",0 //Stop print
     printh 0A 
-    delay=1000
+    delay=250*k
     click luxRead,1
   }
 }
@@ -119,11 +123,14 @@ if(printer.printState.txt=="printing")
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.sdPrinting.val==0) //Handle a finished print while LCD was asleep
 {
-  printer.printState.txt="finishing"
   commands.queue.txt+="" //Clear invalid commands
-  click luxView,1
   click luxSend,0
   commands.queue.txt+="M31\r" //Get print time
+  click luxSend,0
+  printer.printState.txt="waking"
+  click luxView,1
+  parse.callback.txt="luxCheckSleep:finished"
+  click luxSetCallback,1
 }
 
 ///////////////////////////////////////////////////////////////////////////////
