@@ -45,7 +45,7 @@ if(printer.fanSpeed.val>0) //Fan
 {
   bFan.picc=bFan.picc2+FrameB //picc2 use to signify starting frame
 }
-//bTool.picc=bTool.picc2+Tool
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxControlBar 1
@@ -68,7 +68,14 @@ covx printer.setBedTemp.val,vars.s.txt,0,0
 tBedTemp.txt+=vars.s.txt
 covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
 tFanSpeed.txt=vars.s.txt
-bTool.picc=bTool.picc2+Tool
+if(IdexMode==0||IdexMode==1)
+{
+  bTool.picc=bTool.picc2+Tool
+}else
+{
+  bTool.picc=bTool.picc2+2
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @brief Buttons
