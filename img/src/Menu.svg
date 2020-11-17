@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="Menu.svg"
-   inkscape:export-filename="D:\printing\universal-ui\img\toolbar-s3.png"
+   inkscape:export-filename="C:\Users\rlayt\Desktop\toolbar-mockup.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <style
@@ -1474,8 +1474,8 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1297064"
-     inkscape:cx="178.24147"
+     inkscape:zoom="1.1150695"
+     inkscape:cx="159.20998"
      inkscape:cy="40.641848"
      inkscape:document-units="px"
      inkscape:current-layer="layer48"
@@ -1487,9 +1487,9 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:window-width="1416"
-     inkscape:window-height="1080"
-     inkscape:window-x="1959"
-     inkscape:window-y="180"
+     inkscape:window-height="1008"
+     inkscape:window-x="2073"
+     inkscape:window-y="331"
      inkscape:window-maximized="0"
      guidetolerance="3.3"
      inkscape:lockguides="false"
@@ -1573,7 +1573,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
