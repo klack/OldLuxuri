@@ -3,15 +3,9 @@
 /// @brief Send a single command
 /// @param[in] command.command.txt
 ///////////////////////////////////////////////////////////////////////////////
-if(ok==1&&busy==0)
-{
-  prints commands.command.txt,0
-  printh 0A
-  ok=0
-}else
-{
-  commands.queue.txt+=commands.command.txt
-}
+prints commands.command.txt,0
+printh 0A
+ok=0
 commands.command.txt=""
 
 ///////////////////////////////////////////////////////////////////////////////

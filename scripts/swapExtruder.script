@@ -20,12 +20,15 @@ page diagPrompt
 ///////////////////////////////////////////////////////////////////////////////
 if(ReturnVal!=-1)
 {
-  commands.queue.txt+="T"
+  bSwap.picc=bSwap.picc2
+  commands.command.txt+="T"
   covx ReturnVal,vars.s.txt,0,0
-  commands.queue.txt+=vars.s.txt
-  commands.queue.txt+="\r"
-  click luxSend,0
+  commands.command.txt+=vars.s.txt
+  commands.command.txt+="\r"
+  commands.command.txt+="M114\r"
+  click luxSend,1
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1

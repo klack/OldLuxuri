@@ -6,7 +6,6 @@ parse.callback.txt="null"
 parse.callbackReturn.txt="null"
 click luxView,1
 click luxAnimate,1
-ReturnPage=dp
 DiagReturnPage=dp
 if(HandleCallback==1)
 {
@@ -24,35 +23,25 @@ if(HandleCallback==1)
   commands.queue.txt+="M605 S0\r" //Set manual idex mode
   IdexMode=0
   commands.queue.txt+="M114\r"
+  commands.queue.txt+="G91\r"
   click luxSend,0
 }
 click luxController,1
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxController,1
-/// @brief Program loop
-///////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////
 /// @fn bClose
 /// @brief Close button
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="G0 F5000" //Reset speed
+commands.queue.txt+="G0 F5000\r" //Reset speed
+commands.queue.txt+="G90\r" //Back to absolution positioning
 click luxSend,0
 page ReturnPage
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn sendMovement
-/// @brief Sends movement command to printer
+/// @fn luxController,1
+/// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="G91\r"
-commands.queue.txt+=command.txt
-commands.queue.txt+="\r"
-commands.queue.txt+="G90"
-commands.queue.txt+="M114"
-
-
+//Empty
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1
@@ -112,13 +101,17 @@ if(busy==1) //Busy
 {
   tBusy.aph=0
 }
-if(Tool==0) //Toolhead
-{
-  bSwap.picc=20
-}else
-{
-  bSwap.picc=21
-}
+bSwap.picc=bSwap.picc2+1
+bSwap.picc+=Tool
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn sendMovement
+/// @brief Sends movement command to printer
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt+=command.txt
+commands.command.txt+="\r"
+commands.command.txt+="M114\r"
+click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
 //bZHome
@@ -215,8 +208,8 @@ if(vars.returnVal.txt!="null")
 
 //Distances
 distance.txt=bDistance1.txt
-click luxSend,1
+click sendMovement,1
 
 //Speeds
 speed.txt=bSpeed1.txt
-click luxSend,1
+click sendMovement,1
