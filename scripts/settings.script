@@ -1,20 +1,33 @@
-//Onload
-DiagReturnPage=dp
-click updateState,1
-if(HandleCallback==1)
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxView,1
+/// @brief Updates states for controls
+///////////////////////////////////////////////////////////////////////////////
+eStepsVal.txt=printer.T0Esteps.txt
+zOffsetVal.txt=printer.zOffset.txt
+x2Val.txt=printer.x2Offset.txt
+y2Val.txt=printer.y2Offset.txt
+z2Val.txt=printer.z2Offset.txt
+if(printer.printState.txt!="null")
 {
-  click b[ReturnObj],0 //Run right click code as callback
-  HandleCallback=0
-  vars.returnVal.txt=""
-  ReturnVal=-1
-}
-if(printer.printState.txt!="printing")
-{
-  prints "M503",0
-  printh 0A
+  tsw bDefaults,0
+  bDefaults.aph=0
+  tsw tDefaults,0
+  tDefaults.aph=0
+  tsw bPIDTune,0
+  bPIDTune.aph=0
 }
 
-//Close
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxRunOnce
+/// @breif Does not run when returning from dialog boxes
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="M503\r"
+click luxSend,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn bClose
+/// @brief Close button
+///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt!="null")
 {
   page printSettings
@@ -23,25 +36,8 @@ if(printer.printState.txt!="null")
   page ReturnPage
 }
 
-//Update State
-eStepsVal.txt=printer.T0Esteps.txt
-zOffsetVal.txt=printer.zOffset.txt
-x2Val.txt=printer.x2Offset.txt
-y2Val.txt=printer.y2Offset.txt
-z2Val.txt=printer.z2Offset.txt
-if(printer.printState.txt!="null")
-{
-  setlayer bDefaults,0
-  bDefaults.aph=0
-  setlayer tDefaults,0
-  tDefaults.aph=0
-  setlayer bPIDTune,0
-  bPIDTune.aph=0
-}
-
-
 //bDefaults click
-ReturnObj=3
+ReturnObj=!!
 diagPrompt.tMessage.txt="Load Firmware Defaults?"
 ReturnVal=1
 page diagPrompt
@@ -49,22 +45,19 @@ page diagPrompt
 //bDefaults callback
 if(ReturnVal!=-1)
 {
-  prints "M502",0
-  printh 0A
-  prints "M500",0
-  printh 0A
-  prints "M503",0
-  printh 0A
+  commands.queue.txt+="M502\r"
+  commands.queue.txt+="M500\r"
+  commands.queue.txt+="M503\r"
+  click luxSend,0
 }
 
 //saveAndReload click
-prints "M500",0
-printh 0A
-prints "M503",0
-printh 0A
+commands.queue.txt+="M500\r"
+commands.queue.txt+="M503\r"
+click luxSend,0
 
 //eStepsVal click
-ReturnObj=2
+ReturnObj=!!
 numpad.tCaption.txt="E-Steps"
 vars.returnVal.txt=b[ReturnObj].txt
 page numpad
@@ -72,22 +65,16 @@ page numpad
 //eStepsVal callback
 if(vars.returnVal.txt!=b[ReturnObj].txt)
 {
-  prints "M92 T0 E",0
-  prints vars.returnVal.txt,0
-  printh 0A
-  prints "M92 T1 E",0
-  prints vars.returnVal.txt,0
-  printh 0A
-  prints "M500",0
-  printh 0A
-  prints "M503",0
-  printh 0A
+  commands.queue.txt+="M92 T0 E"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\rM92 T1 E"
+  commands.queue.txt+=vars.returnVal.txt
+  click saveAndReload,1
+  click luxSend,0
 }
 
-
-
 //zOffsetVal click
-ReturnObj=10
+ReturnObj=!!
 numpad.tCaption.txt="Z Offset"
 vars.returnVal.txt=b[ReturnObj].txt
 page numpad
@@ -95,14 +82,15 @@ page numpad
 //zOffsetVal callback
 if(vars.returnVal.txt!=b[ReturnObj].txt)
 {
-  prints "M206 Z",0
-  prints vars.returnVal.txt,0
-  printh 0A
+  commands.queue.txt+="M206 Z"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+  click luxSend,0
   click saveAndReload,1
 }
 
 //x2 click
-ReturnObj=11
+ReturnObj=!!
 numpad.tCaption.txt="X2 Offset"
 vars.returnVal.txt=b[ReturnObj].txt
 page numpad
@@ -110,14 +98,14 @@ page numpad
 //x2 callback
 if(vars.returnVal.txt!=b[ReturnObj].txt)
 {
-  prints "M218 T1 X",0
-  prints vars.returnVal.txt,0
-  printh 0A
+  commands.queue.txt+="M218 T1 X"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
   click saveAndReload,1
 }
 
 //y2 click
-ReturnObj=12
+ReturnObj=!!
 numpad.tCaption.txt="Y2 Offset"
 vars.returnVal.txt=b[ReturnObj].txt
 page numpad
@@ -125,14 +113,14 @@ page numpad
 //y2 callback
 if(vars.returnVal.txt!=b[ReturnObj].txt)
 {
-  prints "M218 T1 Y",0
-  prints vars.returnVal.txt,0
-  printh 0A
+  commands.queue.txt+="M218 T1 Y"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
   click saveAndReload,1
 }
 
 //z2 click
-ReturnObj=13
+ReturnObj=!!
 numpad.tCaption.txt="Z2 Offset"
 vars.returnVal.txt=b[ReturnObj].txt
 page numpad
@@ -140,10 +128,9 @@ page numpad
 //z2 callback
 if(vars.returnVal.txt!=b[ReturnObj].txt)
 {
-  prints "M218 T1 Z",0
-  prints vars.returnVal.txt,0
-  printh 0A
+  commands.queue.txt+="M218 T1 Z"
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+  click luxSend,0
   click saveAndReload,1
 }
-
-

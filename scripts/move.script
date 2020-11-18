@@ -17,6 +17,7 @@ if(HandleCallback==1)
     click b[ReturnObj],0
   }
   ReturnVal=-1
+  vars.returnVal.txt="null"
   HandleCallback=0
 }else
 {
