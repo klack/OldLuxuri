@@ -84,7 +84,7 @@ if(state.txt=="heating")
   }
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
 //Send Command
 commands.command.txt="T"
 covx commandTool.val,vars.s.txt,0,0

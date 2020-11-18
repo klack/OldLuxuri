@@ -44,7 +44,7 @@ commands.command.txt+="\r"
 click luxSend,1
 IdexMode=ReturnVal
 
-//Buttons
+///////////////////////////////////////////////////////////////////////////////
 //Manual
 if(IdexMode!=0)
 {
@@ -84,5 +84,3 @@ if(IdexMode!=3)
   ReturnVal=3
   page diagPrompt
 }
-
-

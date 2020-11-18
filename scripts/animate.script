@@ -1,7 +1,0 @@
-for(k=272;k>=0;k--)
-{
-  k--
-  qBanner.y=k
-  doevents
-}
-animate.en=0

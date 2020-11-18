@@ -90,14 +90,3 @@ if(parse.eval.txt==parse.lineMatch.txt)
 //TODO Powerloss
 //TODO Idex Mode
 //TODO handle M107 Fan off
-
-//Mock data
-// parse.buffer.txt="echo:M117 This is an M117 Message"
-// click notifyEOL,1
-
-// parse.buffer.txt="Error: Mock error test"
-// click notifyEOL,1
-// parse.buffer.txt="Error:Printer halted. "
-// click notifyEOL,1
-// parse.buffer.txt="echo:Power off button pressed"
-// click notifyEOL,1
