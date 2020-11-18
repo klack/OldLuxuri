@@ -1,16 +1,23 @@
-// Motors Off
-click stopPrint,1
-commands.command.txt="M84" //Disable steppers
-click sendCommand,1
-vars.status.txt="Stepper Motors Disabled"
+///////////////////////////////////////////////////////////////////////////////
+/// @fn bMotors
+/// @brief Stop print and unlock motors
+///////////////////////////////////////////////////////////////////////////////
+click luxStopPrint,0
+commands.command.txt="M84\r" //Disable steppers
+click luxSend,1
 
-// Heaters Off
-click stopPrint,1
-commands.command.txt+="M104 T0 S0\rM104 T1 S0\rM140 S0\r"
-click sendCommand,1
-vars.status.txt="Heaters Off"
+///////////////////////////////////////////////////////////////////////////////
+/// @fn bHeaters
+/// @brief Turn off all heaters
+///////////////////////////////////////////////////////////////////////////////
+click luxStopPrint,0
+commands.command.txt="M104 T0 S0\rM104 T1 S0\rM140 S0\r"
+click luxSend,1
 
-// Power Off
+///////////////////////////////////////////////////////////////////////////////
+/// @fn bShutdown
+/// @brief Shut down the printer.  USB must be unplugged to completely power off
+///////////////////////////////////////////////////////////////////////////////
 bPowerOff.picc=bPowerOff.picc2
 prints "M112",0
 printh 0A
