@@ -1,17 +1,84 @@
-//--------------------
-//Update State
-//--------------------
-//Update T0
-covx printer.T0Temp.val,vars.s.txt,0,0
-tT0Temp.txt=vars.s.txt
-//Update T1
-covx printer.T1Temp.val,vars.s.txt,0,0
-tT1Temp.txt=vars.s.txt
-//Update Bed
-covx printer.bedTemp.val,vars.s.txt,0,0
-tBedTemp.txt=vars.s.txt
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxController,1
+/// @brief Program loop
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="init")
+{
+}
+if(state.txt=="choose")
+{
+  if(preheatT0Temp.val>0||preheatT1Temp.val>0) //Check if a value was set
+  {
+    state.txt=="heating"
+  }
+}
+if(state.txt=="heating")
+{
+  if(printer.T0Temp.val>=preheatT0Temp.val) //Check T0Temp
+  {
+    j=1
+  }
+  if(printer.T1Temp.val>=preheatT1Temp.val) //Check T1Temp
+  {
+    k=1
+  }
+  if(printer.bedTemp.val>=printer.setBedTemp.val) //Check Bed Temp
+  {
+    l=1
+  }
+  c=j+k+l
+  if(c==3)
+  {
+    state.txt=="ready"
+  }
+}
+if(state.txt=="ready")
+{  
+}
 
-//Swap States
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxView,1
+/// @brief Updates states for controls
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="init"||state.txt=="choose")
+{  
+  tMessage.txt="Choose"
+  tMessage2.txt="Materials"
+  tempIcons.aph=0
+  tT0Temp.aph=0
+  tT1Temp.aph=0
+  tBedTemp.aph=0
+  tMessage2.aph=127
+}
+if(state.txt=="heating"||state.txt=="ready")
+{  
+  tMessage.txt="Heating"
+  tMessage2.txt="Please wait..."
+  tempIcons.aph=127
+  tT0Temp.aph=127
+  tT1Temp.aph=127
+  tBedTemp.aph=127
+}
+if(state.txt=="choose")
+{
+  icon.picc=pState.picc
+}
+if(state.txt=="heating")
+{
+  icon.picc=pState.picc+1
+}
+if(state.txt=="ready")
+{
+  tMessage.txt="Ready"
+  tMessage2.aph=0
+  icon.picc=pState.picc+2
+}
+covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+tT0Temp.txt=vars.s.txt
+covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
+tT1Temp.txt=vars.s.txt
+covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+tBedTemp.txt=vars.s.txt
 for(j=0;j<=32;j++) //Button Groups
 {
   if(b[j].type==98) //If text box
@@ -43,91 +110,32 @@ for(j=0;j<=32;j++) //Button Groups
   }
 }
 
-j=0
-k=0
-l=0
-if(preheatT0Temp.val>0||preheatT1Temp.val>0)
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPageAnimate
+/// @brief Animations specific to this page
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="heating")
 {
-  //Check T0Temp
-  if(printer.T0Temp.val>=preheatT0Temp.val)
+  if(Frame==0)
   {
-    j=1
-  }
-  //Check T1Temp
-  if(printer.T1Temp.val>=preheatT1Temp.val)
-  {
-    k=1
-  }
-  //Check Bed Temp
-  if(printer.bedTemp.val>=printer.setBedTemp.val)
-  {
-    l=1
-  }
-}
-State=j+k+l
-//Set States
-if(State==3)
-{
-  //Temperature Reached
-  icon.picc=24 //Change message to ready
-  tMessage.txt="Ready"
-  tMessage2.aph=0
-  ready.val=1
-  tempIcons.aph=127
-  tT0Temp.aph=127
-  tT1Temp.aph=127
-  tBedTemp.aph=127  
-}else
-{
-  if(preheatT0Temp.val>0||preheatT1Temp.val>0)
-  {
-    if(ready.val==0)
-    {
-      //Heating
-      tMessage.txt="Heating"
-      tMessage2.txt="Please wait..."
-      icon.picc=46
-      tempIcons.aph=127
-      tT0Temp.aph=127
-      tT1Temp.aph=127
-      tBedTemp.aph=127
-      if(tMessage2.aph==127) //Blink message2
-      {
-        tMessage2.aph=0
-      }else
-      {
-        tMessage2.aph=127
-      }    
-    }
+    tMessage2.aph=0
   }else
   {
-    //Choose temp
-    tMessage.txt="Choose"
-    tMessage2.txt="Materials"
     tMessage2.aph=127
-    icon.picc=23
-    tempIcons.aph=0
-    tT0Temp.aph=0
-    tT1Temp.aph=0
-    tBedTemp.aph=0
   }
-
 }
-//--------------------
-//End UpdateState
-//--------------------
 
-
-
-//Send Command
-prints "M104 T0 S",0 //Set T0
+///////////////////////////////////////////////////////////////////////////////
+/// @fn sendCommand 
+/// @brief Prepares and sends command
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="M104 T0 S" //Set T0
 covx preheatT0Temp.val,vars.s.txt,0,0
-prints vars.s.txt,0
-printh 0A
-prints "M104 T1 S",0 //Set T1
+commands.command.txt+=vars.s.txt
+commands.command.txt+="\rM104 T1 S" //Set T1
 covx preheatT1Temp.val,vars.s.txt,0,0
-prints vars.s.txt,0
-printh 0A
+commands.command.txt+=vars.s.txt
+commands.command.txt+="\r"
 if(preheatT0Bed.val>preheatT1Bed.val) //Set the higher bed temp of the two
 {
   j=preheatT0Bed.val
@@ -135,17 +143,11 @@ if(preheatT0Bed.val>preheatT1Bed.val) //Set the higher bed temp of the two
 {
   j=preheatT1Bed.val
 }
-prints "M140 S",0
+commands.command.txt+="M140 S"
 covx j,vars.s.txt,0,0
-prints vars.s.txt,0
-printh 0A
-ready.val=0
-click updateState,1
-
-//Onload
-click updateState,1
-
-
+commands.command.txt+=vars.s.txt
+commands.command.txt+="\r"
+state.txt="heating"
 
 //bT0None
 preheatT0Temp.val=0
@@ -176,9 +178,6 @@ preheatT0Temp.val=220
 T0Mat.txt="PVA"
 preheatT0Bed.val=60
 click sendCommand,1
-
-
-
 
 //bT1None
 preheatT1Temp.val=0
