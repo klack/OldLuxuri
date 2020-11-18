@@ -1,40 +1,30 @@
-//Page load
-prints "G28",0 //Home
-printh 0A
-prints "M605 S0",0 //Set to manual idex mode
-printh 0A
-prints "G0 F5000",0
-printh 0A
-prints "M114",0 //Report position
-printh 0A
-DiagReturnPage=dp
-//Do callback
-if(HandleCallback==1)
-{
-  click ReturnObj,0 //Mouse up
-  HandleCallback=0
-  ReturnVal=-1
-}
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxRunOnce
+/// @breif Does not run when returning from dialog boxes
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="G28\r" //Home
+commands.command.txt+="M605 S1\r" //Set to auto mode
+commands.command.txt+="T0\r"
+commands.command.txt+="G0 F5000\r"
+commands.command.txt+="M114\r" //Report position
+click luxSend,1
 
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxInitialize 0
+/// @brief Should run on any close button
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="G28\r" //Home
+commands.command.txt+="T0\r" //Set to T0
+commands.command.txt+="G0 F5000\r"
+click luxSend,1
+page ReturnPage
 
-//bSwap callback
-vars.status.txt="Swapping Tool"
-if(ReturnVal!=-1)
-{
-  prints "T",0
-  covx ReturnVal,vars.s.txt,0,0
-  prints vars.s.txt,0
-  printh 0A
-}
-
-//updateState
-if(Tool==0)
-{
-  bSwap.picc=14
-}else
-{
-  bSwap.picc=15
-}
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxView,1
+/// @brief Updates states for controls
+///////////////////////////////////////////////////////////////////////////////
+bSwap.picc=bSwap.picc2+1
+bSwap.picc+=Tool
 tPosition.txt="X:"
 tPosition.txt+=printer.x.txt
 tPosition.txt+=" "
@@ -44,57 +34,45 @@ tPosition.txt+=" "
 tPosition.txt+="Z:"
 tPosition.txt+=printer.z.txt
 
-
-//Send Command
-prints "G90",0
-printh 0A
-prints "G0 Z10 F400",0
-printh 0A
-prints "G0 X",0
+///////////////////////////////////////////////////////////////////////////////
+/// @fn sendCommand
+/// @brief Prepare and send commands
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="G90\r"
+commands.command.txt+="G0 Z10 F400\r"
+commands.command.txt+="G0 X"
 covx destX.val,vars.s.txt,0,0
-prints vars.s.txt,0
-prints " Y",0 
+commands.command.txt+=vars.s.txt
+commands.command.txt+=" Y"
 covx destY.val,vars.s.txt,0,0
-prints vars.s.txt,0
-prints " F5000",0
-printh 0A
-prints "G0 Z0 F400",0
-printh 0A
-prints "M114",0 //Report position
-printh 0A
+commands.command.txt+=vars.s.txt
+commands.command.txt+=" F5000\r"
+commands.command.txt+="G0 Z0 F400\r"
+commands.command.txt+="M114\r"
+click luxSend,1
 
-//Close
-prints "G28",0 //Home
-printh 0A
-prints "T0",0 //Set to T0
-printh 0A
-prints "G0 F5000",0
-printh 0A
-page ReturnPage
-
-
-//Points
-//1
+///////////////////////////////////////////////////////////////////////////////
+//bPoint1
 destX.val=10
 destY.val=10
 click sendCommand,1
 
-//2
+//bPoint2
 destX.val=290
 destY.val=290
 click sendCommand,1
 
-//3
+//bPoint3
 destX.val=290
 destY.val=10
 click sendCommand,1
 
-//4
+//bPoint4
 destX.val=10
 destY.val=290
 click sendCommand,1
 
-//5
+//bPoint5
 destX.val=155
 destY.val=155
 click sendCommand,1

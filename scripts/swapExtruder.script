@@ -20,7 +20,6 @@ page diagPrompt
 ///////////////////////////////////////////////////////////////////////////////
 if(ReturnVal!=-1)
 {
-  bSwap.picc=bSwap.picc2
   commands.command.txt+="T"
   covx ReturnVal,vars.s.txt,0,0
   commands.command.txt+=vars.s.txt
@@ -31,12 +30,7 @@ if(ReturnVal!=-1)
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1
+/// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
 bSwap.picc=bSwap.picc2+1
-if(Tool==0)
-{
-  bSwap.picc=bSwap.picc2+1
-}else
-{
-  bSwap.picc=bSwap.picc2+2
-}
+bSwap.picc+=Tool
