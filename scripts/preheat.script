@@ -9,7 +9,7 @@ if(state.txt=="choose")
 {
   if(preheatT0Temp.val>0||preheatT1Temp.val>0) //Check if a value was set
   {
-    state.txt=="heating"
+    state.txt="heating"
   }
 }
 if(state.txt=="heating")
@@ -29,7 +29,7 @@ if(state.txt=="heating")
   c=j+k+l
   if(c==3)
   {
-    state.txt=="ready"
+    state.txt="ready"
   }
 }
 if(state.txt=="ready")
@@ -91,7 +91,7 @@ for(j=0;j<=32;j++) //Button Groups
         b[j].pco=0
       }else
       {
-        b[j].picc=3
+        b[j].picc=PIC_CLEAR
         b[j].pco=WHITE
       }
     }
@@ -103,7 +103,7 @@ for(j=0;j<=32;j++) //Button Groups
         b[j].pco=0
       }else
       {
-        b[j].picc=3
+        b[j].picc=PIC_CLEAR
         b[j].pco=WHITE
       }
     }
@@ -147,8 +147,11 @@ commands.command.txt+="M140 S"
 covx j,vars.s.txt,0,0
 commands.command.txt+=vars.s.txt
 commands.command.txt+="\r"
+click luxSend,1
 state.txt="heating"
+click luxView,1
 
+///////////////////////////////////////////////////////////////////////////////
 //bT0None
 preheatT0Temp.val=0
 T0Mat.txt="None"
