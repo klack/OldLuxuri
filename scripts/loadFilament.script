@@ -1,64 +1,102 @@
-//Set temperature
-prints "M104 T0 S",0
-covx loadTemp.val,vars.s.txt,0,0
-prints vars.s.txt,0
-printh 0A
-prints "M104 T1 S",0
-prints vars.s.txt,0
-printh 0A
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxRunOnce
+/// @brief Warm up extruders
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="M605 S0\r" //Set manual mode
+covx loadTemp.val,vars.s.txt,0,0 //Heat to load temp
+commands.command.txt+="M104 T0 S"
+commands.command.txt+=vars.s.txt
+commands.command.txt+="\r"
+commands.command.txt+="M104 T1 S"
+commands.command.txt+=vars.s.txt
+commands.command.txt+="\r"
+click luxSend,1
 
-//State
-//Update temperature display
-covx printer.T0Temp.val,vars.s.txt,0,0
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxView
+/// @brief Updates states for controls
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="init")
+{
+  bT0Out.aph=0
+  bT0In.aph=0
+  bT1Out.aph=0
+  bT1In.aph=0
+  tsw bT0Out,0 //Disable buttons
+  tsw bT0In,0
+  tsw bT1Out,0
+  tsw bT1In,0
+}
+if(state.txt=="heating")
+{
+  pIcon.picc=pState.picc
+  tMessage2.aph=127
+}
+if(state.txt=="ready")
+{
+  pIcon.picc=pState.picc+1
+  tMessage2.aph=0
+  tT0Temp.y=222 //Move temps below box
+  tT1Temp.y=222
+  tsw bT0Out,1 //Enable buttons
+  tsw bT0In,1
+  tsw bT1Out,1
+  tsw bT1In,1
+  bT0Out.aph=127
+  bT0In.aph=127
+  bT1Out.aph=127
+  bT1In.aph=127
+}
+covx printer.T0Temp.val,vars.s.txt,0,0 //Update temperature display
 tT0Temp.txt=vars.s.txt
 covx printer.T1Temp.val,vars.s.txt,0,0
 tT1Temp.txt=vars.s.txt
 
-if(printer.T0Temp.val<loadTemp.val||printer.T1Temp.val<loadTemp.val)
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPageAnimate
+/// @brief Page Animations
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="heating")
 {
-  if(ready.val==0)
-    {
-    tMessage.txt="Heating"
-    if(tMessage2.aph==127)
-    {
-      tMessage2.aph=0
-    }else
-    {
-      tMessage2.aph=127
-    }
+  if(Frame==0)
+  {
+    tMessage2.aph=0
+  }else
+  {
+    tMessage2.aph=127
   }
-}else
-{ 
-  //Temperature Reached
-  state1.picc=18 //Change message to ready
-  tMessage.txt="Ready"
-  tMessage2.aph=0
-
-  tT0Temp.y=222 //Move temps below box
-  tT1Temp.y=222
-  
-  setlayer bT0Out,255 //Unhide buttons
-  setlayer bT0In,255
-  setlayer bT1Out,255
-  setlayer bT1In,255
-  ready.val=1
 }
 
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxController
+/// @brief Main program loop
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="init")
+{
+  state.txt="heating"
+}
+if(state.txt=="heating")
+{
+  if(printer.T0Temp.val>=loadTemp.val&&printer.T1Temp.val>=loadTemp.val)
+  {
+    state.txt="ready"
+    tMessage.txt="Ready"
+  }
+}
+
+
 //Send Command
-prints "T",0
+commands.command.txt="T"
 covx commandTool.val,vars.s.txt,0,0
-prints vars.s.txt,0
-printh 0A
-prints "G92 E0",0 //Set extruder pos to 0
-printh 0A
-vars.s.txt="G1 E"
+commands.command.txt+=vars.s.txt
+commands.command.txt+="\rG92 E0\r" //Set extruder pos to 0
+commands.command.txt+="G1 E"
 covx commandLength.val,vars.s2.txt,0,0
 vars.s.txt+=vars.s2.txt
 vars.s.txt+=" F500"
-prints vars.s.txt,0
-printh 0A
-prints "G92 E0",0
-printh 0A
+commands.command.txt+=vars.s.txt
+commands.command.txt+="\rG92 E0\r"
+click luxSend,1
 
 //bT0Out
 commandTool.val=0
@@ -81,7 +119,6 @@ commandLength.val=loadLength.val //Change to negative number
 click sendCommand,1
 
 //Close button
-prints "M104 T0 S0",0 //Unset temperature
-printh 0A
-prints "M104 T1 S0",0
-printh 0A
+commands.command.txt="M104 T0 S0\rM104 T1 S0\r"//Unset temperature
+commands.command.txt+="M605 S1\r" //Set back to auto mode
+click luxSend,1

@@ -2,8 +2,9 @@
 /// @fn Pre-initialize
 /// @brief Page Initialization
 ///////////////////////////////////////////////////////////////////////////////
-// ReturnPage=dp
-DiagReturnPage=dp
+click luxView,1
+click luxAnimate,1
+click luxController,1
 if(HandleCallback==0)
 {
   click luxDoCallback,0 //Clears callback vars
@@ -13,9 +14,8 @@ if(HandleCallback==0)
   click luxDoCallback,1
   click luxDoCallback,0
 }
-click luxView,1
-click luxAnimate,1
-click luxController,1
+// ReturnPage=dp
+DiagReturnPage=dp
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRunOnce
