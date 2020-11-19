@@ -1,43 +1,11 @@
-//Onload
-click updateState,1
-ReturnPage=dp
-DiagReturnPage=dp
-if(HandleCallback==1)
-{
-  click b[ReturnObj],0 //Run right click code as callback
-  HandleCallback=0
-  vars.returnVal.txt="null"
-  ReturnVal=-1
-}
-
-//Route
-// Direct to print page
-parse.lineMatch.txt="SD printing byte " //Qualify Line
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt)
-{
-  page print
-}
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
 click luxControlBar,1
-//Current Tool
 bSwap.picc=bSwap.picc2+1
-if(Tool==0)
-{
-  bSwap.picc=bSwap.picc2+1
-}else
-{
-  bSwap.picc=bSwap.picc2+2
-}
-//Idex Mode
-if(IdexMode==0)
+bSwap.picc+=Tool
+if(IdexMode==0) //Idex Mode
 {
   bMode.picc=bMode.picc2+1
   bSwap.aph=127
@@ -65,12 +33,6 @@ if(IdexMode==3)
   tSwap.aph=0
   tsw bSwap,0
 }
-
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn luxController,1
-/// @brief Program loop
-///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxAnimate

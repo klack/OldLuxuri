@@ -1,48 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn Pre-initialize
-/// @brief Page Initialization
+/// @fn luxRunOnce
+/// @breif Does not run when returning from dialog boxes
 ///////////////////////////////////////////////////////////////////////////////
-parse.callback.txt="null"
-parse.callbackReturn.txt="null"
-click luxView,1
-click luxAnimate,1
-DiagReturnPage=dp
-if(HandleCallback==1)
-{
-  if(ReturnObj==0) //Direct to custom controller callback
-  {
-    click luxController,0
-  }else
-  {
-    click b[ReturnObj],0
-  }
-  ReturnVal=-1
-  vars.returnVal.txt="null"
-  HandleCallback=0
-}else
-{
-  commands.queue.txt+="M605 S0\r" //Set manual idex mode
-  IdexMode=0
-  commands.queue.txt+="M114\r"
-  commands.queue.txt+="G91\r"
-  click luxSend,0
-}
-click luxController,1
+commands.queue.txt+="M605 S0\r" //Set manual idex mode
+IdexMode=0
+commands.queue.txt+="M114\r"
+commands.queue.txt+="G91\r"
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn bClose
-/// @brief Close button
+/// @fn luxInitialize 0
+/// @brief Should run on any close button
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="G0 F5000\r" //Reset speed
 commands.queue.txt+="G90\r" //Back to absolution positioning
 click luxSend,0
 page ReturnPage
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn luxController,1
-/// @brief Program loop
-///////////////////////////////////////////////////////////////////////////////
-//Empty
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1
