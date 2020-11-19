@@ -1,8 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn controller,1
-///
+/// @fn luxController,1
 /// @brief Program loop
-/// @brief state.txts: null, connecting, setting-defaults, connected, timeout
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="null")
 {
@@ -10,19 +8,29 @@ if(state.txt=="null")
 }
 if(state.txt=="connecting")
 {
-  click startConnect,1
+  if(buffer.en!=1)
+  {
+    click startConnect,1
+  }else
+  {
+    state.txt="setting=defaults"
+  }
 }
 if(state.txt=="setting-defaults")
 {
   click setDefaults,1
+  state.txt="connected"
 }
 if(state.txt=="connected")
 {
-  if(ok==1&&animate.en==0)
+  if(ok==1&&QueueBlocks==0)
   {
-    delay=3000
-    page main
-  }
+    if(luxAnimate.en==0)
+    {
+      delay=3000
+      page main
+    }
+  }  
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -64,7 +72,7 @@ if(j<20) //Try connecting 10 times
     vars.status.txt="Trying baudrate "
     vars.status.txt+=vars.s.txt
     commands.command.txt="M155 S2"  //Try and trigger a response
-    click sendCommand,1
+    click luxSend,1
     j++
   }else
   { 
@@ -78,7 +86,7 @@ if(j<20) //Try connecting 10 times
 {
   state.txt="timeout"
   vars.status.txt="Could not connect.  Unplug USB when shutting down."
-  click updateView,1
+  click luxView,1
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -86,7 +94,7 @@ if(j<20) //Try connecting 10 times
 /// @brief Report printer settings and set printer defaults
 ///////////////////////////////////////////////////////////////////////////////
 commands.command.txt="" //Clear connection preamble sent by tft
-click sendCommand,1
+click luxSend,1
 commands.command.txt="M115\r" //Get Marlin version
 commands.command.txt+="M503\r" //Get settings
 commands.command.txt+="M114\r" //Get position
@@ -95,12 +103,12 @@ commands.command.txt+="G28 X\r"
 commands.command.txt+="M605 S1\r" //Dual Nozzle Mode Auto
 commands.command.txt+="T0\r" //Select T0
 commands.command.txt+="M220\rM221\r" //Get flow and speed
-click sendCommand,1
-state.txt="connected"
+click luxSend,1
+
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn updateView,1
-/// @breif Handle display state on 1000ms timer
+/// @fn luxView,1
+/// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
 tStatus.txt=vars.status.txt
 if(state.txt=="null")
@@ -124,32 +132,28 @@ if(state.txt=="connected")
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn animate
-/// @brief Animate banners on 50ms timer
+/// @fn luxAnimate
+/// @brief Animation Loop
 ///////////////////////////////////////////////////////////////////////////////
 if(pBanner.y>0)
 {
   pBanner.y-=4
 }else
 {
-  animate.en=0
+  luxAnimate.en=0
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn buffer
-/// @brief Read and parse buffer on 50ms timer
+/// @fn luxRun
+/// @breif Main Program Loop
 ///////////////////////////////////////////////////////////////////////////////
-click readBuffer,1
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn run
-/// @brief Program Loop on 1000ms timer
-///////////////////////////////////////////////////////////////////////////////
-click updateView,1
-click controller,1
+click luxRead,1
+click luxView,1
+click luxController,1
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn Pre-initialize
 /// @brief Page Initialization
 ///////////////////////////////////////////////////////////////////////////////
-click updateView,1
+click luxView,1
