@@ -1,3 +1,4 @@
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRunOnce
 /// @brief Warm up extruders
@@ -11,6 +12,33 @@ commands.command.txt+="M104 T1 S"
 commands.command.txt+=vars.s.txt
 commands.command.txt+="\r"
 click luxSend,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxInitialize 0
+/// @brief Should run on any close button
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="M104 T0 S0\rM104 T1 S0\r"//Unset temperature
+commands.command.txt+="M605 S1\r" //Set back to auto mode
+click luxSend,1
+page ReturnPage
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxController
+/// @brief Main program loop
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="init")
+{
+  state.txt="heating"
+}
+if(state.txt=="heating")
+{
+  if(printer.T0Temp.val>=loadTemp.val&&printer.T1Temp.val>=loadTemp.val)
+  {
+    if(printer.)
+    state.txt="ready"
+    tMessage.txt="Ready"
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView
@@ -68,23 +96,6 @@ if(state.txt=="heating")
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxController
-/// @brief Main program loop
-///////////////////////////////////////////////////////////////////////////////
-if(state.txt=="init")
-{
-  state.txt="heating"
-}
-if(state.txt=="heating")
-{
-  if(printer.T0Temp.val>=loadTemp.val&&printer.T1Temp.val>=loadTemp.val)
-  {
-    state.txt="ready"
-    tMessage.txt="Ready"
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////
 //Send Command
 commands.command.txt="T"
 covx commandTool.val,vars.s.txt,0,0
@@ -117,8 +128,3 @@ click sendCommand,1
 commandTool.val=1
 commandLength.val=loadLength.val //Change to negative number
 click sendCommand,1
-
-//Close button
-commands.command.txt="M104 T0 S0\rM104 T1 S0\r"//Unset temperature
-commands.command.txt+="M605 S1\r" //Set back to auto mode
-click luxSend,1

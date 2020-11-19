@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxController,1
+/// @fn luxController 1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="init")
@@ -37,9 +37,39 @@ if(state.txt=="ready")
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxView,1
+/// @fn luxView 1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
+for(j=0;j<=32;j++) //Button Groups
+{
+  if(b[j].type==98) //If text box
+  {
+    if(b[j].txt_maxl==4) //T0 boxes are set with a maxl of 5
+    {
+      if(T0Mat.txt==b[j].txt)
+      {
+        b[j].picc=b[j].picc2
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=PIC_CLEAR
+        b[j].pco=WHITE
+      }
+    }
+    if(b[j].txt_maxl==5) //T1 boxes are set with a maxl of 6
+    {
+      if(T1Mat.txt==b[j].txt)
+      {
+        b[j].picc=b[j].picc2
+        b[j].pco=0
+      }else
+      {
+        b[j].picc=PIC_CLEAR
+        b[j].pco=WHITE
+      }
+    }
+  }
+}
 if(state.txt=="init"||state.txt=="choose")
 {  
   tMessage.txt="Choose"
@@ -79,36 +109,6 @@ covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
 tT1Temp.txt=vars.s.txt
 covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
 tBedTemp.txt=vars.s.txt
-for(j=0;j<=32;j++) //Button Groups
-{
-  if(b[j].type==98) //If text box
-  {
-    if(b[j].txt_maxl==4) //T0 boxes are set with a maxl of 5
-    {
-      if(T0Mat.txt==b[j].txt)
-      {
-        b[j].picc=b[j].picc2
-        b[j].pco=0
-      }else
-      {
-        b[j].picc=PIC_CLEAR
-        b[j].pco=WHITE
-      }
-    }
-    if(b[j].txt_maxl==5) //T1 boxes are set with a maxl of 6
-    {
-      if(T1Mat.txt==b[j].txt)
-      {
-        b[j].picc=b[j].picc2
-        b[j].pco=0
-      }else
-      {
-        b[j].picc=PIC_CLEAR
-        b[j].pco=WHITE
-      }
-    }
-  }
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPageAnimate
