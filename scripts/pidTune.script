@@ -48,7 +48,7 @@ if(ReturnVal==1) //Handle start confirmation diag
   state.txt="init"
 }else
 {
-  page ReturnPage
+  //page ReturnPage
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ if(state.txt=="tuning")
 }
 thsp=SLEEP_TIME //Reset sleep time
 printer.command.txt="M155 S5\rM106 S0\r" //Temp auto report, turn off fan
-click sendCommand,1
+click luxView,1
 page ReturnPage
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -142,5 +142,4 @@ printer.command.txt="M500" //Save Results
 click luxSend,1
 click luxInit,0
 diagConfirm.tMessage.txt="PID Tuning Complete"
-DiagReturnPage=ReturnPage
-page diagConfirm
+page MAIN
