@@ -1,93 +1,99 @@
-//---------------------------------------------------------
-//Controller
-//States: null, error, init, cooling, ready, tuning, complete
-//---------------------------------------------------------
-if(vars.state.txt=="null")
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxController 1
+/// @brief Program loop
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="null")
 {
   diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
   ReturnVal=1
   ReturnObj=0
   page diagPrompt
 }
-
-if(vars.state.txt=="init")
+if(state.txt=="init")
 {
-  oProgress.val=0
-  vars.status.txt="Initializing"
-  if(printer.bedTemp.val>40) //Stop if heatbed is too hot
+  thsp=0 //Disable sleep
+  click checkHotbed,1
+  click checkHotends,1
+  if(state.txt=="init") //State has was not changed
   {
-    diagConfirm.tMessage.txt="Hot bed must be below\r40C"
-    click destroy,1 //Cleanup
-    DiagReturnPage=4 //main
-    page diagConfirm
+    state.txt="tuning"
+    click luxView,1
   }
-  printer.command.txt="M106 S255" //Turn on fan
-  click sendCommand,1
-  printer.command.txt="M155 S1" //Temp auto report
-  click sendCommand,1
-  click updateView,1
-  delay=1000
-  vars.state.txt="cooling"
 }
-
-if(vars.state.txt=="cooling")
+if(state.txt=="cooling")
 {
   if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
   {
-    vars.state.txt="ready"
-    vars.status.txt="Ready"
-  }else
-  {
-    vars.status.txt="Cooling hotends"
+    state.txt="tuning"
+    click luxView,1
   }  
 }
-
-if(vars.state.txt=="ready")
+if(state.txt=="tuning")
 {
-  vars.state.txt="tuning"
-  vars.status.txt="Starting PID Autotune"
-  printer.command.txt="M303 C5 E0 S220 U" //T0 PID Tune
-  click sendCommand,1
-  printer.command.txt="M303 C5 E1 S220 U" //T1 PID Tune
-  click sendCommand,1
-  printer.command.txt="M303 C5 E-1 S60 U" //Bed PID Tune
-  click sendCommand,1
-}
-
-if(vars.state.txt=="tuning")
-{
-  vars.status.txt="Tuning..."
   oProgress.val=cycle.val*100/totalCycles.val
-  covx oProgress.val,tProgress.txt,0,0
-  tProgress.txt+="%"
   if(oProgress.val==100)
   {
-    vars.state.txt="complete"
-    vars.status.txt="Complete"
-    printer.command.txt="M500" //Save Results
-    click sendCommand,1
-    click destroy,1
-    diagConfirm.tMessage.txt="PID Tuning Complete"
-    DiagReturnPage=ReturnPage
-    page diagConfirm
+    state.txt="complete"
+    click luxView,1
+    click finish,1
   }
 }
-//---------------------------------------------------------
-//End Controller
-//---------------------------------------------------------
 
-//Controller Callback
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxController 0
+/// @brief Custom on page callback handling
+///////////////////////////////////////////////////////////////////////////////
 if(ReturnVal==1) //Handle start confirmation diag
 {
-  vars.state.txt="init"
+  state.txt="init"
 }else
 {
   page ReturnPage
 }
 
-//Update View
-tStatus.txt=vars.status.txt
-add 2,0,printer.T0Temp.val
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxInit 0
+/// @brief Call when perminently exiting the page
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="tuning")
+{
+  state.txt="cancelling"
+  click luxView,1
+  click luxStopPrint,0
+}
+thsp=SLEEP_TIME //Reset sleep time
+printer.command.txt="M155 S5\rM106 S0\r" //Temp auto report, turn off fan
+click sendCommand,1
+page ReturnPage
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxView 1
+/// @brief Updates states for controls
+///////////////////////////////////////////////////////////////////////////////
+if(state.txt=="init")
+{
+  oProgress.val=0
+  tStatus.txt="Initializing"
+}
+if(state.txt=="cooling")
+{
+  tStatus.txt="Cooling hotends..."
+}
+if(state.txt=="tuning")
+{
+  tStatus.txt="Tuning"
+  covx oProgress.val,tProgress.txt,0,0
+  tProgress.txt+="%"
+}
+if(state.txt=="cancelling")
+{
+  tStatus.txt="Cancelling..."
+}
+if(state.txt=="complete")
+{
+  tStatus.txt="Complete"
+}
+add 2,0,printer.T0Temp.val //Plot temps
 add 2,1,printer.T1Temp.val
 add 2,2,printer.bedTemp.val
 covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
@@ -97,59 +103,44 @@ tT1Temp.txt=vars.s.txt
 covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
 tBedTemp.txt=vars.s.txt
 
-//parsePIDTune
-// bias: 109 d: 109 min: 215.00 max: 226.00
-parse.lineMatch.txt=" bias: "
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,j
-if(parse.eval.txt==parse.lineMatch.txt)
+///////////////////////////////////////////////////////////////////////////////
+/// @fn checkHotbed
+/// @brief Hotbed must be cool
+///////////////////////////////////////////////////////////////////////////////
+if(printer.bedTemp.val>40) //Stop if heatbed is too hot
 {
-  cycle.val+=1
+  diagConfirm.tMessage.txt="Hot bed must be below\r40C"
+  click luxInit,0 //Cleanup
+  page MAIN
 }
 
-//destroy
-printer.command.txt="M155 S5" //Temp auto report
+///////////////////////////////////////////////////////////////////////////////
+/// @fn checkHotends
+/// @brief Hotends must be cool
+///////////////////////////////////////////////////////////////////////////////
+if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
+{
+  state.txt=="cooling"
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn tune
+/// @brief Perfrom PID Autotune on hotends and bed
+///////////////////////////////////////////////////////////////////////////////
+printer.command.txt="M303 C10 E0 S220 U" //T0 PID Tune
+click luxSend,1
+printer.command.txt="M303 C10 E1 S220 U" //T1 PID Tune
+click luxSend,1
+printer.command.txt="M303 C5 -1 S60 U" //Bed PID Tune
+click luxSend,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn finish
+/// @brief Save the results and direct to confirmation
+///////////////////////////////////////////////////////////////////////////////
+printer.command.txt="M500" //Save Results
 click sendCommand,1
-printer.command.txt="M106 S0" //Turn off fan
-click sendCommand,1
-vars.state.txt="null"
-HandleCallback=-1
-ReturnVal=-1
-ReturnObj=-1
-
-//close
-vars.status.txt="Cancelling"
-click updateView,1
-printer.command.txt="M108" 
-for(j=0;j<3;j++)
-{
-  click sendCommand,1
-  delay=1000
-}
-click destroy,1
-page ReturnPage
-
-//sendCommand
-prints printer.command.txt,0
-printh 0A
-
-//run
-click updateView,1
-click controller,1
-
-//On Load
-DiagReturnPage=dp
-if(HandleCallback==1)
-{
-  if(ReturnObj==0) //Direct to controller callback
-  {
-    click controller
-  }else
-  {
-    click b[ReturnObj]
-  }
-  ReturnVal=-1
-  HandleCallback=0
-}
-click controller,1
-click updateView,1
+click luxInit,0
+diagConfirm.tMessage.txt="PID Tuning Complete"
+DiagReturnPage=ReturnPage
+page diagConfirm
