@@ -11,22 +11,20 @@ if(state.txt=="null")
 }
 if(state.txt=="init")
 {
-  thsp=0 //Disable sleep
   click checkHotbed,1
   click checkHotends,1
-  if(state.txt=="init") //State has was not changed
-  {
-    state.txt="tuning"
-    click luxView,1
-  }
 }
 if(state.txt=="cooling")
 {
   if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
   {
-    state.txt="tuning"
-    click luxView,1
+    state.txt="ready"
   }  
+}
+if(state.txt=="ready")
+{
+  click tune,1
+  state.txt="tuning"
 }
 if(state.txt=="tuning")
 {
@@ -38,6 +36,7 @@ if(state.txt=="tuning")
     click finish,1
   }
 }
+click luxView,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxController 0
@@ -48,8 +47,16 @@ if(ReturnVal==1) //Handle start confirmation diag
   state.txt="init"
 }else
 {
-  //page ReturnPage
+  page ReturnPage
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxRunOnce
+/// @breif Does not run when returning from dialog boxes
+///////////////////////////////////////////////////////////////////////////////
+thsp=0 //Disable sleep
+commands.command.txt="M155 S1\rM106 S255\r" //Update temp faster, turn on fan.
+click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxInit 0
@@ -62,8 +69,14 @@ if(state.txt=="tuning")
   click luxStopPrint,0
 }
 thsp=SLEEP_TIME //Reset sleep time
-printer.command.txt="M155 S5\rM106 S0\r" //Temp auto report, turn off fan
+commands.command.txt="M155 S5\rM106 S0\r" //Temp auto report, turn off fan
+click luxSend,1
 click luxView,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn bClose
+///////////////////////////////////////////////////////////////////////////////
+click luxInit,0
 page ReturnPage
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -93,9 +106,6 @@ if(state.txt=="complete")
 {
   tStatus.txt="Complete"
 }
-add 2,0,printer.T0Temp.val //Plot temps
-add 2,1,printer.T1Temp.val
-add 2,2,printer.bedTemp.val
 covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
 tT0Temp.txt=vars.s.txt
 covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
@@ -104,14 +114,23 @@ covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
 tBedTemp.txt=vars.s.txt
 
 ///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPageAnimate
+/// @brief Animations specific to this page
+///////////////////////////////////////////////////////////////////////////////
+add 2,0,printer.T0Temp.val //Plot temps
+add 2,1,printer.T1Temp.val
+add 2,2,printer.bedTemp.val
+
+///////////////////////////////////////////////////////////////////////////////
 /// @fn checkHotbed
 /// @brief Hotbed must be cool
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.bedTemp.val>40) //Stop if heatbed is too hot
 {
-  diagConfirm.tMessage.txt="Hot bed must be below\r40C"
   click luxInit,0 //Cleanup
-  page MAIN
+  diagConfirm.tMessage.txt="Hot bed must be below\r40C"
+  DiagReturnPage=MAIN
+  page diagConfirm
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -120,6 +139,10 @@ if(printer.bedTemp.val>40) //Stop if heatbed is too hot
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
 {
+  state.txt="ready"
+}
+else
+{
   state.txt="cooling"
 }
 
@@ -127,19 +150,20 @@ if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
 /// @fn tune
 /// @brief Perfrom PID Autotune on hotends and bed
 ///////////////////////////////////////////////////////////////////////////////
-printer.command.txt="M303 C10 E0 S220 U" //T0 PID Tune
+commands.command.txt="M303 C3 E0 S220 U\r" //T0 PID Tune
 click luxSend,1
-printer.command.txt="M303 C10 E1 S220 U" //T1 PID Tune
+commands.command.txt="M303 C3 E1 S220 U\r" //T1 PID Tune
 click luxSend,1
-printer.command.txt="M303 C5 -1 S60 U" //Bed PID Tune
+commands.command.txt="M303 C3 E-1 S60 U\r" //Bed PID Tune
 click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn finish
 /// @brief Save the results and direct to confirmation
 ///////////////////////////////////////////////////////////////////////////////
-printer.command.txt="M500" //Save Results
+commands.command.txt="M500" //Save Results
 click luxSend,1
 click luxInit,0
 diagConfirm.tMessage.txt="PID Tuning Complete"
-page MAIN
+DiagReturnPage=MAIN
+page diagConfirm

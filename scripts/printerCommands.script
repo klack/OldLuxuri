@@ -83,18 +83,20 @@ click luxSetCallback,1
 /// @brief Break through a busy or waiting for response status
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt=""
-for(j=0;j<4;j++)
+Stops=0
+StopIter=0
+for(Stops=0;Stops<4;Stops++)
 {
   ok=0
-  k=0
-  while(ok==0&&k<25)
+  StopIter=0
+  while(ok==0&&StopIter<25)
   {
-    k=k+1
     prints "M108",0
     printh 0A
     prints "M524",0 //Stop print
     printh 0A 
-    delay=250*k
+    delay=250*StopIter
+    StopIter+=1
     click luxRead,1
   }
   delay=250
