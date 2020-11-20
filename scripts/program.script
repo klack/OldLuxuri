@@ -1,7 +1,7 @@
 // Serial Parser
 int MAIN=5,PIC_CLEAR=0,SLEEP_TIME=900 //15 minutes
 int BlockCount=0,State=0 //depreciated
-int Baud=0,SerialPos=0,BufferLen=0,SearchPos=0,ok=1,busy=0,QueueBlocks=0,MaxQueueBlocks=10,OkBlocks=0,MaxOKBlocks=50
+int Baud=0,SerialPos=0,BufferLen=0,SearchPos=0,ok=1,busy=0,QueueBlocks=0,MaxQueueBlocks=10,OkBlocks=0,MaxOKBlocks=50,Stops=0,StopIter=0
 int ReturnPage=4,DiagReturnPage,ReturnObj=-1,ReturnVal=-1,HandleCallback=0
 int Frame=0,FrameB=0
 int Tool=0,IdexMode=1

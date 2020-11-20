@@ -1,9 +1,21 @@
-//Do callback
-ReturnPage=dp
-if(ReturnVal!=-1)
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxDoCallback 1
+/// @brief Control callbacks
+///////////////////////////////////////////////////////////////////////////////
+if(ReturnObj==0) //Direct to custom controller callback
 {
-  vars.debug.txt="Doing Callback for "
-  covx ReturnObj,vars.s.txt,0,0
-  vars.debug.txt+=vars.s.txt
-  click ReturnObj,0 //Mouse up
+  click luxController,0
+}else
+{
+  click b[ReturnObj],0
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxDoCallback 0
+/// @brief Clear callback vars
+///////////////////////////////////////////////////////////////////////////////
+ReturnVal=-1
+vars.returnVal.txt="null"
+HandleCallback=0
+parse.callback.txt="null"
+parse.callbackReturn.txt="null"
