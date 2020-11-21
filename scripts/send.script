@@ -51,7 +51,8 @@ if(ok==1&&busy==0)
     QueueBlocks+=1 //Track how many times the queue was blocked
   }else
   {
-    QueueBlocks=0
+    QueueBlocks=0 //Successful, reset counts
+    MaxQueueBlocks=5
   }
 }else
 {
@@ -63,6 +64,8 @@ if(ok==1&&busy==0)
 }
 if(MaxQueueBlocks>0&&QueueBlocks>MaxQueueBlocks)
 {
+  MaxQueueBlocks*=125
+  MaxQueueBlocks/=100
   prints "M118 marco",0 //Maybe an ok was missed, try and trigger one
   printh 0A
   QueueBlocks=0

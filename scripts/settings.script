@@ -25,8 +25,8 @@ commands.command.txt="M503\r"
 click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn bClose
-/// @brief Close button
+/// @fn luxInitialize 0
+/// @brief Call when perminently exiting the page
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt!="null")
 {
@@ -36,6 +36,7 @@ if(printer.printState.txt!="null")
   page ReturnPage
 }
 
+///////////////////////////////////////////////////////////////////////////////
 //bDefaults click
 ReturnObj=!!
 diagPrompt.tMessage.txt="Load Firmware Defaults?"

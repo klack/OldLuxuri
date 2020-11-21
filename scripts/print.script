@@ -167,5 +167,8 @@ click luxSend,0
 ///////////////////////////////////////////////////////////////////////////////
 if(QueueBlocks==0&&printer.printState.txt=="printing")
 {
-  click luxPrintTime,1
+  if(ok==1&&busy==0)
+  {
+    click luxPrintTime,1
+  }
 }
