@@ -60,6 +60,11 @@ if(state.txt=="null")
   tMessage.aph=0
   setlayer bUp,0
   setlayer bDown,0
+  tsw f0,0
+  tsw f1,0
+  tsw f2,0
+  tsw f3,0
+  tsw f4,0
 }
 if(state.txt=="init")
 {
@@ -77,7 +82,11 @@ if(selectedFile.txt=="") //Hide or Show Print button
 if(state.txt=="ready")
 {
   tMessage.aph=0
-  
+  tsw f0,1
+  tsw f1,1
+  tsw f2,1
+  tsw f3,1
+  tsw f4,1
   strlen valueLFile.txt,j //Load file controls
   if(j>0)
   {

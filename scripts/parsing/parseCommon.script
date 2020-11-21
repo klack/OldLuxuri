@@ -45,7 +45,7 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   busy=0
 }
 //M117
-parse.lineMatch.txt="echo:M117 "
+parse.lineMatch.txt="echo://lux:M117 "
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
