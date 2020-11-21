@@ -7,7 +7,6 @@ if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substri
   parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
   page shutdown
 }
-
 //Shutdown
 parse.lineMatch.txt="echo://notice:power_pin"
 strlen parse.lineMatch.txt,j
@@ -17,7 +16,6 @@ if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substri
   parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
   page shutdown
 }
-
 //Active Extruder
 parse.lineMatch.txt="echo:Active Extruder: "
 strlen parse.lineMatch.txt,j
@@ -52,31 +50,17 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,printer.m117.txt,parse.lineMatch.txt,1
 }
-
 //Error
 parse.lineMatch.txt="Error:"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  spstr parse.buffer.txt,vars.s.txt,parse.lineMatch.txt,1
-  vars.s.txt+="\r"
-  printer.error.txt+=vars.s.txt
-}
-
-//Halt
-parse.lineMatch.txt="Error:Printer halted. "
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt)
-{
-  spstr parse.buffer.txt,vars.s.txt,parse.lineMatch.txt,1
-  vars.s.txt+="\r"
-  printer.error.txt+=vars.s.txt
+  printer.error.txt+=parse.buffer.txt
+  printer.error.txt+="\r"
   parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  page error
+  page ERROR_PAGE
 }
-
 //Busy
 parse.lineMatch.txt="echo:busy: processing"
 strlen parse.lineMatch.txt,j
@@ -86,7 +70,6 @@ if(parse.eval.txt==parse.lineMatch.txt)
   busy=1
   ok=0
 }
-
 //TODO Powerloss
 //TODO Idex Mode
 //TODO handle M107 Fan off
