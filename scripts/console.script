@@ -6,14 +6,3 @@ nDebug.val=recmod
 recmod=1-recmod
 swRecmod.val=recmod
 nDebug.val=recmod
-
-///////////////////////////////////////////////////////////////////////////////
-/// tInput
-ReturnObj=1
-vars.returnVal.txt=""
-page keybdAP
-/// tInput callback
-if(vars.returnVal.txt!="null")
-{
-  tInput.txt=vars.returnVal.txt
-}
