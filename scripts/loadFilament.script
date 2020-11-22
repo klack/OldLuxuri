@@ -34,11 +34,11 @@ if(state.txt=="heating")
 {
   if(printer.T0Temp.val>=loadTemp.val&&printer.T1Temp.val>=loadTemp.val)
   {
-    if(printer.)
     state.txt="ready"
     tMessage.txt="Ready"
   }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView

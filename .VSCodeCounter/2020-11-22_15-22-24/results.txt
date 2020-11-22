@@ -1,0 +1,64 @@
+Date : 2020-11-22 15:22:24
+Directory : d:\printing\universal-ui\scripts
+Total : 39 files,  2115 codes, 641 comments, 203 blanks, all 2959 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         39 |      2,115 |        641 |        203 |      2,959 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                               | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                  |         39 |      2,115 |        641 |        203 |      2,959 |
+| parsing                                                            |         10 |        256 |        121 |         30 |        407 |
++--------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                           | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\printing\universal-ui\scripts\animate.script                    | C#       |          9 |          8 |          1 |         18 |
+| d:\printing\universal-ui\scripts\connect.script                    | C#       |        124 |         28 |          7 |        159 |
+| d:\printing\universal-ui\scripts\console.script                    | C#       |          5 |          2 |          1 |          8 |
+| d:\printing\universal-ui\scripts\controlBar.script                 | C#       |        107 |         19 |          9 |        135 |
+| d:\printing\universal-ui\scripts\doCallback.script                 | C#       |         12 |          8 |          1 |         21 |
+| d:\printing\universal-ui\scripts\error.script                      | C#       |          8 |          4 |          0 |         12 |
+| d:\printing\universal-ui\scripts\idexMode.script                   | C#       |         60 |         17 |          6 |         83 |
+| d:\printing\universal-ui\scripts\initialize.script                 | C#       |         12 |         13 |          4 |         29 |
+| d:\printing\universal-ui\scripts\keypad.script                     | C#       |          8 |          4 |          3 |         15 |
+| d:\printing\universal-ui\scripts\levelBed.script                   | C#       |         48 |         22 |          8 |         78 |
+| d:\printing\universal-ui\scripts\loadFilament.script               | C#       |         92 |         26 |         11 |        129 |
+| d:\printing\universal-ui\scripts\main.script                       | C#       |         40 |          8 |          1 |         49 |
+| d:\printing\universal-ui\scripts\move.script                       | C#       |        135 |         37 |         17 |        189 |
+| d:\printing\universal-ui\scripts\parsing\parseCallback.script      | C#       |          7 |          4 |          0 |         11 |
+| d:\printing\universal-ui\scripts\parsing\parseCommon.script        | C#       |         64 |         11 |          1 |         76 |
+| d:\printing\universal-ui\scripts\parsing\parseFirmware.script      | C#       |         12 |          3 |          1 |         16 |
+| d:\printing\universal-ui\scripts\parsing\parsePIDTune.script       | C#       |          7 |          3 |          0 |         10 |
+| d:\printing\universal-ui\scripts\parsing\parsePosition.script      | C#       |         12 |          2 |          2 |         16 |
+| d:\printing\universal-ui\scripts\parsing\parsePrintSettings.script | C#       |         18 |         53 |          8 |         79 |
+| d:\printing\universal-ui\scripts\parsing\parseSDPrint.script       | C#       |         48 |          7 |          6 |         61 |
+| d:\printing\universal-ui\scripts\parsing\parseSettings.script      | C#       |         44 |         13 |          7 |         64 |
+| d:\printing\universal-ui\scripts\parsing\parseTemp.script          | C#       |         24 |         10 |          4 |         38 |
+| d:\printing\universal-ui\scripts\parsing\parser.script             | C#       |         20 |         15 |          1 |         36 |
+| d:\printing\universal-ui\scripts\pidTune.script                    | C#       |        116 |         43 |         10 |        169 |
+| d:\printing\universal-ui\scripts\preheat.script                    | C#       |        173 |         27 |         13 |        213 |
+| d:\printing\universal-ui\scripts\print.script                      | C#       |        145 |         24 |          5 |        174 |
+| d:\printing\universal-ui\scripts\printSettings.script              | C#       |        156 |         30 |         10 |        196 |
+| d:\printing\universal-ui\scripts\printerCommands.script            | C#       |         89 |         57 |         17 |        163 |
+| d:\printing\universal-ui\scripts\program.script                    | C#       |         14 |          1 |          0 |         15 |
+| d:\printing\universal-ui\scripts\read.script                       | C#       |         40 |          5 |          0 |         45 |
+| d:\printing\universal-ui\scripts\run.script                        | C#       |          4 |          4 |          0 |          8 |
+| d:\printing\universal-ui\scripts\sdPrint.script                    | C#       |        225 |         37 |         16 |        278 |
+| d:\printing\universal-ui\scripts\send.script                       | C#       |         60 |         11 |          1 |         72 |
+| d:\printing\universal-ui\scripts\settings.script                   | C#       |         96 |         26 |         15 |        137 |
+| d:\printing\universal-ui\scripts\shutdown.script                   | C#       |         27 |          3 |          4 |         34 |
+| d:\printing\universal-ui\scripts\skel.script                       | C#       |          6 |         31 |          7 |         44 |
+| d:\printing\universal-ui\scripts\swapExtruder.script               | C#       |         22 |         12 |          2 |         36 |
+| d:\printing\universal-ui\scripts\tools.script                      | C#       |         10 |         12 |          2 |         24 |
+| d:\printing\universal-ui\scripts\updateLines.script                | C#       |         16 |          1 |          2 |         19 |
+| Total                                                              |          |      2,115 |        641 |        203 |      2,959 |
++--------------------------------------------------------------------+----------+------------+------------+------------+------------+
