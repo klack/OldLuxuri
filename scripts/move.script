@@ -14,6 +14,7 @@ click luxSend,0
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="G0 F5000\r" //Reset speed
 commands.queue.txt+="G90\r" //Back to absolution positioning
+commands.queue.txt+="M605 S1\r" //Set auto idex mode
 click luxSend,0
 page ReturnPage
 
