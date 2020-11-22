@@ -88,14 +88,18 @@ Stops=0
 StopIter=0
 for(Stops=0;Stops<4;Stops++)
 {
+  StopIter=1
+  prints "M108",0
+  printh 0A
+  prints "M524",0 //Stop print
+  printh 0A
   ok=0
-  StopIter=0
-  while(ok==0&&StopIter<25)
+  while(ok==0&&StopIter<10)
   {
-    prints "M108",0
-    printh 0A
-    prints "M524",0 //Stop print
-    printh 0A 
+    // prints "M108",0
+    // printh 0A
+    // prints "M524",0 //Stop print
+    // printh 0A 
     delay=250*StopIter
     StopIter+=1
     click luxRead,1
@@ -157,25 +161,3 @@ commands.queue.txt+="M118 A1 lux:callback "
 commands.queue.txt+=parse.callback.txt
 commands.queue.txt+="\r"
 click luxSend,0
-
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn Pre-initialize
-/// @brief Page Initialization
-///////////////////////////////////////////////////////////////////////////////
-parse.callback.txt="null"
-click luxView,1
-DiagReturnPage=dp
-if(HandleCallback==1)
-{
-  if(ReturnObj==0) //Direct to custom controller callback
-  {
-    click luxController,0
-  }else
-  {
-    click b[ReturnObj],0
-  }
-  ReturnVal=-1
-  HandleCallback=0
-}
-click luxController,1
