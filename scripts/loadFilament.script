@@ -103,10 +103,9 @@ commands.command.txt+=vars.s.txt
 commands.command.txt+="\rG92 E0\r" //Set extruder pos to 0
 commands.command.txt+="G1 E"
 covx commandLength.val,vars.s2.txt,0,0
-vars.s.txt+=vars.s2.txt
-vars.s.txt+=" F500"
-commands.command.txt+=vars.s.txt
-commands.command.txt+="\rG92 E0\r"
+commands.command.txt+=vars.s2.txt
+commands.command.txt+=" F500\r"
+commands.command.txt+="G92 E0\r"
 click luxSend,1
 
 //bT0Out
