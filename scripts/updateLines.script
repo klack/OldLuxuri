@@ -15,4 +15,3 @@ if(parse.eval.txt!=parse.lineMatch.txt&&parse.buffer.txt!="ok") //Do not keep te
   console.tLine2.txt=console.tLine1.txt
   console.tLine1.txt=parse.buffer.txt
 }
-
