@@ -99,9 +99,9 @@ commands.command.txt="M115\r" //Get Marlin version
 commands.command.txt+="M503\r" //Get settings
 commands.command.txt+="M114\r" //Get position
 commands.command.txt+="M155 S5\r" //Temp auto report
-commands.command.txt+="G28 X\r"
-commands.command.txt+="M605 S1\r" //Dual Nozzle Mode Auto
-commands.command.txt+="T0\r" //Select T0
+// commands.command.txt+="G28 X\r"
+//commands.command.txt+="M605 S1\r" //Dual Nozzle Mode Auto
+//commands.command.txt+="T0\r" //Select T0
 commands.command.txt+="M220\rM221\r" //Get flow and speed
 click luxSend,1
 
