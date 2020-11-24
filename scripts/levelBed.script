@@ -53,26 +53,26 @@ click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
 //bPoint1
-destX.val=10
-destY.val=10
+destX.val=50
+destY.val=50
 click sendCommand,1
 
 //bPoint2
-destX.val=290
-destY.val=290
+destX.val=250
+destY.val=250
 click sendCommand,1
 
 //bPoint3
-destX.val=290
-destY.val=10
+destX.val=250
+destY.val=50
 click sendCommand,1
 
 //bPoint4
-destX.val=10
-destY.val=290
+destX.val=50
+destY.val=250
 click sendCommand,1
 
 //bPoint5
-destX.val=155
-destY.val=155
+destX.val=150
+destY.val=150
 click sendCommand,1
