@@ -23,13 +23,15 @@ page ReturnPage
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
+bSwap.picc=bSwap.picc2+1
+bSwap.picc+=Tool
 tX.txt="X:"
 tX.txt+=printer.x.txt
 tY.txt="Y:"
 tY.txt+=printer.y.txt
 tZ.txt="Z:"
 tZ.txt+=printer.z.txt
-for(j=0;j<=35;j++) //Button Groups
+for(j=0;j<=45;j++) //Button Groups
 {
   if(b[j].type==98) //If text box
   {
@@ -68,17 +70,15 @@ if(busy==1) //Busy
 {
   if(Frame==0) //Flash
   {
-    tBusy.aph=0
+    tMessage.aph=0
   }else
   {
-    tBusy.aph=127
+    tMessage.aph=127
   }
 }else
 {
-  tBusy.aph=0
+  tMessage.aph=0
 }
-bSwap.picc=bSwap.picc2+1
-bSwap.picc+=Tool
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn sendMovement
@@ -181,6 +181,22 @@ if(vars.returnVal.txt!="null")
   commands.command.txt+=" F500"
   click luxSend,1 //Send immediatly
 }
+
+//bEReverse
+commands.command.txt="G1 E-"
+commands.command.txt+=distance.txt
+commands.command.txt+=" F"
+commands.command.txt+=speed.txt
+commands.command.txt+="\r"
+click luxSend,1
+
+//bEForward
+commands.command.txt="G1 E"
+commands.command.txt+=distance.txt
+commands.command.txt+=" F"
+commands.command.txt+=speed.txt
+commands.command.txt+="\r"
+click luxSend,1
 
 //Distances
 distance.txt=bDistance1.txt

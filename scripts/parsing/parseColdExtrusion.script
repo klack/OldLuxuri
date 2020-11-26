@@ -1,0 +1,6 @@
+parse.lineMatch.txt="echo: cold extrusion prevented"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  diagConfirm.tMessage.txt="Cold Extrusion Prevented"
+  page diagConfirm
+}
