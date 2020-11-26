@@ -43,3 +43,12 @@ if(usize>0)
     BufferLen=0
   }
 }
+if(busy==1) //Clear busy status every 5 seconds
+{
+  BusyCycles++
+  if(BusyCycles>50) //50 * 100ms run timer = 5 seconds
+  {
+    busy=0
+    BusyCycles=0
+  }
+}

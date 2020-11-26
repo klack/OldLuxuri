@@ -37,7 +37,7 @@ if(state.txt=="connected")
 /// @fn startConnect,1
 /// @brief Connect trying different baud rates automatically
 ///////////////////////////////////////////////////////////////////////////////
-if(j<20) //Try connecting 10 times
+if(tries.val<9) //Try connecting 10 times
 {
   if(usize<=0) //If the buffer is empty
   {
@@ -55,7 +55,7 @@ if(j<20) //Try connecting 10 times
     {
       baud=9600
       Baud=9600
-    }      
+    }
     if(k==3)
     {
       baud=250000
@@ -73,9 +73,9 @@ if(j<20) //Try connecting 10 times
     vars.status.txt+=vars.s.txt
     commands.command.txt="M155 S2"  //Try and trigger a response
     click luxSend,1
-    j++
+    tries.val++
   }else
-  { 
+  {
     buffer.en=1
     vars.status.txt="Connected at "
     covx Baud,vars.s.txt,0,0
@@ -88,6 +88,7 @@ if(j<20) //Try connecting 10 times
   vars.status.txt="Could not connect.  Unplug USB when shutting down."
   click luxView,1
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn setDefaults,1
