@@ -84,15 +84,16 @@ click luxSetCallback,1
 /// @brief Break through a busy or waiting for response status
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt=""
-ok=0
 StopWait=0
 commands.command.txt="M108" //Break out of busy
 click luxSend,1
 commands.command.txt="M524" //Stop print
 click luxSend,1
-while(ok==0&&StopWait<10)
+while(ok==0&&StopWait<5)
 {
-  delay=500
+  BackOff=BackOff*150
+  BackOff/=100
+  delay=500*BackOff
   doevents
   click luxRead,1  
   commands.command.txt="M108"
