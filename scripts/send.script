@@ -13,7 +13,46 @@ commands.command.txt=""
 /// @brief Send command queue, waiting for ok between each command
 /// @brief Waits a max of 10 times for each ok
 ///////////////////////////////////////////////////////////////////////////////
-if(ok==1&&busy==0)
+if(busy==1) //Clear busy status every 5 seconds
+{
+  BusyCycles++
+  if(BusyCycles>50) //50 * 100ms run timer = 5 seconds
+  {
+    busy=0
+    BusyCycles=0
+  }
+}else
+{
+  BusyCycles=0
+}
+
+if(ok==0) //Track how many time ok was not recieved
+{
+  OkBlocks+=1
+}else
+{
+  OkBlocks=0
+}
+
+if(OkBlocks>=MaxOKBlocks)
+{
+  QueueBlocks+=1 //Track how many times the queue was blocked
+}else
+{
+  QueueBlocks=0 //Successful, reset counts
+  MaxQueueBlocks=5
+}
+
+if(MaxQueueBlocks>0&&QueueBlocks>MaxQueueBlocks)
+{
+  MaxQueueBlocks*=150 //Incremental Back Off
+  MaxQueueBlocks/=100
+  prints "M118",0 //Maybe an ok was missed, try and trigger one
+  printh 0A
+  QueueBlocks=0
+}
+
+if(ok==1&&busy==0) //Send Queue
 {
   OkBlocks=0
   strlen commands.queue.txt,k //get the length of the command queue
@@ -23,7 +62,6 @@ if(ok==1&&busy==0)
     click luxRead,1
     if(ok==1&&busy==0)
     {
-      OkBlocks=0
       spstr commands.queue.txt,vars.s.txt,"\r",0
       if(vars.s.txt!="")
       {
@@ -36,7 +74,6 @@ if(ok==1&&busy==0)
       }else
       {
         commands.queue.txt=""
-        QueueBlocks=0
       }
     }else
     {
@@ -46,14 +83,6 @@ if(ok==1&&busy==0)
     }
     strlen commands.queue.txt,k
   }
-  if(OkBlocks>=MaxOKBlocks)
-  {
-    QueueBlocks+=1 //Track how many times the queue was blocked
-  }else
-  {
-    QueueBlocks=0 //Successful, reset counts
-    MaxQueueBlocks=5
-  }
 }else
 {
   strlen commands.queue.txt,j
@@ -61,12 +90,4 @@ if(ok==1&&busy==0)
   {
     QueueBlocks+=1
   }
-}
-if(MaxQueueBlocks>0&&QueueBlocks>MaxQueueBlocks)
-{
-  MaxQueueBlocks*=150 //Incremental Back Off
-  MaxQueueBlocks/=100
-  prints "M118",0 //Maybe an ok was missed, try and trigger one
-  printh 0A
-  QueueBlocks=0
 }

@@ -86,15 +86,19 @@ click luxSetCallback,1
 commands.queue.txt=""
 ok=0
 StopWait=0
-prints "M524",0 //Stop print
-printh 0A
+commands.command.txt="M108" //Break out of busy
+click luxSend,1
+commands.command.txt="M524" //Stop print
+click luxSend,1
 while(ok==0&&StopWait<10)
 {
   delay=500
   doevents
   click luxRead,1  
-  prints "M108",0
-  printh 0A
+  commands.command.txt="M108"
+  click luxSend,1
+  commands.command.txt="M524"
+  click luxSend,1
   StopWait++
 }
 parse.callback.txt="luxStopPrint0:finished"      
