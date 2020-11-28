@@ -9,7 +9,7 @@ if(state.txt=="null")
   state.txt="init"
   click luxView,1
   vars.status.txt="Initializing"
-  commands.queue.txt+="M155 S0\r" //Temp auto report on
+  commands.queue.txt+="M155 S0\r" //Temp auto report off
   click luxSend,0
 }
 if(state.txt=="init")
@@ -48,6 +48,23 @@ if(state.txt=="no-sd")
   diagConfirm.tMessage.txt="Please insert SD Card"
   page diagConfirm
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxInitialize 0
+/// @brief Should run on any close button
+///////////////////////////////////////////////////////////////////////////////
+commands.queue.txt+="M155 S5\r" //Temp auto report on
+click luxSend,0
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn bClose
+///////////////////////////////////////////////////////////////////////////////
+page ReturnPage
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn onExit
+///////////////////////////////////////////////////////////////////////////////
+click luxInit,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1
@@ -249,10 +266,6 @@ spstr valueLFile.txt,vars.s.txt,"\r",selectedIndex.val
 selectedFLong.txt=vars.s.txt
 print.tFileName.txt=selectedFLong.txt
 click luxView,1
-
-//On Exit
-commands.queue.txt+="M155 S5" //Temp auto report on
-click luxSend,0
 
 //bUp
 bUp.picc=bUp.picc2
