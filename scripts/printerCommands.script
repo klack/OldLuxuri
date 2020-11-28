@@ -73,11 +73,13 @@ click luxSend,0
 /// @brief Return printer to default settings
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\r" //Turn off Heaters
-commands.queue.txt+="T0\rM605 S1\r"
-// commands.queue.txt+="G28 X\rT0\rM605 S1\r" //Home 
-commands.queue.txt+="M220 S100\rM221 S100\rM220\rM221\r" //Reset
+commands.queue.txt+="M605 S0\r"
+commands.queue.txt+="G28 X\r"
+commands.queue.txt+="M605 S1\r"
+//commands.queue.txt+="G28 X\r" //Home 
+// commands.queue.txt+="M220 S100\rM221 S100\rM220\rM221\r" //Reset
 // IdexMode=1
-click luxSend,0
+// click luxSend,0
 parse.callback.txt="luxStopPrint_1:finished"
 click luxSetCallback,1
 
@@ -90,13 +92,13 @@ commands.queue.txt=""
 StopWait=0
 commands.command.txt="M108" //Break out of busy
 click luxSend,1
-commands.command.txt="M524" //Stop print
+commands.command.txt="M25" //Stop print
 click luxSend,1
 while(ok==0&&StopWait<20)
 {
   commands.command.txt="M108"
   click luxSend,1
-  commands.command.txt="M524"
+  commands.command.txt="M25"
   click luxSend,1
   BackOff=BackOff*150
   BackOff/=100
@@ -106,6 +108,8 @@ while(ok==0&&StopWait<20)
   StopWait++
 }
 parse.callback.txt="luxStopPrint0:finished"      
+commands.command.txt="M524"
+click luxSend,1
 BackOff=1
 click luxSetCallback,1
 
