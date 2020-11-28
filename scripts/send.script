@@ -25,10 +25,15 @@ if(busy==1) //Clear busy status every 5 seconds
 {
   BusyCycles=0
 }
-
 if(ok==0) //Track how many time ok was not recieved
 {
   OkBlocks+=1
+  if(OkBlocks>500) //Failsafe, try and trigger an ok
+  {
+    commands.command.txt="M118"
+    click luxSend,1
+    OkBlocks=0
+  }
 }else
 {
   OkBlocks=0

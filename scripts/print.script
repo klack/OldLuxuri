@@ -24,7 +24,7 @@ if(printer.printState.txt=="printing") //Printing
   {
     commands.command.txt="" //Clear any responses sent by nextion
     click luxSend,1
-    click luxPrintTime,1    
+    click luxPrintStats,1    
     printer.printState.txt="finished"
     click luxView,1
   }
@@ -74,6 +74,8 @@ if(printer.printState.txt=="printing")
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
+  tZHeight.txt="Z: "
+  tZHeight.txt+=printer.z.txt
   if(timeCount.val>4) //Only show after time was recieved the 3rd time (heaters will no longer be blocking)
   {
     tTime.aph=127
@@ -140,17 +142,6 @@ if(printer.speed.val!=100)
 {
   pSpeed.aph=0
 }
-if(printer.printState.txt=="cleaning-up")
-{
-  if(Frame==0)
-  {
-    tProgress.aph=0
-  }
-  else
-  {
-    tProgress.aph=127
-  }
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRun
@@ -165,10 +156,10 @@ click luxSend,0
 /// @fn tm5s
 /// @brief Get the print time every 5 seconds
 ///////////////////////////////////////////////////////////////////////////////
-if(QueueBlocks==0&&printer.printState.txt=="printing")
+if(QueueLen==0&&printer.printState.txt=="printing")
 {
   if(ok==1&&busy==0)
   {
-    click luxPrintTime,1
+    click luxPrintStats,1
   }
 }

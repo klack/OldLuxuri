@@ -101,7 +101,7 @@ while(ok==0&&StopWait<50)
   click luxSend,1
   BackOff=BackOff*150 //Incremental backoff
   BackOff/=100
-  delay=500*BackOff 
+  delay=800*BackOff 
   doevents
   click luxRead,1
   StopWait++
@@ -117,10 +117,10 @@ BackOff=1
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxPrintTime 1
+/// @fn luxPrintStats 1
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="M31\r"
-click luxSend,0
+commands.command.txt+="M31\rM114\r"
+click luxSend,1
 timeCount.val+=1
 
 ///////////////////////////////////////////////////////////////////////////////

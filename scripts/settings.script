@@ -30,7 +30,7 @@ click luxSend,1
 ///////////////////////////////////////////////////////////////////////////////
 if(printer.printState.txt!="null")
 {
-  page printSettings
+  page print
 }else
 {
   page ReturnPage
