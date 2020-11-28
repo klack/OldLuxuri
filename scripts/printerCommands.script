@@ -72,11 +72,11 @@ click luxSend,0
 /// @fn luxStopPrint 1
 /// @brief Return printer to default settings
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="M27 S0\rM104 T0 S0\rM104 T1 S0\rM140 S0\r" //Turn off Heaters
+commands.queue.txt="M104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\r" //Turn off Heaters
 commands.queue.txt+="M605 S0\r" //Home via manual mode
 commands.queue.txt+="G28 X\r"
 commands.queue.txt+="M605 S1\r"
-commands.queue.txt+="M220 S100\rM221 S100\rM220\rM221\r" //Reset flow and speed
+commands.queue.txt+="M27 S0\rM220 S100\rM221 S100\rM220\rM221\r" //Reset flow and speed
 click luxSend,0
 IdexMode=1
 parse.callback.txt="luxStopPrint_1:finished"
@@ -145,7 +145,7 @@ commands.queue.txt+="M220\rM221\r" //Get flow / speed
 commands.queue.txt+="M27 S5\r"  //Report SD Status
 commands.queue.txt+="M23 "
 commands.queue.txt+=fileName.txt
-commands.queue.txt+="\rM24\r"
+commands.queue.txt+="\rM24\rM503\r"
 printer.printTime.txt=""
 printer.currentByte.val=0
 printer.totalBytes.val=0
