@@ -31,6 +31,17 @@ tY.txt="Y:"
 tY.txt+=printer.y.txt
 tZ.txt="Z:"
 tZ.txt+=printer.z.txt
+if(busy==1)
+{
+  tMessage.txt="Busy"
+}else
+{
+  if(tMessage.txt=="Busy") //Only clear if it was a busy message
+  {
+    tMessage.txt=""
+  }
+}
+
 for(j=0;j<=45;j++) //Button Groups
 {
   if(b[j].type==98) //If text box
@@ -66,25 +77,21 @@ for(j=0;j<=45;j++) //Button Groups
 /// @fn luxPageAnimate
 /// @brief Animation Loop
 ///////////////////////////////////////////////////////////////////////////////
-if(busy==1) //Busy
-{
-  if(Frame==0) //Flash
-  {
-    tMessage.aph=0
-  }else
-  {
-    tMessage.aph=127
-  }
-}else
+if(Frame==0) //Flash
 {
   tMessage.aph=0
+}else
+{
+  tMessage.aph=127
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn sendMovement
 /// @brief Sends movement command to printer
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt+=command.txt
+tMessage.txt=""
+commands.command.txt=command.txt
 commands.command.txt+="\r"
 commands.command.txt+="M114\r"
 click luxSend,1
@@ -146,10 +153,11 @@ page numpad
 //tX callback
 if(vars.returnVal.txt!="null")
 {
-  commands.command.txt="G0 X"
+  commands.command.txt="G90\rG0 X"
   commands.command.txt+=vars.returnVal.txt
   commands.command.txt+=" F"
   commands.command.txt+=speed.txt
+  commands.command.txt+="\rM114\rG91\r"
   click luxSend,1 //Send immediatly
 }
 
@@ -161,10 +169,11 @@ page numpad
 //tY callback
 if(vars.returnVal.txt!="null")
 {
-  commands.command.txt="G0 Y"
+  commands.command.txt="G90\rG0 Y"
   commands.command.txt+=vars.returnVal.txt
   commands.command.txt+=" F"
   commands.command.txt+=speed.txt
+  commands.command.txt+="\rM114\rG91\r"
   click luxSend,1 //Send immediatly
 }
 
@@ -176,9 +185,10 @@ page numpad
 //tZ callback
 if(vars.returnVal.txt!="null")
 {
-  commands.command.txt="G0 Z"
+  commands.command.txt="G90\rG0 Z"
   commands.command.txt+=vars.returnVal.txt
   commands.command.txt+=" F500"
+  commands.command.txt+="\rM114\rG91\r"
   click luxSend,1 //Send immediatly
 }
 
