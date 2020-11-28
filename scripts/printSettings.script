@@ -93,7 +93,7 @@ if(busy==1)
 {
   tBusy.txt="Busy"
 }
-if(QueueBlocks>0)
+if(QueueLen>0)
 {
   tBusy.txt="Commands Queued"
 }

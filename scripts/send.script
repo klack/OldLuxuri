@@ -33,11 +33,10 @@ if(ok==0) //Track how many time ok was not recieved
 {
   OkBlocks=0
 }
-
+strlen commands.queue.txt,QueueLen //get the length of the command queue
 if(ok==1&&busy==0) //Send Queue
 {
   OkBlocks=0
-  strlen commands.queue.txt,QueueLen //get the length of the command queue
   while(QueueLen>0&&OkBlocks<MaxOKBlocks)
   {
     doevents
