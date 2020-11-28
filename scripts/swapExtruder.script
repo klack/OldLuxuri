@@ -20,12 +20,12 @@ page diagPrompt
 ///////////////////////////////////////////////////////////////////////////////
 if(ReturnVal!=-1)
 {
-  commands.command.txt+="T"
+  commands.queue.txt+="T"
   covx ReturnVal,vars.s.txt,0,0
-  commands.command.txt+=vars.s.txt
-  commands.command.txt+="\r"
-  commands.command.txt+="M114\r"
-  click luxSend,1
+  commands.queue.txt+=vars.s.txt
+  commands.queue.txt+="\r"
+  commands.queue.txt+="M114\r"
+  click luxSend,0
 }
 
 ///////////////////////////////////////////////////////////////////////////////

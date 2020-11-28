@@ -92,25 +92,33 @@ commands.command.txt="M108" //Break out of busy
 click luxSend,1
 commands.command.txt="M524" //Stop print
 click luxSend,1
-StopWait=0
-while(ok==0&&StopWait<50)
+Breaks=0
+while(Breaks<4)
 {
-  commands.command.txt="M108"
-  click luxSend,1
-  commands.command.txt="M524"
-  click luxSend,1
-  BackOff=BackOff*150 //Incremental backoff
-  BackOff/=100
-  delay=800*BackOff 
-  doevents
-  click luxRead,1
-  StopWait++
-  BackOff++
-  if(BackOff>10) //Restart increment
+  BackOff=1
+  StopWait=0
+  ok=0
+  while(ok==0&&StopWait<25)
   {
-    BackOff=1
+    commands.command.txt="M108"
+    click luxSend,1
+    commands.command.txt="M524"
+    click luxSend,1
+    BackOff=BackOff*150 //Incremental backoff
+    BackOff/=100
+    delay=800*BackOff 
+    doevents
+    click luxRead,1
+    StopWait++
+    BackOff++
+    if(BackOff>10) //Restart increment
+    {
+      BackOff=1
+    }
   }
+  Breaks++
 }
+
 parse.callback.txt="luxStopPrint_0:finished"      
 click luxSetCallback,1
 BackOff=1

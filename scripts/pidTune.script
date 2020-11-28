@@ -55,8 +55,8 @@ if(ReturnVal==1) //Handle start confirmation diag
 /// @breif Does not run when returning from dialog boxes
 ///////////////////////////////////////////////////////////////////////////////
 thsp=0 //Disable sleep
-commands.command.txt="M155 S1\rM106 S255\r" //Update temp faster, turn on fan.
-click luxSend,1
+commands.queue.txt="M155 S1\rM106 S255\r" //Update temp faster, turn on fan.
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxInit 0
@@ -69,7 +69,7 @@ if(state.txt=="tuning")
   click luxStopPrint,0
 }
 thsp=SLEEP_TIME //Reset sleep time
-commands.command.txt="M155 S5\rM106 S0\r" //Temp auto report, turn off fan
+commands.queue.txt="M155 S5\rM106 S0\r" //Temp auto report, turn off fan
 click luxSend,1
 click luxView,1
 
@@ -161,8 +161,8 @@ click luxSend,1
 /// @fn finish
 /// @brief Save the results and direct to confirmation
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="M500" //Save Results
-click luxSend,1
+commands.queue.txt="M500" //Save Results
+click luxSend,0
 click luxInit,0
 diagConfirm.tMessage.txt="PID Tuning Complete"
 DiagReturnPage=MAIN

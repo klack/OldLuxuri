@@ -2,21 +2,21 @@
 /// @fn luxRunOnce
 /// @breif Does not run when returning from dialog boxes
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="G28\r" //Home
-commands.command.txt+="M605 S1\r" //Set to auto mode
-commands.command.txt+="T0\r"
-commands.command.txt+="G0 F5000\r"
-commands.command.txt+="M114\r" //Report position
-click luxSend,1
+commands.queue.txt="G28\r" //Home
+commands.queue.txt+="M605 S1\r" //Set to auto mode
+commands.queue.txt+="T0\r"
+commands.queue.txt+="G0 F5000\r"
+commands.queue.txt+="M114\r" //Report position
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxInitialize 0
 /// @brief Should run on any close button
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="G28\r" //Home
-commands.command.txt+="T0\r" //Set to T0
-commands.command.txt+="G0 F5000\r"
-click luxSend,1
+commands.queue.txt="G28\r" //Home
+commands.queue.txt+="T0\r" //Set to T0
+commands.queue.txt+="G0 F5000\r"
+click luxSend,0
 page ReturnPage
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,18 +38,18 @@ tPosition.txt+=printer.z.txt
 /// @fn sendCommand
 /// @brief Prepare and send commands
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="G90\r"
-commands.command.txt+="G0 Z10 F400\r"
-commands.command.txt+="G0 X"
+commands.queue.txt="G90\r"
+commands.queue.txt+="G0 Z10 F400\r"
+commands.queue.txt+="G0 X"
 covx destX.val,vars.s.txt,0,0
-commands.command.txt+=vars.s.txt
-commands.command.txt+=" Y"
+commands.queue.txt+=vars.s.txt
+commands.queue.txt+=" Y"
 covx destY.val,vars.s.txt,0,0
-commands.command.txt+=vars.s.txt
-commands.command.txt+=" F5000\r"
-commands.command.txt+="G0 Z0 F400\r"
-commands.command.txt+="M114\r"
-click luxSend,1
+commands.queue.txt+=vars.s.txt
+commands.queue.txt+=" F5000\r"
+commands.queue.txt+="G0 Z0 F400\r"
+commands.queue.txt+="M114\r"
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 //bPoint1
