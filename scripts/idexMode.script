@@ -33,13 +33,14 @@ if(IdexMode==3)
 /// @fn setIdexMode
 /// @breif Set idex mode from a return value
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="G28 X\r"
-commands.command.txt+="M605 S"
+commands.queue.txt="G28 X\r"
+commands.queue.txt+="M605 S"
 covx ReturnVal,vars.s.txt,0,0
-commands.command.txt+=vars.s.txt
-commands.command.txt+="\r"
-click luxSend,1
+commands.queue.txt+=vars.s.txt
+commands.queue.txt+="\r"
+click luxSend,0
 IdexMode=ReturnVal
+page MAIN
 
 ///////////////////////////////////////////////////////////////////////////////
 //bManual
