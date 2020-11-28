@@ -99,14 +99,14 @@ while(ok==0&&StopWait<50)
   click luxSend,1
   commands.command.txt="M524"
   click luxSend,1
-  BackOff=BackOff*150
+  BackOff=BackOff*150 //Incremental backoff
   BackOff/=100
   delay=500*BackOff 
   doevents
   click luxRead,1
   StopWait++
   BackOff++
-  if(BackOff>10)
+  if(BackOff>10) //Restart increment
   {
     BackOff=1
   }
