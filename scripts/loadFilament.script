@@ -27,11 +27,23 @@ page ReturnPage
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="init")
 {
-  state.txt="heating"
+  state.txt="choose"
 }
-if(state.txt=="heating")
+if(state.txt=="choose")
 {
-  if(printer.T0Temp.val>=loadTemp.val&&printer.T1Temp.val>=loadTemp.val)
+  if(T0State.txt=="heating"||T1State.txt=="heating")
+  {
+    state.txt="heating"
+  }
+}
+if(state.txt="heating"||state.txt="ready")
+{
+  if(printer.T0Temp.val>=loadTemp.val)
+  {
+
+  }
+
+  if(printer.T1Temp.val>=loadTemp.val)
   {
     state.txt="ready"
     tMessage.txt="Ready"
