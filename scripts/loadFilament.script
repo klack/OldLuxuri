@@ -17,41 +17,61 @@ page ReturnPage
 /// @fn luxController
 /// @brief Main program loop
 ///////////////////////////////////////////////////////////////////////////////
-if(state.txt=="init")
+if(printer.T0SetTemp.val>0&&printer.T0SetTemp.val>=minTemp.val) //Handle temperature already set
 {
-  //Handle temperature already set
-  if(printer.T0SetTemp.val>0&&printer.T0SetTemp.val>minTemp.val)
-  {
-    T0Target.val=printer.T0SetTemp.val
-  }
-  if(printer.T1SetTemp.val>0&&printer.T1SetTemp.val>minTemp.val)
-  {
-    T1Target.val=printer.T1SetTemp.val
-  }
+  T0Target.val=printer.T0SetTemp.val
+}else
+{
+  T0Target.val=defaultTemp.val
+}
+if(printer.T1SetTemp.val>0&&printer.T1SetTemp.val>=minTemp.val)
+{
+  T1Target.val=printer.T1SetTemp.val
+}else
+{
+  T1Target.val=defaultTemp.val
 }
 
-if(printer.T0SetTemp.val>0&&T0State.txt!="ready")
-{
-  T0State.txt="heating"
-}else
+if(printer.T0SetTemp.val==0)
 {
   T0State.txt="off"
 }
-if(printer.T1SetTemp.val>0&&T1State.txt!="ready")
+if(printer.T1SetTemp.val==0)
 {
-  T1State.txt="heating" 
-}else
-{
-  T1State.txt="off"  
+  T1State.txt="off" 
 }
 
-if(printer.T0Temp.val>=T0Target.val)
+if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T0SetTemp.val>=T0Target.val)
 {
   T0State.txt="ready"
 }
-if(printer.T1Temp.val>=T1Target.val)
+if(printer.T1Temp.val>=printer.T1SetTemp.val&&printer.T1SetTemp.val>=T1Target.val)
 {
   T1State.txt="ready"
+}
+
+if(printer.T0SetTemp.val!=0&&printer.T0SetTemp.val>=minTemp.val)
+{
+  if(T0State.txt!="ready")
+  {
+    T0State.txt="heating" 
+  }
+  if(T0Target.val!=printer.T0SetTemp.val)
+  {
+    T0State.txt="heating"
+  }
+}
+
+if(printer.T1SetTemp.val!=0&&printer.T1SetTemp.val>=minTemp.val)
+{
+  if(T1State.txt!="ready")
+  {
+    T1State.txt="heating" 
+  }
+if(T1Target.val!=printer.T1SetTemp.val)
+  {
+    T1State.txt="heating"
+  }
 }
 
 if(T0State.txt=="off"&&T1State.txt=="off")
@@ -209,3 +229,22 @@ click sendCommand,1
 commandTool.val=1
 commandLength.val=loadLength.val //Change to negative number
 click sendCommand,1
+
+//bDebug
+tDebug.txt+="State: "
+tDebug.txt+=state.txt
+tDebug.txt+="\r"
+tDebug.txt+="T0 State: "
+tDebug.txt+=T0State.txt
+tDebug.txt+="\r"
+tDebug.txt+="T0 Target: "
+covx T0Target.val,vars.s.txt,0,0
+tDebug.txt+=vars.s.txt
+tDebug.txt+="\r"
+tDebug.txt+="T1 State: "
+tDebug.txt+=T1State.txt
+tDebug.txt+="\r"
+tDebug.txt+="T1 Target: "
+covx T1Target.val,vars.s.txt,0,0
+tDebug.txt+=vars.s.txt
+tDebug.txt+="\r"
