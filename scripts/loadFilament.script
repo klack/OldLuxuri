@@ -1,16 +1,8 @@
-
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRunOnce
 /// @brief Warm up extruders
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="M605 S0\r" //Set manual mode
-covx loadTemp.val,vars.s.txt,0,0 //Heat to load temp
-commands.queue.txt+="M104 T0 S"
-commands.queue.txt+=vars.s.txt
-commands.queue.txt+="\r"
-commands.queue.txt+="M104 T1 S"
-commands.queue.txt+=vars.s.txt
-commands.queue.txt+="\r"
+commands.queue.txt+="M605 S0\r" //Set manual mode
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -27,66 +19,115 @@ page ReturnPage
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="init")
 {
+  //Handle temperature already set
+  if(printer.T0SetTemp.val>0&&printer.T0SetTemp.val>minTemp.val)
+  {
+    T0Target.val=printer.T0SetTemp.val
+  }
+  if(printer.T1SetTemp.val>0&&printer.T1SetTemp.val>minTemp.val)
+  {
+    T1Target.val=printer.T1SetTemp.val
+  }
+}
+
+if(printer.T0SetTemp.val>0&&T0State.txt!="ready")
+{
+  T0State.txt="heating"
+}else
+{
+  T0State.txt="off"
+}
+if(printer.T1SetTemp.val>0&&T1State.txt!="ready")
+{
+  T1State.txt="heating" 
+}else
+{
+  T1State.txt="off"  
+}
+
+if(printer.T0Temp.val>=T0Target.val)
+{
+  T0State.txt="ready"
+}
+if(printer.T1Temp.val>=T1Target.val)
+{
+  T1State.txt="ready"
+}
+
+if(T0State.txt=="off"&&T1State.txt=="off")
+{
   state.txt="choose"
 }
-if(state.txt=="choose")
+if(T0State.txt=="heating"||T1State.txt=="heating")
 {
-  if(T0State.txt=="heating"||T1State.txt=="heating")
-  {
-    state.txt="heating"
-  }
+  state.txt="heating"
 }
-if(state.txt="heating"||state.txt="ready")
+if(T0State.txt=="ready"||T1State.txt=="ready")
 {
-  if(printer.T0Temp.val>=loadTemp.val)
-  {
-
-  }
-
-  if(printer.T1Temp.val>=loadTemp.val)
-  {
-    state.txt="ready"
-    tMessage.txt="Ready"
-  }
+  state.txt="ready"
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
-if(state.txt=="init")
+if(T0State.txt=="ready") //Show hide buttons
 {
-  bT0Out.aph=0
-  bT0In.aph=0
-  bT1Out.aph=0
-  bT1In.aph=0
-  tsw bT0Out,0 //Disable buttons
-  tsw bT0In,0
-  tsw bT1Out,0
-  tsw bT1In,0
+  setlayer bT0Out,255
+  setlayer bT0In,255
+  setlayer bHeatT0,1
+}else
+{
+  setlayer bT0Out,1
+  setlayer bT0In,1
+  setlayer bHeatT0,255
+}
+if(T1State.txt=="ready")
+{
+  setlayer bT1Out,255
+  setlayer bT1In,255
+  setlayer bHeatT1,1
+}else
+{
+  setlayer bT1Out,1
+  setlayer bT1In,1
+  setlayer bHeatT1,255
+}
+if(T0State.txt=="heating") //Heating pics
+{
+  bHeatT0.picc=bHeatT0.picc2+3
+}else
+{
+  bHeatT0.picc=bHeatT0.picc2+1
+}
+if(T1State.txt=="heating")
+{
+  bHeatT1.picc=bHeatT1.picc2+3
+}else
+{
+  bHeatT1.picc=bHeatT1.picc2+1
+}
+if(state.txt=="choose") //Page state
+{
+  pIcon.picc=pState.picc-1
+  tMessage2.aph=127
+  tMessage.txt="Heat"
+  tMessage2.txt="Extruders"
 }
 if(state.txt=="heating")
 {
-  pIcon.picc=pState.picc
+  pIcon.picc=pState.picc+1
   tMessage2.aph=127
+  tMessage.txt="Heating"
+  tMessage2.txt="Please Wait..."
 }
 if(state.txt=="ready")
 {
-  pIcon.picc=pState.picc+1
+  pIcon.picc=pState.picc+3
   tMessage2.aph=0
-  tT0Temp.y=222 //Move temps below box
-  tT1Temp.y=222
-  tsw bT0Out,1 //Enable buttons
-  tsw bT0In,1
-  tsw bT1Out,1
-  tsw bT1In,1
-  bT0Out.aph=127
-  bT0In.aph=127
-  bT1Out.aph=127
-  bT1In.aph=127
+  tMessage.txt="Ready"
 }
-covx printer.T0Temp.val,vars.s.txt,0,0 //Update temperature display
+covx printer.T0Temp.val,vars.s.txt,0,0 //Temperature display
 tT0Temp.txt=vars.s.txt
 covx printer.T1Temp.val,vars.s.txt,0,0
 tT1Temp.txt=vars.s.txt
@@ -95,20 +136,50 @@ tT1Temp.txt=vars.s.txt
 /// @fn luxPageAnimate
 /// @brief Page Animations
 ///////////////////////////////////////////////////////////////////////////////
-if(state.txt=="heating")
+if(T0State.txt=="heating")
 {
   if(Frame==0)
   {
-    tMessage2.aph=0
+    bHeatT0.aph=0
   }else
   {
-    tMessage2.aph=127
+    bHeatT0.aph=127
   }
+}else
+{
+  bHeatT0.aph=127
+}
+if(T1State.txt=="heating")
+{
+  if(Frame==0)
+  {
+    bHeatT1.aph=0
+  }else
+  {
+    bHeatT1.aph=127
+  }
+}else
+{
+  bHeatT1.aph=127
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//bHeatT0
+covx T0Target.val,vars.s.txt,0,0 //Heat to load temp
+commands.queue.txt+="M104 T0 S"
+commands.queue.txt+=vars.s.txt
+commands.queue.txt+="\r"
+click luxSend,0
+
+//bHeatT1
+covx T1Target.val,vars.s.txt,0,0 //Heat to load temp
+commands.queue.txt+="M104 T1 S"
+commands.queue.txt+=vars.s.txt
+commands.queue.txt+="\r"
+click luxSend,0
+
 //Send Command
-commands.queue.txt="T"
+commands.queue.txt+="T"
 covx commandTool.val,vars.s.txt,0,0
 commands.queue.txt+=vars.s.txt
 commands.queue.txt+="\rG92 E0\r" //Set extruder pos to 0
