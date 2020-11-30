@@ -107,6 +107,8 @@ if(T0State.txt=="cold")  //Show hide T0 Buttons
 }
 if(T0State.txt=="heating")
 {
+  setlayer bT0Out,0
+  setlayer bT0In,0
   setlayer pT0Flame,255
   setlayer bHeatT0,0
 }else
@@ -127,8 +129,10 @@ if(T1State.txt=="cold") //Show hide T1 Buttons
 }
 if(T1State.txt=="heating")
 {
-  setlayer pT1Flame,255
+  setlayer bT1Out,0
+  setlayer bT1In,0
   setlayer bHeatT1,0
+  setlayer pT1Flame,255
 }else
 {
   setlayer pT1Flame,0
