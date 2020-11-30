@@ -2,9 +2,6 @@
 /// @fn luxController 1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
-if(state.txt=="init")
-{
-}
 if(state.txt=="choose")
 {
   if(preheatT0Temp.val>0||preheatT1Temp.val>0) //Check if a value was set
@@ -14,6 +11,9 @@ if(state.txt=="choose")
 }
 if(state.txt=="heating")
 {
+  j=0
+  k=0
+  l=0
   if(printer.T0Temp.val>=preheatT0Temp.val) //Check T0Temp
   {
     j=1
@@ -31,9 +31,10 @@ if(state.txt=="heating")
   {
     state.txt="ready"
   }
-}
-if(state.txt=="ready")
-{  
+  if(preheatT0Temp.val==0&&preheatT1Temp.val==0)
+  {
+    state.txt="choose"
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
