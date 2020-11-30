@@ -100,45 +100,47 @@ if(state.txt=="init")
   setlayer bT1Out,0
   setlayer bT1In,0
 }
-if(T0State.txt=="ready") //Show hide T0 Buttons
-{
-  setlayer bHeatT0,0
-  setlayer bT0Out,255
-  setlayer bT0In,255
-}
-if(T0State.txt=="cold"||T0State.txt=="heating") 
+
+if(T0State.txt=="cold")  //Show hide T0 Buttons
 {
   setlayer bT0Out,0
   setlayer bT0In,0
   setlayer bHeatT0,255
 }
-if(T1State.txt=="ready") //Show hide T1 Buttons
+if(T0State.txt=="heating")
 {
-  setlayer bHeatT1,0
-  setlayer bT1Out,255
-  setlayer bT1In,255
+  setlayer pT0Flame,255
+  setlayer bHeatT0,0
+}else
+{
+  setlayer pT0Flame,0
 }
-if(T1State.txt=="cold"||T1State.txt=="heating") 
+if(T0State.txt=="ready")
+{
+  setlayer bHeatT0,0
+  setlayer bT0Out,255
+  setlayer bT0In,255
+}
+
+if(T1State.txt=="cold") //Show hide T1 Buttons
 {
   setlayer bT1Out,0
   setlayer bT1In,0
   setlayer bHeatT1,255
 }
-
-if(T0State.txt=="heating") //Heating pics
-{
-  setlayer pT0Flame,255
-}else
-{
-  setlayer pT0Flame,0
-}
-
 if(T1State.txt=="heating")
 {
   setlayer pT1Flame,255
+  setlayer bHeatT1,0
 }else
 {
   setlayer pT1Flame,0
+}
+if(T1State.txt=="ready") 
+{
+  setlayer bHeatT1,0
+  setlayer bT1Out,255
+  setlayer bT1In,255
 }
 
 if(state.txt=="choose") //Page state
