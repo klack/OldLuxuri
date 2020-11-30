@@ -17,7 +17,7 @@ page ReturnPage
 /// @fn luxController
 /// @brief Main program loop
 ///////////////////////////////////////////////////////////////////////////////
-if(printer.T0SetTemp.val>0&&printer.T0SetTemp.val>=minTemp.val) //Handle temperature already set
+if(printer.T0SetTemp.val>0&&printer.T0SetTemp.val>=minTemp.val) //Use temperature already set
 {
   T0Target.val=printer.T0SetTemp.val
 }else
@@ -31,7 +31,7 @@ if(printer.T1SetTemp.val>0&&printer.T1SetTemp.val>=minTemp.val)
 {
   T1Target.val=defaultTemp.val
 }
-if(printer.T0SetTemp.val<T0Target.val)
+if(printer.T0SetTemp.val<T0Target.val) //Individual extruder states
 {
   T0State.txt="cold"
 }
@@ -39,15 +39,6 @@ if(printer.T1SetTemp.val<T0Target.val)
 {
   T1State.txt="cold" 
 }
-if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T0SetTemp.val>=T0Target.val)
-{
-  T0State.txt="ready"
-}
-if(printer.T1Temp.val>=printer.T1SetTemp.val&&printer.T1SetTemp.val>=T1Target.val)
-{
-  T1State.txt="ready"
-}
-
 if(printer.T0SetTemp.val!=0&&printer.T0SetTemp.val>=minTemp.val)
 {
   if(T0State.txt!="ready")
@@ -70,7 +61,15 @@ if(printer.T1SetTemp.val!=0&&printer.T1SetTemp.val>=minTemp.val)
     T1State.txt="heating"
   }
 }
-if(T0State.txt=="cold"&&T1State.txt=="cold")
+if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T0SetTemp.val>=T0Target.val)
+{
+  T0State.txt="ready"
+}
+if(printer.T1Temp.val>=printer.T1SetTemp.val&&printer.T1SetTemp.val>=T1Target.val)
+{
+  T1State.txt="ready"
+}
+if(T0State.txt=="cold"&&T1State.txt=="cold") //Page States
 {
   state.txt="choose"
 }
@@ -100,7 +99,6 @@ if(state.txt=="init")
   setlayer bT1Out,0
   setlayer bT1In,0
 }
-
 if(T0State.txt=="cold")  //Show hide T0 Buttons
 {
   setlayer bT0Out,0
@@ -121,7 +119,6 @@ if(T0State.txt=="ready")
   setlayer bT0Out,255
   setlayer bT0In,255
 }
-
 if(T1State.txt=="cold") //Show hide T1 Buttons
 {
   setlayer bT1Out,0
@@ -142,7 +139,6 @@ if(T1State.txt=="ready")
   setlayer bT1Out,255
   setlayer bT1In,255
 }
-
 if(state.txt=="choose") //Page state
 {
   pIcon.picc=pState.picc-1
@@ -246,7 +242,7 @@ click sendCommand,1
 
 //bT0In
 commandTool.val=0
-commandLength.val=loadLength.val //Change to negative number
+commandLength.val=loadLength.val
 click sendCommand,1
 
 //bT1Out
@@ -256,24 +252,5 @@ click sendCommand,1
 
 //bT1In
 commandTool.val=1
-commandLength.val=loadLength.val //Change to negative number
+commandLength.val=loadLength.val
 click sendCommand,1
-
-//bDebug
-tDebug.txt+="State: "
-tDebug.txt+=state.txt
-tDebug.txt+="\r"
-tDebug.txt+="T0 State: "
-tDebug.txt+=T0State.txt
-tDebug.txt+="\r"
-tDebug.txt+="T0 Target: "
-covx T0Target.val,vars.s.txt,0,0
-tDebug.txt+=vars.s.txt
-tDebug.txt+="\r"
-tDebug.txt+="T1 State: "
-tDebug.txt+=T1State.txt
-tDebug.txt+="\r"
-tDebug.txt+="T1 Target: "
-covx T1Target.val,vars.s.txt,0,0
-tDebug.txt+=vars.s.txt
-tDebug.txt+="\r"

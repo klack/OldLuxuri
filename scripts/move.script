@@ -158,7 +158,7 @@ if(vars.returnVal.txt!="null")
   commands.queue.txt+=" F"
   commands.queue.txt+=speed.txt
   commands.queue.txt+="\rM114\rG91\r"
-  click luxSend,0 //Send immediatly
+  click luxSend,0
 }
 
 //tY
