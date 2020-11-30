@@ -37,7 +37,10 @@ if(printer.T0SetTemp.val<T0Target.val) //Individual extruder states
 }
 if(printer.T1SetTemp.val<T0Target.val)
 {
-  T1State.txt="cold" 
+  if(T1State.txt!="ready")
+  {
+    T1State.txt="cold" 
+  }
 }
 if(printer.T0SetTemp.val!=0&&printer.T0SetTemp.val>=minTemp.val)
 {
