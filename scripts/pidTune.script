@@ -94,7 +94,7 @@ if(state.txt=="cooling")
 }
 if(state.txt=="tuning")
 {
-  tStatus.txt="Tuning"
+  tStatus.txt="Tuning..."
   covx oProgress.val,tProgress.txt,0,0
   tProgress.txt+="%"
 }
@@ -150,11 +150,11 @@ else
 /// @fn tune
 /// @brief Perfrom PID Autotune on hotends and bed
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="M303 C3 E0 S220 U\r" //T0 PID Tune
+commands.command.txt="M303 C8 E0 S220 U\r" //T0 PID Tune
 click luxSend,1
-commands.command.txt="M303 C3 E1 S220 U\r" //T1 PID Tune
+commands.command.txt="M303 C8 E1 S220 U\r" //T1 PID Tune
 click luxSend,1
-commands.command.txt="M303 C3 E-1 S60 U\r" //Bed PID Tune
+commands.command.txt="M303 C8 E-1 S60 U\r" //Bed PID Tune
 click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
