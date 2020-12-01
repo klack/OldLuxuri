@@ -28,9 +28,9 @@ click luxSend,1
 /// @fn luxInitialize 0
 /// @brief Call when perminently exiting the page
 ///////////////////////////////////////////////////////////////////////////////
-if(printer.printState.txt!="null")
+if(printer.printState.txt=="paused")
 {
-  page print
+  page printSettings
 }else
 {
   page ReturnPage

@@ -31,10 +31,30 @@ if(printer.T1SetTemp.val>0&&printer.T1SetTemp.val>=minTemp.val)
 {
   T1Target.val=defaultTemp.val
 }
-if(printer.T0SetTemp.val<T0Target.val) //Individual extruder states
+
+//Individual extruder states
+if(T0State.txt!="ready")
 {
-  T0State.txt="cold"
+  if(printer.T0SetTemp.val<T0Target.val) //Temp is not set above target
+  {
+    T0State.txt="cold"
+  }
+  if(printer.T0SetTemp.val>=minTemp.val&&printer.T0SetTemp.val!=0)
+  {
+    T0State.txt="heating" 
+  }
 }
+if(T0Target.val!=printer.T0SetTemp.val)
+{
+  T0State.txt="heating"
+}
+if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T0SetTemp.val>=T0Target.val)
+{
+  T0State.txt="ready"
+}
+
+
+
 if(printer.T1SetTemp.val<T0Target.val)
 {
   if(T1State.txt!="ready")
@@ -42,17 +62,9 @@ if(printer.T1SetTemp.val<T0Target.val)
     T1State.txt="cold" 
   }
 }
-if(printer.T0SetTemp.val!=0&&printer.T0SetTemp.val>=minTemp.val)
-{
-  if(T0State.txt!="ready")
-  {
-    T0State.txt="heating" 
-  }
-  if(T0Target.val!=printer.T0SetTemp.val)
-  {
-    T0State.txt="heating"
-  }
-}
+
+
+
 if(printer.T1SetTemp.val!=0&&printer.T1SetTemp.val>=minTemp.val)
 {
   if(T1State.txt!="ready")
@@ -64,14 +76,14 @@ if(printer.T1SetTemp.val!=0&&printer.T1SetTemp.val>=minTemp.val)
     T1State.txt="heating"
   }
 }
-if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T0SetTemp.val>=T0Target.val)
-{
-  T0State.txt="ready"
-}
+
+
+
 if(printer.T1Temp.val>=printer.T1SetTemp.val&&printer.T1SetTemp.val>=T1Target.val)
 {
   T1State.txt="ready"
 }
+
 if(T0State.txt=="cold"&&T1State.txt=="cold") //Page States
 {
   state.txt="choose"
