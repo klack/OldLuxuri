@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="M25\r" 
 commands.queue.txt+="M400\r" //Trigger busy until planner is finished
-commands.queue.txt+="M114\r"
+commands.queue.txt+="M114\rM84\r" //Stop motors and report postion
 click luxSend,0
 parse.callback.txt="luxPause_1:finished"
 click luxSetCallback,1

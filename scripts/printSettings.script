@@ -56,7 +56,7 @@ if(printer.printState.txt=="pausing") //Pausing
 }
 if(printer.printState.txt=="paused") //Paused
 {
-  bPauseResume.picc=bPauseResume.picc2+2
+  bPauseResume.picc=bPauseResume.picc2
   tPlayPause.txt="Resume"
   tsw bClose,0
   bClose.aph=0

@@ -11,10 +11,24 @@ if(printer.printState.txt!="null")
 {
   tsw bDefaults,0
   bDefaults.aph=0
-  tsw tDefaults,0
   tDefaults.aph=0
-  tsw bPIDTune,0
-  bPIDTune.aph=0
+  tsw bAutotune,0
+  bAutotune.aph=0
+  tAutotune.aph=0
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxPageAnimate
+/// @brief Animations specific to this page
+///////////////////////////////////////////////////////////////////////////////
+tBusy.txt=""
+if(busy==1) 
+{
+  tBusy.txt="Busy"
+}
+if(QueueLen>0&&ok==0)
+{
+  tBusy.txt="Commands Queued"
 }
 
 ///////////////////////////////////////////////////////////////////////////////
