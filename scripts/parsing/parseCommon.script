@@ -1,51 +1,14 @@
-//TODO Idex Mode
-
-//Shutdown
-parse.lineMatch.txt="//lux:power_pin"
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
-{
-  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  page shutdown
-}
-//Shutdown
-parse.lineMatch.txt="echo://lux:power_pin"
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
-{
-  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  page shutdown
-}
-//Active Extruder
-parse.lineMatch.txt="echo:Active Extruder: "
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt)
-{
-  spstr parse.buffer.txt,parse.match.txt,"echo:Active Extruder: ",1
-  covx parse.match.txt,j,0,0
-  Tool=j
-}
-//Fan
-parse.lineMatch.txt="M106 P0 S"
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt)
-{
-  spstr parse.buffer.txt,parse.match.txt,"M106 P0 S",1
-  covx parse.match.txt,printer.fanSpeed.val,0,0
-}
-//Ok
-parse.lineMatch.txt="ok"
+///////////////////////////////////////////////////////////////////////////////
+/// @fn     parseCommon 1
+/// @brief  Essential items to be parsed
+///////////////////////////////////////////////////////////////////////////////
+parse.lineMatch.txt="ok" //Ok
 if(parse.buffer.txt==parse.lineMatch.txt)
 {
   ok=1
   busy=0
 }
-//M105 ok
-parse.lineMatch.txt="ok T:"
+parse.lineMatch.txt="ok T:" //M105 ok
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -53,16 +16,14 @@ if(parse.eval.txt==parse.lineMatch.txt)
   ok=1
   busy=0
 }
-//M117
-parse.lineMatch.txt="echo://lux:M117 "
+parse.lineMatch.txt="echo:busy: processing" //Busy
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  spstr parse.buffer.txt,printer.m117.txt,parse.lineMatch.txt,1
+  busy=1
 }
-//Error
-parse.lineMatch.txt="Error:"
+parse.lineMatch.txt="Error:" //Error
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -72,11 +33,70 @@ if(parse.eval.txt==parse.lineMatch.txt)
   parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
   page ERROR_PAGE
 }
-//Busy
-parse.lineMatch.txt="echo:busy: processing"
+parse.lineMatch.txt="echo:Active Extruder: " //Active Extruder
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  busy=1
+  spstr parse.buffer.txt,parse.match.txt,"echo:Active Extruder: ",1
+  covx parse.match.txt,j,0,0
+  Tool=j
+}
+parse.lineMatch.txt="M106 P0 S" //Fan
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,parse.match.txt,"M106 P0 S",1
+  covx parse.match.txt,printer.fanSpeed.val,0,0
+}
+parse.lineMatch.txt="// lux:callback " //Serial callback
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,parse.callbackReturn.txt,parse.lineMatch.txt,1
+}
+parse.lineMatch.txt="//lux:power_pin" //Shutdown
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+{
+  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
+  page shutdown
+}
+parse.lineMatch.txt="echo://lux:power_pin" //Shutdown
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+{
+  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
+  page shutdown
+}
+parse.lineMatch.txt="echo://lux:M117 " //M117
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,printer.m117.txt,parse.lineMatch.txt,1
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn         parseCommon 0
+///
+/// @brief      Parse buffer using a starting and ending position
+/// @param[in]  parse.search.txt      Text to search for
+/// @param[in]  parse.startPos.val    Starting char postion to search from
+/// @param[out] parse.matched.val     1 if match, 0 if no match       
+///////////////////////////////////////////////////////////////////////////////
+parse.matched.val=0
+parse.eval.txt=parse.buffer.txt
+strlen parse.search.txt,j
+substr parse.eval.txt,parse.result.txt,parse.startPos.val,j
+if(parse.result.txt==parse.search.txt)
+{
+  parse.matched.val=1
+}else
+{
+  parse.matched.val=0
 }
