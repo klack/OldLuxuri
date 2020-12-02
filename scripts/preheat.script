@@ -147,7 +147,7 @@ if(preheatT0Bed.val>preheatT1Bed.val) //Set the higher bed temp of the two
 commands.queue.txt+="M140 S"
 covx j,vars.s.txt,0,0
 commands.queue.txt+=vars.s.txt
-commands.queue.txt+="\r"
+commands.queue.txt+="\rM105"
 click luxSend,0
 state.txt="heating"
 click luxView,1

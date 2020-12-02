@@ -15,10 +15,10 @@ commands.command.txt="M104 T0 S0\rM104 T1 S0\rM140 S0\r"
 click luxSend,1
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn bShutdown
+/// @fn bPowerOff
 /// @brief Shut down the printer.  USB must be unplugged to completely power off
 ///////////////////////////////////////////////////////////////////////////////
 bPowerOff.picc=bPowerOff.picc2
-prints "M112",0
-printh 0A
+commands.command.txt="M112"
+click luxSend,1
 page shutdown
