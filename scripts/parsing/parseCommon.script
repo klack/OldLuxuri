@@ -44,6 +44,15 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   ok=1
   busy=0
 }
+//M105 ok
+parse.lineMatch.txt="ok T:"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  ok=1
+  busy=0
+}
 //M117
 parse.lineMatch.txt="echo://lux:M117 "
 strlen parse.lineMatch.txt,j

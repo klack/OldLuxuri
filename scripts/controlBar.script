@@ -89,7 +89,8 @@ if(vars.returnVal.txt!="null")
 {
   commands.queue.txt+="M104 T0 S"
   commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\r"
+  commands.queue.txt+="\rM105\r"
+  click luxSend,0
 }
 
 //bT1 click
@@ -104,6 +105,7 @@ if(vars.returnVal.txt!="null")
   commands.queue.txt+="M104 T1 S"
   commands.queue.txt+=vars.returnVal.txt
   commands.queue.txt+="\r"
+  click luxSend,0
 }
 
 //bBed click
@@ -118,6 +120,7 @@ if(vars.returnVal.txt!="null")
   commands.queue.txt+="M140 S"
   commands.queue.txt+=vars.returnVal.txt
   commands.queue.txt+="\r"
+  click luxSend,0
 }
 
 //bFan click
@@ -132,4 +135,5 @@ if(vars.returnVal.txt!="null")
   commands.queue.txt+="M106 S"
   commands.queue.txt+=vars.returnVal.txt
   commands.queue.txt+="\r"
+  click luxSend,0
 }

@@ -1,12 +1,21 @@
-// //Utilize mock data
-// parse.buffer.txt=" T:22.15 /0.00 B:59.91 /60.00 T0:211.15 /215 T1:242 /245.00 @:0 B@:0 @0:0 @1:0"
-// strlen parse.buffer.txt,BufferLen
-
 //Qualify Line
+parse.matched.val=0
 parse.lineMatch.txt=" T:"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
+{
+  parse.matched.val=1
+}
+parse.lineMatch.txt="ok T:" //Handle M105
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  parse.matched.val=1
+}
+
+if(parse.matched.val==1)
 {
   //Bed Temp
   spstr parse.buffer.txt,parse.match.txt,"B:",1 //Split by B:
