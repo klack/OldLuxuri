@@ -1,12 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn parseError
-/// @brief Used only on the error page
+/// @fn runOnce
+/// @brief Enable normal sleep settings.  Handles error while fake sleep is in use
 ///////////////////////////////////////////////////////////////////////////////
-parse.lineMatch.txt="Error:"
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt)
-{
-  printer.error.txt+=parse.buffer.txt
-  printer.error.txt+="\r"
-}
+dim=100
+thsp=SLEEP_TIME*60
