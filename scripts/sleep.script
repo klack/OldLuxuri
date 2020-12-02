@@ -2,17 +2,20 @@
 /// @fn luxSleep 1
 /// @brief Simulate sleep by using a top layer
 ///////////////////////////////////////////////////////////////////////////////
-thsp=0
-if(FakeSleep==1)
+if(printer.printState.txt!="printing")
 {
-  dim=0
-  setlayer oSleep,255
-  oSleep.x=0
   thsp=0
-}else
-{
-  dim=100
-  oSleep.x=-480
+  if(FakeSleep==1)
+  {
+    dim=0
+    setlayer oSleep,255
+    oSleep.x=0
+    thsp=0
+  }else
+  {
+    dim=100
+    oSleep.x=-480
+  } 
 }
 
 ///////////////////////////////////////////////////////////////////////////////

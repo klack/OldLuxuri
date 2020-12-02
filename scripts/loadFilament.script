@@ -33,53 +33,34 @@ if(printer.T1SetTemp.val>0&&printer.T1SetTemp.val>=minTemp.val)
 }
 
 //Individual extruder states
-if(T0State.txt!="ready")
+if(T0State.txt!="ready") //Keep ready state once set
 {
   if(printer.T0SetTemp.val<T0Target.val) //Temp is not set above target
   {
     T0State.txt="cold"
   }
-  if(printer.T0SetTemp.val>=minTemp.val&&printer.T0SetTemp.val!=0)
+  if(printer.T0SetTemp.val>=minTemp.val&&printer.T0SetTemp.val!=0) //A temperature was set above the min temp
   {
     T0State.txt="heating" 
   }
 }
-if(T0Target.val!=printer.T0SetTemp.val)
-{
-  T0State.txt="heating"
-}
-if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T0SetTemp.val>=T0Target.val)
+if(printer.T0Temp.val>=printer.T0SetTemp.val&&printer.T0SetTemp.val>=T0Target.val) //Reached tempature above the set temp
 {
   T0State.txt="ready"
 }
 
-
-
-if(printer.T1SetTemp.val<T0Target.val)
+if(T1State.txt!="ready") //Keep ready state once set
 {
-  if(T1State.txt!="ready")
+  if(printer.T1SetTemp.val<T1Target.val) //Temp is not set above target
   {
-    T1State.txt="cold" 
+    T1State.txt="cold"
   }
-}
-
-
-
-if(printer.T1SetTemp.val!=0&&printer.T1SetTemp.val>=minTemp.val)
-{
-  if(T1State.txt!="ready")
+  if(printer.T1SetTemp.val>=minTemp.val&&printer.T1SetTemp.val!=0) //A temperature was set above the min temp
   {
     T1State.txt="heating" 
   }
-  if(T1Target.val!=printer.T1SetTemp.val)
-  {
-    T1State.txt="heating"
-  }
 }
-
-
-
-if(printer.T1Temp.val>=printer.T1SetTemp.val&&printer.T1SetTemp.val>=T1Target.val)
+if(printer.T1Temp.val>=printer.T1SetTemp.val&&printer.T1SetTemp.val>=T1Target.val) //Reached tempature above the set temp
 {
   T1State.txt="ready"
 }
