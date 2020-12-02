@@ -74,8 +74,7 @@ if(printer.printState.txt=="printing")
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
-  tZHeight.txt="Z: "
-  tZHeight.txt+=printer.z.txt
+  tZHeight.txt=printer.z.txt
   if(timeCount.val>4) //Only show after time was recieved the 3rd time (heaters will no longer be blocking)
   {
     tTime.aph=127
