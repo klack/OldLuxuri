@@ -7,27 +7,24 @@
 if(state.txt=="null")
 {
   state.txt="init"
-  click luxView,1
-  vars.status.txt="Initializing"
+  // vars.status.txt="Initializing"
   commands.queue.txt+="M155 S0\r" //Temp auto report off
   click luxSend,0
 }
 if(state.txt=="init")
 {
-  state.txt="getting-files"
-  click luxView,1
-  vars.status.txt="Getting Files"
   click luxListFiles,1
   parse.callback.txt="luxController:init"
   click luxSetCallback,1
+  state.txt="getting-files"
 }
 if(state.txt=="getting-files")
 {
+  vars.status.txt="Getting Files"
   if(parse.callbackReturn.txt=="luxController:init")
   {
-    state.txt="getting-long"
-    click luxView,1
     click luxGetLong,1
+    state.txt="getting-long"
   }
 }
 if(state.txt=="getting-long")
@@ -35,7 +32,6 @@ if(state.txt=="getting-long")
   if(lFilesReq.val==lFilesRecieved.val)
   {
     state.txt="ready"
-    click luxView,1
   }  
 }
 if(state.txt=="ready")
@@ -71,7 +67,6 @@ click luxInit,0
 ///
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
-tMessage.txt=vars.status.txt
 if(state.txt=="null")
 {
   tMessage.aph=0
@@ -83,7 +78,7 @@ if(state.txt=="null")
   tsw f3,0
   tsw f4,0
 }
-if(state.txt=="init")
+if(state.txt=="getting-files")
 {
   tMessage.aph=127
 }
@@ -148,6 +143,8 @@ if(state.txt=="ready")
     }
   }
 }
+tMessage.txt=vars.status.txt
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxListFiles,1

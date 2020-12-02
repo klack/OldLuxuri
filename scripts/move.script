@@ -208,6 +208,10 @@ commands.queue.txt+=speed.txt
 commands.queue.txt+="\r"
 click luxSend,0
 
+//bStop
+commands.command.txt="M112"
+click luxSend,1
+
 //Distances
 distance.txt=bDistance1.txt
 click sendMovement,1
