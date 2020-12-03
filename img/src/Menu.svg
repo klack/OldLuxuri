@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="Menu.svg"
-   inkscape:export-filename="D:\printing\universal-ui\img\settings-s1.png"
+   inkscape:export-filename="D:\printing\universal-ui\img\diag-s0.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <style
@@ -2049,7 +2049,7 @@
        xlink:href="#linearGradient2817"
        id="linearGradient2445"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.11730882,0,0,0.09380003,33.705664,19.320452)"
+       gradientTransform="matrix(0.13022018,0,0,0.09935824,30.426412,18.333076)"
        x1="12.941481"
        y1="27.152496"
        x2="29.199364"
@@ -2063,10 +2063,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="148.716"
-     inkscape:cy="228.86267"
+     inkscape:cx="241.44504"
+     inkscape:cy="157.18359"
      inkscape:document-units="px"
-     inkscape:current-layer="layer17"
+     inkscape:current-layer="layer96"
      inkscape:document-rotation="0"
      showgrid="false"
      width="480mm"
@@ -2268,7 +2268,7 @@
      inkscape:groupmode="layer"
      id="layer69"
      inkscape:label="Background"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        style="display:inline;opacity:1;fill:#000000;stroke:none;stroke-width:1.42954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
@@ -5462,8 +5462,23 @@
   <g
      inkscape:groupmode="layer"
      id="layer92"
-     inkscape:label="Diag Confirm"
+     inkscape:label="Diag Box"
      style="display:inline">
+    <g
+       inkscape:groupmode="layer"
+       id="layer93"
+       inkscape:label="State 1"
+       style="display:inline">
+      <rect
+         style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;stroke:url(#linearGradient2445);stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000;stop-opacity:1"
+         id="rect1041"
+         width="93.397919"
+         height="28.574999"
+         x="16.801041"
+         y="21.695833"
+         rx="5.291667"
+         ry="5.2916675" />
+    </g>
     <g
        inkscape:groupmode="layer"
        id="layer94"
@@ -5471,28 +5486,16 @@
        style="display:none" />
     <g
        inkscape:groupmode="layer"
-       id="layer93"
-       inkscape:label="State 1"
-       style="display:inline">
-      <rect
-         style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;stroke:url(#linearGradient2445);stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000;stop-opacity:1"
-         id="rect1041"
-         width="84.137497"
-         height="26.976482"
-         x="21.431252"
-         y="22.495092"
-         rx="5.2916665"
-         ry="5.2916675" />
-    </g>
-    <g
-       inkscape:groupmode="layer"
        id="layer17"
        inkscape:label="State 2"
        style="display:none">
       <g
          id="g2180"
-         transform="translate(79.368742,7.975076)"
-         style="display:inline">
+         transform="translate(74.341665,6.9167428)"
+         style="display:inline"
+         inkscape:export-filename="D:\printing\universal-ui\img\question.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96">
         <g
            id="g1321"
            transform="matrix(0.58254792,0,0,0.58254792,-21.97972,8.121896)"
@@ -5515,7 +5518,7 @@
        style="display:none">
       <g
          id="g2170"
-         transform="matrix(0.88696045,0,0,0.88639877,68.419035,-10.221646)"
+         transform="matrix(0.88696045,0,0,0.88639877,63.391958,-11.279978)"
          style="display:inline;stroke-width:1.1278">
         <path
            style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0.596796;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
@@ -5538,18 +5541,21 @@
        style="display:inline">
       <g
          id="g2175"
-         transform="translate(57.744252,39.435329)"
-         style="display:inline">
+         transform="matrix(0.95555553,0,0,0.95555553,51.590994,38.36088)"
+         style="display:inline;stroke-width:1.04651"
+         inkscape:export-filename="D:\printing\universal-ui\img\question.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96">
         <path
-           style="stroke:#ffffff;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none"
+           style="stroke:#ffffff;stroke-width:0.553779;stroke-miterlimit:4;stroke-dasharray:none"
            d="m -19.385923,-6.3158389 c 0,3.28855 -2.665536,5.95312496 -5.953125,5.95312496 -3.287589,0 -5.953125,-2.66457496 -5.953125,-5.95312496 0,-3.286629 2.665536,-5.9531251 5.953125,-5.9531251 3.287589,0 5.953125,2.6664961 5.953125,5.9531251 z"
            id="path1308" />
         <path
-           style="fill:#ffffff;stroke:none;stroke-width:0.264583"
+           style="fill:#ffffff;stroke:none;stroke-width:0.276889"
            d="m -25.339048,-4.3474669 c -0.608875,0 -1.104209,0.495334 -1.104209,1.104209 0,0.608851 0.495334,1.104208 1.104209,1.104208 0.608875,0 1.104209,-0.495357 1.104209,-1.104208 0,-0.608875 -0.495334,-1.104209 -1.104209,-1.104209 z"
            id="path1327" />
         <path
-           style="fill:#ffffff;stroke:none;stroke-width:0.264583"
+           style="fill:#ffffff;stroke:none;stroke-width:0.276889"
            d="m -25.179298,-10.300592 c -1.308175,0 -2.142525,0.5510721 -2.797704,1.5304811 -0.08488,0.126888 -0.05648,0.298016 0.06517,0.390266 l 0.832933,0.631559 c 0.124944,0.09475 0.302962,0.07221 0.400036,-0.05094 0.428817,-0.543895 0.722849,-0.859291 1.375532,-0.859291 0.490389,0 1.096959,0.315612 1.096959,0.791142 0,0.359492 -0.296768,0.54411 -0.780963,0.815578 -0.564683,0.316548 -1.311896,0.710534 -1.311896,1.696136 v 0.09602 c 0,0.159079 0.128976,0.288055 0.288054,0.288055 h 1.344254 c 0.159078,0 0.288055,-0.128976 0.288055,-0.288055 v -0.032 c 0,-0.683218 1.996841,-0.711663 1.996841,-2.560493 0,-1.392311 -1.444233,-2.4484621 -2.797273,-2.4484621 z"
            id="path1325" />
       </g>
@@ -5558,34 +5564,34 @@
        inkscape:groupmode="layer"
        id="layer96"
        inkscape:label="Text"
-       style="display:none">
+       style="display:inline">
       <text
          xml:space="preserve"
          style="font-size:5.29167px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;display:inline;stroke-width:0.264583"
-         x="97.893723"
-         y="45.72662"
+         x="102.92074"
+         y="45.462036"
          id="text1047"><tspan
            sodipodi:role="line"
            id="tspan1045"
-           x="97.893723"
-           y="45.72662"
+           x="102.92074"
+           y="45.462036"
            style="font-size:5.29167px;fill:#ffffff;stroke-width:0.264583">Ok</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:5.29167px;line-height:1;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;display:inline;stroke-width:0.264583"
-         x="42.696625"
-         y="32.480259"
+         x="37.140369"
+         y="31.421925"
          id="text1053"><tspan
            sodipodi:role="line"
-           x="42.696625"
-           y="32.480259"
+           x="37.140369"
+           y="31.421925"
            style="font-size:5.29167px;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.264583"
            id="tspan1051">PID Autotune?</tspan><tspan
            sodipodi:role="line"
-           x="42.696625"
-           y="37.771927"
+           x="37.140369"
+           y="36.713596"
            style="font-size:5.29167px;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.264583"
-           id="tspan2468">This will take some time.</tspan></text>
+           id="tspan2468">This will take......some time</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:5.29167px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;display:none;stroke-width:0.264583"
@@ -5602,31 +5608,31 @@
        inkscape:groupmode="layer"
        id="g2305"
        inkscape:label="Text 2"
-       style="display:inline">
+       style="display:none">
       <text
          xml:space="preserve"
          style="font-size:5.29167px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;display:inline;stroke-width:0.264583"
-         x="97.893723"
+         x="86.781372"
          y="45.72662"
          id="text2293"><tspan
            sodipodi:role="line"
            id="tspan2291"
-           x="97.893723"
+           x="86.781372"
            y="45.72662"
-           style="font-size:5.29167px;fill:#ffffff;stroke-width:0.264583">Ok</tspan></text>
+           style="font-size:5.29167px;fill:#ffffff;stroke-width:0.264583">No</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:5.29167px;line-height:1;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;display:inline;stroke-width:0.264583"
-         x="42.696625"
+         x="36.856148"
          y="32.480259"
          id="text2299"><tspan
            sodipodi:role="line"
-           x="42.696625"
+           x="36.856148"
            y="32.480259"
            style="font-size:5.29167px;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.264583"
            id="tspan2297">Print Complete</tspan><tspan
            sodipodi:role="line"
-           x="42.696625"
+           x="36.856148"
            y="37.771927"
            style="font-size:5.29167px;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.264583"
            id="tspan2309">1d 24h 32m</tspan></text>
