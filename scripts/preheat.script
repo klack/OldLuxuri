@@ -75,20 +75,12 @@ if(state.txt=="init"||state.txt=="choose")
 {  
   tMessage.txt="Choose"
   tMessage2.txt="Materials"
-  tempIcons.aph=0
-  tT0Temp.aph=0
-  tT1Temp.aph=0
-  tBedTemp.aph=0
   tMessage2.aph=127
 }
 if(state.txt=="heating"||state.txt=="ready")
 {  
   tMessage.txt="Heating"
   tMessage2.txt="Please wait..."
-  tempIcons.aph=127
-  tT0Temp.aph=127
-  tT1Temp.aph=127
-  tBedTemp.aph=127
 }
 if(state.txt=="choose")
 {
