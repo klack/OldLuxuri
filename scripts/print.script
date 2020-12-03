@@ -56,16 +56,18 @@ if(printer.printState.txt=="error") //Error
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
-click luxControlBar,1
 if(printer.printState.txt=="null")
-{
+{ 
   tProgress.txt=""
   oProgress.val=0
   tTime.aph=0
+  pTimer.aph=0
   pFlow.aph=0
   pSpeed.aph=0
   bSettings.aph=0
+  tM117.aph=0
   tsw hSettings,0
+
 }
 if(printer.printState.txt=="printing") 
 {
@@ -74,13 +76,16 @@ if(printer.printState.txt=="printing")
   covx oProgress.val,vars.s.txt,0,0
   tProgress.txt=vars.s.txt
   tProgress.txt+="%"
+  tM117.aph=127
   tZHeight.txt=printer.z.txt
   if(timeCount.val>4) //Only show after time was recieved the 3rd time (heaters will no longer be blocking)
   {
+    pTimer.aph=127
     tTime.aph=127
     tTime.txt=printer.printTime.txt
   }else
   {
+    pTimer.aph=0
     tTime.aph=0
     tTime.txt=""
   }
@@ -94,6 +99,7 @@ if(printer.printState.txt=="cleaning-up")
   tProgress.txt="Finishing up..."
   tsw 255,0
 }
+click luxControlBar,1
 tM117.txt=printer.m117.txt
 
 ///////////////////////////////////////////////////////////////////////////////
