@@ -84,17 +84,17 @@ if(state.txt=="heating"||state.txt=="ready")
 }
 if(state.txt=="choose")
 {
-  icon.picc=pState.picc
+  pIcon.pic=pIcon.pic2
 }
 if(state.txt=="heating")
 {
-  icon.picc=pState.picc+1
+  pIcon.pic=pIcon.pic2+1
 }
 if(state.txt=="ready")
 {
   tMessage.txt="Ready"
   tMessage2.aph=0
-  icon.picc=pState.picc+2
+  pIcon.pic=pIcon.pic2+2
 }
 covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
 tT0Temp.txt=vars.s.txt
