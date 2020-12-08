@@ -85,7 +85,7 @@ click luxView,1
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="init")
 {
-  pIcon.picc=PIC_CLEAR
+  pIcon.pic=PIC_CLEAR
   tMessage.txt=""
   tMessage2.txt=""
   setlayer bHeatT0,0
@@ -141,21 +141,21 @@ if(T1State.txt=="ready")
 }
 if(state.txt=="choose") //Page state
 {
-  pIcon.picc=pState.picc-1
+  pIcon.pic=pIcon.pic2
   tMessage2.aph=127
   tMessage.txt="Heat"
   tMessage2.txt="Extruders"
 }
 if(state.txt=="heating")
 {
-  pIcon.picc=pState.picc+1
+  pIcon.pic=pIcon.pic2+1
   tMessage2.aph=127
   tMessage.txt="Heating"
   tMessage2.txt="Please Wait..."
 }
 if(state.txt=="ready")
 {
-  pIcon.picc=pState.picc+3
+  pIcon.pic=pIcon.pic2+3
   tMessage2.aph=0
   if(T1State.txt!="ready")
   {
@@ -208,7 +208,7 @@ if(T1State.txt=="heating")
 
 ///////////////////////////////////////////////////////////////////////////////
 //bHeatT0
-bHeatT0.picc=bHeatT0.picc2
+bHeatT0.pic=bHeatT0.pic2
 covx T0Target.val,vars.s.txt,0,0 //Heat to load temp
 commands.queue.txt+="M104 T0 S"
 commands.queue.txt+=vars.s.txt
@@ -216,7 +216,7 @@ commands.queue.txt+="\r"
 click luxSend,0
 
 //bHeatT1
-bHeatT1.picc=bHeatT1.picc2
+bHeatT1.pic=bHeatT1.pic2
 covx T1Target.val,vars.s.txt,0,0 //Heat to load temp
 commands.queue.txt+="M104 T1 S"
 commands.queue.txt+=vars.s.txt
