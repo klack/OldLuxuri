@@ -23,16 +23,11 @@ if(state.txt=="setting-defaults")
 }
 if(state.txt=="connected")
 {
-  if(tmFinished.en==0)
-  {
-    tmFinished.en=1  
-  }
-  
   if(ok==1&&QueueBlocks==0)
   {
     if(luxAnimate.en==0)
     {
-      tmFinished.en=1      
+      ready.val=1
     }
   }  
 }
@@ -154,7 +149,11 @@ if(pBanner.y>0)
 /// @fn tmFinished
 /// @brief Exit page after pausing to show version number
 ///////////////////////////////////////////////////////////////////////////////
-page MAIN
+if(ready.val==1)
+{
+  page MAIN
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRun
