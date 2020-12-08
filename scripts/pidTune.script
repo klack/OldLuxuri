@@ -143,7 +143,11 @@ if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
 }
 else
 {
-  state.txt="cooling"
+  if(state.txt!="cooling")
+  {
+    commands.queue.txt="M104 T0 S0\rM104 T1 S0\rM140 S0\r" //Turn off heaters
+    state.txt="cooling"
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

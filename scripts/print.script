@@ -67,7 +67,6 @@ if(printer.printState.txt=="null")
   bSettings.aph=0
   tM117.aph=0
   tsw hSettings,0
-
 }
 if(printer.printState.txt=="printing") 
 {
