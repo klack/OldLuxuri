@@ -5,7 +5,7 @@
 if(state.txt=="null")
 {
   state.txt="connecting"   
-  tLuxVersion.txt="lux version "
+  tLuxVersion.txt="luxURI version "
   tLuxVersion.txt+=luxVersion.txt
 }
 if(state.txt=="connecting")
@@ -21,7 +21,7 @@ if(state.txt=="connecting")
 }
 if(state.txt=="setting-defaults")
 {
-  if(printer.firmwareName.txt!="")
+  if(printer.machineType.txt!="")
   {
     luxAnimate.en=1
     state.txt="connected"
@@ -90,7 +90,7 @@ if(tries.val<9) //Try connecting 10 times
 }else
 {
   state.txt="timeout"
-  vars.status.txt="Could not connect.  Unplug USB when shutting down."
+  vars.status.txt="Connection Failed.  Unplug USB when shutting down."
   click luxView,1
 }
 
@@ -128,6 +128,8 @@ if(state.txt=="timeout")
   pBanner.aph=0
   pState.aph=0
   setlayer pState,255
+  tLuxVersion.pco=WHITE
+  tStatus.pco=WHITE
 }
 if(state.txt=="connected")
 {
@@ -158,7 +160,6 @@ if(ready.val==1)
 {
   page MAIN
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRun
