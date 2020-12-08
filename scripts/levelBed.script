@@ -23,8 +23,8 @@ page ReturnPage
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
-bSwap.picc=bSwap.picc2+1
-bSwap.picc+=Tool
+bSwap.pic=bSwap.pic2+1
+bSwap.pic+=Tool
 tPosition.txt="X:"
 tPosition.txt+=printer.x.txt
 tPosition.txt+=" "
@@ -39,7 +39,7 @@ tPosition.txt+=printer.z.txt
 /// @brief Prepare and send commands
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt="G90\r"
-commands.queue.txt+="G0 Z10 F400\r"
+commands.queue.txt+="G0 Z10 F500\r"
 commands.queue.txt+="G0 X"
 covx destX.val,vars.s.txt,0,0
 commands.queue.txt+=vars.s.txt
@@ -47,7 +47,7 @@ commands.queue.txt+=" Y"
 covx destY.val,vars.s.txt,0,0
 commands.queue.txt+=vars.s.txt
 commands.queue.txt+=" F5000\r"
-commands.queue.txt+="G0 Z0 F400\r"
+commands.queue.txt+="G0 Z0 F500\r"
 commands.queue.txt+="M114\r"
 click luxSend,0
 

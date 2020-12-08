@@ -113,6 +113,7 @@ if(T0State.txt=="heating")
 }
 if(T0State.txt=="ready")
 {
+  pIcon.pic=PIC_CLEAR
   setlayer bHeatT0,0
   setlayer bT0Out,255
   setlayer bT0In,255
@@ -155,7 +156,7 @@ if(state.txt=="heating")
 }
 if(state.txt=="ready")
 {
-  pIcon.pic=pIcon.pic2+3
+  pIcon.pic=pIcon.pic2+2
   tMessage2.aph=0
   if(T1State.txt!="ready")
   {
