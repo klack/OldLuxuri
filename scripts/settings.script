@@ -7,6 +7,8 @@ zOffsetVal.txt=printer.zOffset.txt
 x2Val.txt=printer.x2Offset.txt
 y2Val.txt=printer.y2Offset.txt
 z2Val.txt=printer.z2Offset.txt
+tVersion.txt="LuxURI Version "
+tVersion.txt+=connect.luxVersion.txt
 if(printer.printState.txt!="null")
 {
   tsw bDefaults,0

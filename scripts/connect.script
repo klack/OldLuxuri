@@ -23,12 +23,16 @@ if(state.txt=="setting-defaults")
 }
 if(state.txt=="connected")
 {
+  if(tmFinished.en==0)
+  {
+    tmFinished.en=1  
+  }
+  
   if(ok==1&&QueueBlocks==0)
   {
     if(luxAnimate.en==0)
     {
-      delay=3000
-      page main
+      tmFinished.en=1      
     }
   }  
 }
@@ -114,22 +118,24 @@ click luxSend,1
 tStatus.txt=vars.status.txt
 if(state.txt=="null")
 {
-  tVersion.aph=0
+  tFirmwareName.aph=0
   tMachine.aph=0
 }
 if(state.txt=="timeout")
 {
-  dim=50
-  pState.aph=0
+  tsw pBanner,0
   pBanner.aph=0
+  pState.aph=0
+  setlayer pState,255
 }
 if(state.txt=="connected")
 {
-  tVersion.aph=127
+  tFirmwareName.aph=127
   tMachine.aph=127
+  tLuxVersion.aph=0
   tStatus.aph=0
-  tVersion.txt=version.txt
-  tMachine.txt=machine.txt
+  tFirmwareName.txt=printer.firmwareName.txt
+  tMachine.txt=printer.machineType.txt
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,6 +149,12 @@ if(pBanner.y>0)
 {
   luxAnimate.en=0
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn tmFinished
+/// @brief Exit page after pausing to show version number
+///////////////////////////////////////////////////////////////////////////////
+page MAIN
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxRun
