@@ -5,21 +5,28 @@
 if(state.txt=="null")
 {
   state.txt="connecting"   
+  tLuxVersion.txt="lux version "
+  tLuxVersion.txt+=luxVersion.txt
 }
 if(state.txt=="connecting")
 {
-  if(buffer.en!=1)
+  if(buffer.en==0)
   {
     click startConnect,1
   }else
   {
-    state.txt="setting=defaults"
+    click setDefaults,1
+    state.txt="setting-defaults"
   }
 }
 if(state.txt=="setting-defaults")
 {
-  click setDefaults,1
-  state.txt="connected"
+  if(printer.firmwareName.txt!="")
+  {
+    luxAnimate.en=1
+    state.txt="connected"
+    click luxView,1
+  }
 }
 if(state.txt=="connected")
 {
@@ -79,7 +86,6 @@ if(tries.val<9) //Try connecting 10 times
     vars.status.txt="Connected at "
     covx Baud,vars.s.txt,0,0
     vars.status.txt+=vars.s.txt
-    state.txt="setting-defaults"
   }
 }else
 {
@@ -137,13 +143,12 @@ if(state.txt=="connected")
 /// @fn luxAnimate
 /// @brief Animation Loop
 ///////////////////////////////////////////////////////////////////////////////
-if(pBanner.y>0)
+while(pBanner.y>0)
 {
   pBanner.y-=4
-}else
-{
-  luxAnimate.en=0
+  doevents
 }
+luxAnimate.en=0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn tmFinished
