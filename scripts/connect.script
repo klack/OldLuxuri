@@ -43,7 +43,7 @@ if(state.txt=="connected")
 /// @fn startConnect,1
 /// @brief Connect trying different baud rates automatically
 ///////////////////////////////////////////////////////////////////////////////
-if(tries.val<9) //Try connecting 10 times
+if(tries.val<15) //Try connecting x times
 {
   if(usize<=0) //If the buffer is empty
   {
