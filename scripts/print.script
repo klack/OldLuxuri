@@ -42,6 +42,7 @@ if(printer.printState.txt=="cleaning-up")
     diagConfirm.tMessage.txt="Print Complete"
     diagConfirm.tMessage.txt+="\r"
     diagConfirm.tMessage.txt+=printer.printTime.txt
+    ReturnPage=DIAG_CONFIRM //Return to ok page if coming back from sleep mode
     DiagReturnPage=MAIN
     page diagConfirm
   }
