@@ -2,10 +2,9 @@
 /// @fn luxSleep 1
 /// @brief Simulate sleep by using a top layer
 ///////////////////////////////////////////////////////////////////////////////
-thsp=0
 if(FakeSleep==1)
 {
-  dim=100
+  dim=50
   setlayer oSleep,255
   oSleep.x=0
 }
@@ -17,12 +16,13 @@ if(FakeSleep==1)
 oSleep.x=-480
 FakeSleep=0
 InactiveMins=0
-thsp=SLEEP_TIME
-dim=25
+thsp=SLEEP_TIME 
+dim=100
 
 ///////////////////////////////////////////////////////////////////////////////
 /// tmSleep 60000ms timer
 ///////////////////////////////////////////////////////////////////////////////
+thsp=0
 InactiveMins+=1
 if(InactiveMins>=FakeSleep)
 {
