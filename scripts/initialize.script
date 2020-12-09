@@ -18,6 +18,7 @@ if(HandleCallback==0)
 }
 click luxView,1
 click luxAnimate,1
+click luxSleep,1
 click luxController,1
 click luxDoCallback,0 //Clears callback vars
 
@@ -26,4 +27,5 @@ click luxDoCallback,0 //Clears callback vars
 /// @fn luxInitialize 0
 /// @brief Call when perminently exiting the page
 ///////////////////////////////////////////////////////////////////////////////
+click luxSleep,0
 page ReturnPage
