@@ -3,13 +3,9 @@
 /// @brief Simulate sleep by using a top layer
 ///////////////////////////////////////////////////////////////////////////////
 thsp=0
-if(tmSleep.en==0)
-{
-  tmSleep.en=1
-}
 if(FakeSleep==1)
 {
-  dim=50
+  dim=100
   setlayer oSleep,255
   oSleep.x=0
 }
@@ -19,11 +15,10 @@ if(FakeSleep==1)
 /// @breif Reset sleep settings
 ///////////////////////////////////////////////////////////////////////////////
 oSleep.x=-480
-tmSleep.en=0
 FakeSleep=0
 InactiveMins=0
 thsp=SLEEP_TIME
-dim=100
+dim=25
 
 ///////////////////////////////////////////////////////////////////////////////
 /// tmSleep 60000ms timer
