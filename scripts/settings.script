@@ -37,22 +37,31 @@ if(QueueLen>0&&ok==0)
 /// @fn luxRunOnce
 /// @breif Does not run when returning from dialog boxes
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="M503\r"
-click luxSend,0
+if(printer.printState.txt!="null")
+{
+  if(QueueLen==0)
+  {
+    commands.queue.txt+="M503\r"
+    click luxSend,0
+  }
+}else
+{
+  commands.queue.txt+="M503\r"
+  click luxSend,0    
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn luxInitialize 0
-/// @brief Call when perminently exiting the page
-///////////////////////////////////////////////////////////////////////////////
-if(printer.printState.txt=="paused")
+//bClose
+if(printer.printState.txt!="null")
 {
   page printSettings
-}else
+}
+else
 {
   page ReturnPage
 }
 
-///////////////////////////////////////////////////////////////////////////////
 //bDefaults click
 ReturnObj=!!
 diagPrompt.tMessage.txt="Load Firmware Defaults?"

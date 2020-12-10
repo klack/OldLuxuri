@@ -56,10 +56,13 @@ click luxSleep,0
 /// @fn tmAutoClose 1000ms timer
 /// @brief Used primarily to navagate to back to print page (for fake sleep) if printing
 ///////////////////////////////////////////////////////////////////////////////
-CloseCycles+=1
-j=SLEEP_TIME-10
-if(CloseCycles>=j)
+if(printer.printState.txt=="printing")
 {
-  CloseCycles=0
-  page ReturnPage
+  CloseCycles+=1
+  j=SLEEP_TIME-10
+  if(CloseCycles>=j)
+  {
+    CloseCycles=0
+    page DiagReturnPage
+  }
 }
