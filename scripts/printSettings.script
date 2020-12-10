@@ -102,6 +102,17 @@ if(QueueLen>0)
 /// @brief Buttons
 ///////////////////////////////////////////////////////////////////////////////
 
+//bAutotune click
+diagPrompt.tMessage.txt="Perform PID Autotune?\rThis will take some time."
+ReturnVal=1
+ReturnObj=!!
+page diagPrompt
+//bAutotune callback
+if(ReturnVal==1)
+{
+  page pidTune
+}
+
 //bSpeed click
 bSpeed.txt=""
 ReturnObj=2

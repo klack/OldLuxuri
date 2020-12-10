@@ -93,6 +93,7 @@ if(printer.printState.txt=="printing")
 if(printer.printState.txt=="cleaning-up")
 {
   oProgress.val=100
+  pTimer.aph=0
   bSettings.aph=0
   tTime.txt=""
   tProgress.txt="Finishing up..."
