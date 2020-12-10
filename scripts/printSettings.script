@@ -9,7 +9,7 @@ if(busy==1)
 }
 if(QueueLen>0)
 {
-  tBusy.txt="Commands Queued"
+  tBusy.txt="Commandsssss Queued"
 }
 if(printer.printState.txt=="finished")
 {
@@ -48,7 +48,7 @@ if(printer.printState.txt=="stopping")
     page main
   }
 }
-click luxView,1 
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxView,1
