@@ -4,5 +4,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 if(ok==1)
 {
-  page DiagReturnPage
+  if(WakeReturnPage!=-1) //Handle custom return page after waking
+  {
+    j=WakeReturnPage
+    WakeReturnPage=-1
+    page j
+  }else
+  {
+    page DiagReturnPage
+  }
 }
