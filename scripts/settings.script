@@ -37,19 +37,11 @@ if(QueueLen>0&&ok==0)
 /// @fn luxRunOnce
 /// @breif Does not run when returning from dialog boxes
 ///////////////////////////////////////////////////////////////////////////////
-if(printer.printState.txt!="null")
-{
-  if(QueueLen==0)
-  {
-    commands.queue.txt+="M503\r"
-    click luxSend,0
-  }
-}else
+if(printer.printState.txt=="null")
 {
   commands.queue.txt+="M503\r"
-  click luxSend,0    
+  click luxSend,0
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //bClose

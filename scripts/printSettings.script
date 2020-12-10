@@ -9,7 +9,7 @@ if(busy==1)
 }
 if(QueueLen>0)
 {
-  tBusy.txt="Commandsssss Queued"
+  tBusy.txt="Commands Queued"
 }
 if(printer.printState.txt=="finished")
 {
