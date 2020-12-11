@@ -35,11 +35,19 @@ if(IdexMode==3)
 ///////////////////////////////////////////////////////////////////////////////
 if(ReturnVal>-1)
 {
-  commands.queue.txt="G28 X\r"
-  commands.queue.txt+="M605 S"
-  covx ReturnVal,vars.s.txt,0,0
-  commands.queue.txt+=vars.s.txt
-  commands.queue.txt+="\r"
+  if(ReturnVal==3)
+  {
+    commands.queue.txt="G28 X\r"
+    commands.queue.txt+="M605 S2\r" //To use Mirror Mode, Clone Mode must first be set
+    commands.queue.txt+="M605 S3\r"
+  }else
+  {
+    commands.queue.txt="G28 X\r"
+    commands.queue.txt+="M605 S"
+    covx ReturnVal,vars.s.txt,0,0
+    commands.queue.txt+=vars.s.txt
+    commands.queue.txt+="\r"
+  }
   click luxSend,0
   IdexMode=ReturnVal
   page MAIN
