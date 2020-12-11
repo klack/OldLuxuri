@@ -7,6 +7,7 @@
 /// @fn luxInitialize 1
 /// @brief Sets up the lux framework
 ///////////////////////////////////////////////////////////////////////////////
+click luxView,1
 // ReturnPage=dp
 DiagReturnPage=dp
 if(HandleCallback==0)
@@ -16,7 +17,6 @@ if(HandleCallback==0)
 {
   click luxDoCallback,1
 }
-click luxView,1
 click luxAnimate,1
 click luxSleep,1
 click luxController,1

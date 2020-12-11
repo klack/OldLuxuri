@@ -1,0 +1,2 @@
+//init
+WakeReturnPage=DIAG_CONFIRM //Return to ok page if coming back from sleep mode

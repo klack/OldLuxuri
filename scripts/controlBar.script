@@ -119,7 +119,7 @@ if(vars.returnVal.txt!="null")
 {
   commands.queue.txt+="M140 S"
   commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\r"
+  commands.queue.txt+="\rM105\r"
   click luxSend,0
 }
 

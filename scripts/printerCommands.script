@@ -79,6 +79,7 @@ commands.queue.txt+="M605 S1\r"
 commands.queue.txt+="M27 S0\rM220 S100\rM221 S100\rM220\rM221\r" //Reset flow and speed
 click luxSend,0
 IdexMode=1
+printer.m117.txt=""
 parse.callback.txt="luxStopPrint_1:finished"
 click luxSetCallback,1
 
