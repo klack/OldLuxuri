@@ -2,6 +2,21 @@
 /// @fn     parseCommon 1
 /// @brief  Essential items to be parsed
 ///////////////////////////////////////////////////////////////////////////////
+parse.lineMatch.txt="//lux:power_pin" //Shutdown
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+{
+  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
+  
+}
+parse.lineMatch.txt="echo://lux:power_pin" //Shutdown
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+{
+  ShutDown=1
+}
 parse.lineMatch.txt="ok" //Ok
 if(parse.buffer.txt==parse.lineMatch.txt)
 {
@@ -22,16 +37,6 @@ substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   busy=1
-}
-parse.lineMatch.txt="Error:" //Error
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt)
-{
-  printer.error.txt+=parse.buffer.txt
-  printer.error.txt+="\r"
-  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  page ERROR_PAGE
 }
 parse.lineMatch.txt="echo:Active Extruder: " //Active Extruder
 strlen parse.lineMatch.txt,j
@@ -57,28 +62,29 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,parse.callbackReturn.txt,parse.lineMatch.txt,1
 }
-parse.lineMatch.txt="//lux:power_pin" //Shutdown
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
-{
-  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  page shutdown
-}
-parse.lineMatch.txt="echo://lux:power_pin" //Shutdown
-strlen parse.lineMatch.txt,j
-substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
-{
-  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  page shutdown
-}
 parse.lineMatch.txt="echo://lux:M117 " //M117
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,printer.m117.txt,parse.lineMatch.txt,1
+}
+parse.lineMatch.txt="Error:" //Error
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  printer.error.txt+=parse.buffer.txt
+  printer.error.txt+="\r"
+  Error=1
+}
+if(ShutDown==1)
+{
+  page shutdown
+}
+if(Error==1)
+{
+  page ERROR_PAGE
 }
 
 ///////////////////////////////////////////////////////////////////////////////
