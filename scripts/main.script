@@ -2,7 +2,6 @@
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
-click luxControlBar,1
 bSwap.picc=bSwap.picc2+1
 bSwap.picc+=Tool
 if(IdexMode==0) //Idex Mode
@@ -33,6 +32,7 @@ if(IdexMode==3)
   tSwap.aph=0
   tsw bSwap,0
 }
+click luxControlBar,1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxAnimate
