@@ -80,8 +80,8 @@ if(printer.printState.txt=="printing")
   tM117.aph=127
   if(timeCount.val>4) //Only show after time was recieved the 3rd time (heaters will no longer be blocking)
   {
-    pTimer.aph=127
-    tTime.aph=127
+    pTimer.aph=100
+    tTime.aph=100
     tTime.txt=printer.printTime.txt
   }else
   {

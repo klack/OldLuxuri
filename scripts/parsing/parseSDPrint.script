@@ -48,6 +48,7 @@ substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,printer.printTime.txt,": ",1
+  timeCount.val+=1
 }
 
 // Error
