@@ -13,23 +13,27 @@ click luxSetCallback,1
 /// @fn luxPause 0
 /// @fn Store current position and park
 ///////////////////////////////////////////////////////////////////////////////
-printer.storedX.txt=printer.x.txt
-printer.storedY.txt=printer.y.txt
-printer.storedZ.txt=printer.z.txt
-commands.queue.txt+="G28 X\r"
+// printer.storedX.txt=printer.x.txt
+// printer.storedY.txt=printer.y.txt
+// printer.storedZ.txt=printer.z.txt
+if(IdexMode!=2) //Clone mode in Marlin has a bug, this causes T0 to keep homing past the endstop
+{
+  commands.queue.txt+="G28 X\r"
+}
+commands.queue.txt+="G0 Y300\r" //Present forward
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxResume 1
 /// @brief Go back to old coordinates and resume the print
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="G0 X"
-commands.queue.txt+=printer.storedX.txt
-commands.queue.txt+=" Y"
-commands.queue.txt+=printer.storedY.txt
-commands.queue.txt+=" Z"
-commands.queue.txt+=printer.storedZ.txt
-commands.queue.txt+="\r"
+// commands.queue.txt+="G0 X"
+// commands.queue.txt+=printer.storedX.txt
+// commands.queue.txt+=" Y"
+// commands.queue.txt+=printer.storedY.txt
+// commands.queue.txt+=" Z"
+// commands.queue.txt+=printer.storedZ.txt
+// commands.queue.txt+="\r"
 commands.queue.txt+="M24\r"
 click luxSend,0
 parse.callback.txt="luxResume_1:finished"

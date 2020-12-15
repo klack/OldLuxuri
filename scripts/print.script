@@ -38,8 +38,6 @@ if(printer.printState.txt=="cleaning-up")
 {
   if(parse.callbackReturn.txt=="luxStopPrint_1:finished")
   {
-    commands.queue.txt+="G0 Y300"
-    click luxSend,1
     printer.printState.txt="null"
     diagConfirm.tMessage.txt="Print Complete"
     diagConfirm.tMessage.txt+="\r"
