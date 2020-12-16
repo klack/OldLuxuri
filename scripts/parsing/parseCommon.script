@@ -7,8 +7,7 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
 {
-  parse.buffer.txt="" //Clear buffer since readBuffer will be broken out of
-  
+  ShutDown=1  
 }
 parse.lineMatch.txt="echo://lux:power_pin" //Shutdown
 strlen parse.lineMatch.txt,j
