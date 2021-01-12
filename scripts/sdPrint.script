@@ -128,7 +128,7 @@ if(state.txt=="ready")
     spstr valueLFile.txt,f2.txt,"\r",2
     spstr valueLFile.txt,f3.txt,"\r",3
     spstr valueLFile.txt,f4.txt,"\r",4
-    for(j=0;j<=36;j++) //Button Group, yellow highlight
+    for(j=0;j<=45;j++) //Button Group, yellow highlight
     {
       if(b[j].type==116&&b[j].txt_maxl==254) //If filetext box
       {
