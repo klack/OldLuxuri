@@ -1,0 +1,27 @@
+tDebug.txt="ok:"
+covx ok,vars.s.txt,0,0
+tDebug.txt+=vars.s.txt
+tDebug.txt+="bsy:"
+covx busy,vars.s.txt,0,0
+tDebug.txt+=vars.s.txt
+tDebug.txt+="\r"
+tDebug.txt+="blkok:"
+covx OkBlocks,vars.s.txt,0,0
+tDebug.txt+=vars.s.txt
+tDebug.txt+="q:"
+covx QueueBlocks,vars.s.txt,0,0
+tDebug.txt+=vars.s.txt
+tDebug.txt+="\r"
+tDebug.txt+=commands.queue.txt
+tDebug.txt+="last:"
+tDebug.txt+=commands.last.txt
+
+
+
+//scroll
+tDebug.val_y+=tDebug.h-20
+if(tDebug.val_y>=tDebug.maxval_y)
+{
+  delay=1000
+  tDebug.val_y=0
+}

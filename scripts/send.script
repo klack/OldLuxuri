@@ -6,6 +6,18 @@
 prints commands.command.txt,0
 printh 0A
 ok=0
+strlen commands.history.txt,j // Scroll up
+strlen commands.command.txt,k
+if(j+k>commands.history.txt_maxl)
+{
+  spstr commands.history.txt,vars.s.txt,"\r",0
+  strlen vars.s.txt,l
+  substr commands.history.txt,vars.s.txt,l+1,j-l
+  commands.history.txt=vars.s.txt
+}
+commands.history.txt+=commands.command.txt
+commands.history.txt+="\r"
+commands.last.txt=commands.command.txt
 commands.command.txt=""
 
 ///////////////////////////////////////////////////////////////////////////////
