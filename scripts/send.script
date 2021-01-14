@@ -8,7 +8,8 @@ printh 0A
 ok=0
 strlen commands.history.txt,j // Scroll up
 strlen commands.command.txt,k
-if(j+k>commands.history.txt_maxl)
+l=j+k
+if(l>commands.history.txt_maxl)
 {
   spstr commands.history.txt,vars.s.txt,"\r",0
   strlen vars.s.txt,l
