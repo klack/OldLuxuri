@@ -87,6 +87,7 @@ if(vars.returnVal.txt!=b[ReturnObj].txt)
   commands.queue.txt+=vars.returnVal.txt
   commands.queue.txt+="\rM92 T1 E"
   commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
   click saveAndReload,1
   click luxSend,0
 }

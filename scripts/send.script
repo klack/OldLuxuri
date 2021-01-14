@@ -13,7 +13,8 @@ if(l>commands.history.txt_maxl)
 {
   spstr commands.history.txt,vars.s.txt,"\r",0
   strlen vars.s.txt,l
-  substr commands.history.txt,vars.s.txt,l+1,j-l
+  m=j-l
+  substr commands.history.txt,vars.s.txt,l+1,m+1
   commands.history.txt=vars.s.txt
 }
 commands.history.txt+=commands.command.txt
@@ -67,7 +68,7 @@ if(ok==1&&busy==0) //Send Queue
         strlen vars.s.txt,CommandLen //get the lenght of the command
         CharLen=QueueLen-CommandLen //calc the amount of chars to copy
         //remove the command from the queue by getting a substring of the commandqueue
-        substr commands.queue.txt,commands.queue.txt,CommandLen+2,CharLen //+2 to count \r
+        substr commands.queue.txt,commands.queue.txt,CommandLen+2,CharLen+1 //+2 to count \r
         commands.command.txt=vars.s.txt
         click luxSend,1
       }else
