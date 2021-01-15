@@ -3,6 +3,7 @@
 /// @brief Preserves command sent history
 ///////////////////////////////////////////////////////////////////////////////
 // Scroll up up command history
+commands.last.txt=commands.command.txt
 strlen commands.history.txt,send_historyLen 
 strlen commands.command.txt,send_newCmdLen
 send_newBufLen=send_historyLen+send_newCmdLen
