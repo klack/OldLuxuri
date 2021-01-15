@@ -15,8 +15,15 @@ InactiveSecs+=1
 if(InactiveSecs>=SLEEP_TIME)
 {
   FakeSleep=1
-  oSleep.x=0
-  tmToast.en=1
+  if(oSleep.x!=0)
+  {
+    dim=25
+    oSleep.x=0
+  }
+  if(tmToast.en!=1)
+  {
+    tmToast.en=1
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

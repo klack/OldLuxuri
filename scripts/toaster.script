@@ -1,0 +1,53 @@
+if(tmToast.tim!=50)
+{
+  randset 0,30 //Change to toast
+  j=rand
+  if(j==0)
+  {
+    toaster.vid=1 
+  }  
+  randset -350,250
+  toaster.y=rand  
+  tmToast.tim=50
+}
+randset 0,10
+j=rand
+if(j==0) //Fly up
+{
+  for(j=0;j<=15;j++)
+  {
+    toaster.x-=2
+    toaster.y-=4
+    toaster.tim=1000 //Freeze animation
+    doevents
+  }
+}
+randset 0,10
+j=rand
+if(j==0) //Fly down
+{
+  for(j=0;j<=15;j++)
+  {
+    toaster.x-=2
+    toaster.y+=4
+    toaster.tim=50
+    doevents
+  }
+}
+for(j=0;j<=30;j++)
+{
+  toaster.x-=4
+  toaster.y+=4
+  doevents
+}
+if(toaster.x<-64) //Reset
+{
+  randset -350,250
+  toaster.y=rand
+  randset 480,560
+  toaster.x=rand
+  toaster.vid=0
+  randset 45000,180000
+  tmToast.tim=rand
+  tmToast.en=0
+}
