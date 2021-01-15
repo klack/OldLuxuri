@@ -6,17 +6,29 @@
 prints commands.command.txt,0
 printh 0A
 ok=0
-strlen commands.history.txt,j // Scroll up
-strlen commands.command.txt,k
-l=j+k
-if(l>commands.history.txt_maxl)
+
+// Scroll up
+strlen commands.history.txt,send_historyLen 
+strlen commands.command.txt,send_newCmdLen
+send_newBufLen=send_historyLen+send_newCmdLen
+if(send_newBufLen>=commands.history.txt_maxl) //Check if reached buffer lenght
 {
-  spstr commands.history.txt,vars.s.txt,"\r",0
-  strlen vars.s.txt,l
-  m=j-l
-  substr commands.history.txt,vars.s.txt,l+1,m+1
+  //Cut lenght of new command out of buffer
+  substr commands.history.txt,vars.s.txt,send_newCmdLen,send_historyLen-send_newCmdLen
+  commands.history.txt=vars.s.txt
+  //Find length until next \r
+  spstr  commands.history.txt,vars.s.txt,"\r",0
+  strlen vars.s.txt,send_trimLen
+  //Cut that out of the rest of the buffer
+  //+1 is to advance cursor
+  substr commands.history.txt,vars.s.txt,send_trimLen+1,
+  
+  
+  
+  substr commands.history.txt,vars.s.txt,send_fstCmdLen+1,send_historyLen-send_fstCmdLen  //Substring of history without first command, +1 to advance cursor
   commands.history.txt=vars.s.txt
 }
+
 commands.history.txt+=commands.command.txt
 commands.history.txt+="\r"
 commands.last.txt=commands.command.txt
