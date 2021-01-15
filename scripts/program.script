@@ -1,17 +1,19 @@
 // Serial Parser
 int MAIN=5,ERROR_PAGE=18,PIC_CLEAR=0,SLEEP_TIME,WAKE_PAGE=19,DIAG_CONFIRM=23
 int Baud=0,SerialPos=0,BufferLen=0,SearchPos=0,ok=1,busy=0,QueueBlocks=0,MaxQueueBlocks=10,BackOff=1,OkBlocks=0,OkFailsafe=100,MaxOKBlocks=50,StopWait=0,BusyCycles=0,Breaks=0,QueueLen=0,CommandLen=0,CharLen=0
-int ReturnPage=4,DiagReturnPage,ReturnObj=-1,ReturnVal=-1,HandleCallback=0,FakeSleep=0,InactiveSecs=-1,CloseCycles=0
+int WakeReturnPage=-1,ReturnPage=4,DiagReturnPage,ReturnObj=-1,ReturnVal=-1,HandleCallback=0,FakeSleep=0,InactiveSecs=-1,CloseCycles=0,ShutDown=0,Error=0
+int send_historyLen=0,send_newBufLen=0,send_newCmdLen=0,send_trimLen=0
 int Frame=0,FrameB=0
 int Tool=0,IdexMode=1
-int j=0,k=0,l=0,c=0
-//Depreciated
-int InactiveMins
+int j=0,k=0,l=0,m=0,c=0
+int InactiveMins //Depreciated
+wup=WAKE_PAGE
+SLEEP_TIME=15*60
+thsp=SLEEP_TIME
+WakeReturnPage=MAIN
+thup=1 //Wake on Touch
 baud=0
 recmod=1
-SLEEP_TIME=5*60
-thsp=SLEEP_TIME
-thup=1 //Wake on Touch
-wup=WAKE_PAGE
+//recmod=0
 page connect
-//page wake
+//page settings
