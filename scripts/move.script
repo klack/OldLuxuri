@@ -5,7 +5,7 @@
 commands.queue.txt+="M605 S0\r" //Set manual idex mode
 IdexMode=0
 commands.queue.txt+="M114\r"
-commands.queue.txt+="G91\r"
+// commands.queue.txt+="G91\r"
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -13,7 +13,7 @@ click luxSend,0
 /// @brief Should run on any close button
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt+="G0 F5000\r" //Reset speed
-commands.queue.txt+="G90\r" //Back to absolution positioning
+// commands.queue.txt+="G90\r" //Back to absolution positioning
 commands.queue.txt+="M605 S1\r" //Set auto idex mode
 IdexMode=1
 click luxSend,0
@@ -91,8 +91,10 @@ if(Frame==0) //Flash
 /// @brief Sends movement command to printer
 ///////////////////////////////////////////////////////////////////////////////
 tMessage.txt=""
-commands.queue.txt=command.txt
+commands.queue.txt+="G91\r"
+commands.queue.txt+=command.txt
 commands.queue.txt+="\r"
+commands.queue.txt+="G90\r"
 commands.queue.txt+="M114\r"
 click luxSend,0
 
