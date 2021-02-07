@@ -1,1 +1,0 @@
-M117 Printing...G28 X YM117 Switchable scalable complexityM109 T0 S90G28 X YM117 Rodriguez, Gordon and HoganG28 X YM117 Finished...M104 T0 S0

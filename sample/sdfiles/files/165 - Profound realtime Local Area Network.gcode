@@ -1,1 +1,0 @@
-M117 Printing...G28 X YM117 Profound realtime Local Area NetworkM109 T0 S90G28 X YM117 Walters, Nelson and SmithG28 X YM117 Finished...M104 T0 S0

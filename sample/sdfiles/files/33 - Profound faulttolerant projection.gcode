@@ -1,1 +1,0 @@
-M117 Printing...G28 X YM117 Profound faulttolerant projectionM109 T0 S90G28 X YM117 Price-SandovalG28 X YM117 Finished...M104 T0 S0
