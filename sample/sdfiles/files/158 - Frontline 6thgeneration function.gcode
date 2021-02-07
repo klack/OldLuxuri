@@ -1,0 +1,1 @@
+M117 Printing...G28 X YM117 Frontline 6thgeneration functionM109 T0 S90G28 X YM117 Jones, Murray and HardyG28 X YM117 Finished...M104 T0 S0
