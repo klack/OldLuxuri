@@ -1,53 +1,58 @@
 if(tmToast.tim!=50)
 {
-  randset 0,30 //Change to toast
-  j=rand
-  if(j==0)
+  randset 0,120 //Chance to spawn a toaster
+  ii=rand
+  if(ii==0) 
   {
-    toaster.vid=1 
-  }  
-  randset -350,250
-  toaster.y=rand  
-  tmToast.tim=50
-}
-randset 0,10
-j=rand
-if(j==0) //Fly up
-{
-  for(j=0;j<=15;j++)
-  {
-    toaster.x-=2
-    toaster.y-=4
-    toaster.tim=1000 //Freeze animation
-    doevents
+    randset 0,30 //Change to toast
+    jj=rand
+    if(jj==0)
+    {
+      toaster.vid=1 
+    }
+    tmToast.tim=50
   }
 }
-randset 0,10
-j=rand
-if(j==0) //Fly down
+if(ii==0)
 {
-  for(j=0;j<=15;j++)
+  randset 0,20
+  jj=rand
+  if(jj==0) //Fly up
   {
-    toaster.x-=2
+    for(jj=0;jj<=4;jj++)
+    {
+      toaster.x-=2
+      toaster.y-=4
+      toaster.tim=1000 //Freeze animation
+      doevents
+    }
+  }
+  randset 0,10
+  jj=rand
+  if(jj==0) //Fly down
+  {
+    for(jj=0;jj<=15;jj++)
+    {
+      toaster.x-=2
+      toaster.y+=4
+      toaster.tim=50 //Freeze animation
+      doevents
+    }
+  }
+  for(jj=0;jj<=30;jj++)
+  {
+    toaster.x-=4
     toaster.y+=4
-    toaster.tim=50
     doevents
   }
 }
-for(j=0;j<=30;j++)
-{
-  toaster.x-=4
-  toaster.y+=4
-  doevents
-}
-if(toaster.x<-64) //Reset
+if(toaster.x<-64||ii!=0) //Reset if toaster reaches end or was skipped
 {
   randset -350,250
   toaster.y=rand
   randset 480,560
   toaster.x=rand
   toaster.vid=0
-  randset 45000,180000
-  tmToast.tim=rand
+  tmToast.tim=1000
   tmToast.en=0
 }

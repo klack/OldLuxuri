@@ -7,14 +7,15 @@ int debug_i=0
 int Frame=0,FrameB=0
 int Tool=0,IdexMode=1
 int j=0,k=0,l=0,m=0,c=0
+int ii=0, jj=0, kk=0 //Not guaranteed to stay the same, do not intermix with click events
 int InactiveMins //Depreciated
 wup=WAKE_PAGE
 SLEEP_TIME=15*60
 thsp=SLEEP_TIME
 WakeReturnPage=MAIN
 thup=1 //Wake on Touch
-baud=0
 recmod=1
-//recmod=0
+baud=9600
+Baud=9600
 page connect
-//page settings
+//page print
