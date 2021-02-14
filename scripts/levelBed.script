@@ -2,8 +2,15 @@
 /// @fn luxRunOnce
 /// @breif Does not run when returning from dialog boxes
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="G28\r" //Home
-commands.queue.txt+="M605 S1\r" //Set to auto mode
+if(IdexMode!=1)
+{
+  commands.queue.txt+="M605 S1\r" //Set auto idex mode
+  IdexMode=1
+}
+else
+{
+  commands.queue.txt="G28\r" //Home
+}
 commands.queue.txt+="T0\r"
 commands.queue.txt+="G0 F5000\r"
 commands.queue.txt+="M114\r" //Report position
