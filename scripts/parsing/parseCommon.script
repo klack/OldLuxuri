@@ -7,7 +7,7 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
 {
-  ShutDown=1  
+  ShutDown=1
 }
 parse.lineMatch.txt="echo://lux:power_pin" //Shutdown
 strlen parse.lineMatch.txt,j
@@ -54,7 +54,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
   spstr parse.buffer.txt,parse.match.txt,"M106 P0 S",1
   covx parse.match.txt,printer.fanSpeed.val,0,0
 }
-parse.lineMatch.txt="// lux:callback " //Serial callback
+parse.lineMatch.txt="//lux:callback " //Serial callback
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -84,24 +84,4 @@ if(ShutDown==1)
 if(Error==1)
 {
   page ERROR_PAGE
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn         parseCommon 0
-///
-/// @brief      Parse buffer using a starting and ending position
-/// @param[in]  parse.search.txt      Text to search for
-/// @param[in]  parse.startPos.val    Starting char postion to search from
-/// @param[out] parse.matched.val     1 if match, 0 if no match       
-///////////////////////////////////////////////////////////////////////////////
-parse.matched.val=0
-parse.eval.txt=parse.buffer.txt
-strlen parse.search.txt,j
-substr parse.eval.txt,parse.result.txt,parse.startPos.val,j
-if(parse.result.txt==parse.search.txt)
-{
-  parse.matched.val=1
-}else
-{
-  parse.matched.val=0
 }
