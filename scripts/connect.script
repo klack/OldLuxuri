@@ -46,29 +46,24 @@ if(state.txt=="connected")
 ///////////////////////////////////////////////////////////////////////////////
 if(tries.val<15) //Try connecting x times
 {
-  if(usize<=0) //If the buffer is empty
+  if(usize<=0||Baud==0) //If the buffer is empty, or Baud has not be initialized
   {
     if(k==0)
+    {
+      baud=9600
+      Baud=9600
+    }
+    if(k==1)
     {
       baud=115200
       Baud=115200
     }
-    if(k==1)
-    {
-      baud=9600
-      Baud=9600
-    }
     if(k==2)
-    {
-      baud=9600
-      Baud=9600
-    }
-    if(k==3)
     {
       baud=250000
       Baud=250000
     }
-    if(k>3)
+    if(k>2)
     {
       k=0 //Start over and try again
     }else
