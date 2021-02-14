@@ -3,6 +3,7 @@
 /// @brief Warm up extruders
 ///////////////////////////////////////////////////////////////////////////////
 // commands.queue.txt+="M605 S0\r" //Set manual mode
+commands.queue.txt+="M84\r" //Disable steppers
 commands.queue.txt+="G90\r"
 click luxSend,0
 
