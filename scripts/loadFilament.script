@@ -2,14 +2,16 @@
 /// @fn luxRunOnce
 /// @brief Warm up extruders
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="M605 S0\r" //Set manual mode
+// commands.queue.txt+="M605 S0\r" //Set manual mode
+commands.queue.txt+="G90\r"
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxInitialize 0
 /// @brief Should run on any close button
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt+="M605 S1\r" //Set back to auto mode
+// commands.queue.txt+="M605 S1\r" //Set back to auto mode
+commands.queue.txt+="G28 X\r"
 click luxSend,0
 page ReturnPage
 
@@ -232,7 +234,7 @@ commands.queue.txt+="\rG92 E0\r" //Set extruder pos to 0
 commands.queue.txt+="G1 E"
 covx commandLength.val,vars.s2.txt,0,0
 commands.queue.txt+=vars.s2.txt
-commands.queue.txt+=" F500\r"
+commands.queue.txt+=" F800\r"
 commands.queue.txt+="G92 E0\rM105\r"
 click luxSend,0
 
