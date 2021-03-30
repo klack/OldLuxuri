@@ -1,3 +1,6 @@
+0.7.10
+Fix direct X Y Z entry on move tool page
+
 0.7.7
 Fix freezing on file selector
 Fix pause print causing z-height to raise (revert to storing XYZ coordinates)
