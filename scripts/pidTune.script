@@ -141,8 +141,10 @@ click luxSend,1
 /// @fn finish
 /// @brief Save the results and direct to confirmation
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="M500" //Save Results
-click luxSend,0
+commands.command.txt="M500" //Save Results
+click luxSend,1
+commands.command.txt="M108" //Save Results
+click luxSend,1
 click luxInit,0
 diagConfirm.tMessage.txt="PID Tuning Complete"
 DiagReturnPage=MAIN

@@ -1,3 +1,6 @@
+0.7.11
+Fix PID Tune not saving
+
 0.7.10
 Fix direct X Y Z entry on move tool page
 
