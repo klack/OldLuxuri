@@ -45,8 +45,8 @@ tPosition.txt+=printer.z.txt
 /// @fn sendCommand
 /// @brief Prepare and send commands
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="G90\r"
-commands.queue.txt+="G0 Z10 F500\r"
+commands.queue.txt+="G90\r"
+commands.queue.txt+="G0 Z5 F500\r"
 commands.queue.txt+="G0 X"
 covx destX.val,vars.s.txt,0,0
 commands.queue.txt+=vars.s.txt

@@ -1,3 +1,9 @@
+0.8
+Add Live Z-Offset
+Reduce Z height on level bed
+Fix present forward after stop print
+Disable motors after stop print
+
 0.7.11
 Fix PID Tune not saving
 
