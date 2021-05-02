@@ -186,9 +186,13 @@ if(ReturnVal!=-1)
 //bStepup click
 commands.command.txt="M290 Z0.05"
 click luxSend,1
+commands.command.txt="M500"
+click luxSend,1
 
 //bStepdown click
 commands.command.txt="M290 Z-0.05"
+click luxSend,1
+commands.command.txt="M500"
 click luxSend,1
 
 
