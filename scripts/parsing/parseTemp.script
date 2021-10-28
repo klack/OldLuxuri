@@ -1,6 +1,6 @@
 //Qualify Line
 parse.matched.val=0
-parse.lineMatch.txt=" T:"
+parse.lineMatch.txt=" T0:"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
