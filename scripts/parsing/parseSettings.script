@@ -4,10 +4,10 @@
 //Recv: echo: M92 X80.00 Y80.00 Z792.00
 //Recv: echo: M92 T0 E413.72
 //Recv: echo:; Hotend offsets:
-//Recv: echo:  M218 T1 X368.70 Y0.15 Z0.030
+//Recv: echo:echo:  M218 T1 X368.70 Y0.15 Z0.030
 
 //E1 Steps
-parse.lineMatch.txt="echo: M92 T0 E"
+parse.lineMatch.txt="echo:  M92 T0 E"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -16,7 +16,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 //E2 Steps
-parse.lineMatch.txt="echo: M92 T1 E"
+parse.lineMatch.txt="echo:  M92 T1 E"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -34,7 +34,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 //X2
-parse.lineMatch.txt="echo:  M218"
+parse.lineMatch.txt="echo:echo:  M218"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -44,7 +44,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 //Y2
-parse.lineMatch.txt="echo:  M218"
+parse.lineMatch.txt="echo:echo:  M218"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -54,7 +54,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 }
 
 //Z2
-parse.lineMatch.txt="echo:  M218"
+parse.lineMatch.txt="echo:echo:  M218"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)

@@ -1,8 +1,8 @@
 //Qualify Line
-parse.lineMatch.txt=" T:"
+parse.lineMatch.txt=" T0:"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt!=parse.lineMatch.txt&&parse.buffer.txt!="ok") //Do not keep temp lines
+if(parse.eval.txt!=parse.lineMatch.txt) //Do not keep temp lines
 {
   console.tLine10.txt=console.tLine9.txt
   console.tLine9.txt=console.tLine8.txt

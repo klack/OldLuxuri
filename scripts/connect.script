@@ -7,7 +7,7 @@ if(state.txt=="null")
   state.txt="connecting"   
   tLuxVersion.txt="luxURI version "
   tLuxVersion.txt+=luxVersion.txt
-  delay=3000
+  delay=5000
 }
 if(state.txt=="connecting")
 {
@@ -50,20 +50,15 @@ if(tries.val<15) //Try connecting x times
   {
     if(k==0)
     {
-      baud=9600
-      Baud=9600
-    }
-    if(k==1)
-    {
       baud=115200
       Baud=115200
     }
-    if(k==2)
+    if(k==1)
     {
       baud=250000
       Baud=250000
     }
-    if(k>2)
+    if(k>1)
     {
       k=0 //Start over and try again
     }else
