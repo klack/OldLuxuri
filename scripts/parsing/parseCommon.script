@@ -54,7 +54,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
   spstr parse.buffer.txt,parse.match.txt,"M106 P0 S",1
   covx parse.match.txt,printer.fanSpeed.val,0,0
 }
-parse.lineMatch.txt="// lux:callback " //Serial callback
+parse.lineMatch.txt="//lux:callback " //Serial callback
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)

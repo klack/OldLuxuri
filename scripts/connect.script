@@ -7,7 +7,7 @@ if(state.txt=="null")
   state.txt="connecting"   
   tLuxVersion.txt="luxURI version "
   tLuxVersion.txt+=luxVersion.txt
-  delay=5000
+  delay=3000
 }
 if(state.txt=="connecting")
 {
@@ -48,26 +48,8 @@ if(tries.val<15) //Try connecting x times
 {
   if(usize<=0||Baud==0) //If the buffer is empty, or Baud has not be initialized
   {
-    if(k==0)
-    {
-      baud=115200
-      Baud=115200
-    }
-    if(k==1)
-    {
-      baud=250000
-      Baud=250000
-    }
-    if(k>1)
-    {
-      k=0 //Start over and try again
-    }else
-    {
-      k++ //Try the next baud value on the next iteration
-    }
-    covx Baud,vars.s.txt,0,0  //Output status
-    vars.status.txt="Trying baudrate "
-    vars.status.txt+=vars.s.txt
+    baud=115200
+    Baud=115200
     commands.command.txt="M155 S2"  //Try and trigger a response
     click luxSend,1
     tries.val++
