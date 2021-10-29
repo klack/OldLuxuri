@@ -61,7 +61,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,parse.callbackReturn.txt,parse.lineMatch.txt,1
 }
-parse.lineMatch.txt="echo://lux:M117 " //M117
+parse.lineMatch.txt="//lux:M117 " //M117
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
