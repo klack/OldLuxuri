@@ -27,4 +27,4 @@ click luxDoCallback,0 //Clears callback vars
 /// @fn luxInitialize 0
 /// @brief Call when perminently exiting the page
 ///////////////////////////////////////////////////////////////////////////////
-click luxSleep,0
+PreviousPage=dp
