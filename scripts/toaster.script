@@ -1,6 +1,6 @@
 if(tmToast.tim!=50)
 {
-  randset 0,120 //Chance to spawn a toaster
+  randset 0,1200 //Chance to spawn a toaster
   ii=rand
   if(ii==0) 
   {
