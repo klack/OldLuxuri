@@ -5,8 +5,6 @@
 if(state.txt=="null")
 {
   thsp=0 //Disable sleep
-  commands.queue.txt="M155 S1\r"
-  commands.queue.txt="M106 S255\r" //Update temp faster, turn on fan.
   click luxSend,0
   state.txt="init"
 }
@@ -14,6 +12,8 @@ if(state.txt=="init")
 {
   click checkHotbed,1
   click checkHotends,1
+  commands.queue.txt="M155 S1\r"
+  commands.queue.txt="M106 S255\r" //Update temp faster, turn on fan.
 }
 if(state.txt=="cooling")
 {
