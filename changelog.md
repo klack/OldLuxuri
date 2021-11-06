@@ -1,3 +1,6 @@
+0.9
+Change live z offset increment to 0.02
+
 0.8
 Add Live Z-Offset
 Reduce Z height on level bed
