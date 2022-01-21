@@ -83,3 +83,16 @@ click sendCommand,1
 destX.val=150
 destY.val=150
 click sendCommand,1
+
+// D6 Points
+// 50 50
+// 305 50 
+// 560 50 
+
+// 50 305
+// 305 305
+// 560 305
+
+// 50 560
+// 305 560
+// 560 560
