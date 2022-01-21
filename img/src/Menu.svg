@@ -5,7 +5,7 @@
    viewBox="0 0 127 71.966667"
    version="1.1"
    id="svg8"
-   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   inkscape:version="1.1.1 (26b7af14f2, 2022-01-19)"
    sodipodi:docname="Menu.svg"
    inkscape:export-filename="C:\projects\universal-ui\img\octo-s3.png"
    inkscape:export-xdpi="96"
@@ -2421,22 +2421,22 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4069374"
-     inkscape:cx="228.15514"
-     inkscape:cy="243.08118"
+     inkscape:zoom="1.9934986"
+     inkscape:cx="173.5642"
+     inkscape:cy="162.77914"
      inkscape:document-units="px"
-     inkscape:current-layer="g2279"
+     inkscape:current-layer="layer25"
      inkscape:document-rotation="0"
      showgrid="false"
      width="480mm"
      units="px"
      inkscape:pagecheckerboard="true"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-width="2504"
+     inkscape:window-height="1376"
+     inkscape:window-x="1976"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      guidetolerance="3.3"
      inkscape:lockguides="true"
@@ -3513,12 +3513,12 @@
      inkscape:groupmode="layer"
      id="layer23"
      inkscape:label="Bed Level"
-     style="display:none;mix-blend-mode:normal">
+     style="display:inline;mix-blend-mode:normal">
     <g
        inkscape:groupmode="layer"
        id="layer24"
        inkscape:label="State 1"
-       style="display:inline">
+       style="display:none">
       <rect
          style="font-variation-settings:normal;display:inline;mix-blend-mode:normal;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3019);stroke-width:0.529182;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
          id="rect3013"
@@ -3553,17 +3553,41 @@
          cy="58.167751"
          r="4.3736949" />
       <circle
-         style="display:inline;vector-effect:none;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
-         id="circle157305-1"
-         cx="31.262175"
-         cy="40.707294"
-         r="4.3736949" />
+         style="display:inline;mix-blend-mode:normal;fill:#333333;fill-rule:evenodd;stroke-width:0.3411"
+         id="path1463"
+         cx="13.733829"
+         cy="40.673367"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#333333;fill-rule:evenodd;stroke-width:0.3411"
+         id="path1463-3"
+         cx="31.262049"
+         cy="59.745926"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#333333;fill-rule:evenodd;stroke-width:0.3411"
+         id="path1463-6"
+         cx="47.527119"
+         cy="40.673367"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#333333;fill-rule:evenodd;stroke-width:0.3411"
+         id="path1463-6-5"
+         cx="31.262049"
+         cy="40.673367"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#333333;fill-rule:evenodd;stroke-width:0.3411"
+         id="path1463-7"
+         cx="31.262049"
+         cy="23.178982"
+         r="1.3229166" />
     </g>
     <g
        inkscape:groupmode="layer"
        id="layer25"
        inkscape:label="State 0"
-       style="display:none">
+       style="display:inline">
       <circle
          style="display:inline;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.51298;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
          id="circle157492"
@@ -3589,17 +3613,41 @@
          cy="58.167774"
          r="4.3737183" />
       <circle
-         style="display:inline;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.512979;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;stop-color:#000000"
-         id="circle157500"
-         cx="31.262199"
-         cy="40.707317"
-         r="4.3737187" />
+         style="display:inline;mix-blend-mode:normal;fill:#ffffff;fill-rule:evenodd;stroke-width:0.3411"
+         id="circle1929"
+         cx="13.733829"
+         cy="40.673367"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#ffffff;fill-rule:evenodd;stroke-width:0.3411"
+         id="circle1931"
+         cx="31.262049"
+         cy="59.745926"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#ffffff;fill-rule:evenodd;stroke-width:0.3411"
+         id="circle1933"
+         cx="47.527119"
+         cy="40.673367"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#ffffff;fill-rule:evenodd;stroke-width:0.3411"
+         id="circle1935"
+         cx="31.262049"
+         cy="40.673367"
+         r="1.3229166" />
+      <circle
+         style="display:inline;mix-blend-mode:normal;fill:#ffffff;fill-rule:evenodd;stroke-width:0.3411"
+         id="circle1937"
+         cx="31.262049"
+         cy="23.178982"
+         r="1.3229166" />
     </g>
     <g
        inkscape:groupmode="layer"
        id="layer71"
        inkscape:label="Button"
-       style="display:inline">
+       style="display:none">
       <circle
          style="display:inline;mix-blend-mode:normal;fill:#000000;stroke:url(#linearGradient3035);stroke-width:0.79375;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="circle967-1"
@@ -3629,7 +3677,7 @@
        inkscape:groupmode="layer"
        id="layer61"
        inkscape:label="E1"
-       style="display:inline">
+       style="display:none">
       <path
          d="m 90.213144,33.858856 a 1.1022227,1.1022227 0 0 0 -0.745864,0.712105 l -1.606584,4.819587 0.252981,0.252983 2.585103,-2.585107 c -0.05151,-0.107807 -0.08266,-0.226979 -0.08266,-0.354418 0,-0.456539 0.370089,-0.826627 0.826625,-0.826627 0.456542,0 0.826625,0.370088 0.826625,0.826627 0,0.456541 -0.370083,0.826628 -0.826625,0.826628 -0.127436,0 -0.246611,-0.03117 -0.354412,-0.08266 l -2.585101,2.585107 0.252981,0.252984 4.819575,-1.606586 a 1.1022227,1.1022227 0 0 0 0.712109,-0.74586 l 0.7369,-2.607323 -2.204339,-2.204343 z m 6.222775,-1.112849 -1.035178,-1.035179 c -0.322897,-0.322903 -0.846605,-0.322903 -1.169503,0 l -0.973877,0.973871 2.204688,2.204687 0.97387,-0.973872 c 0.322904,-0.322902 0.322904,-0.846432 0,-1.169507 z"
          id="path157406"
@@ -3642,7 +3690,7 @@
        inkscape:groupmode="layer"
        id="layer62"
        inkscape:label="E2"
-       style="display:inline">
+       style="display:none">
       <path
          d="m 94.325649,33.858856 a 1.1022227,1.1022227 0 0 1 0.745864,0.712105 l 1.606584,4.819587 -0.252981,0.252983 -2.585103,-2.585107 c 0.05151,-0.107807 0.08266,-0.226979 0.08266,-0.354418 0,-0.456539 -0.370089,-0.826627 -0.826625,-0.826627 -0.456542,0 -0.826625,0.370088 -0.826625,0.826627 0,0.456541 0.370083,0.826628 0.826625,0.826628 0.127436,0 0.246611,-0.03117 0.354412,-0.08266 l 2.585101,2.585107 -0.252981,0.252984 -4.819575,-1.606586 a 1.1022227,1.1022227 0 0 1 -0.712109,-0.74586 l -0.7369,-2.607323 2.204339,-2.204343 z m -6.222775,-1.112849 1.035178,-1.035179 c 0.322897,-0.322903 0.846605,-0.322903 1.169503,0 l 0.973877,0.973871 -2.204688,2.204687 -0.97387,-0.973872 c -0.322904,-0.322902 -0.322904,-0.846432 0,-1.169507 z"
          id="path3041"
@@ -3655,7 +3703,7 @@
        inkscape:groupmode="layer"
        id="layer70"
        inkscape:label="Text"
-       style="display:inline">
+       style="display:none">
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;stroke-width:0.251478"
@@ -3680,7 +3728,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.386763">Level Bed</tspan><tspan
            sodipodi:role="line"
            x="4.6792932"
-           y="21.607025"
+           y="21.511513"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.386763"
            id="tspan3026" /></text>
       <text
@@ -3727,17 +3775,6 @@
            y="24.998274"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583"
            id="tspan157340">4</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:4.98781px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;stroke-width:0.264583"
-         x="31.292578"
-         y="42.471806"
-         id="text157346"><tspan
-           sodipodi:role="line"
-           x="31.292578"
-           y="42.471806"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.264583"
-           id="tspan157344">5</tspan></text>
     </g>
     <text
        xml:space="preserve"
@@ -7251,7 +7288,7 @@
      inkscape:groupmode="layer"
      id="layer80"
      inkscape:label="Octoprint"
-     style="display:inline">
+     style="display:none">
     <g
        inkscape:groupmode="layer"
        id="layer88"
