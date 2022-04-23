@@ -1,8 +1,34 @@
 ///////////////////////////////////////////////////////////////////////////////
+/// @fn serialHistory 0
+/// @brief Preserves command recieved history
+///////////////////////////////////////////////////////////////////////////////
+parse.last.txt=parse.buffer.txt
+strlen parse.history.txt,recv_historyLen 
+strlen parse.last.txt,recv_newCmdLen
+recv_newBufLen=recv_historyLen+recv_newCmdLen
+if(recv_newBufLen>=parse.history.txt_maxl) //Check if reached buffer lenght
+{
+  //Cut lenght of new command out of buffer
+  substr parse.history.txt,vars.s.txt,recv_newCmdLen,recv_historyLen-recv_newCmdLen
+  parse.history.txt=vars.s.txt
+  //Find length until next \r
+  spstr parse.history.txt,vars.s.txt,"\r",0
+  strlen vars.s.txt,recv_trimLen
+  recv_trimLen+=1 // Trim one more char
+  //Cut that out of the rest of the buffer
+  strlen parse.history.txt,recv_historyLen //Get new buffer len
+  substr parse.history.txt,vars.s.txt,recv_trimLen+1,recv_historyLen-recv_trimLen //+1 is to advance cursor
+  parse.history.txt=vars.s.txt
+}
+parse.history.txt+="R: "
+parse.history.txt+=parse.last.txt
+parse.history.txt+="\r"
+
+///////////////////////////////////////////////////////////////////////////////
 /// @fn serialHistory 1
 /// @brief Preserves command sent history
 ///////////////////////////////////////////////////////////////////////////////
-// Scroll up up command history
+// Scroll up command history
 commands.last.txt=commands.command.txt
 strlen commands.history.txt,send_historyLen 
 strlen commands.command.txt,send_newCmdLen
@@ -21,5 +47,6 @@ if(send_newBufLen>=commands.history.txt_maxl) //Check if reached buffer lenght
   substr commands.history.txt,vars.s.txt,send_trimLen+1,send_historyLen-send_trimLen //+1 is to advance cursor
   commands.history.txt=vars.s.txt
 }
+commands.history.txt+="S: "
 commands.history.txt+=commands.command.txt
 commands.history.txt+="\r"
