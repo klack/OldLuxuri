@@ -20,7 +20,8 @@ click luxSend,0
 /// @fn luxInitialize 0
 /// @brief Should run on any close button
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="G28\r" //Home
+commands.queue.txt="G0 Z5 F500\r"
+commands.queue.txt+="G28\r" //Home
 commands.queue.txt+="T0\r" //Set to T0
 commands.queue.txt+="G0 F5000\r"
 click luxSend,0
