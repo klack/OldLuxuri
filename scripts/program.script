@@ -17,5 +17,5 @@ WakeReturnPage=MAIN
 thup=1 //Wake on Touch
 recmod=1
 Baud=0
-page main
-//page printSettings
+//page main
+page connect
