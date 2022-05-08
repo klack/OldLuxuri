@@ -1,3 +1,4 @@
+
 ///////////////////////////////////////////////////////////////////////////////
 // @fn luxControlBar 0
 // @brief Animate control bar
@@ -6,15 +7,31 @@ if(printer.T0SetTemp.val!=0) //T0 Temp
 {
   if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
   {
-    bT0.picc=bT0.picc2+Frame
+    bT0.picc=bT0.picc2+1
   }else
   {
-    bT0.picc=bT0.picc2 //Temperature reached
+    covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+    bT0.picc=bT0.picc2+2 //Temperature reached
+  }
+  
+  if(Frame==0)
+  {
+    covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+    tT0Temp.txt=vars.s.txt
+    tT0Temp.pco=53053
+  }else
+  {
+    covx printer.T0SetTemp.val,vars.s.txt,0,0 //Update T0 Set Temp
+    tT0Temp.txt=vars.s.txt
+    tT0Temp.pco=65242
   }
 }else //Cooling
 {
-  bT0.picc=bT0.picc2+1
+  covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+  bT0.picc=bT0.picc2
+
 }
+
 if(printer.T1SetTemp.val!=0) //T1 Temp
 {
   if(printer.T1Temp.val<printer.T1SetTemp.val) //Heating
@@ -44,96 +61,4 @@ if(printer.setBedTemp.val!=0) //Bed Temp
 if(printer.fanSpeed.val>0) //Fan
 {
   bFan.picc=bFan.picc2+FrameB //picc2 use to signify starting frame
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn luxControlBar 1
-/// @brief Update temperature text
-///////////////////////////////////////////////////////////////////////////////
-covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
-tT0Temp.txt=vars.s.txt
-tT0Temp.txt+="/"
-covx printer.T0SetTemp.val,vars.s.txt,0,0
-tT0Temp.txt+=vars.s.txt
-covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
-tT1Temp.txt=vars.s.txt
-tT1Temp.txt+="/"
-covx printer.T1SetTemp.val,vars.s.txt,0,0
-tT1Temp.txt+=vars.s.txt
-covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
-tBedTemp.txt=vars.s.txt
-tBedTemp.txt+="/"
-covx printer.setBedTemp.val,vars.s.txt,0,0
-tBedTemp.txt+=vars.s.txt
-covx printer.fanSpeed.val,vars.s.txt,0,0 //Fan Speed
-tFanSpeed.txt=vars.s.txt
-if(IdexMode==0||IdexMode==1)
-{
-  bTool.picc=bTool.picc2+Tool
-}else
-{
-  bTool.picc=bTool.picc2+2
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// @brief Buttons
-///////////////////////////////////////////////////////////////////////////////
-//bT0 click
-ReturnObj=!!
-numpad.tCaption.txt="T0 Temperature"
-vars.returnVal.txt=""
-page numpad
-
-//bT0 callback
-if(vars.returnVal.txt!="null")
-{
-  commands.queue.txt+="M104 T0 S"
-  commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\rM105\r"
-  click luxSend,0
-}
-
-//bT1 click
-ReturnObj=!!
-numpad.tCaption.txt="T1 Temperature"
-vars.returnVal.txt=""
-page numpad
-
-//bT1 callback
-if(vars.returnVal.txt!="null")
-{
-  commands.queue.txt+="M104 T1 S"
-  commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\rM105\r"
-  click luxSend,0
-}
-
-//bBed click
-ReturnObj=!!
-numpad.tCaption.txt="Bed Temperature"
-vars.returnVal.txt=""
-page numpad
-
-//bBed callback
-if(vars.returnVal.txt!="null")
-{
-  commands.queue.txt+="M140 S"
-  commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\rM105\r"
-  click luxSend,0
-}
-
-//bFan click
-ReturnObj=!!
-numpad.tCaption.txt="Fan Speed"
-vars.returnVal.txt=""
-page numpad
-
-//bFan callback
-if(vars.returnVal.txt!="null")
-{
-  commands.queue.txt+="M106 S"
-  commands.queue.txt+=vars.returnVal.txt
-  commands.queue.txt+="\r"
-  click luxSend,0
 }
