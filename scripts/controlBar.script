@@ -2,6 +2,8 @@
 // @fn luxControlBar 0
 // @brief Animate control bar
 ///////////////////////////////////////////////////////////////////////////////
+covx printer.fanSpeed.val,vars.s.txt,0,0 //Update T0
+tFanSpeed.txt=vars.s.txt
 if(printer.T0SetTemp.val!=0) //T0 Temp is set
 {
   if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
@@ -48,8 +50,6 @@ if(printer.T0SetTemp.val!=0) //T0 Temp is set
   tT0Temp.txt=vars.s.txt
   tT0Temp.pco=53053
 }
-
-
 if(printer.T1SetTemp.val!=0) //T1 Temp is set
 {
   if(printer.T1Temp.val<printer.T1SetTemp.val) //Heating
@@ -96,42 +96,49 @@ if(printer.T1SetTemp.val!=0) //T1 Temp is set
   tT1Temp.txt=vars.s.txt
   tT1Temp.pco=53053
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if(printer.setBedTemp.val!=0) //Bed Temp
+if(printer.setBedTemp.val!=0) //Bed Temp is set
 {
   if(printer.bedTemp.val<printer.setBedTemp.val) //Heating
   {
-    bBed.picc=bBed.picc2+Frame
-  }else
+    bBed.picc=bBed.picc2+1
+    if(Frame==0)
+    {
+      covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+      tBedTemp.txt=vars.s.txt
+      tBedTemp.pco=53053
+    }else
+    {
+      covx printer.setBedTemp.val,vars.s.txt,0,0 //Update Bed Set Temp
+      tBedTemp.txt=vars.s.txt
+      tBedTemp.pco=65242
+    }
+  }else //At or above Temp
   {
-    bBed.picc=bBed.picc2 //Temperature reached
+    bBed.picc=bBed.picc2+2
+    if(printer.bedTemp.val==printer.setBedTemp.val)
+    {
+      covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+      tBedTemp.txt=vars.s.txt
+      tBedTemp.pco=64591
+    }else
+    {
+      if(Frame==0)
+      {
+        covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+        tBedTemp.txt=vars.s.txt
+        tBedTemp.pco=64591
+      }else
+      {
+        covx printer.setBedTemp.val,vars.s.txt,0,0 //Update Bed Set Temp
+        tBedTemp.txt=vars.s.txt
+        tBedTemp.pco=65242
+      }          
+    }
   }
 }else //Cooling
 {
-  bBed.picc=bBed.picc2+1
-}
-if(printer.fanSpeed.val>0) //Fan
-{
-  bFan.picc=bFan.picc2+FrameB //picc2 use to signify starting frame
+  bBed.picc=bBed.picc2
+  covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
+  tBedTemp.txt=vars.s.txt
+  tBedTemp.pco=53053
 }
