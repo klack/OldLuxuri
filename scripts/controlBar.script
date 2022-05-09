@@ -1,36 +1,54 @@
-
 ///////////////////////////////////////////////////////////////////////////////
 // @fn luxControlBar 0
 // @brief Animate control bar
 ///////////////////////////////////////////////////////////////////////////////
-if(printer.T0SetTemp.val!=0) //T0 Temp
+if(printer.T0SetTemp.val!=0) //T0 Temp is set
 {
   if(printer.T0Temp.val<printer.T0SetTemp.val) //Heating
   {
     bT0.picc=bT0.picc2+1
-  }else
+    if(Frame==0)
+    {
+      covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+      tT0Temp.txt=vars.s.txt
+      tT0Temp.pco=53053
+    }else
+    {
+      covx printer.T0SetTemp.val,vars.s.txt,0,0 //Update T0 Set Temp
+      tT0Temp.txt=vars.s.txt
+      tT0Temp.pco=65242
+    }
+  }else //At or above Temp
   {
-    covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
-    bT0.picc=bT0.picc2+2 //Temperature reached
-  }
-  
-  if(Frame==0)
-  {
-    covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
-    tT0Temp.txt=vars.s.txt
-    tT0Temp.pco=53053
-  }else
-  {
-    covx printer.T0SetTemp.val,vars.s.txt,0,0 //Update T0 Set Temp
-    tT0Temp.txt=vars.s.txt
-    tT0Temp.pco=65242
+    bT0.picc=bT0.picc2+2
+    if(printer.T0Temp.val=printer.T0SetTemp.val)
+    {
+      covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+      tT0Temp.txt=vars.s.txt
+      tT0Temp.pco=64591
+    }else
+    {
+      if(Frame==0)
+      {
+        covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+        tT0Temp.txt=vars.s.txt
+        tT0Temp.pco=64591
+      }else
+      {
+        covx printer.T0SetTemp.val,vars.s.txt,0,0 //Update T0 Set Temp
+        tT0Temp.txt=vars.s.txt
+        tT0Temp.pco=65242
+      }          
+    }
   }
 }else //Cooling
 {
-  covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
   bT0.picc=bT0.picc2
-
+  covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
+  tT0Temp.txt=vars.s.txt
+  tT0Temp.pco=53053
 }
+
 
 if(printer.T1SetTemp.val!=0) //T1 Temp
 {
