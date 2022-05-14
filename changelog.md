@@ -1,3 +1,14 @@
+0.9.1
+New console in Dark Mode
+Console scrollback (touch and buttons)
+Console filters
+New GCode Keyboard
+Preserve serial history
+Record sent commands
+New combined status bar (console page)
+Fix delay in set temperature
+Raise Z after bed level
+
 0.9
 Change live z offset increment to 0.02
 
