@@ -1,7 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn serialHistory 0
+/// @fn serialHistory 1
 /// @brief Preserves command recieved history
 ///////////////////////////////////////////////////////////////////////////////
+click historyFilters,1
 parse.last.txt=parse.buffer.txt
 if(parse.last.txt!="")
 {
@@ -22,14 +23,13 @@ if(parse.last.txt!="")
     substr connect.history.txt,vars.slarge.txt,BuffHistTrimLen+1,BuffHistLen-BuffHistTrimLen //+1 is to advance cursor
     connect.history.txt=vars.slarge.txt
   }
-  connect.history.txt+="R: "
+  //connect.history.txt+="R: "
   connect.history.txt+=parse.last.txt
   connect.history.txt+="\r"
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-/// @fn serialHistory 1
+/// @fn serialHistory 0
 /// @brief Preserves command sent history
 ///////////////////////////////////////////////////////////////////////////////
 // Scroll up command history

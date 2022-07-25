@@ -8,6 +8,8 @@ Record sent commands
 New combined status bar (console page)
 Fix delay in set temperature
 Raise Z after bed level
+Change PVA to ABS on preheat page
+Increase PETG to 80 bed and 250 hotend
 
 0.9
 Change live z offset increment to 0.02
