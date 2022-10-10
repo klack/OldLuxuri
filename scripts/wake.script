@@ -2,15 +2,16 @@
 /// @fn luxController,1
 /// @brief Program loop
 ///////////////////////////////////////////////////////////////////////////////
-if(ok==1)
+code_c
+printh 0A
+ok=1
+busy=0
+if(WakeReturnPage!=-1) //Handle custom return page after waking
 {
-  if(WakeReturnPage!=-1) //Handle custom return page after waking
-  {
-    j=WakeReturnPage
-    WakeReturnPage=-1
-    page j
-  }else
-  {
-    page DiagReturnPage
-  }
+  j=WakeReturnPage
+  WakeReturnPage=-1
+  page j
+}else
+{
+  page DiagReturnPage
 }

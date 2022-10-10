@@ -14,38 +14,11 @@ commands.command.txt=""
 /// @brief Send command queue, waiting for ok between each command
 /// @brief Waits a max of 10 times for each ok
 ///////////////////////////////////////////////////////////////////////////////
-if(busy==1) //Clear busy status every 5 seconds
-{
-  BusyCycles++
-  if(BusyCycles>50) //50 * 100ms run timer = 5 seconds
-  {
-    busy=0
-    BusyCycles=0
-  }
-}else
-{
-  BusyCycles=0
-}
-if(ok==0) //Track how many time ok was not recieved
-{
-  OkBlocks+=1
-  if(OkBlocks>OkFailsafe) //Failsafe, try and trigger an ok
-  {
-    commands.command.txt="M118"
-    click luxSend,1
-    OkBlocks=0
-  }
-}else
-{
-  OkBlocks=0
-}
 strlen commands.queue.txt,QueueLen //get the length of the command queue
 if(ok==1&&busy==0) //Send Queue
 {
-  OkBlocks=0
-  while(QueueLen>0&&OkBlocks<MaxOKBlocks)
+  while(QueueLen>0)
   {
-    doevents
     click luxRead,1
     if(ok==1&&busy==0)
     {
@@ -55,7 +28,7 @@ if(ok==1&&busy==0) //Send Queue
         strlen vars.s.txt,CommandLen //get the lenght of the command
         CharLen=QueueLen-CommandLen //calc the amount of chars to copy
         //remove the command from the queue by getting a substring of the commandqueue
-        substr commands.queue.txt,commands.queue.txt,CommandLen+2,CharLen+1 //+2 to count \r
+        substr commands.queue.txt,commands.queue.txt,CommandLen+2,CharLen //+2 to count \r
         commands.command.txt=vars.s.txt
         click luxSend,1
       }else
@@ -63,10 +36,6 @@ if(ok==1&&busy==0) //Send Queue
         commands.queue.txt=""
         QueueLen=0
       }
-    }else
-    {
-      OkBlocks+=1
-      delay=10
     }
     strlen commands.queue.txt,QueueLen //Refresh the command queue lenght
   }

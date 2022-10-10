@@ -37,6 +37,15 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   busy=1
 }
+else
+{ 
+  commands.linesNotBusy.val+=1
+  if(commands.linesNotBusy.val>=5)
+  {
+    busy=0
+    commands.linesNotBusy.val=0
+  }
+}
 parse.lineMatch.txt="echo:Active Extruder: " //Active Extruder
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j

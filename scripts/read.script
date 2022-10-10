@@ -39,7 +39,6 @@ if(usize>0)
   }
   if(SerialPos==usize) //End of buffer reached
   {
-    code_c //Clear buffer
     BufferLen=0
   }
 }
