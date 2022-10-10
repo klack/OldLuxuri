@@ -6,7 +6,7 @@ if(usize>0)
 {
   SerialPos=0
   while(SerialPos<usize)
-  {   
+  {
     ucopy parse.startChar.txt,SerialPos,1,0 //Check next character
     if(u[SerialPos]==10||u[SerialPos]==13) //If linefeed or carriage return
     {
@@ -39,6 +39,7 @@ if(usize>0)
   }
   if(SerialPos==usize) //End of buffer reached
   {
+    code_c
     BufferLen=0
   }
 }
