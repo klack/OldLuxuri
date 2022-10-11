@@ -6,7 +6,7 @@
 prints commands.command.txt,0
 printh 0A
 ok=0
-click serialHistory,1
+click serialHistory,0
 commands.command.txt=""
 
 ///////////////////////////////////////////////////////////////////////////////
