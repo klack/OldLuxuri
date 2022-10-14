@@ -20,7 +20,7 @@ if(printer.printState.txt=="init")
 }
 if(printer.printState.txt=="printing") //Printing
 {
-  if(printer.sdPrinting.val==0) //Print is either finishing or waking from sleep and finished
+  if(printer.sdPrinting.val==0&&commands.pauseAction.val==1) //Print is either finishing or waking from sleep and finished
   {
     commands.command.txt="" //Clear any responses sent by nextion
     click luxSend,1

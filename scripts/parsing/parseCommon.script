@@ -2,6 +2,19 @@
 /// @fn     parseCommon 1
 /// @brief  Essential items to be parsed
 ///////////////////////////////////////////////////////////////////////////////
+parse.lineMatch.txt="//action:paused" //Shutdown
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  parse.buffer.txt=""
+  commands.pauseAction.val=1
+  pause.message.txt="Please wait..."
+  if(dp!=PAUSE_PAGE)
+  {
+    page PAUSE_PAGE
+  }
+}
 parse.lineMatch.txt=" External Reset" //Shutdown
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
