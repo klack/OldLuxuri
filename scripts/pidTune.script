@@ -5,16 +5,11 @@
 if(state.txt=="null")
 {
   thsp=0 //Disable sleep
-  click luxSend,0
   state.txt="init"
 }
 if(state.txt=="init")
 {
-  click checkHotbed,1
-  click checkHotends,1
-  commands.queue.txt="M155 S1\r"
-  commands.queue.txt+="M106 S255\r" //Update temp faster, turn on fan.
-  click luxSend,0
+  click checkHeaters,1
 }
 if(state.txt=="cooling")
 {
@@ -39,3 +34,78 @@ if(state.txt=="tuning")
   }
 }
 click luxView,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn finish
+/// @brief Save the results and direct to confirmation
+///////////////////////////////////////////////////////////////////////////////
+diagConfirm.tMessage.txt="PID Tuning Complete"
+DiagReturnPage=MAIN
+page diagConfirm
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn tune
+/// @brief Perfrom PID Autotune on hotends and bed
+///////////////////////////////////////////////////////////////////////////////
+commands.command.txt="M106 S255\rM155 S1\r" //Turn on fan.
+click luxSend,1
+delay=500
+commands.command.txt="M303 C8 E0 S250 U" //T0 PID Tune
+click luxSend,1
+commands.command.txt="M303 C8 E1 S250 U" //T1 PID Tune
+click luxSend,1
+commands.command.txt="M303 C8 E-1 S80 U" //Bed PID Tune
+click luxSend,1
+commands.command.txt="M500" //Save
+click luxSend,1
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn checkHeaters
+/// @brief Hotbed must be cool
+///////////////////////////////////////////////////////////////////////////////
+if(printer.bedTemp.val>40) //Stop if heatbed is too hot
+{
+  diagConfirm.tMessage.txt="Hot bed must be below\r40C"
+  DiagReturnPage=MAIN
+  page diagConfirm
+}
+if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
+{
+  state.txt="ready"
+}else
+{
+  if(state.txt!="cooling")
+  {
+    commands.queue.txt="M106 S255\rM104 T0 S0\rM104 T1 S0\rM140 S0\r" //Turn off heaters
+    click luxSend,0
+    state.txt="cooling"
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn checkHotbed
+/// @brief Hotbed must be cool
+///////////////////////////////////////////////////////////////////////////////
+if(printer.bedTemp.val>40) //Stop if heatbed is too hot
+{
+  click luxInit,0 //Cleanup
+  diagConfirm.tMessage.txt="Hot bed must be below\r40C"
+  DiagReturnPage=MAIN
+  page diagConfirm
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxInit 0
+/// @brief Call when perminently exiting the page
+///////////////////////////////////////////////////////////////////////////////
+thsp=SLEEP_TIME
+if(state.txt=="tuning")
+{
+  state.txt="cancelling"
+  click luxView,1
+  click luxStopPrint,0
+}
+commands.command.txt="M155 S5" //Update temp slower
+click luxSend,1
+commands.command.txt="M107" //Turn off fan.
+click luxSend,1
