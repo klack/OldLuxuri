@@ -13,7 +13,8 @@ if(state.txt=="init")
   click checkHotbed,1
   click checkHotends,1
   commands.queue.txt="M155 S1\r"
-  commands.queue.txt="M106 S255\r" //Update temp faster, turn on fan.
+  commands.queue.txt+="M106 S255\r" //Update temp faster, turn on fan.
+  click luxSend,0
 }
 if(state.txt=="cooling")
 {
@@ -38,115 +39,3 @@ if(state.txt=="tuning")
   }
 }
 click luxView,1
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn luxInit 0
-/// @brief Call when perminently exiting the page
-///////////////////////////////////////////////////////////////////////////////
-thsp=SLEEP_TIME
-if(state.txt=="tuning")
-{
-  state.txt="cancelling"
-  click luxView,1
-  click luxStopPrint,0
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn bClose
-///////////////////////////////////////////////////////////////////////////////
-page ReturnPage
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn luxView 1
-/// @brief Updates states for controls
-///////////////////////////////////////////////////////////////////////////////
-if(state.txt=="init")
-{
-  oProgress.val=0
-  tStatus.txt="Initializing"
-}
-if(state.txt=="cooling")
-{
-  tStatus.txt="Cooling hotends..."
-}
-if(state.txt=="tuning")
-{
-  tStatus.txt="Tuning..."
-  covx oProgress.val,tProgress.txt,0,0
-  tProgress.txt+="%"
-}
-if(state.txt=="cancelling")
-{
-  tStatus.txt="Cancelling..."
-}
-if(state.txt=="complete")
-{
-  tStatus.txt="Complete"
-}
-covx printer.T0Temp.val,vars.s.txt,0,0 //Update T0
-tT0Temp.txt=vars.s.txt
-covx printer.T1Temp.val,vars.s.txt,0,0 //Update T1
-tT1Temp.txt=vars.s.txt
-covx printer.bedTemp.val,vars.s.txt,0,0 //Update Bed
-tBedTemp.txt=vars.s.txt
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn luxPageAnimate
-/// @brief Animations specific to this page
-///////////////////////////////////////////////////////////////////////////////
-add 2,0,printer.T0Temp.val //Plot temps
-add 2,1,printer.T1Temp.val
-add 2,2,printer.bedTemp.val
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn checkHotbed
-/// @brief Hotbed must be cool
-///////////////////////////////////////////////////////////////////////////////
-if(printer.bedTemp.val>40) //Stop if heatbed is too hot
-{
-  click luxInit,0 //Cleanup
-  diagConfirm.tMessage.txt="Hot bed must be below\r40C"
-  DiagReturnPage=MAIN
-  page diagConfirm
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn checkHotends
-/// @brief Hotends must be cool
-///////////////////////////////////////////////////////////////////////////////
-if(printer.T0Temp.val<40&&printer.T1Temp.val<40)
-{
-  state.txt="ready"
-}
-else
-{
-  if(state.txt!="cooling")
-  {
-    commands.queue.txt="M104 T0 S0\rM104 T1 S0\rM140 S0\r" //Turn off heaters
-    state.txt="cooling"
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn tune
-/// @brief Perfrom PID Autotune on hotends and bed
-///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="M303 C15 E0 S220 U\r" //T0 PID Tune
-click luxSend,1
-commands.command.txt="M303 C15 E1 S220 U\r" //T1 PID Tune
-click luxSend,1
-commands.command.txt="M303 C15 E-1 S60 U\r" //Bed PID Tune
-click luxSend,1
-
-///////////////////////////////////////////////////////////////////////////////
-/// @fn finish
-/// @brief Save the results and direct to confirmation
-///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="M500" //Save Results
-click luxSend,1
-commands.command.txt="M108" //Save Results
-click luxSend,1
-click luxInit,0
-diagConfirm.tMessage.txt="PID Tuning Complete"
-DiagReturnPage=MAIN
-page diagConfirm

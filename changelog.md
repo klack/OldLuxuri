@@ -1,3 +1,18 @@
+0.9.2.1
+Bugs Fixed:
+#17 Screen not monitoring temperature changes set by Gcode
+#50 Preheat button on occasion heats only bed
+#145 Exiting the Level bed screen can crash extruder into front clips
+#150 Move menu extrude button does not handle repeated press
+
+Rudimentary support for Filament Runout
+Fix incorrect display of temperature when E2 is selected
+Seperate versions for different bed sizes no longer needed
+Screen will now reconnect if an external reset is caused by plugging in USB
+Fix commands being thrown out after waking from sleep
+Fix PID Tune not starting fan
+Reduced delays in set and read temperature
+
 0.9.1
 New console in Dark Mode
 Console scrollback (touch and buttons)

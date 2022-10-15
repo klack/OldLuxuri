@@ -25,7 +25,7 @@ if(parse.matched.val==1)
   spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
   covx vars.s.txt,printer.setBedTemp.val,0,0 //Give bedSetTemp at index 0
   //T0 Temp
-  spstr parse.buffer.txt,parse.match.txt,"T0:",1
+  spstr parse.buffer.txt,parse.match.txt,"T0:",2 //Get second occurance because of Marlin active extruder temperature reporting bug
   spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
   covx vars.s.txt,printer.T0Temp.val,0,0
   //T0 SetTemp
