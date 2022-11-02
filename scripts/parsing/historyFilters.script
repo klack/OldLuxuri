@@ -48,7 +48,16 @@ if(historyFilters.swSDCard.val==1)
     parse.matched.val=1
   }
 }
-
+if(historyFilters.swEcho.val==1)
+{
+  parse.lineMatch.txt="echo:echo:"
+  strlen parse.lineMatch.txt,j
+  substr parse.buffer.txt,parse.eval.txt,0,j
+  if(parse.eval.txt==parse.lineMatch.txt)
+  {
+    spstr parse.buffer.txt,parse.buffer.txt,"echo:",2
+  }
+}
 if(historyFilters.swEcho.val==1)
 {
   parse.lineMatch.txt="echo:"
