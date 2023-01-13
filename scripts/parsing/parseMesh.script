@@ -15,15 +15,38 @@
  -0.107 -0.085 -0.045 -0.049 0.010 0.004 0.025 0.046 0.060 0.050 0.056 0.066 0.063 0.086 0.075
  -0.107 -0.085 -0.034 -0.049 0.030 0.004 0.025 0.046 0.065 0.085 0.056 0.070 0.086 0.139 0.109
 
-// parseBed
-for(ii=0;id=="";ii++)
+// 
+
+14;14;14;14;14;14;14;14;14;14;14;14;14;14
+0;1;2;3;4;5;6;7;8;9;10;11;12;13;14
+
+for(ii=0;jj!=3;ii++) //type 3 denotes end of page controls
 {
-    jj=b[ii].type
+  jj=b[ii].type
+  if(jj==54) //float control
+  {
+    //colorize
+  }
 }
 
-// txt2Float
-spstr tLine.txt,vars.s.txt," ",ii
-spstr vars.s.txt,vars.s2.txt,".",0
-concat.txt=vars.s2.txt
-spstr vars.s.txt,vars.s2.txt,".",1
-concat.txt+=vars.s2.txt
+
+// convertLine
+for(ii=0;ii<14;ii++)
+{
+    spstr tLine.txt,vars.s.txt," ",ii
+    spstr vars.s.txt,vars.s2.txt,".",0
+    concat.txt=vars.s2.txt
+    spstr vars.s.txt,vars.s2.txt,".",1
+    concat.txt+=vars.s2.txt
+    arrPoints.txt+=concat.txt
+    arrPoints.txt+=";"
+}
+
+// touchAction
+if(b[touchAction.val].type==54) // Is a number box
+{
+    // Get the offset value for this point
+    spstr arrPoints.txt,vars.s.txt,";",b[touchAction.val].val
+    covx vars.s.txt,offset.val,0,0
+    // Get the mesh column and row
+}
