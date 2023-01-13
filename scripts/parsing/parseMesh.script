@@ -20,18 +20,34 @@
 14;14;14;14;14;14;14;14;14;14;14;14;14;14
 0;1;2;3;4;5;6;7;8;9;10;11;12;13;14
 
-for(ii=0;jj!=3;ii++) //type 3 denotes end of page controls
+for(ii=0;ii<50;ii++) //type 3 denotes end of page controls
 {
-  jj=b[ii].type
-  if(jj==54) //float control
+  tt=b[ii].type
+  if(tt==54) //number control
   {
     //colorize
+    pp=b[ii].val
+    spstr arrPoints.txt,vars.s.txt,";",pp // Get the offset value for this point
+    covx vars.s.txt,kk,0,0
+    if(kk>0)
+    {
+      kk/=10
+      spstr posColors.txt,vars.s.txt,";",kk
+      covx vars.s.txt,b[ii].bco,0,0
+    }
+    else
+    {
+      kk/=10
+      kk*=-1
+      spstr negColors.txt,vars.s.txt,";",kk
+      covx vars.s.txt,b[ii].bco,0,0
+    }
   }
 }
 
 
 // convertLine
-for(ii=0;ii<14;ii++)
+for(ii=0;ii<15;ii++)
 {
     spstr tLine.txt,vars.s.txt," ",ii
     spstr vars.s.txt,vars.s2.txt,".",0
@@ -43,10 +59,15 @@ for(ii=0;ii<14;ii++)
 }
 
 // touchAction
+tDebug.txt="Firing touch action"
 if(b[touchAction.val].type==54) // Is a number box
 {
-    // Get the offset value for this point
-    spstr arrPoints.txt,vars.s.txt,";",b[touchAction.val].val
-    covx vars.s.txt,offset.val,0,0
-    // Get the mesh column and row
+  // Get the offset value for this point
+  spstr arrPoints.txt,vars.s.txt,";",b[touchAction.val].val
+  covx vars.s.txt,offset.val,0,0
+  // Get the mesh column and row
+  spstr arrMeshRows.txt,vars.s.txt,";",b[touchAction.val].val
+  covx vars.s.txt,row.val,0,0
+  spstr arrMeshColumns.txt,vars.s.txt,";",b[touchAction.val].val
+  covx vars.s.txt,column.val,0,0
 }
