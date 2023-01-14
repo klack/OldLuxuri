@@ -20,6 +20,9 @@
 14;14;14;14;14;14;14;14;14;14;14;14;14;14
 0;1;2;3;4;5;6;7;8;9;10;11;12;13;14
 
+-0186;-0100;-0075;-0069;-0033;-0029;-0015;0019;0035;0006;0025;0012;0020;0002;-0014;-0110;-0116;-0071;-0040;-0046;-0010;-0003;-0005;-0003;-0013;0000;-0008;-0030;-0040;-0044;-0110;-0102;-0058;-0061;-0005;-0013;-0025;0016;-0008;-0011;-0016;-0018;-0054;-0065;-0086;-0133;-0111;-0095;-0065;-0046;-0030;-0030;0002;-0001;-0031;-0038;-0048;-0053;-0095;-0110;-0119;-0100;-0070;-0061;-0036;-0013;-0010;-0004;-0024;-0020;-0029;-0070;-0085;-0129;-0155;-0153;-0116;-0067;-0051;-0056;-0049;-0015;-0008;-0045;-0029;-0030;-0036;-0051;-0133;-0118;-0134;-0124;-0076;-0038;-0038;-0034;-0009;-0001;-0019;-0038;-0035;-0031;-0059;-0114;-0161;-0131;-0102;-0099;-0043;-0038;-0066;-0048;-0008;-0041;-0041;-0048;-0075;-0107;-0123;-0116;-0097;-0118;-0084;-0043;-0035;-0041;-0014;-0015;-0019;-0066;-0040;-0064;-0066;-0125;-0114;-0081;-0089;-0077;-0059;-0020;-0025;-0021;-0006;-0010;-0044;-0019;-0054;-0077;-0134;-0130;-0095;-0092;-0069;-0035;0014;-0018;0011;-0003;0010;-0018;-0025;0005;-0023;-0054;-0081;-0085;-0095;-0060;0010;0011;-0016;0026;0023;0031;0025;0048;0010;-0001;0006;-0029;-0076;-0084;-0056;-0011;-0010;0043;0031;0069;0055;0015;0066;0063;0039;0034;0041;-0107;-0085;-0045;-0049;0010;0004;0025;0046;0060;0050;0056;0066;0063;0086;0075;-0107;-0085;-0034;-0049;0030;0004;0025;0046;0065;0085;0056;0070;0086;0139;0109
+
+// colorize
 for(ii=0;ii<50;ii++) //type 3 denotes end of page controls
 {
   tt=b[ii].type
@@ -34,16 +37,18 @@ for(ii=0;ii<50;ii++) //type 3 denotes end of page controls
       kk/=10
       spstr posColors.txt,vars.s.txt,";",kk
       covx vars.s.txt,b[ii].bco,0,0
-    }
-    else
+      b[ii].pco=b[ii].bco
+    }else
     {
       kk/=10
       kk*=-1
       spstr negColors.txt,vars.s.txt,";",kk
       covx vars.s.txt,b[ii].bco,0,0
+      b[ii].pco=b[ii].bco
     }
   }
 }
+
 
 
 // convertLine
@@ -71,3 +76,51 @@ if(b[touchAction.val].type==54) // Is a number box
   spstr arrMeshColumns.txt,vars.s.txt,";",b[touchAction.val].val
   covx vars.s.txt,column.val,0,0
 }
+
+//parseMesh
+parse.lineMatch.txt=" External Reset" //Shutdown
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+{
+  ExternalReset=1
+}
+
+//Entry
+boxWidth.val=grid.w
+boxWidth.val/=gridPoints.val
+boxHeight.val=grid.h
+boxHeight.val/=gridPoints.val
+ii=0
+for(row.val=0;row.val<gridPoints.val;row.val++)
+{
+  for(col.val=0;col.val<gridPoints.val;col.val++)
+  {
+    click getColor,1
+    click drawBox,1
+    ii++
+  }
+}
+
+//drawBox
+startX.val=col.val
+startX.val*=boxWidth.val
+startX.val+=grid.x
+startY.val=row.val
+startY.val*=boxHeight.val
+startY.val+=grid.y
+fill startX.val,startY.val,boxWidth.val,boxHeight.val,cc
+
+//getColor
+spstr arrPoints.txt,vars.s.txt,";",ii // Get the offset value for this point
+covx vars.s.txt,oo,0,0
+oo/=10
+if(oo>0)
+{
+  spstr posColors.txt,vars.s.txt,";",oo
+}else
+{
+  oo*=-1
+  spstr negColors.txt,vars.s.txt,";",oo
+}
+covx vars.s.txt,cc,0,0
