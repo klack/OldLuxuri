@@ -78,13 +78,38 @@ if(b[touchAction.val].type==54) // Is a number box
 }
 
 //parseMesh
-parse.lineMatch.txt=" External Reset" //Shutdown
+if(parsingMesh.val==1)
+{
+  while(rowsRecieved.val<15)
+  {
+    for(j=0;j<gridPoints.val;j++)
+    {
+        spstr parse.buffer.txt,vars.s.txt," ",j
+        spstr vars.s.txt,vars.s2.txt,".",0
+        concat.txt=vars.s2.txt
+        spstr vars.s.txt,vars.s2.txt,".",1
+        concat.txt+=vars.s2.txt
+        arrPoints.txt+=concat.txt
+        arrPoints.txt+=";"
+    }
+    rowsRecieved.val++
+  }
+  if(rowsRecieved>14)
+  {
+    parseMesh.val=0
+  }
+}
+
+parse.lineMatch.txt="Bed Topography Report for CSV" //Shutdown
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
-if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substring for some reason
+if(parse.eval.txt==parse.lineMatch.txt)
 {
-  ExternalReset=1
+  parsingMesh.val=1
 }
+
+
+
 
 //Entry
 boxWidth.val=grid.w

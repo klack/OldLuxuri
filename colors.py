@@ -18,11 +18,15 @@ def printColors(IntColors):
 PosColors = []
 NegColors = []
 
-colors = list(Color("green").range_to(Color("red"),50))
+colors = list(Color("green").range_to(Color("yellow"),25))
+colors2Int(colors,PosColors)
+colors = list(Color("yellow").range_to(Color("red"),25))
 colors2Int(colors,PosColors)
 printColors(PosColors)
 print('')
 
-colors = list(Color("green").range_to(Color("purple"),50))
+colors = list(Color("green").range_to(Color("blue"),25))
+colors2Int(colors,NegColors)
+colors = list(Color("blue").range_to(Color("purple"),25))
 colors2Int(colors,NegColors)
 printColors(NegColors)
