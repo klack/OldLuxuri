@@ -1,0 +1,66 @@
+//drawMesh
+arrPoints.txt=""
+j=gridPoints.val
+j*=gridPoints.val
+for(k=0;k<j;k++)
+{
+  spstr rawMesh.txt,vars.s.txt,vars.tab.txt,k
+  spstr vars.s.txt,vars.concat.txt,".",0
+  spstr vars.s.txt,vars.s2.txt,".",1
+  vars.concat.txt+=vars.s2.txt
+  arrPoints.txt+=vars.concat.txt
+  arrPoints.txt+=";"
+}
+boxWidth.val=grid.w
+boxWidth.val/=gridPoints.val
+boxHeight.val=grid.h
+boxHeight.val/=gridPoints.val
+ii=0
+for(row.val=0;row.val<gridPoints.val;row.val++)
+{
+  for(col.val=0;col.val<gridPoints.val;col.val++)
+  {
+    click getColor,1
+    click drawBox,1
+    ii++
+  }
+}
+
+//drawBox
+startX.val=col.val
+startX.val*=boxWidth.val
+startX.val+=grid.x
+startY.val=row.val
+startY.val*=boxHeight.val
+startY.val+=grid.y
+fill startX.val,startY.val,boxWidth.val,boxHeight.val,cc
+
+//getColor
+spstr arrPoints.txt,vars.s.txt,";",ii // Get the offset value for this point
+covx vars.s.txt,oo,0,0
+oo/=10
+if(oo>0)
+{
+  spstr posColors.txt,vars.s.txt,";",oo
+}else
+{
+  oo*=-1
+  spstr negColors.txt,vars.s.txt,";",oo
+}
+covx vars.s.txt,cc,0,0
+
+
+
+// // touchAction
+// tDebug.txt="Firing touch action"
+// if(b[touchAction.val].type==54) // Is a number box
+// {
+//   // Get the offset value for this point
+//   spstr arrPoints.txt,vars.s.txt,";",b[touchAction.val].val
+//   covx vars.s.txt,offset.val,0,0
+//   // Get the mesh column and row
+//   spstr arrMeshRows.txt,vars.s.txt,";",b[touchAction.val].val
+//   covx vars.s.txt,row.val,0,0
+//   spstr arrMeshColumns.txt,vars.s.txt,";",b[touchAction.val].val
+//   covx vars.s.txt,column.val,0,0
+// }
