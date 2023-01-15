@@ -80,26 +80,21 @@ if(b[touchAction.val].type==54) // Is a number box
 //parseMesh
 if(parsingMesh.val==1)
 {
-  while(rowsRecieved.val<15)
+  strlen parse.buffer.txt,l
+  if(l>1) //Filter out blank link
   {
-    for(j=0;j<gridPoints.val;j++)
+    if(rowsRecieved.val<15)
     {
-        spstr parse.buffer.txt,vars.s.txt," ",j
-        spstr vars.s.txt,vars.s2.txt,".",0
-        concat.txt=vars.s2.txt
-        spstr vars.s.txt,vars.s2.txt,".",1
-        concat.txt+=vars.s2.txt
-        arrPoints.txt+=concat.txt
-        arrPoints.txt+=";"
+      rawMesh.txt+=parse.buffer.txt
+      rawMesh.txt+=vars.tab.txt
+      rowsRecieved.val++
+    }else
+    {
+      parsingMesh.val=0
+      rowsRecieved.val=0
     }
-    rowsRecieved.val++
-  }
-  if(rowsRecieved>14)
-  {
-    parseMesh.val=0
   }
 }
-
 parse.lineMatch.txt="Bed Topography Report for CSV" //Shutdown
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
@@ -107,9 +102,21 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   parsingMesh.val=1
 }
+    
 
-
-
+//drawBed
+arrPoints.txt=""
+j=gridPoints.val
+j*=gridPoints.val
+for(k=0;k<j;k++)
+{
+  spstr rawMesh.txt,vars.s.txt,vars.tab.txt,k
+  spstr vars.s.txt,vars.concat.txt,".",0
+  spstr vars.s.txt,vars.s2.txt,".",1
+  vars.concat.txt+=vars.s2.txt
+  arrPoints.txt+=vars.concat.txt
+  arrPoints.txt+=";"
+}
 
 //Entry
 boxWidth.val=grid.w
