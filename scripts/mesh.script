@@ -14,7 +14,6 @@ for(row.val=0;row.val<gridPoints.val;row.val++)
   }
 }
 
-
 //drawBox
 startX.val=col.val
 startX.val*=boxWidth.val
@@ -43,17 +42,11 @@ covx currentSlot.val,vars.s.txt,0,0
 commands.command.txt="G29 W L"
 commands.command.txt+=vars.s.txt
 
-
-// // touchAction
-// tDebug.txt="Firing touch action"
-// if(b[touchAction.val].type==54) // Is a number box
-// {
-//   // Get the offset value for this point
-//   spstr arrPoints.txt,vars.s.txt,";",b[touchAction.val].val
-//   covx vars.s.txt,offset.val,0,0
-//   // Get the mesh column and row
-//   spstr arrMeshRows.txt,vars.s.txt,";",b[touchAction.val].val
-//   covx vars.s.txt,row.val,0,0
-//   spstr arrMeshColumns.txt,vars.s.txt,";",b[touchAction.val].val
-//   covx vars.s.txt,column.val,0,0
-// }
+//showLastLine
+historyFilters.swTemp.val=1
+historyFilters.swBusy.val=1
+strlen parse.last.txt,ii
+if(ii>1)
+{
+  tLastLine.txt=parse.last.txt
+}
