@@ -1,4 +1,24 @@
-//parseMesh
+
+//parseSlot
+// Mesh 0 Loaded.
+parse.lineMatch.txt="Mesh"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,currentSlot.val," ",1
+}
+
+//parseMaxSlots
+parse.lineMatch.txt="EEPROM can hold"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,maxSlots.val," ",3
+}
+
+//parseMaxPoints
 parse.lineMatch.txt="GRID_MAX_POINTS_X"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
@@ -8,6 +28,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
   covx vars.s.txt,gridPoints.val,0,0
 }
 
+//Parse points
 if(parsingMesh.val==1)
 {
   strlen parse.buffer.txt,l
@@ -15,8 +36,15 @@ if(parsingMesh.val==1)
   {
     if(rowsRecieved.val<gridPoints.val)
     {
-      rawMesh.txt+=parse.buffer.txt
-      rawMesh.txt+=vars.tab.txt
+      for(ii=0;ii<gridPoints.val;ii++)
+      {
+        spstr parse.buffer.txt,vars.s.txt,vars.tab.txt,ii
+        spstr vars.s.txt,vars.concat.txt,".",0
+        spstr vars.s.txt,vars.s2.txt,".",1
+        vars.concat.txt+=vars.s2.txt
+        arrPoints.txt+=vars.concat.txt
+        arrPoints.txt+=";"    
+      }
       rowsRecieved.val++
     }else
     {
@@ -30,5 +58,6 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
+  arrPoints.txt=""
   parsingMesh.val=1
 }

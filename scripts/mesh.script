@@ -1,16 +1,4 @@
 //drawMesh
-arrPoints.txt=""
-j=gridPoints.val
-j*=gridPoints.val
-for(k=0;k<j;k++)
-{
-  spstr rawMesh.txt,vars.s.txt,vars.tab.txt,k
-  spstr vars.s.txt,vars.concat.txt,".",0
-  spstr vars.s.txt,vars.s2.txt,".",1
-  vars.concat.txt+=vars.s2.txt
-  arrPoints.txt+=vars.concat.txt
-  arrPoints.txt+=";"
-}
 boxWidth.val=grid.w
 boxWidth.val/=gridPoints.val
 boxHeight.val=grid.h
@@ -25,6 +13,7 @@ for(row.val=0;row.val<gridPoints.val;row.val++)
     ii++
   }
 }
+
 
 //drawBox
 startX.val=col.val
@@ -49,6 +38,10 @@ if(oo>0)
 }
 covx vars.s.txt,cc,0,0
 
+//getMesh
+covx currentSlot.val,vars.s.txt,0,0
+commands.command.txt="G29 W L"
+commands.command.txt+=vars.s.txt
 
 
 // // touchAction
