@@ -4,7 +4,7 @@ strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  spstr parse.buffer.txt,vars.s.txt,"Storage slot: ",0
+  spstr parse.buffer.txt,vars.s.txt,"Storage slot: ",1
   covx vars.s.txt,currentSlot.val,0,0
 }
 
@@ -68,4 +68,5 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   arrPoints.txt=""
   parsingMesh.val=1
+  drawFinished.val=0
 }
