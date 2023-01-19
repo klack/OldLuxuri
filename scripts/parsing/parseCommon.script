@@ -42,7 +42,7 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   ok=1
   busy=0
 }
-parse.lineMatch.txt="ok T0:" //M105 ok
+parse.lineMatch.txt="ok T:" //M105 ok
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
