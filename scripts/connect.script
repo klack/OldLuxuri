@@ -76,7 +76,7 @@ commands.command.txt="" //Clear connection preamble sent by tft
 click luxSend,1
 commands.command.txt="M115\r" //Get Marlin version
 commands.command.txt+="M503\r" //Get settings
-commands.command.txt+="M114\r" //Get position
+commands.command.txt+="M154 S5\r" //Position autoreport
 commands.command.txt+="M155 S5\r" //Temp auto report
 // commands.command.txt+="G28 X\r"
 //commands.command.txt+="M605 S1\r" //Dual Nozzle Mode Auto

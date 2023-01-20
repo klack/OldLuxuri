@@ -50,15 +50,22 @@ if(parse.eval.txt==parse.lineMatch.txt)
   ok=1
   busy=0
 }
+parse.lineMatch.txt="ok " //Advanced ok
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  ok=1
+  busy=0
+}
 parse.lineMatch.txt="echo:busy: processing" //Busy
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   busy=1
-}
-else
-{ 
+}else
+{
   commands.linesNotBusy.val+=1
   if(commands.linesNotBusy.val>=5)
   {
