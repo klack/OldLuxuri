@@ -6,3 +6,22 @@ nDebug.val=recmod
 recmod=1-recmod
 swRecmod.val=recmod
 nDebug.val=recmod
+
+//bSend callback
+if(vars.returnVal.txt!="")
+{
+  commands.queue.txt+=vars.returnVal.txt
+  commands.queue.txt+="\r"
+  tHistoryBuffer.txt=tHistory.txt
+  tHistory.txt=vars.returnVal.txt
+  tHistory.txt+="\r"
+  tHistory.txt+=tHistoryBuffer.txt
+  if(vars.returnVal.txt=="M108"||vars.returnVal.txt=="R000")
+  {
+    click luxSend,1
+  }
+  else
+  {
+    click luxSend,0
+  }
+}
