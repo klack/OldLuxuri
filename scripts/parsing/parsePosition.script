@@ -1,5 +1,4 @@
 //X:-48.00 Y:0.00 Z:-0.06 E:0.00 Count X:-3840 Y:0 Z:-24
-X:-47.00 Y:0.00 Z:0.00 E:0.00 Count X:-3760 Y:0 Z:0
 
 //Qualify Line
 parse.lineMatch.txt="X:"
