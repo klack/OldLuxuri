@@ -76,41 +76,34 @@ click luxSend,0
 /// @fn luxStopPrint 1
 /// @brief Return printer to default settings
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt+="M118 A1 P0 action:cancel\r"
 commands.queue.txt+="M104 T0 S0\rM104 T1 S0\rM140 S0\rM106 S0\r" //Turn off Heaters
 commands.queue.txt+="M27 S0\rM220 S100\rM221 S100\rM220\rM221\r" //Reset flow and speed
 commands.queue.txt+="M84\r" //Disable steppers
 click luxSend,0
-IdexMode=1
 printer.m117.txt=""
-parse.callback.txt="luxStopPrint_1:finished"
-click luxSetCallback,1
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxStopPrint 0
 /// @brief Break through a busy or waiting for response status
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt=""
-commands.command.txt="M108" //Break out of busy
-click luxSend,1
-commands.command.txt="M524" //Stop print
-click luxSend,1
 Breaks=0
 while(Breaks<4)
 {
   BackOff=1
   StopWait=0
   ok=0
+  commands.command.txt="M524"
+  click luxSend,1
   while(ok==0&&StopWait<25)
   {
     commands.command.txt="M108"
     click luxSend,1
-    commands.command.txt="M524"
+    commands.command.txt="M118 A1 P0 action:cancel"
     click luxSend,1
     BackOff=BackOff*150 //Incremental backoff
     BackOff/=100
-    delay=800*BackOff 
+    delay=800*BackOff
     doevents
     click luxRead,1
     StopWait++
@@ -122,10 +115,6 @@ while(Breaks<4)
   }
   Breaks++
 }
-
-parse.callback.txt="luxStopPrint_0:finished"      
-click luxSetCallback,1
-BackOff=1
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPrintStats 1
