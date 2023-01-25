@@ -4,7 +4,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 if(usize>0)
 {
-  SerialPos=0
   while(SerialPos<usize)
   {
     ucopy parse.startChar.txt,SerialPos,1,0 //Check next character
@@ -41,5 +40,6 @@ if(usize>0)
   {
     code_c
     BufferLen=0
+    SerialPos=0
   }
 }

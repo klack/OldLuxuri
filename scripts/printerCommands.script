@@ -20,7 +20,9 @@ if(IdexMode!=2) //Clone mode in Marlin has a bug, this causes T0 to keep homing 
 {
   commands.queue.txt+="G28 X\r"
 }
-commands.queue.txt+="G0 Y300\r" //Present forward
+
+commands.queue.txt+="G0 Y200\r" //Present forward  //TODO read from printer.y_max value
+covx printer.
 click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
