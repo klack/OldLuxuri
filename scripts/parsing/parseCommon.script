@@ -2,13 +2,30 @@
 /// @fn     parseCommon 1
 /// @brief  Essential items to be parsed
 ///////////////////////////////////////////////////////////////////////////////
-parse.lineMatch.txt="//action:paused"
+parse.lineMatch.txt="//action:paused filament_runout"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
+  printer.filamentRunout.val=1
+  printer.paused.val=1
   parse.buffer.txt=""
-  pause.message.txt="Please wait..."
+  if(dp!=PAUSE_PAGE)
+  {
+    page PAUSE_PAGE
+  }
+}
+parse.lineMatch.txt="//action:resumed"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  printer.filamentRunout.val=0
+  printer.paused.val=0
+}
+parse.lineMatch.txt="echo:busy: paused for user"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  printer.paused.val=1
+  parse.buffer.txt=""
   if(dp!=PAUSE_PAGE)
   {
     page PAUSE_PAGE
@@ -41,7 +58,15 @@ if(parse.buffer.txt==parse.lineMatch.txt)
   ok=1
   busy=0
 }
-parse.lineMatch.txt="ok T0:" //M105 ok
+parse.lineMatch.txt="ok T:" //M105 ok
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  ok=1
+  busy=0
+}
+parse.lineMatch.txt="ok " //Advanced ok
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
@@ -55,9 +80,8 @@ substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
   busy=1
-}
-else
-{ 
+}else
+{
   commands.linesNotBusy.val+=1
   if(commands.linesNotBusy.val>=5)
   {
