@@ -26,16 +26,25 @@ fill startX.val,startY.val,boxWidth.val,boxHeight.val,cc
 //getColor
 spstr arrPoints.txt,vars.s.txt,";",ii // Get the offset value for this point
 covx vars.s.txt,oo,0,0
-oo/=10
-if(oo>0)
+if(oo>=0&&oo<=49)
 {
   spstr posColors.txt,vars.s.txt,";",oo
-}else
+}
+if(oo<=0&&oo>=-49)
 {
   oo*=-1
   spstr negColors.txt,vars.s.txt,";",oo
 }
+if(oo>49)
+{
+  spstr posColors.txt,vars.s.txt,";",49
+}
+if(oo<-49)
+{
+  spstr negColors.txt,vars.s.txt,";",49
+}
 covx vars.s.txt,cc,0,0
+
 
 //getMesh
 covx currentSlot.val,vars.s.txt,0,0
