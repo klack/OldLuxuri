@@ -64,16 +64,73 @@ if(ii>1)
 /// @fn luxView,1
 /// @brief Updates states for controls
 ///////////////////////////////////////////////////////////////////////////////
+if(currentSlot.val==-1)
+{
+  currentSlot.aph=0
+}else
+{
+  currentSlot.aph=127
+}
+if(getSlot.val==0)
+{
+  bBack.aph=0
+}else
+{
+  bBack.aph=127
+}
+if(getSlot.val==maxSlots.val)
+{
+  bForward.aph=0
+}else
+{
+  bForward.aph=127
+}
+if(updatingMesh.val==1)
+{
+  progress.aph=127
+  bUpdate.txt="Updating"
+  bUpdate.picc=bUpdate.picc2+1
+  bUpdate.pco=29615
+  if(tStatus.y>SCREEN_HEIGHT)
+  {
+    tStatus.y=tStatus.y-SCREEN_HEIGHT
+  }
+}
+else
+{
+  progress.aph=0
+  bUpdate.txt="Update"
+  bUpdate.picc=bUpdate.picc2
+  bUpdate.pco=36
+  if(tStatus.y<SCREEN_HEIGHT)
+  {
+    tStatus.y=tStatus.y+SCREEN_HEIGHT
+  }
+}
+ii=currentPoint.val
+ii*=100
+ii/=totalPoints.val
+progress.val=ii
+if(currentPoint.val>0)
+{
+  tStatus.txt="Probing Point "
+  covx currentPoint.val,vars.s.txt,0,0
+  tStatus.txt+=vars.s.txt
+  tStatus.txt+="/"
+  covx totalPoints.val,vars.s.txt,0,0
+  tStatus.txt+=vars.s.txt
+}
+tFadeHeight.txt=mesh.fadeHeight.txt
 strlen arrPoints.txt,ii
 if(ii>0)
 {
   if(drawFinished.val==0)
   {
+    doevents
     click drawMesh,1
   }
 }
-swEnabled.val=mesh.meshEnabled.val
-tFadeHeight.txt=mesh.fadeHeight.txt
+
 
 
 
@@ -90,3 +147,33 @@ if(vars.returnVal.txt!="null")
   commands.queue.txt+=vars.returnVal.txt
   click luxSend,0
 }
+  parse.callback.txt="luxController:init"
+  click luxSetCallback,1
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// @fn luxController,1
+/// @brief Program loop
+///////////////////////////////////////////////////////////////////////////////
+if(currentSlot.val==-1)
+{
+  commands.queue.txt="M420 T1 L0\r"
+  click luxSend,0
+}
+if(parse.callbackReturn.txt=="bUpdate:finished")
+{
+  updatingMesh.val=0
+}
+
+//bUpdate click
+updatingMesh.val=1
+commands.command.txt="G28\rG29 P1"
+click luxSend,1
+commands.command.txt="G29 P3\rG29 P3\rG29 T1"
+click luxSend,1
+commands.command.txt="G29 S"
+covx currentSlot.val,vars.s.txt,0,0
+commands.command.txt+=vars.s.txt
+click luxSend,1
+parse.callback.txt="bUpdate:finished"
+click luxSetCallback,1
