@@ -94,6 +94,8 @@ if(updatingMesh.val==1)
   if(tStatus.y>SCREEN_HEIGHT)
   {
     tStatus.y=tStatus.y-SCREEN_HEIGHT
+    blkTouch.y=blkTouch.y-SCREEN_HEIGHT
+    vis blkTouch,1
   }
 }
 else
@@ -105,6 +107,7 @@ else
   if(tStatus.y<SCREEN_HEIGHT)
   {
     tStatus.y=tStatus.y+SCREEN_HEIGHT
+    blkTouch.y=blkTouch.y+SCREEN_HEIGHT
   }
 }
 ii=currentPoint.val
@@ -147,8 +150,17 @@ if(vars.returnVal.txt!="null")
   commands.queue.txt+=vars.returnVal.txt
   click luxSend,0
 }
-  parse.callback.txt="luxController:init"
-  click luxSetCallback,1
+
+//bUpdate click
+currentPoint.val=0
+updatingMesh.val=1
+tStatus.txt="Updating Mesh..."
+click luxView,1
+doevents
+commands.queue.txt+="G28\rG29 P1\r"
+click luxSend,0
+parse.callback.txt="bUpdate:P1"
+click luxSetCallback,1
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -162,18 +174,19 @@ if(currentSlot.val==-1)
 }
 if(parse.callbackReturn.txt=="bUpdate:finished")
 {
+  parse.callbackReturn.txt=""
   updatingMesh.val=0
 }
+if(parse.callbackReturn.txt=="bUpdate:P1")
+{
+  parse.callbackReturn.txt=""
+  commands.command.txt="G29 P3\rG29 P3\rG29 T1"
+  click luxSend,1
+  commands.command.txt="G29 S"
+  covx currentSlot.val,vars.s.txt,0,0
+  commands.command.txt+=vars.s.txt
+  click luxSend,1
+  parse.callback.txt="bUpdate:finished"
+  click luxSetCallback,1
+}
 
-//bUpdate click
-updatingMesh.val=1
-commands.command.txt="G28\rG29 P1"
-click luxSend,1
-commands.command.txt="G29 P3\rG29 P3\rG29 T1"
-click luxSend,1
-commands.command.txt="G29 S"
-covx currentSlot.val,vars.s.txt,0,0
-commands.command.txt+=vars.s.txt
-click luxSend,1
-parse.callback.txt="bUpdate:finished"
-click luxSetCallback,1
