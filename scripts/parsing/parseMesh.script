@@ -22,6 +22,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,vars.s.txt,"Storage slot: ",1
   covx vars.s.txt,currentSlot.val,0,0
+  getSlot.val=currentSlot.val
 }
 parse.lineMatch.txt="Mesh loaded from slot"
 strlen parse.lineMatch.txt,j
@@ -30,6 +31,7 @@ if(parse.eval.txt==parse.lineMatch.txt)
 {
   spstr parse.buffer.txt,vars.s.txt," ",4
   covx vars.s.txt,currentSlot.val,0,0
+  getSlot.val=currentSlot.val
 }
 parse.lineMatch.txt="EEPROM can hold"
 strlen parse.lineMatch.txt,j
@@ -80,4 +82,16 @@ if(parse.eval.txt==parse.lineMatch.txt)
   arrPoints.txt=""
   parsingMesh.val=1
   drawFinished.val=0
+}
+//Probing mesh point 3/49.\x0A
+parse.lineMatch.txt="Probing mesh point "
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.lineMatch.txt,vars.s.txt," ",3
+  spstr vars.s.txt,vars.s2.txt,"/",0
+  covx vars.s2.txt,currentPoint.val,0,0
+  spstr vars.s.txt,vars.s2.txt,"/",1
+  covx vars.s2.txt,totalPoints.val,0,0
 }
