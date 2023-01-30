@@ -72,3 +72,21 @@ if(ii>0)
     click drawMesh,1
   }
 }
+swEnabled.val=mesh.meshEnabled.val
+tFadeHeight.txt=mesh.fadeHeight.txt
+
+
+
+//tFadeHeight click
+ReturnObj=touch.val
+numpad.tCaption.txt="Fade Height"
+vars.returnVal.txt=""
+page numpad
+
+//tFadeHeight callback
+if(vars.returnVal.txt!="null")
+{
+  commands.queue.txt+="M420 Z"
+  commands.queue.txt+=vars.returnVal.txt
+  click luxSend,0
+}

@@ -1,4 +1,20 @@
-// Storage slot: 1
+parse.lineMatch.txt="echo:Bed Leveling OFF"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  mesh.meshEnabled.val=0
+}
+parse.lineMatch.txt="echo:Bed Leveling ON"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  mesh.meshEnabled.val=1
+}
+parse.lineMatch.txt="echo:Fade Height "
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  spstr parse.buffer.txt,mesh.fadeHeight.txt,"Fade Height ",1
+}
 parse.lineMatch.txt="Storage slot: "
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
@@ -7,9 +23,6 @@ if(parse.eval.txt==parse.lineMatch.txt)
   spstr parse.buffer.txt,vars.s.txt,"Storage slot: ",1
   covx vars.s.txt,currentSlot.val,0,0
 }
-
-//parseSlot
-// Mesh 0 Loaded.
 parse.lineMatch.txt="Mesh loaded from slot"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
@@ -18,7 +31,6 @@ if(parse.eval.txt==parse.lineMatch.txt)
   spstr parse.buffer.txt,vars.s.txt," ",4
   covx vars.s.txt,currentSlot.val,0,0
 }
-//parseMaxSlots
 parse.lineMatch.txt="EEPROM can hold"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
@@ -27,7 +39,6 @@ if(parse.eval.txt==parse.lineMatch.txt)
   spstr parse.buffer.txt,vars.s.txt," ",3
   covx vars.s.txt,maxSlots.val,0,0
 }
-//parseMaxPoints
 parse.lineMatch.txt="GRID_MAX_POINTS_X"
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
