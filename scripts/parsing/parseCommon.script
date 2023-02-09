@@ -89,12 +89,12 @@ if(parse.eval.txt==parse.lineMatch.txt)
     commands.linesNotBusy.val=0
   }
 }
-parse.lineMatch.txt="echo:Active Extruder: " //Active Extruder
+parse.lineMatch.txt="Active Extruder: " //Active Extruder
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
 if(parse.eval.txt==parse.lineMatch.txt)
 {
-  spstr parse.buffer.txt,parse.match.txt,"echo:Active Extruder: ",1
+  spstr parse.buffer.txt,parse.match.txt,"Active Extruder: ",1
   covx parse.match.txt,j,0,0
   Tool=j
 }

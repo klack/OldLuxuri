@@ -3,14 +3,14 @@ parse.matched.val=0
 
 if(historyFilters.swTemp.val==1)
 {
-  parse.lineMatch.txt=" T0:"
+  parse.lineMatch.txt=" T:"
   strlen parse.lineMatch.txt,j
   substr parse.buffer.txt,parse.eval.txt,0,j
   if(parse.eval.txt==parse.lineMatch.txt)
   {
     parse.matched.val=1
   }
-  parse.lineMatch.txt="ok T0:" //Handle M105 Temp Response
+  parse.lineMatch.txt="ok T:" //Handle M105 Temp Response
   strlen parse.lineMatch.txt,j
   substr parse.buffer.txt,parse.eval.txt,0,j
   if(parse.eval.txt==parse.lineMatch.txt)
