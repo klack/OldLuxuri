@@ -69,6 +69,14 @@ if(historyFilters.swEcho.val==1)
   }
 }
 
+parse.lineMatch.txt="X:" //Position
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  parse.matched.val=1
+}
+
 if(parse.matched.val==1)
 {
   parse.buffer.txt=""
