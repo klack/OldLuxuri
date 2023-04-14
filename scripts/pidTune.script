@@ -47,17 +47,14 @@ page diagConfirm
 /// @fn tune
 /// @brief Perfrom PID Autotune on hotends and bed
 ///////////////////////////////////////////////////////////////////////////////
-commands.command.txt="M106 S255\rM155 S1\r" //Turn on fan.
-click luxSend,1
+commands.queue.txt+="M106 S255\rM155 S1\r" //Turn on fan.
+click luxSend,0
 delay=500
-commands.command.txt="M303 C8 E0 S250 U" //T0 PID Tune
-click luxSend,1
-commands.command.txt="M303 C8 E1 S250 U" //T1 PID Tune
-click luxSend,1
-commands.command.txt="M303 C8 E-1 S80 U" //Bed PID Tune
-click luxSend,1
-commands.command.txt="M500" //Save
-click luxSend,1
+commands.queue.txt+="M303 C8 E0 S250 U\r" //T0 PID Tune
+commands.queue.txt+="M303 C8 E1 S250 U\r" //T1 PID Tune
+commands.queue.txt+="M303 C8 E-1 S80 U\r" //Bed PID Tune
+commands.queue.txt+="M500\r" //Save
+click luxSend,0
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn checkHeaters

@@ -17,7 +17,8 @@ commands.command.txt=""
 strlen commands.queue.txt,QueueLen //get the length of the command queue
 if(ok==1&&busy==0) //Send Queue
 {
-  while(QueueLen>0)
+  QueueBlocks=0
+  while(QueueLen>0&&QueueBlocks<=10)
   {
     click luxRead,1
     if(ok==1&&busy==0)
@@ -37,6 +38,12 @@ if(ok==1&&busy==0) //Send Queue
         QueueLen=0
       }
     }
+    else
+    {
+      QueueBlocks+=1
+    }
     strlen commands.queue.txt,QueueLen //Refresh the command queue lenght
+  }
+  QueueBlocks+=1
   }
 }
