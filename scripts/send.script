@@ -37,13 +37,10 @@ if(ok==1&&busy==0) //Send Queue
         commands.queue.txt=""
         QueueLen=0
       }
-    }
-    else
+    }else
     {
       QueueBlocks+=1
     }
     strlen commands.queue.txt,QueueLen //Refresh the command queue lenght
-  }
-  QueueBlocks+=1
   }
 }

@@ -4,40 +4,54 @@
 ///////////////////////////////////////////////////////////////////////////////
 if(state.txt=="null")
 {
-  state.txt="connecting"   
-  tLuxVersion.txt="luxURI version "
+  state.txt="connecting"
+  tLuxVersion.txt="Luxuri version "
   tLuxVersion.txt+=luxVersion.txt
-  delay=3000
+  delay=5000
 }
 if(state.txt=="connecting")
 {
   if(buffer.en==0)
   {
+    vars.status.txt="Awaiting Response"
+    click luxView,1
     click startConnect,1
   }else
   {
+    vars.status.txt="Setting Defaults"
+    click luxView,1
     click setDefaults,1
     state.txt="setting-defaults"
+    delay=5000
   }
 }
 if(state.txt=="setting-defaults")
 {
+  vars.status.txt="Reading Machine Type"
+  click luxView,1
   if(printer.machineType.txt!="")
   {
     luxAnimate.en=1
     state.txt="connected"
     click luxView,1
+    delay=1000
   }
 }
 if(state.txt=="connected")
 {
-  if(ok==1&&QueueBlocks==0)
+  vars.status.txt="Reading Settings"
+  click luxView,1
+  delay=1000
+  if(ok==1&&QueueLen==0)
   {
     if(luxAnimate.en==0)
     {
+      vars.status.txt="Ready"
+      click luxView,1
+      delay=1000
       ready.val=1
     }
-  }  
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
