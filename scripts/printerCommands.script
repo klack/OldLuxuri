@@ -93,34 +93,21 @@ click luxSetCallback,1
 /// @brief Break through a busy or waiting for response status
 ///////////////////////////////////////////////////////////////////////////////
 commands.queue.txt=""
+commands.command.txt="M524"
+click luxSend,1
 Breaks=0
 while(Breaks<4)
 {
-  BackOff=1
-  StopWait=0
-  ok=0
-  commands.command.txt="M524"
+  commands.command.txt="M108"
   click luxSend,1
-  while(ok==0&&StopWait<25)
+  delay=500
+  click luxRead,1
+  if(ok==1)
   {
-    commands.command.txt="M108"
-    click luxSend,1
-    commands.command.txt="M118 A1 P0 action:cancel"
-    click luxSend,1
-    BackOff=BackOff*150 //Incremental backoff
-    BackOff/=100
-    delay=800*BackOff
-    doevents
-    click luxRead,1
-    StopWait++
-    BackOff++
-    if(BackOff>10) //Restart increment
-    {
-      BackOff=1
-    }
+    Breaks++
   }
-  Breaks++
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxPrintStats 1
