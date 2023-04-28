@@ -50,9 +50,9 @@ page diagConfirm
 commands.queue.txt+="M106 S255\rM155 S1\r" //Turn on fan.
 click luxSend,0
 delay=500
-commands.queue.txt+="M303 C8 E0 S250 U\r" //T0 PID Tune
-commands.queue.txt+="M303 C8 E1 S250 U\r" //T1 PID Tune
-commands.queue.txt+="M303 C8 E-1 S80 U\r" //Bed PID Tune
+commands.queue.txt+="M303 E0 S220 U\r" //T0 PID Tune
+commands.queue.txt+="M303 E1 S220 U\r" //T1 PID Tune
+commands.queue.txt+="M303 E-1 S70 U\r" //Bed PID Tune
 commands.queue.txt+="M500\r" //Save
 click luxSend,0
 

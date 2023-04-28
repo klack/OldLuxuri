@@ -2,27 +2,21 @@
 /// @fn luxRunOnce
 /// @breif Does not run when returning from dialog boxes
 ///////////////////////////////////////////////////////////////////////////////
-if(IdexMode!=1)
-{
-  commands.queue.txt+="M605 S1\r" //Set auto idex mode
-  IdexMode=1
-}
-else
-{
-  commands.queue.txt="G28\r" //Home
-}
+commands.queue.txt+="M605 S1\r" //Set auto idex mode
+commands.queue.txt+="M420 S0\r" //Disable bed level
+commands.queue.txt+="G28\r" //Home
 commands.queue.txt+="T0\r"
 commands.queue.txt+="G0 F5000\r"
-commands.queue.txt+="M114\r" //Report position
 click luxSend,0
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn luxInitialize 0
 /// @brief Should run on any close button
 ///////////////////////////////////////////////////////////////////////////////
-commands.queue.txt="G0 Z5 F500\r"
-commands.queue.txt+="G28\r" //Home
 commands.queue.txt+="T0\r" //Set to T0
+commands.queue.txt+="G28 X\r" //Home
+commands.queue.txt+="G0 Z5 F500\r"
 commands.queue.txt+="G0 F5000\r"
 click luxSend,0
 page ReturnPage
