@@ -38,6 +38,11 @@ if(parse.eval.txt==parse.lineMatch.txt) //This one only works when using substri
 {
   ExternalReset=1
 }
+parse.lineMatch.txt="start"
+if(parse.buffer.txt==parse.lineMatch.txt)
+{
+  ExternalReset=1
+}
 parse.lineMatch.txt="//lux:power_pin" //Shutdown
 strlen parse.lineMatch.txt,j
 substr parse.buffer.txt,parse.eval.txt,0,j
