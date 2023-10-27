@@ -1,0 +1,43 @@
+//Qualify Line
+parse.matched.val=0
+parse.lineMatch.txt=" T0:"
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  parse.matched.val=1
+}
+parse.lineMatch.txt="ok T0:" //Handle M105
+strlen parse.lineMatch.txt,j
+substr parse.buffer.txt,parse.eval.txt,0,j
+if(parse.eval.txt==parse.lineMatch.txt)
+{
+  parse.matched.val=1
+}
+if(parse.matched.val==1)
+{
+  //Bed Temp
+  spstr parse.buffer.txt,parse.match.txt,"B:",1 //Split by B:
+  spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+  covx vars.s.txt,printer.bedTemp.val,0,0 //Give bed temp at index 0
+  //Bed SetTemp
+  spstr parse.buffer.txt,parse.match.txt," /",2
+  spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+  covx vars.s.txt,printer.setBedTemp.val,0,0 //Give bedSetTemp at index 0
+  //T0 Temp
+  spstr parse.buffer.txt,parse.match.txt,"T0:",2 //Get second occurance because of Marlin active extruder temperature reporting bug
+  spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+  covx vars.s.txt,printer.T0Temp.val,0,0
+  //T0 SetTemp
+  spstr parse.buffer.txt,parse.match.txt," /",3
+  spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+  covx vars.s.txt,printer.T0SetTemp.val,0,0 //Give bedSetTemp at index 0
+  //T1 Temp
+  spstr parse.buffer.txt,parse.match.txt,"T1:",1
+  spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+  covx vars.s.txt,printer.T1Temp.val,0,0
+  //T1 SetTemp
+  spstr parse.buffer.txt,parse.match.txt," /",4
+  spstr parse.match.txt,vars.s.txt," ",0 //Split substring by space
+  covx vars.s.txt,printer.T1SetTemp.val,0,0 //Give bedSetTemp at index 0
+}
